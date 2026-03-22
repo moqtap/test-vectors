@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "requests_blocked",
+  "message_type_id": "0x1a",
+  "spec_section": "9.6",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "REQUESTS_BLOCKED at maximum request ID 100",
+      "hex": "1a00024064",
+      "decoded": {
+        "maximum_request_id": "100"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUESTS_BLOCKED \u2013 missing maximum request ID",
+      "hex": "1a0002",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading maximum_request_id"
+    }
+  ]
+}

@@ -39,8 +39,16 @@ PROTOCOL_INT_FIELDS = {
     "last_group_id", "last_object_id",
     "role", "max_subscribe_id", "delivery_timeout", "max_cache_duration",
     # draft-14
-    "request_id", "forward", "largest_group", "largest_object",
+    "request_id", "forward", "largest_group",
     "subscribe_request_id", "max_request_id", "max_auth_token_cache_size",
+    # draft-15: subscription_request_id, stream_count, joining fields
+    "subscription_request_id", "stream_count",
+    "joining_request_id", "joining_start", "maximum_request_id",
+    "fetch_type", "status",
+    # Location fields (used inside largest_object parameter)
+    "group", "object",
+    # draft-16: existing_request_id, retry_interval, subscribe_options
+    "existing_request_id", "retry_interval", "subscribe_options",
 }
 
 # Fields that are string integers inside version arrays

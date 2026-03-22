@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_namespace_cancel",
+  "message_type_id": "0x0c",
+  "spec_section": "9.24",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "PUBLISH_NAMESPACE_CANCEL with request_id=1, error=0, empty reason",
+      "hex": "0c0003010000",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "with-reason",
+      "description": "PUBLISH_NAMESPACE_CANCEL with UNAUTHORIZED and reason phrase",
+      "hex": "0c000f03010c756e617574686f72697a6564",
+      "decoded": {
+        "request_id": "3",
+        "error_code": "1",
+        "reason_phrase": "unauthorized"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_NAMESPACE_CANCEL \u2013 missing error_code",
+      "hex": "0c000301",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code"
+    }
+  ]
+}

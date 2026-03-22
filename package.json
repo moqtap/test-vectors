@@ -25,6 +25,9 @@
   "bugs": {
     "url": "https://github.com/moqtap/test-vectors/issues"
   },
+  "scripts": {
+    "validate": "python scripts/validate.py"
+  },
   "keywords": [
     "moqt",
     "moq",

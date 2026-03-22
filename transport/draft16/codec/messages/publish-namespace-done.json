@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_namespace_done",
+  "message_type_id": "0x09",
+  "spec_section": "9.22",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "PUBLISH_NAMESPACE_DONE with request ID 1",
+      "hex": "09000101",
+      "decoded": {
+        "request_id": "1"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_NAMESPACE_DONE \u2013 missing request_id",
+      "hex": "090001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading request_id"
+    }
+  ]
+}

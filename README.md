@@ -18,6 +18,8 @@ See [`examples/`](examples/README.md) for copy-pasteable integration snippets in
 transport/
   draft07/                  MoQ Transport draft-07
   draft14/                  MoQ Transport draft-14
+  draft15/                  MoQ Transport draft-15
+  draft16/                  MoQ Transport draft-16
     codec/
       varint.json           VarInt encoding (RFC 9000 §16)
       messages/*.json       One file per control message type
@@ -115,10 +117,12 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 
 ## Specs covered
 
-| Spec | Draft | Messages | Data streams |
-|------|-------|----------|-------------|
-| MoQ Transport | draft-07 | 25 control messages | 3 stream types |
-| MoQ Transport | draft-14 | 30 control messages | 3 stream types |
+| Spec | Draft | Messages | Data streams | Total vectors |
+|------|-------|----------|-------------|---------------|
+| MoQ Transport | draft-07 | 26 control messages | 3 stream types | 122 |
+| MoQ Transport | draft-14 | 31 control messages | 3 stream types | 134 |
+| MoQ Transport | draft-15 | 24 control messages | 3 stream types | 110 |
+| MoQ Transport | draft-16 | 25 control messages | 3 stream types | 115 |
 
 ## Scope
 
@@ -127,8 +131,8 @@ This repo tests **codec correctness** — wire encoding and decoding of individu
 ## Adding a new draft
 
 ```bash
-make new-draft SPEC=transport FROM=draft14 TO=draft15
-# Edit transport/draft15/meta.json
+make new-draft SPEC=transport FROM=draft16 TO=draft17
+# Edit transport/draft17/meta.json
 # Modify only the vector files affected by spec changes
 # Update manifest.json
 ```

@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "server_setup",
+  "message_type_id": "0x21",
+  "spec_section": "9.3",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal SERVER_SETUP with no parameters (version negotiation via ALPN)",
+      "hex": "21000100",
+      "decoded": {
+        "parameters": {}
+      }
+    },
+    {
+      "id": "max-request-id-param",
+      "description": "SERVER_SETUP with MAX_REQUEST_ID parameter set to 100",
+      "hex": "21000401024064",
+      "decoded": {
+        "parameters": {
+          "max_request_id": "100"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SERVER_SETUP \u2013 payload shorter than declared length",
+      "hex": "21000201",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading setup parameters"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "client_setup",
+  "message_type_id": "0x20",
+  "spec_section": "9.3",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal CLIENT_SETUP with no parameters (version negotiation via ALPN)",
+      "hex": "20000100",
+      "decoded": {
+        "parameters": {}
+      }
+    },
+    {
+      "id": "max-request-id-param",
+      "description": "CLIENT_SETUP with MAX_REQUEST_ID parameter set to 0",
+      "hex": "200003010200",
+      "decoded": {
+        "parameters": {
+          "max_request_id": "0"
+        }
+      }
+    },
+    {
+      "id": "path-param",
+      "description": "CLIENT_SETUP with PATH parameter",
+      "hex": "2000070101042f6d6f71",
+      "decoded": {
+        "parameters": {
+          "path": "/moq"
+        }
+      }
+    },
+    {
+      "id": "non-canonical-param-count",
+      "description": "non-canonical CLIENT_SETUP \u2013 parameter count uses 2-byte varint for value 0",
+      "hex": "2000024000",
+      "canonical": false,
+      "decoded": {
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated-payload",
+      "description": "truncated CLIENT_SETUP \u2013 payload shorter than declared length",
+      "hex": "20000301",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading setup parameters"
+    }
+  ]
+}

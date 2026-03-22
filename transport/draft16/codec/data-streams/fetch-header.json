@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "object",
+  "message_type_id": "0x05",
+  "spec_section": "10.4.4",
+  "vectors": [
+    {
+      "id": "fetch-stream-single-object",
+      "description": "fetch stream header (type 0x05) with one object (flags=0x1c: group_id, obj_id, priority present; subgroup_id=0)",
+      "hex": "05041c00008004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-two-objects",
+      "description": "fetch stream header with two objects; second uses delta encoding (flags=0x00)",
+      "hex": "05041c00008004deadbeef0002cafe",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "serialization_flags": "0x00",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "1",
+            "publisher_priority": "128",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated fetch header \u2013 missing request_id",
+      "hex": "05",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading request_id"
+    }
+  ]
+}
