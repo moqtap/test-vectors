@@ -73,7 +73,7 @@
     {
       "id": "unknown-extension-param",
       "description": "SUBSCRIBE with unknown extension parameter \u2013 must be skipped",
-      "hex": "0300140101046c69766505766964656f014104deadbeef",
+      "hex": "0300150101046c69766505766964656f01404104deadbeef",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
