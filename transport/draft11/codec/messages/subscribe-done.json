@@ -1,0 +1,81 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_done",
+  "message_type_id": "0x0b",
+  "spec_section": "8.12",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "SUBSCRIBE_DONE with Internal Error (0x0), stream_count=5",
+      "hex": "0b0402000500",
+      "decoded": {
+        "request_id": "2",
+        "status_code": "0",
+        "stream_count": "5",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "SUBSCRIBE_DONE with Unauthorized (0x1)",
+      "hex": "0b1202010a0e6e6f7420617574686f72697a6564",
+      "decoded": {
+        "request_id": "2",
+        "status_code": "1",
+        "stream_count": "10",
+        "reason_phrase": "not authorized"
+      }
+    },
+    {
+      "id": "track-ended",
+      "description": "SUBSCRIBE_DONE with Track Ended (0x2)",
+      "hex": "0b130202140f747261636b2068617320656e646564",
+      "decoded": {
+        "request_id": "2",
+        "status_code": "2",
+        "stream_count": "20",
+        "reason_phrase": "track has ended"
+      }
+    },
+    {
+      "id": "subscription-ended",
+      "description": "SUBSCRIBE_DONE with Subscription Ended (0x3)",
+      "hex": "0b1602030512737562736372697074696f6e20656e646564",
+      "decoded": {
+        "request_id": "2",
+        "status_code": "3",
+        "stream_count": "5",
+        "reason_phrase": "subscription ended"
+      }
+    },
+    {
+      "id": "going-away",
+      "description": "SUBSCRIBE_DONE with Going Away (0x4)",
+      "hex": "0b150204001173657276657220676f696e672061776179",
+      "decoded": {
+        "request_id": "2",
+        "status_code": "4",
+        "stream_count": "0",
+        "reason_phrase": "server going away"
+      }
+    },
+    {
+      "id": "expired",
+      "description": "SUBSCRIBE_DONE with Expired (0x5)",
+      "hex": "0b1802050014737562736372697074696f6e2065787069726564",
+      "decoded": {
+        "request_id": "2",
+        "status_code": "5",
+        "stream_count": "0",
+        "reason_phrase": "subscription expired"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_DONE \u2014 missing status_code",
+      "hex": "0b0102",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading status_code"
+    }
+  ]
+}

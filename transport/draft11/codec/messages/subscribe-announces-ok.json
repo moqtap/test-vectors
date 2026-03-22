@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_announces_ok",
+  "message_type_id": "0x12",
+  "spec_section": "8.25",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "SUBSCRIBE_ANNOUNCES_OK for request_id 1",
+      "hex": "120101",
+      "decoded": {
+        "request_id": "1"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_ANNOUNCES_OK \u2014 missing request_id",
+      "hex": "1200",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading request_id"
+    }
+  ]
+}

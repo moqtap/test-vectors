@@ -1,0 +1,84 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch",
+  "message_type_id": "0x16",
+  "spec_section": "8.13",
+  "vectors": [
+    {
+      "id": "standalone-basic",
+      "description": "Standalone FETCH (type=1) with range group 0-10",
+      "hex": "16150280010101046c69766505766964656f00000a0000",
+      "decoded": {
+        "request_id": "2",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "standalone-multi-namespace",
+      "description": "Standalone FETCH with multi-element namespace and descending order",
+      "hex": "162204000201020a636f6e666572656e636506726f6f6d343205617564696f0503140000",
+      "decoded": {
+        "request_id": "4",
+        "subscriber_priority": "0",
+        "group_order": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "start_group": "5",
+        "start_object": "3",
+        "end_group": "20",
+        "end_object": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "joining-relative",
+      "description": "Relative Joining FETCH (type=2) with offset=3",
+      "hex": "160706800102020300",
+      "decoded": {
+        "request_id": "6",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "fetch_type": "2",
+        "joining_subscribe_id": "2",
+        "joining_start": "3",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "joining-absolute",
+      "description": "Absolute Joining FETCH (type=3) starting at group 5",
+      "hex": "160708800103020500",
+      "decoded": {
+        "request_id": "8",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "fetch_type": "3",
+        "joining_subscribe_id": "2",
+        "joining_start": "5",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH \u2014 missing start_group",
+      "hex": "16100280010101046c69766505766964656f",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading start_group"
+    }
+  ]
+}

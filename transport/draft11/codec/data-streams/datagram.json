@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "object",
+  "message_type_id": "0x00",
+  "spec_section": "9.2",
+  "vectors": [
+    {
+      "id": "datagram-4byte-payload",
+      "description": "object datagram (type 0x00, no extensions) with 4-byte payload",
+      "hex": "0001020080deadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "0",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "datagram-zero-payload",
+      "description": "object datagram with zero-length payload",
+      "hex": "000540643240",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "0",
+        "track_alias": "5",
+        "group_id": "100",
+        "object_id": "50",
+        "publisher_priority": "64",
+        "payload_hex": ""
+      }
+    },
+    {
+      "id": "datagram-status",
+      "description": "object datagram status (type 0x02, no extensions) signaling end of group",
+      "hex": "020100058003",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "2",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "5",
+        "publisher_priority": "128",
+        "object_status": "3"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated datagram \u2014 missing object_id",
+      "hex": "000102",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading object_id"
+    }
+  ]
+}

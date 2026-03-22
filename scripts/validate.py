@@ -44,7 +44,8 @@ PROTOCOL_INT_FIELDS = {
     # draft-15: subscription_request_id, stream_count, joining fields
     "subscription_request_id", "stream_count",
     "joining_request_id", "joining_start", "maximum_request_id",
-    "fetch_type", "status",
+    "fetch_type", "status", "joining_subscribe_id",
+    "extension_headers_length",
     # Location fields (used inside largest_object parameter)
     "group", "object",
     # draft-16: existing_request_id, retry_interval, subscribe_options
