@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch_cancel",
+  "message_type_id": "0x17",
+  "spec_section": "9.18",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "FETCH_CANCEL with request ID 2",
+      "hex": "17000102",
+      "decoded": {
+        "request_id": "2"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH_CANCEL \u2013 missing request ID",
+      "hex": "170001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading request_id"
+    }
+  ]
+}

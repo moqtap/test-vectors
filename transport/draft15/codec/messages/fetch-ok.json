@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch_ok",
+  "message_type_id": "0x18",
+  "spec_section": "9.17",
+  "vectors": [
+    {
+      "id": "more-data",
+      "description": "FETCH_OK with end_of_track=0 (more data available), end_location=(10,3)",
+      "hex": "18000502000a0300",
+      "decoded": {
+        "request_id": "2",
+        "end_of_track": "0",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "end-of-track",
+      "description": "FETCH_OK with end_of_track=1 (track has ended), end_location=(10,3)",
+      "hex": "18000502010a0300",
+      "decoded": {
+        "request_id": "2",
+        "end_of_track": "1",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH_OK \u2013 missing end_of_track",
+      "hex": "18000502",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading end_of_track"
+    }
+  ]
+}

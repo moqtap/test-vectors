@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "request_error",
+  "message_type_id": "0x05",
+  "spec_section": "9.8",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "REQUEST_ERROR with INTERNAL_ERROR (0x0)",
+      "hex": "05001101000e696e7465726e616c206572726f72",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "REQUEST_ERROR with UNAUTHORIZED (0x1)",
+      "hex": "05000f01010c756e617574686f72697a6564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "1",
+        "reason_phrase": "unauthorized"
+      }
+    },
+    {
+      "id": "does-not-exist",
+      "description": "REQUEST_ERROR with DOES_NOT_EXIST (0x10)",
+      "hex": "05001101100e646f6573206e6f74206578697374",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "16",
+        "reason_phrase": "does not exist"
+      }
+    },
+    {
+      "id": "empty-reason",
+      "description": "REQUEST_ERROR with empty reason phrase",
+      "hex": "050003010000",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUEST_ERROR \u2013 missing error_code",
+      "hex": "05001101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code"
+    }
+  ]
+}

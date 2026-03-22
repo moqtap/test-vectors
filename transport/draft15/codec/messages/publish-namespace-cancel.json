@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_namespace_cancel",
+  "message_type_id": "0x0c",
+  "spec_section": "9.22",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "PUBLISH_NAMESPACE_CANCEL for single-element namespace, error=0, empty reason",
+      "hex": "0c000e010a636f6e666572656e63650000",
+      "decoded": {
+        "track_namespace": [
+          "conference"
+        ],
+        "error_code": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "with-reason",
+      "description": "PUBLISH_NAMESPACE_CANCEL with reason phrase",
+      "hex": "0c001b02046c6976650673706f727473010c756e617574686f72697a6564",
+      "decoded": {
+        "track_namespace": [
+          "live",
+          "sports"
+        ],
+        "error_code": "1",
+        "reason_phrase": "unauthorized"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_NAMESPACE_CANCEL \u2013 missing namespace data",
+      "hex": "0c000e010a",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

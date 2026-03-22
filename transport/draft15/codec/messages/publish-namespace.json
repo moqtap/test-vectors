@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_namespace",
+  "message_type_id": "0x06",
+  "spec_section": "9.20",
+  "vectors": [
+    {
+      "id": "single-namespace",
+      "description": "PUBLISH_NAMESPACE with single-element namespace",
+      "hex": "06000e01010a636f6e666572656e636500",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "conference"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-namespace",
+      "description": "PUBLISH_NAMESPACE with multi-element namespace",
+      "hex": "06000f0302046c6976650673706f72747300",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "live",
+          "sports"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_NAMESPACE \u2013 missing namespace",
+      "hex": "06000e01",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

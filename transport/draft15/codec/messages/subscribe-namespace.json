@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_namespace",
+  "message_type_id": "0x11",
+  "spec_section": "9.23",
+  "vectors": [
+    {
+      "id": "single-prefix",
+      "description": "SUBSCRIBE_NAMESPACE with single-element prefix",
+      "hex": "11000e01010a636f6e666572656e636500",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-prefix",
+      "description": "SUBSCRIBE_NAMESPACE with multi-element prefix",
+      "hex": "11000f0302046c6976650673706f72747300",
+      "decoded": {
+        "request_id": "3",
+        "namespace_prefix": [
+          "live",
+          "sports"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_NAMESPACE \u2013 missing namespace_prefix",
+      "hex": "11000e01010a",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading namespace_prefix"
+    }
+  ]
+}
