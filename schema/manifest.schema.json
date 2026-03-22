@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/moqtap/test-vectors/schema/manifest.schema.json",
+  "title": "MoQT Test Vectors Manifest",
+  "description": "Machine-readable index of all specifications and versions in the test vector repository.",
+  "type": "object",
+  "required": ["schema_version", "specs"],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Manifest format version."
+    },
+    "specs": {
+      "type": "object",
+      "description": "Map of specification identifiers to their definitions.",
+      "additionalProperties": {
+        "$ref": "#/$defs/spec"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "spec": {
+      "type": "object",
+      "required": ["name", "ietf_base", "versions"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable specification name."
+        },
+        "ietf_base": {
+          "type": "string",
+          "description": "IETF document base name (e.g., 'draft-ietf-moq-transport')."
+        },
+        "versions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/version"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "version": {
+      "type": "object",
+      "required": ["id", "spec", "path"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Short identifier matching the directory name."
+        },
+        "spec": {
+          "type": "string",
+          "description": "Full IETF document identifier or RFC number."
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^.+/$",
+          "description": "Relative path to the version directory (must end with /)."
+        },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Optional aliases for CI convenience (e.g., 'latest-stable')."
+        },
+        "based_on": {
+          "type": "string",
+          "description": "For stable versions, which draft it was based on."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

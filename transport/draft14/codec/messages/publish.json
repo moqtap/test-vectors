@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish",
+  "message_type_id": "0x1d",
+  "spec_section": "9.13",
+  "vectors": [
+    {
+      "id": "forward-disabled",
+      "description": "PUBLISH with single-element namespace, forward disabled",
+      "hex": "1d000f0101046c69766505766964656f0000",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "forward": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "forward-enabled",
+      "description": "PUBLISH with multi-element namespace, forward enabled",
+      "hex": "1d001c03020a636f6e666572656e636506726f6f6d343205617564696f0100",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "forward": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH \u00e2\u20ac\u201d missing track_name",
+      "hex": "1d000f0101046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

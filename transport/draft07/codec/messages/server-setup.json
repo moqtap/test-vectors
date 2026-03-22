@@ -1,0 +1,38 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "server_setup",
+  "message_type_id": "0x41",
+  "spec_section": "6.2",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal SERVER_SETUP with draft-07 version, ROLE=PubSub",
+      "hex": "40410cc0000000ff00000701000103",
+      "decoded": {
+        "selected_version": "4278190087",
+        "parameters": {
+          "role": "3"
+        }
+      }
+    },
+    {
+      "id": "with-max-subscribe-id",
+      "description": "SERVER_SETUP with ROLE=Publisher and MAX_SUBSCRIBE_ID",
+      "hex": "404110c0000000ff00000702000101020240c8",
+      "decoded": {
+        "selected_version": "4278190087",
+        "parameters": {
+          "role": "1",
+          "max_subscribe_id": "200"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SERVER_SETUP \u2014 missing parameters",
+      "hex": "404108",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameters"
+    }
+  ]
+}

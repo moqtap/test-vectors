@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "max_subscribe_id",
+  "message_type_id": "0x15",
+  "spec_section": "6.20",
+  "vectors": [
+    {
+      "id": "value-100",
+      "description": "MAX_SUBSCRIBE_ID set to 100",
+      "hex": "15024064",
+      "decoded": {
+        "subscribe_id": "100"
+      }
+    },
+    {
+      "id": "value-0",
+      "description": "MAX_SUBSCRIBE_ID set to 0",
+      "hex": "150100",
+      "decoded": {
+        "subscribe_id": "0"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated MAX_SUBSCRIBE_ID \u2014 missing subscribe_id",
+      "hex": "1500",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading subscribe_id"
+    }
+  ]
+}

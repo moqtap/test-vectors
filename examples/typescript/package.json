@@ -1,0 +1,8 @@
+{
+  "name": "moqt-test-vectors-example",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "vitest": "^1.0.0"
+  }
+}

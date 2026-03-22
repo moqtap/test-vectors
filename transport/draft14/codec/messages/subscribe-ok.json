@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_ok",
+  "message_type_id": "0x04",
+  "spec_section": "9.8",
+  "vectors": [
+    {
+      "id": "no-content",
+      "description": "minimal SUBSCRIBE_OK with no content",
+      "hex": "040006010000000000",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "expires": "0",
+        "group_order": "0",
+        "content_exists": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "content-exists",
+      "description": "SUBSCRIBE_OK with content exists and largest location",
+      "hex": "04000801050001010a0300",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "5",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "1",
+        "largest_group": "10",
+        "largest_object": "3",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-expiry",
+      "description": "SUBSCRIBE_OK with expiry set to 30",
+      "hex": "04000601001e000000",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "expires": "30",
+        "group_order": "0",
+        "content_exists": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_OK \u00e2\u20ac\u201d missing group_order and beyond",
+      "hex": "040006010000",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading group_order"
+    }
+  ]
+}

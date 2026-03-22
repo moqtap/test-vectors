@@ -1,0 +1,68 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate vector files
+        run: python scripts/validate.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install ajv-cli
+        run: npm install -g ajv-cli ajv-formats
+
+      - name: Validate codec vectors against schema
+        run: |
+          for f in transport/*/codec/**/*.json; do
+            ajv validate -s schema/codec-vector.schema.json -d "$f" --spec=draft2020 || exit 1
+          done
+
+      - name: Validate meta.json files against schema
+        run: |
+          for f in transport/*/meta.json; do
+            ajv validate -s schema/meta.schema.json -d "$f" --spec=draft2020 || exit 1
+          done
+
+      - name: Validate manifest.json against schema
+        run: ajv validate -s schema/manifest.schema.json -d manifest.json --spec=draft2020
+
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Verify tag matches package.json version
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "Tag version ($TAG_VERSION) does not match package.json version ($PKG_VERSION)"
+            exit 1
+          fi
+
+      - name: Publish
+        run: npm publish --access public

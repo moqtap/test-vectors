@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_done",
+  "message_type_id": "0x0b",
+  "spec_section": "9.12",
+  "vectors": [
+    {
+      "id": "unsubscribed",
+      "description": "PUBLISH_DONE with UNSUBSCRIBED (0x0), empty reason",
+      "hex": "0b0003010000",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "internal-error",
+      "description": "PUBLISH_DONE with INTERNAL_ERROR (0x1)",
+      "hex": "0b001101010e696e7465726e616c206572726f72",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "1",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "PUBLISH_DONE with UNAUTHORIZED (0x2)",
+      "hex": "0b000f01020c756e617574686f72697a6564",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "2",
+        "reason_phrase": "unauthorized"
+      }
+    },
+    {
+      "id": "track-does-not-exist",
+      "description": "PUBLISH_DONE with TRACK_DOES_NOT_EXIST (0x3)",
+      "hex": "0b0017010314747261636b20646f6573206e6f74206578697374",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "3",
+        "reason_phrase": "track does not exist"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_DONE \u00e2\u20ac\u201d missing status_code",
+      "hex": "0b000301",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading status_code"
+    }
+  ]
+}

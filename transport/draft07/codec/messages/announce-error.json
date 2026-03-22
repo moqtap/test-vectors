@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce_error",
+  "message_type_id": "0x08",
+  "spec_section": "6.10",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "ANNOUNCE_ERROR with Internal Error (0x0)",
+      "hex": "081601046c697665000e696e7465726e616c206572726f72",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "ANNOUNCE_ERROR with Unauthorized (0x1)",
+      "hex": "081601046c697665010e6e6f7420617574686f72697a6564",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "error_code": "1",
+        "reason_phrase": "not authorized"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE_ERROR \u2014 missing reason_phrase",
+      "hex": "080701046c69766500",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading reason_phrase"
+    }
+  ]
+}

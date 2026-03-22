@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_namespace_ok",
+  "message_type_id": "0x12",
+  "spec_section": "9.29",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "SUBSCRIBE_NAMESPACE_OK with request ID 1, no parameters",
+      "hex": "1200020100",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_NAMESPACE_OK \u00e2\u20ac\u201d missing parameter count",
+      "hex": "12000201",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

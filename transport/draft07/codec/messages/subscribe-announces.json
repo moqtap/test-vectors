@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_announces",
+  "message_type_id": "0x11",
+  "spec_section": "6.13",
+  "vectors": [
+    {
+      "id": "single-prefix",
+      "description": "SUBSCRIBE_ANNOUNCES with single-element prefix",
+      "hex": "110701046c69766500",
+      "decoded": {
+        "track_namespace_prefix": [
+          "live"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-prefix-with-auth",
+      "description": "SUBSCRIBE_ANNOUNCES with multi-element prefix and auth",
+      "hex": "111b020a636f6e666572656e636506726f6f6d3432010205746f6b656e",
+      "decoded": {
+        "track_namespace_prefix": [
+          "conference",
+          "room42"
+        ],
+        "parameters": {
+          "authorization_info": "token"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_ANNOUNCES \u2014 missing prefix",
+      "hex": "1100",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace_prefix"
+    }
+  ]
+}

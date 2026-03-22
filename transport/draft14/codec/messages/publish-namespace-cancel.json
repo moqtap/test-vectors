@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_namespace_cancel",
+  "message_type_id": "0x0c",
+  "spec_section": "9.27",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "PUBLISH_NAMESPACE_CANCEL with request ID 1",
+      "hex": "0c000101",
+      "decoded": {
+        "request_id": "1"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_NAMESPACE_CANCEL \u00e2\u20ac\u201d missing request ID",
+      "hex": "0c0001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading request_id"
+    }
+  ]
+}

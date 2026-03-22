@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status_error",
+  "message_type_id": "0x0f",
+  "spec_section": "9.22",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "TRACK_STATUS_ERROR with INTERNAL_ERROR (0x0)",
+      "hex": "0f001101000e696e7465726e616c206572726f72",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "TRACK_STATUS_ERROR with UNAUTHORIZED (0x1)",
+      "hex": "0f000f01010c756e617574686f72697a6564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "1",
+        "reason_phrase": "unauthorized"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS_ERROR \u00e2\u20ac\u201d missing reason phrase",
+      "hex": "0f00110100",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading reason phrase"
+    }
+  ]
+}

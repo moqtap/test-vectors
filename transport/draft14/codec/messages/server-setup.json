@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "server_setup",
+  "message_type_id": "0x21",
+  "spec_section": "9.3",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal SERVER_SETUP with draft-14 version, no parameters",
+      "hex": "210009c0000000ff00000e00",
+      "decoded": {
+        "selected_version": "4278190094",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "max-request-id-param",
+      "description": "SERVER_SETUP with MAX_REQUEST_ID parameter set to 100",
+      "hex": "21000cc0000000ff00000e01024064",
+      "decoded": {
+        "selected_version": "4278190094",
+        "parameters": {
+          "max_request_id": "100"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SERVER_SETUP \u00e2\u20ac\u201d missing parameter count",
+      "hex": "210009c0000000ff00000e",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

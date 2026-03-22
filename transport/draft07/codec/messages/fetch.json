@@ -1,0 +1,54 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch",
+  "message_type_id": "0x16",
+  "spec_section": "6.7",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "FETCH with range group 0-10",
+      "hex": "16140201046c69766505766964656f800100000a0000",
+      "decoded": {
+        "subscribe_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-namespace",
+      "description": "FETCH with multi-element namespace and descending order",
+      "hex": "162104020a636f6e666572656e636506726f6f6d343205617564696f00020503140000",
+      "decoded": {
+        "subscribe_id": "4",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "subscriber_priority": "0",
+        "group_order": "2",
+        "start_group": "5",
+        "start_object": "3",
+        "end_group": "20",
+        "end_object": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH \u2014 missing start_group",
+      "hex": "160f0201046c69766505766964656f8001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading start_group"
+    }
+  ]
+}

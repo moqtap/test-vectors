@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "object",
+  "message_type_id": "0x05",
+  "spec_section": "7.3.2",
+  "vectors": [
+    {
+      "id": "fetch-single-object",
+      "description": "fetch stream with one object",
+      "hex": "05020000008004deadbeef",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "subscribe_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "object_status": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-two-objects",
+      "description": "fetch stream with two objects",
+      "hex": "05040000008004deadbeef0000018002cafe",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "subscribe_id": "4",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "object_status": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "1",
+            "publisher_priority": "128",
+            "object_status": "0",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated fetch header — missing subscribe_id",
+      "hex": "05",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading subscribe_id"
+    }
+  ]
+}

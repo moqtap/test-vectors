@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/moqtap/test-vectors/schema/meta.schema.json",
+  "title": "MoQT Test Vector Version Metadata",
+  "description": "Per-version metadata for a specification draft or stable release.",
+  "type": "object",
+  "required": ["id", "spec", "spec_url", "categories"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "description": "Must match the directory name and the manifest entry."
+    },
+    "spec": {
+      "type": "string",
+      "description": "Full IETF document identifier."
+    },
+    "spec_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the specification text."
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["codec"]
+      },
+      "description": "Which subdirectories exist."
+    }
+  },
+  "additionalProperties": false
+}

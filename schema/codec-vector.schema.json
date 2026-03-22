@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/moqtap/test-vectors/schema/codec-vector.schema.json",
+  "title": "MoQT Codec Test Vector File",
+  "description": "A collection of codec test vectors pairing hex-encoded wire bytes with expected decoded representations or errors.",
+  "type": "object",
+  "required": ["message_type", "vectors"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "message_type": {
+      "type": "string",
+      "description": "The message type or codec unit being tested (e.g., 'varint', 'subscribe', 'client_setup')."
+    },
+    "message_type_id": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]+$",
+      "description": "Hex-encoded message type ID from the wire format (e.g., '0x03' for SUBSCRIBE)."
+    },
+    "spec_section": {
+      "type": "string",
+      "description": "Reference to the specification section defining this message type (e.g., '9.7')."
+    },
+    "vectors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/vector"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "vector": {
+      "type": "object",
+      "required": ["id", "description", "hex"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique identifier within the file. Kebab-case."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of what this case tests."
+        },
+        "hex": {
+          "type": "string",
+          "pattern": "^([0-9a-f]{2})+$",
+          "description": "Lowercase hex-encoded wire bytes. No 0x prefix, no separators."
+        },
+        "decoded": {
+          "type": "object",
+          "description": "Expected decoded representation as a plain JSON object."
+        },
+        "canonical": {
+          "type": "boolean",
+          "default": true,
+          "description": "Defaults to true. Set to false for valid-but-non-canonical encodings (decode-only test)."
+        },
+        "error": {
+          "type": "string",
+          "enum": ["incomplete", "invalid_value", "unknown_message"],
+          "description": "Error category for invalid vectors."
+        },
+        "error_detail": {
+          "type": "string",
+          "description": "Optional human-readable detail about the expected failure."
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["decoded"],
+          "not": { "required": ["error"] }
+        },
+        {
+          "required": ["error"],
+          "not": { "required": ["decoded"] }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

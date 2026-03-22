@@ -1,0 +1,78 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "client_setup",
+  "message_type_id": "0x40",
+  "spec_section": "6.2",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal CLIENT_SETUP with draft-07 version, ROLE=PubSub",
+      "hex": "40400d01c0000000ff00000701000103",
+      "decoded": {
+        "supported_versions": [
+          "4278190087"
+        ],
+        "parameters": {
+          "role": "3"
+        }
+      }
+    },
+    {
+      "id": "two-versions",
+      "description": "CLIENT_SETUP with two versions, ROLE=Subscriber",
+      "hex": "40401502c0000000ff000006c0000000ff00000701000102",
+      "decoded": {
+        "supported_versions": [
+          "4278190086",
+          "4278190087"
+        ],
+        "parameters": {
+          "role": "2"
+        }
+      }
+    },
+    {
+      "id": "with-path-and-max-subscribe-id",
+      "description": "CLIENT_SETUP with PATH and MAX_SUBSCRIBE_ID parameters",
+      "hex": "40401701c0000000ff0000070300010301047465737402024064",
+      "decoded": {
+        "supported_versions": [
+          "4278190087"
+        ],
+        "parameters": {
+          "role": "3",
+          "path": "test",
+          "max_subscribe_id": "100"
+        }
+      }
+    },
+    {
+      "id": "non-canonical-version-count",
+      "description": "non-canonical CLIENT_SETUP: version count uses 2-byte varint for value 1",
+      "hex": "40400e4001c0000000ff00000701000103",
+      "canonical": false,
+      "decoded": {
+        "supported_versions": [
+          "4278190087"
+        ],
+        "parameters": {
+          "role": "3"
+        }
+      }
+    },
+    {
+      "id": "no-versions-error",
+      "description": "CLIENT_SETUP with no versions \u2014 invalid",
+      "hex": "4040020000",
+      "error": "invalid_value",
+      "error_detail": "supported_versions must not be empty"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated CLIENT_SETUP \u2014 payload shorter than declared length",
+      "hex": "4040ff",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input"
+    }
+  ]
+}

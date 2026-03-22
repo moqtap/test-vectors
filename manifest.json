@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "specs": {
+    "transport": {
+      "name": "MoQ Transport",
+      "ietf_base": "draft-ietf-moq-transport",
+      "versions": [
+        {
+          "id": "draft07",
+          "spec": "draft-ietf-moq-transport-07",
+          "path": "transport/draft07/"
+        },
+        {
+          "id": "draft14",
+          "spec": "draft-ietf-moq-transport-14",
+          "path": "transport/draft14/"
+        }
+      ]
+    }
+  }
+}

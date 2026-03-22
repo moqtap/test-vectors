@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch_error",
+  "message_type_id": "0x19",
+  "spec_section": "9.18",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "FETCH_ERROR with INTERNAL_ERROR (0x0)",
+      "hex": "19001102000e696e7465726e616c206572726f72",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "FETCH_ERROR with UNAUTHORIZED (0x1)",
+      "hex": "19000f02010c756e617574686f72697a6564",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "1",
+        "reason_phrase": "unauthorized"
+      }
+    },
+    {
+      "id": "track-does-not-exist",
+      "description": "FETCH_ERROR with TRACK_DOES_NOT_EXIST (0x2)",
+      "hex": "190017020214747261636b20646f6573206e6f74206578697374",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "2",
+        "reason_phrase": "track does not exist"
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "FETCH_ERROR with MALFORMED_TRACK (0x3)",
+      "hex": "19001202030f6d616c666f726d656420747261636b",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "3",
+        "reason_phrase": "malformed track"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH_ERROR \u00e2\u20ac\u201d missing reason phrase",
+      "hex": "1900110200",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading reason phrase"
+    }
+  ]
+}

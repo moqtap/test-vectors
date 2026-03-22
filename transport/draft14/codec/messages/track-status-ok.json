@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status_ok",
+  "message_type_id": "0x0e",
+  "spec_section": "9.21",
+  "vectors": [
+    {
+      "id": "in-progress",
+      "description": "TRACK_STATUS_OK with IN_PROGRESS (0x0) and largest location",
+      "hex": "0e000501000a0500",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "0",
+        "largest_group": "10",
+        "largest_object": "5",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "does-not-exist",
+      "description": "TRACK_STATUS_OK with DOES_NOT_EXIST (0x1)",
+      "hex": "0e0003010100",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "not-yet-begun",
+      "description": "TRACK_STATUS_OK with NOT_YET_BEGUN (0x2)",
+      "hex": "0e0003010200",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "2",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "finished",
+      "description": "TRACK_STATUS_OK with FINISHED (0x3) and largest location",
+      "hex": "0e0006010340643200",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "3",
+        "largest_group": "100",
+        "largest_object": "50",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "relay-no-info",
+      "description": "TRACK_STATUS_OK with RELAY_NO_INFO (0x4)",
+      "hex": "0e0003010400",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "4",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS_OK \u00e2\u20ac\u201d missing status_code",
+      "hex": "0e00050100",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading status_code"
+    }
+  ]
+}

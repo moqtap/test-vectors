@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "object",
+  "message_type_id": "0x02",
+  "spec_section": "10.4.4",
+  "vectors": [
+    {
+      "id": "fetch-stream-single-object",
+      "description": "fetch stream header with one object",
+      "hex": "02040004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "subscribe_request_id": "4",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated fetch header — missing subscribe_request_id",
+      "hex": "02",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading subscribe_request_id"
+    }
+  ]
+}

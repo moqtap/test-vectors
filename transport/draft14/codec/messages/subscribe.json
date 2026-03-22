@@ -1,0 +1,121 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe",
+  "message_type_id": "0x03",
+  "spec_section": "9.7",
+  "vectors": [
+    {
+      "id": "filter-next-group-start",
+      "description": "minimal SUBSCRIBE with NextGroupStart filter, no parameters",
+      "hex": "0300120101046c69766505766964656f8000000100",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "filter-latest-object",
+      "description": "SUBSCRIBE with LatestObject filter and multi-element namespace",
+      "hex": "03001f03020a636f6e666572656e636506726f6f6d343205617564696f8000000200",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "2",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "filter-absolute-start",
+      "description": "SUBSCRIBE with AbsoluteStart filter",
+      "hex": "0300140101046c69766505766964656f800000030a0300",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "3",
+        "start_group": "10",
+        "start_object": "3",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "filter-absolute-range",
+      "description": "SUBSCRIBE with AbsoluteRange filter",
+      "hex": "0300150101046c69766505766964656f800000040a031400",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "4",
+        "start_group": "10",
+        "start_object": "3",
+        "end_group": "20",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "unknown-extension-param",
+      "description": "SUBSCRIBE with unknown extension parameter — must be skipped",
+      "hex": "0300180101046c69766505766964656f80000001012104deadbeef",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "1",
+        "parameters": {
+          "unknown": [
+            {
+              "id": "0x21",
+              "length": "4",
+              "raw_hex": "deadbeef"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "invalid-filter-type",
+      "description": "SUBSCRIBE with filter_type=0 — reserved/undefined value",
+      "hex": "0300120101046c69766505766964656f8000000000",
+      "error": "invalid_value",
+      "error_detail": "filter_type 0 is not a defined filter type"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE — missing track_name",
+      "hex": "0300120101046c697665",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_name"
+    }
+  ]
+}

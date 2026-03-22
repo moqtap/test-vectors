@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch",
+  "message_type_id": "0x16",
+  "spec_section": "9.16",
+  "vectors": [
+    {
+      "id": "single-namespace",
+      "description": "FETCH with single-element namespace, range group 0-10",
+      "hex": "1600110201046c69766505766964656f00000a00",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-namespace",
+      "description": "FETCH with multi-element namespace, range group 5:3 to 20",
+      "hex": "16001e04020a636f6e666572656e636506726f6f6d343205617564696f05031400",
+      "decoded": {
+        "request_id": "4",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "start_group": "5",
+        "start_object": "3",
+        "end_group": "20",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH \u00e2\u20ac\u201d missing start_location",
+      "hex": "1600110201046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

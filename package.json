@@ -1,0 +1,31 @@
+{
+  "name": "@moqtap/test-vectors",
+  "version": "0.1.0",
+  "description": "MoQT protocol test vectors — language-agnostic JSON",
+  "type": "module",
+  "exports": {
+    "./manifest": "./manifest.json",
+    "./schema/*": "./schema/*",
+    "./transport/*": "./transport/*"
+  },
+  "files": [
+    "manifest.json",
+    "schema/",
+    "transport/",
+    "LICENSE",
+    "README.md"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moqtap/test-vectors.git"
+  },
+  "keywords": [
+    "moqt",
+    "moq",
+    "test-vectors",
+    "media-over-quic",
+    "protocol",
+    "ietf"
+  ]
+}
