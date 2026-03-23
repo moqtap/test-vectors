@@ -43,7 +43,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_OK \u2013 missing track_alias",
+      "description": "truncated SUBSCRIBE_OK — missing track_alias",
       "hex": "04000301",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_alias"

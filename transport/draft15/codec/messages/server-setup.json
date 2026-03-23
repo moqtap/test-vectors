@@ -24,7 +24,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SERVER_SETUP \u2013 payload shorter than declared length",
+      "description": "truncated SERVER_SETUP — payload shorter than declared length",
       "hex": "21000201",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading setup parameters"

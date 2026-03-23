@@ -29,7 +29,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated REQUEST_OK \u2013 missing parameter count",
+      "description": "truncated REQUEST_OK — missing parameter count",
       "hex": "07000201",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading parameter count"

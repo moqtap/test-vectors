@@ -91,7 +91,7 @@
     },
     {
       "id": "subgroup-truncated",
-      "description": "truncated subgroup header (type 0x10) \u2013 missing publisher_priority",
+      "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
       "hex": "100100",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading publisher_priority"

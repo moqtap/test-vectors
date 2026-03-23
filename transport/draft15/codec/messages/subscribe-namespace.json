@@ -31,7 +31,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_NAMESPACE \u2013 missing namespace_prefix",
+      "description": "truncated SUBSCRIBE_NAMESPACE — missing namespace_prefix",
       "hex": "11000e01010a",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading namespace_prefix"

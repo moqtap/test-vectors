@@ -24,7 +24,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated NAMESPACE_DONE \u2013 missing suffix data",
+      "description": "truncated NAMESPACE_DONE — missing suffix data",
       "hex": "0e000801",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading namespace_suffix"

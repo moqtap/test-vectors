@@ -83,7 +83,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_DONE — missing status_code",
+      "description": "truncated SUBSCRIBE_DONE â€” missing status_code",
       "hex": "0b0102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading status_code"

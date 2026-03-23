@@ -50,7 +50,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated REQUEST_ERROR \u2013 missing error_code",
+      "description": "truncated REQUEST_ERROR — missing error_code",
       "hex": "05001201",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading error_code"

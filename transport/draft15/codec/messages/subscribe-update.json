@@ -32,7 +32,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_UPDATE \u2013 missing subscription_request_id",
+      "description": "truncated SUBSCRIBE_UPDATE — missing subscription_request_id",
       "hex": "02000302",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading subscription_request_id"

@@ -34,7 +34,7 @@
     },
     {
       "id": "non-canonical-param-count",
-      "description": "non-canonical CLIENT_SETUP \u2013 parameter count uses 2-byte varint for value 0",
+      "description": "non-canonical CLIENT_SETUP — parameter count uses 2-byte varint for value 0",
       "hex": "2000024000",
       "canonical": false,
       "decoded": {
@@ -43,7 +43,7 @@
     },
     {
       "id": "truncated-payload",
-      "description": "truncated CLIENT_SETUP \u2013 payload shorter than declared length",
+      "description": "truncated CLIENT_SETUP — payload shorter than declared length",
       "hex": "20000301",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading setup parameters"

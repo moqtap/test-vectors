@@ -66,7 +66,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_ANNOUNCES_ERROR — missing reason_phrase",
+      "description": "truncated SUBSCRIBE_ANNOUNCES_ERROR â€” missing reason_phrase",
       "hex": "130701046c69766500",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading reason_phrase"

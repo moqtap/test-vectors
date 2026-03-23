@@ -16,7 +16,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated UNSUBSCRIBE_ANNOUNCES — missing prefix",
+      "description": "truncated UNSUBSCRIBE_ANNOUNCES â€” missing prefix",
       "hex": "1400",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_namespace_prefix"

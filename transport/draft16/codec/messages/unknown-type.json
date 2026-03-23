@@ -5,7 +5,7 @@
   "vectors": [
     {
       "id": "unknown-type-with-payload",
-      "description": "message with unrecognized type 0x3F \u2013 implementations must skip or reject",
+      "description": "message with unrecognized type 0x3F — implementations must skip or reject",
       "hex": "3f0004deadbeef",
       "error": "unknown_message",
       "error_detail": "unknown message type 0x3F"

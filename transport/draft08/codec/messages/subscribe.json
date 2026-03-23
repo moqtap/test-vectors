@@ -106,7 +106,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE — missing track_name",
+      "description": "truncated SUBSCRIBE â€” missing track_name",
       "hex": "0306020101046c69",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_name"

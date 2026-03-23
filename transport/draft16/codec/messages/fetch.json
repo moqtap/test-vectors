@@ -55,7 +55,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated FETCH \u2013 missing fetch content",
+      "description": "truncated FETCH — missing fetch content",
       "hex": "160013020101046c69",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_namespace"

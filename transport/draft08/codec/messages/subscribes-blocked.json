@@ -22,7 +22,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBES_BLOCKED — missing maximum_subscribe_id",
+      "description": "truncated SUBSCRIBES_BLOCKED â€” missing maximum_subscribe_id",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading maximum_subscribe_id",
       "hex": "1a00"

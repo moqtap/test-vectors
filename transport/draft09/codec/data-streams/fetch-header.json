@@ -58,7 +58,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated fetch header — missing subscribe_id",
+      "description": "truncated fetch header â€” missing subscribe_id",
       "hex": "05",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading subscribe_id"

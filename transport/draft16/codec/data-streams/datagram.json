@@ -63,7 +63,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated datagram (type 0x00) \u2013 missing object_id",
+      "description": "truncated datagram (type 0x00) — missing object_id",
       "hex": "000102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading object_id"

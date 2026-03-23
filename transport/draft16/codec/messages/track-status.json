@@ -19,7 +19,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated TRACK_STATUS \u2013 missing track_name",
+      "description": "truncated TRACK_STATUS — missing track_name",
       "hex": "0d000e0101046c69",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_namespace"

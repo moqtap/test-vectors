@@ -35,7 +35,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated PUBLISH \u2013 missing track_name",
+      "description": "truncated PUBLISH — missing track_name",
       "hex": "1d000f0101046c69",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_namespace"

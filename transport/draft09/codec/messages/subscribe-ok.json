@@ -46,7 +46,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_OK — missing group_order",
+      "description": "truncated SUBSCRIBE_OK â€” missing group_order",
       "hex": "04020200",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading group_order"

@@ -89,14 +89,14 @@
     },
     {
       "id": "invalid-filter-type-1",
-      "description": "SUBSCRIBE with filter_type=1 — LatestGroup removed in draft-09",
+      "description": "SUBSCRIBE with filter_type=1 â€” LatestGroup removed in draft-09",
       "hex": "0312020101046c69766505766964656f80000100",
       "error": "invalid_value",
       "error_detail": "filter_type 1 is not a defined filter type"
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE — missing track_name",
+      "description": "truncated SUBSCRIBE â€” missing track_name",
       "hex": "0306020101046c69",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_name"

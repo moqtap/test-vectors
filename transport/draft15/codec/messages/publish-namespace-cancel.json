@@ -31,7 +31,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated PUBLISH_NAMESPACE_CANCEL \u2013 missing namespace data",
+      "description": "truncated PUBLISH_NAMESPACE_CANCEL — missing namespace data",
       "hex": "0c000e010a",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_namespace"

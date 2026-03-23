@@ -54,7 +54,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated datagram — missing object_id",
+      "description": "truncated datagram â€” missing object_id",
       "hex": "010102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading object_id"

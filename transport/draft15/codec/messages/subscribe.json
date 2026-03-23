@@ -72,7 +72,7 @@
     },
     {
       "id": "unknown-extension-param",
-      "description": "SUBSCRIBE with unknown extension parameter \u2013 must be skipped",
+      "description": "SUBSCRIBE with unknown extension parameter — must be skipped",
       "hex": "0300150101046c69766505766964656f01404104deadbeef",
       "decoded": {
         "request_id": "1",
@@ -93,7 +93,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE \u2013 missing track_name",
+      "description": "truncated SUBSCRIBE — missing track_name",
       "hex": "03000e0101046c697665",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_name"
