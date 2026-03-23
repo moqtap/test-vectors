@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_ok",
+  "message_type_id": "0x04",
+  "spec_section": "9.9",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal SUBSCRIBE_OK with no parameters and no properties",
+      "hex": "0400020000",
+      "decoded": {
+        "track_alias": "0",
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "SUBSCRIBE_OK with LARGEST_OBJECT parameter (group=10, object=3)",
+      "hex": "0400050501090a03",
+      "decoded": {
+        "track_alias": "5",
+        "parameters": {
+          "largest_object": {
+            "group": "10",
+            "object": "3"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "SUBSCRIBE_OK with EXPIRES parameter set to 30ms",
+      "hex": "0400040001081e",
+      "decoded": {
+        "track_alias": "0",
+        "parameters": {
+          "expires": "30"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_OK — missing track_alias",
+      "hex": "04000301",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_alias"
+    }
+  ]
+}

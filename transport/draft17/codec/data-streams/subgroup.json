@@ -1,0 +1,105 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "object",
+  "message_type_id": "0x10",
+  "spec_section": "10.4.2",
+  "vectors": [
+    {
+      "id": "subgroup-single-object",
+      "description": "subgroup stream (type 0x10: subgroup_id=0, priority present) with one 4-byte object",
+      "hex": "100100800004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x10",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-two-objects",
+      "description": "subgroup stream (type 0x10) with two consecutive objects",
+      "hex": "100100800004deadbeef0002cafe",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x10",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id_delta": "0",
+            "object_id": "1",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-explicit-subgroup-id",
+      "description": "subgroup stream (type 0x14: explicit subgroup_id, priority present) with zero-length object",
+      "hex": "140540640340000000",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x14",
+        "track_alias": "5",
+        "group_id": "100",
+        "subgroup_id": "3",
+        "publisher_priority": "64",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "payload_length": "0",
+            "status": "0",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-no-priority",
+      "description": "subgroup stream (type 0x30: subgroup_id=0, NO priority) with one object",
+      "hex": "3001000004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x30",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-truncated",
+      "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
+      "hex": "100100",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading publisher_priority"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "goaway",
+  "message_type_id": "0x10",
+  "spec_section": "9.5",
+  "vectors": [
+    {
+      "id": "empty-uri",
+      "description": "GOAWAY with empty new session URI and timeout=0",
+      "hex": "1000020000",
+      "decoded": {
+        "new_session_uri": "",
+        "timeout": "0"
+      }
+    },
+    {
+      "id": "with-uri",
+      "description": "GOAWAY with new session URI and timeout=5000ms",
+      "hex": "100007042f6d6f715388",
+      "decoded": {
+        "new_session_uri": "/moq",
+        "timeout": "5000"
+      }
+    },
+    {
+      "id": "non-canonical-uri-length",
+      "description": "non-canonical GOAWAY — URI length uses 2-byte varint for value 0",
+      "hex": "100003400000",
+      "canonical": false,
+      "decoded": {
+        "new_session_uri": "",
+        "timeout": "0"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated GOAWAY — missing URI length",
+      "hex": "100001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading new_session_uri length"
+    }
+  ]
+}

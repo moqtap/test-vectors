@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "namespace",
+  "message_type_id": "0x08",
+  "spec_section": "9.18",
+  "vectors": [
+    {
+      "id": "single-suffix",
+      "description": "NAMESPACE with single-element suffix",
+      "hex": "0800080106726f6f6d3432",
+      "decoded": {
+        "namespace_suffix": [
+          "room42"
+        ]
+      }
+    },
+    {
+      "id": "multi-suffix",
+      "description": "NAMESPACE with multi-element suffix",
+      "hex": "08000c020673706f72747303666f6f",
+      "decoded": {
+        "namespace_suffix": [
+          "sports",
+          "foo"
+        ]
+      }
+    },
+    {
+      "id": "empty-suffix",
+      "description": "NAMESPACE with zero-element suffix (exact match)",
+      "hex": "08000100",
+      "decoded": {
+        "namespace_suffix": []
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated NAMESPACE — missing suffix data",
+      "hex": "08000801",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading namespace_suffix"
+    }
+  ]
+}

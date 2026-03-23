@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "request_ok",
+  "message_type_id": "0x07",
+  "spec_section": "9.6",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "REQUEST_OK with no parameters",
+      "hex": "07000100",
+      "decoded": {
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "REQUEST_OK with LARGEST_OBJECT parameter (group=10, object=3)",
+      "hex": "07000401090a03",
+      "decoded": {
+        "parameters": {
+          "largest_object": {
+            "group": "10",
+            "object": "3"
+          }
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUEST_OK — missing parameter count",
+      "hex": "070001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_blocked",
+  "message_type_id": "0x0f",
+  "spec_section": "9.21",
+  "vectors": [
+    {
+      "id": "single-suffix",
+      "description": "PUBLISH_BLOCKED with single-element namespace suffix",
+      "hex": "0f000e0106726f6f6d343205766964656f",
+      "decoded": {
+        "namespace_suffix": [
+          "room42"
+        ],
+        "track_name": "video"
+      }
+    },
+    {
+      "id": "multi-suffix",
+      "description": "PUBLISH_BLOCKED with multi-element namespace suffix",
+      "hex": "0f0012020673706f727473036e626105617564696f",
+      "decoded": {
+        "namespace_suffix": [
+          "sports",
+          "nba"
+        ],
+        "track_name": "audio"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_BLOCKED — missing suffix data",
+      "hex": "0f000801",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading namespace_suffix"
+    }
+  ]
+}

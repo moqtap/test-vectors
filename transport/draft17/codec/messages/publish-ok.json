@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_ok",
+  "message_type_id": "0x1e",
+  "spec_section": "9.12",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal PUBLISH_OK with no parameters",
+      "hex": "1e000100",
+      "decoded": {
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-params",
+      "description": "PUBLISH_OK with SUBSCRIBER_PRIORITY and GROUP_ORDER parameters",
+      "hex": "1e00050220400201",
+      "decoded": {
+        "parameters": {
+          "subscriber_priority": "64",
+          "group_order": "1"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_OK — missing parameter count",
+      "hex": "1e000201",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

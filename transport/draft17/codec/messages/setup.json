@@ -1,0 +1,54 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "setup",
+  "message_type_id": "0x2f00",
+  "spec_section": "9.4",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal SETUP with no options",
+      "hex": "6f000000",
+      "decoded": {
+        "options": {}
+      }
+    },
+    {
+      "id": "path-option",
+      "description": "SETUP with PATH option",
+      "hex": "6f00000601042f6d6f71",
+      "decoded": {
+        "options": {
+          "path": "/moq"
+        }
+      }
+    },
+    {
+      "id": "max-auth-token-cache",
+      "description": "SETUP with MAX_AUTH_TOKEN_CACHE_SIZE option set to 1024",
+      "hex": "6f000003044400",
+      "decoded": {
+        "options": {
+          "max_auth_token_cache_size": "1024"
+        }
+      }
+    },
+    {
+      "id": "path-and-implementation",
+      "description": "SETUP with PATH and MOQT_IMPLEMENTATION options",
+      "hex": "6f00000f01042f6d6f710607746573742d7631",
+      "decoded": {
+        "options": {
+          "path": "/moq",
+          "moqt_implementation": "test-v1"
+        }
+      }
+    },
+    {
+      "id": "truncated-payload",
+      "description": "truncated SETUP � payload shorter than declared length",
+      "hex": "6f00000501",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading setup options"
+    }
+  ]
+}

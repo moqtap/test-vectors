@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "namespace_done",
+  "message_type_id": "0x0e",
+  "spec_section": "9.19",
+  "vectors": [
+    {
+      "id": "single-suffix",
+      "description": "NAMESPACE_DONE with single-element suffix",
+      "hex": "0e00080106726f6f6d3432",
+      "decoded": {
+        "namespace_suffix": [
+          "room42"
+        ]
+      }
+    },
+    {
+      "id": "empty-suffix",
+      "description": "NAMESPACE_DONE with zero-element suffix",
+      "hex": "0e000100",
+      "decoded": {
+        "namespace_suffix": []
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated NAMESPACE_DONE — missing suffix data",
+      "hex": "0e000801",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading namespace_suffix"
+    }
+  ]
+}

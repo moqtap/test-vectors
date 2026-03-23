@@ -54,6 +54,9 @@ PROTOCOL_INT_FIELDS = {
     "group", "object",
     # draft-16: existing_request_id, retry_interval, subscribe_options
     "existing_request_id", "retry_interval", "subscribe_options",
+    "timeout",
+    "object_id_delta",
+    "required_request_id_delta",
 }
 
 # Fields that are string integers inside version arrays

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status",
+  "message_type_id": "0x0d",
+  "spec_section": "9.16",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "TRACK_STATUS request for live/video (format identical to SUBSCRIBE)",
+      "hex": "0d000f010001046c69766505766964656f00",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS — missing track_namespace",
+      "hex": "0d000e010001046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

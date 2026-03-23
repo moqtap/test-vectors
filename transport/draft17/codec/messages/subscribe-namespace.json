@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_namespace",
+  "message_type_id": "0x11",
+  "spec_section": "9.20",
+  "vectors": [
+    {
+      "id": "single-prefix-publish",
+      "description": "SUBSCRIBE_NAMESPACE with single-element prefix, subscribe_options=0 (PUBLISH)",
+      "hex": "1100100100010a636f6e666572656e63650000",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "subscribe_options": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-prefix-namespace",
+      "description": "SUBSCRIBE_NAMESPACE with multi-element prefix, subscribe_options=1 (NAMESPACE)",
+      "hex": "110011030002046c6976650673706f7274730100",
+      "decoded": {
+        "request_id": "3",
+        "required_request_id_delta": "0",
+        "namespace_prefix": [
+          "live",
+          "sports"
+        ],
+        "subscribe_options": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "both-options",
+      "description": "SUBSCRIBE_NAMESPACE with subscribe_options=2 (both PUBLISH and NAMESPACE)",
+      "hex": "1100100100010a636f6e666572656e63650200",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "subscribe_options": "2",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_NAMESPACE — missing namespace_prefix",
+      "hex": "11000f0100010a636f6e",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading namespace_prefix"
+    }
+  ]
+}

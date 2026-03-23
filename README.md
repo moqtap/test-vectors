@@ -26,6 +26,7 @@ transport/
   draft14/                  MoQ Transport draft-14
   draft15/                  MoQ Transport draft-15
   draft16/                  MoQ Transport draft-16
+  draft17/                  MoQ Transport draft-17
     codec/
       varint.json           VarInt encoding (RFC 9000 §16)
       messages/*.json       One file per control message type
@@ -123,6 +124,8 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 
 ## Specs covered
 
+Coverage begins at draft-07, the first draft to establish the modern MoQT wire format (VarInt-framed control messages, subgroup-based data streams). Earlier drafts (00–06) used substantially different framing and message structures; they will be added for historical completeness.
+
 | Spec | Draft | Messages | Data streams | Total vectors |
 |------|-------|----------|-------------|---------------|
 | MoQ Transport | draft-07 | 26 control messages | 3 stream types | 122 |
@@ -130,11 +133,12 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 | MoQ Transport | draft-09 | 27 control messages | 4 stream types | 135 |
 | MoQ Transport | draft-10 | 27 control messages | 4 stream types | 135 |
 | MoQ Transport | draft-11 | 27 control messages | 3 stream types | 129 |
-| MoQ Transport | draft-12 | 30 control messages | 3 stream types | 120 |
-| MoQ Transport | draft-13 | 31 control messages | 3 stream types | 121 |
+| MoQ Transport | draft-12 | 30 control messages | 3 stream types | 139 |
+| MoQ Transport | draft-13 | 31 control messages | 3 stream types | 140 |
 | MoQ Transport | draft-14 | 31 control messages | 3 stream types | 134 |
 | MoQ Transport | draft-15 | 24 control messages | 3 stream types | 110 |
 | MoQ Transport | draft-16 | 25 control messages | 3 stream types | 115 |
+| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 100 |
 
 ## Scope
 
