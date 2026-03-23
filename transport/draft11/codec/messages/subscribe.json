@@ -7,7 +7,7 @@
     {
       "id": "filter-next-group-start",
       "description": "SUBSCRIBE with NextGroupStart filter, forward=1, no parameters",
-      "hex": "031302010101046c69766505766964656f8000010100",
+      "hex": "0313020101046c69766505766964656f8000010100",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -44,7 +44,7 @@
     {
       "id": "filter-absolute-start",
       "description": "SUBSCRIBE with AbsoluteStart filter",
-      "hex": "031502010101046c69766505766964656f80000101030a0300",
+      "hex": "0315020101046c69766505766964656f800001030a0300",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -64,7 +64,7 @@
     {
       "id": "filter-absolute-range",
       "description": "SUBSCRIBE with AbsoluteRange filter",
-      "hex": "031602010101046c69766505766964656f80000101040a031400",
+      "hex": "0316020101046c69766505766964656f800001040a031400",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -85,7 +85,7 @@
     {
       "id": "with-auth-param",
       "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (USE_VALUE)",
-      "hex": "031f02010101046c69766505766964656f8000010101010a0300746f6b656e313233",
+      "hex": "031f020101046c69766505766964656f8000010101010a0300746f6b656e313233",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -109,7 +109,7 @@
     {
       "id": "not-forwarded",
       "description": "SUBSCRIBE with forward=0 (not forwarded)",
-      "hex": "031302010101046c69766505766964656f8000000100",
+      "hex": "0313020101046c69766505766964656f8000000100",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -127,7 +127,7 @@
     {
       "id": "invalid-filter-type",
       "description": "SUBSCRIBE with filter_type=0 \u2014 reserved/undefined value",
-      "hex": "031302010101046c69766505766964656f8000010000",
+      "hex": "0313020101046c69766505766964656f8000010000",
       "error": "invalid_value",
       "error_detail": "filter_type 0 is not a defined filter type"
     },

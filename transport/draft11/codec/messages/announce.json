@@ -19,7 +19,7 @@
     {
       "id": "multi-namespace-with-auth",
       "description": "ANNOUNCE with multi-element namespace and AUTHORIZATION_TOKEN",
-      "hex": "062003020a636f6e666572656e636506726f6f6d34320101070300746f6b656e",
+      "hex": "061e03020a636f6e666572656e636506726f6f6d34320101070300746f6b656e",
       "decoded": {
         "request_id": "3",
         "track_namespace": [
