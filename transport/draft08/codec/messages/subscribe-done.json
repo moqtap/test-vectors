@@ -1,0 +1,92 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_done",
+  "message_type_id": "0x0b",
+  "spec_section": "7.19",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "SUBSCRIBE_DONE with Internal Error (0x0)",
+      "decoded": {
+        "subscribe_id": "2",
+        "status_code": "0",
+        "stream_count": "0",
+        "reason_phrase": ""
+      },
+      "hex": "0b0402000000"
+    },
+    {
+      "id": "unauthorized",
+      "description": "SUBSCRIBE_DONE with Unauthorized (0x1)",
+      "decoded": {
+        "subscribe_id": "2",
+        "status_code": "1",
+        "stream_count": "0",
+        "reason_phrase": "not authorized"
+      },
+      "hex": "0b120201000e6e6f7420617574686f72697a6564"
+    },
+    {
+      "id": "track-ended",
+      "description": "SUBSCRIBE_DONE with Track Ended (0x2)",
+      "decoded": {
+        "subscribe_id": "2",
+        "status_code": "2",
+        "stream_count": "5",
+        "reason_phrase": "track has ended"
+      },
+      "hex": "0b130202050f747261636b2068617320656e646564"
+    },
+    {
+      "id": "subscription-ended",
+      "description": "SUBSCRIBE_DONE with Subscription Ended (0x3)",
+      "decoded": {
+        "subscribe_id": "2",
+        "status_code": "3",
+        "stream_count": "0",
+        "reason_phrase": "subscription ended"
+      },
+      "hex": "0b1602030012737562736372697074696f6e20656e646564"
+    },
+    {
+      "id": "going-away",
+      "description": "SUBSCRIBE_DONE with Going Away (0x4)",
+      "decoded": {
+        "subscribe_id": "2",
+        "status_code": "4",
+        "stream_count": "0",
+        "reason_phrase": "server going away"
+      },
+      "hex": "0b150204001173657276657220676f696e672061776179"
+    },
+    {
+      "id": "expired",
+      "description": "SUBSCRIBE_DONE with Expired (0x5)",
+      "decoded": {
+        "subscribe_id": "2",
+        "status_code": "5",
+        "stream_count": "0",
+        "reason_phrase": "subscription expired"
+      },
+      "hex": "0b1802050014737562736372697074696f6e2065787069726564"
+    },
+    {
+      "id": "too-far-behind",
+      "description": "SUBSCRIBE_DONE with Too Far Behind (0x6)",
+      "decoded": {
+        "subscribe_id": "2",
+        "status_code": "6",
+        "stream_count": "3",
+        "reason_phrase": "too far behind"
+      },
+      "hex": "0b120206030e746f6f2066617220626568696e64"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_DONE — missing status_code",
+      "hex": "0b0102",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading status_code"
+    }
+  ]
+}

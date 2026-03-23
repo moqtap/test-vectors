@@ -1,0 +1,85 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status",
+  "message_type_id": "0x0e",
+  "spec_section": "7.24",
+  "vectors": [
+    {
+      "id": "in-progress",
+      "description": "TRACK_STATUS with In Progress (0x0)",
+      "hex": "0e0f01046c69766505766964656f00050a",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "0",
+        "last_group_id": "5",
+        "last_object_id": "10"
+      }
+    },
+    {
+      "id": "does-not-exist",
+      "description": "TRACK_STATUS with Does Not Exist (0x1)",
+      "hex": "0e0f01046c69766505766964656f010000",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "1",
+        "last_group_id": "0",
+        "last_object_id": "0"
+      }
+    },
+    {
+      "id": "not-yet-begun",
+      "description": "TRACK_STATUS with Not Yet Begun (0x2)",
+      "hex": "0e0f01046c69766505766964656f020000",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "2",
+        "last_group_id": "0",
+        "last_object_id": "0"
+      }
+    },
+    {
+      "id": "finished",
+      "description": "TRACK_STATUS with Finished (0x3)",
+      "hex": "0e0f01046c69766505766964656f030a14",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "3",
+        "last_group_id": "10",
+        "last_object_id": "20"
+      }
+    },
+    {
+      "id": "relay-no-info",
+      "description": "TRACK_STATUS with Relay No Info (0x4)",
+      "hex": "0e0f01046c69766505766964656f040000",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "4",
+        "last_group_id": "0",
+        "last_object_id": "0"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS — missing status_code",
+      "hex": "0e0c01046c69766505766964656f",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading status_code"
+    }
+  ]
+}

@@ -6,14 +6,17 @@ Checks:
 2. Hex fields are valid even-length lowercase hex strings
 3. Every codec vector has exactly one of decoded or error
 4. Protocol integer fields in decoded objects are strings matching ^[0-9]+$
-5. Every version directory has a meta.json
-6. meta.json entries are consistent with manifest.json
+5. Control message framing: declared length matches actual payload length
+   (varint framing for draft07/11, 16-bit BE for draft12+)
+6. Every version directory has a meta.json
+7. meta.json entries are consistent with manifest.json
 """
 
 import json
 import glob
 import os
 import re
+import struct
 import sys
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -45,7 +48,8 @@ PROTOCOL_INT_FIELDS = {
     "subscription_request_id", "stream_count",
     "joining_request_id", "joining_start", "maximum_request_id",
     "fetch_type", "status", "joining_subscribe_id",
-    "extension_headers_length",
+    "extension_headers_length", "preceding_group_offset",
+    "extension_count", "maximum_subscribe_id",
     # Location fields (used inside largest_object parameter)
     "group", "object",
     # draft-16: existing_request_id, retry_interval, subscribe_options
@@ -124,6 +128,76 @@ def validate_codec_vectors(filepath, data):
         if has_decoded:
             check_protocol_ints(v["decoded"], f"[{i}].decoded", filepath)
 
+def _dvi(data, off):
+    """Decode a QUIC varint at offset. Returns (value, bytes_consumed) or (None, 0)."""
+    if off >= len(data):
+        return None, 0
+    b = data[off]
+    p = b >> 6
+    if p == 0:
+        return b, 1
+    elif p == 1:
+        if off + 2 > len(data): return None, 0
+        return ((b & 0x3f) << 8) | data[off + 1], 2
+    elif p == 2:
+        if off + 4 > len(data): return None, 0
+        return struct.unpack('>I', bytes([b & 0x3f]) + data[off + 1:off + 4])[0], 4
+    else:
+        if off + 8 > len(data): return None, 0
+        return struct.unpack('>Q', bytes([b & 0x3f]) + data[off + 1:off + 8])[0], 8
+
+# Drafts where ALL control messages use varint length framing
+_VARINT_FRAMED_DRAFTS = {'draft07', 'draft08', 'draft11'}
+# Message types that use varint length even in 16-bit-BE drafts (draft12/13 only)
+_VARINT_LENGTH_MESSAGES = {'publish', 'publish_ok', 'publish_error'}
+
+def _extract_draft_id(filepath):
+    """Extract draft id (e.g. 'draft12') from a file path."""
+    parts = filepath.replace('\\', '/').split('/')
+    for p in parts:
+        if p.startswith('draft'):
+            return p
+    return None
+
+def validate_message_framing(filepath, data, draft_id):
+    """Validate that control message hex has correct type + length framing."""
+    mt = data.get('message_type', '')
+    if mt == 'unknown_type':
+        return
+
+    for i, v in enumerate(data['vectors']):
+        if 'hex' not in v:
+            continue
+        if v.get('error') == 'incomplete':
+            continue
+
+        raw = bytes.fromhex(v['hex'])
+        t, tl = _dvi(raw, 0)
+        if t is None:
+            continue
+
+        if draft_id in _VARINT_FRAMED_DRAFTS:
+            use_varint = True
+        elif mt in _VARINT_LENGTH_MESSAGES and draft_id in ('draft12', 'draft13'):
+            use_varint = True
+        else:
+            use_varint = False
+
+        if use_varint:
+            length, ll = _dvi(raw, tl)
+            if length is None:
+                continue
+            payload = raw[tl + ll:]
+        else:
+            if tl + 2 > len(raw):
+                continue
+            length = struct.unpack('>H', raw[tl:tl + 2])[0]
+            payload = raw[tl + 2:]
+
+        if len(payload) != length:
+            desc = v.get('description', f'vector {i}')
+            err(f"{filepath}: [{i}] '{desc}' declared length {length} but payload is {len(payload)} bytes")
+
 def validate_manifest_consistency():
     """Check that manifest.json and meta.json files are consistent."""
     manifest_path = os.path.join(REPO_ROOT, "manifest.json")
@@ -158,7 +232,7 @@ print("Validating test vectors...")
 print()
 
 # 1. Parse and validate all JSON vector files
-print("Checking vector files...")
+print("Checking vector files and message framing...")
 for filepath in glob.glob(os.path.join(REPO_ROOT, "transport/**/codec/**/*.json"), recursive=True):
     relpath = os.path.relpath(filepath, REPO_ROOT)
     try:
@@ -169,6 +243,12 @@ for filepath in glob.glob(os.path.join(REPO_ROOT, "transport/**/codec/**/*.json"
         continue
 
     validate_codec_vectors(relpath, data)
+
+    # Check message framing (only for control messages, not data streams or varint)
+    if os.sep + "messages" + os.sep in filepath or "/messages/" in filepath:
+        draft_id = _extract_draft_id(relpath)
+        if draft_id:
+            validate_message_framing(relpath, data, draft_id)
 
 # 2. Validate meta.json files
 print("Checking meta.json files...")
