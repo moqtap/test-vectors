@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_ok",
+  "message_type_id": "0x04",
+  "spec_section": "6.4",
+  "vectors": [
+    {
+      "id": "no-expiry",
+      "description": "SUBSCRIBE OK with track_id=1, expires=0 (no expiry)",
+      "hex": "040d0a6c6976652f766964656f0100",
+      "decoded": {
+        "full_track_name": "live/video",
+        "track_id": "1",
+        "expires": "0"
+      }
+    },
+    {
+      "id": "with-expiry",
+      "description": "SUBSCRIBE OK with 30-second expiry (30000 ms)",
+      "hex": "04100a6c6976652f766964656f0280007530",
+      "decoded": {
+        "full_track_name": "live/video",
+        "track_id": "2",
+        "expires": "30000"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE OK — missing track_id",
+      "hex": "040b0a6c6976652f766964656f",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_id"
+    }
+  ]
+}

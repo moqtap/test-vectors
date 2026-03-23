@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status",
+  "message_type_id": "0x0e",
+  "spec_section": "6.19",
+  "vectors": [
+    {
+      "id": "in-progress",
+      "description": "TRACK_STATUS with status=0 (in progress), last group=10, object=5",
+      "hex": "0e0f01046c69766505766964656f000a05",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "0",
+        "last_group_id": "10",
+        "last_object_id": "5"
+      }
+    },
+    {
+      "id": "track-not-exist",
+      "description": "TRACK_STATUS with status=1 (does not exist)",
+      "hex": "0e0f01046c69766505766964656f010000",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "1",
+        "last_group_id": "0",
+        "last_object_id": "0"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS — missing status_code",
+      "hex": "0e0c01046c69766505766964656f",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading status_code"
+    }
+  ]
+}

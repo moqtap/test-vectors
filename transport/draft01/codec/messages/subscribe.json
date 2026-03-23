@@ -1,0 +1,111 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe",
+  "message_type_id": "0x03",
+  "spec_section": "6.4",
+  "vectors": [
+    {
+      "id": "now",
+      "description": "SUBSCRIBE 'now': StartGroup=RelPrev(0), StartObj=RelNext(0), open-ended",
+      "hex": "03110a6c6976652f766964656f020003000000",
+      "decoded": {
+        "full_track_name": "live/video",
+        "start_group": {
+          "mode": "2",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "3",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "current",
+      "description": "SUBSCRIBE 'current': StartGroup=RelPrev(0), StartObj=Abs(0), open-ended",
+      "hex": "03110a6c6976652f766964656f020001000000",
+      "decoded": {
+        "full_track_name": "live/video",
+        "start_group": {
+          "mode": "2",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "absolute-range",
+      "description": "SUBSCRIBE absolute range: group 3 object 0 to group 4 object 0",
+      "hex": "03130a6c6976652f766964656f0103010001040100",
+      "decoded": {
+        "full_track_name": "live/video",
+        "start_group": {
+          "mode": "1",
+          "value": "3"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "1",
+          "value": "4"
+        },
+        "end_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-authorization-info",
+      "description": "SUBSCRIBE with AUTHORIZATION_INFO parameter",
+      "hex": "031a0a6c6976652f766964656f02000300000002076d79746f6b656e",
+      "decoded": {
+        "full_track_name": "live/video",
+        "start_group": {
+          "mode": "2",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "3",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {
+          "authorization_info": "mytoken"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE — missing full_track_name",
+      "hex": "03010a",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading full_track_name"
+    }
+  ]
+}

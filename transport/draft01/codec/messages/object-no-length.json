@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "object_no_length",
+  "message_type_id": "0x02",
+  "spec_section": "6.3",
+  "vectors": [
+    {
+      "id": "simple-object",
+      "description": "OBJECT (type 0x02, without payload length) track_id=1, group=0, object=0",
+      "hex": "020801000000deadbeef",
+      "decoded": {
+        "track_id": "1",
+        "group_sequence": "0",
+        "object_sequence": "0",
+        "object_send_order": "0",
+        "payload_length": "4",
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated OBJECT (type 0x02) — missing group_sequence",
+      "hex": "020101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading group_sequence"
+    }
+  ]
+}

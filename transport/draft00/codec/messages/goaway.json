@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "goaway",
+  "message_type_id": "0x10",
+  "spec_section": "6.9",
+  "vectors": [
+    {
+      "id": "empty",
+      "description": "GOAWAY with empty payload",
+      "hex": "1000",
+      "decoded": {}
+    },
+    {
+      "id": "truncated",
+      "description": "truncated GOAWAY — missing message length",
+      "hex": "10",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading message length"
+    }
+  ]
+}

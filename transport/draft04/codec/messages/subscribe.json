@@ -1,0 +1,88 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe",
+  "message_type_id": "0x03",
+  "spec_section": "6.4",
+  "vectors": [
+    {
+      "id": "latest-group",
+      "description": "SUBSCRIBE with LatestGroup filter, no parameters",
+      "hex": "030f0101046c69766505766964656f0100",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "1",
+        "track_namespace": "live",
+        "track_name": "video",
+        "filter_type": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "latest-object",
+      "description": "SUBSCRIBE with LatestObject filter",
+      "hex": "030f0202046c69766505766964656f0200",
+      "decoded": {
+        "subscribe_id": "2",
+        "track_alias": "2",
+        "track_namespace": "live",
+        "track_name": "video",
+        "filter_type": "2",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "absolute-start",
+      "description": "SUBSCRIBE with AbsoluteStart filter from group 5 object 0",
+      "hex": "03110303046c69766505766964656f03050000",
+      "decoded": {
+        "subscribe_id": "3",
+        "track_alias": "3",
+        "track_namespace": "live",
+        "track_name": "video",
+        "filter_type": "3",
+        "start_group": "5",
+        "start_object": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "absolute-range",
+      "description": "SUBSCRIBE with AbsoluteRange filter from group 3 to group 5",
+      "hex": "03130404046c69766505766964656f040300050000",
+      "decoded": {
+        "subscribe_id": "4",
+        "track_alias": "4",
+        "track_namespace": "live",
+        "track_name": "video",
+        "filter_type": "4",
+        "start_group": "3",
+        "start_object": "0",
+        "end_group": "5",
+        "end_object": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-authorization-info",
+      "description": "SUBSCRIBE with LatestGroup and AUTHORIZATION_INFO parameter",
+      "hex": "03180101046c69766505766964656f010102076d79746f6b656e",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "1",
+        "track_namespace": "live",
+        "track_name": "video",
+        "filter_type": "1",
+        "parameters": {
+          "authorization_info": "mytoken"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE — missing track_name",
+      "hex": "03070101046c697665",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_name"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_update",
+  "message_type_id": "0x02",
+  "spec_section": "6.5",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "SUBSCRIBE_UPDATE narrowing range to group 5-10",
+      "hex": "02070105000a008000",
+      "decoded": {
+        "subscribe_id": "1",
+        "start_group": "5",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "subscriber_priority": "128",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE_UPDATE with DELIVERY_TIMEOUT parameter",
+      "hex": "020b0100000500ff0103025388",
+      "decoded": {
+        "subscribe_id": "1",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "5",
+        "end_object": "0",
+        "subscriber_priority": "255",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_UPDATE — missing start_group",
+      "hex": "020101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading start_group"
+    }
+  ]
+}

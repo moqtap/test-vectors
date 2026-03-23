@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce",
+  "message_type_id": "0x06",
+  "spec_section": "6.17",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "ANNOUNCE with single-element namespace tuple, no parameters",
+      "hex": "060701046c69766500",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-element-namespace",
+      "description": "ANNOUNCE with multi-element namespace tuple",
+      "hex": "061a020b6578616d706c652e636f6d0b6d656574696e673d31323300",
+      "decoded": {
+        "track_namespace": [
+          "example.com",
+          "meeting=123"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-authorization-info",
+      "description": "ANNOUNCE with AUTHORIZATION_INFO parameter",
+      "hex": "061001046c6976650102076d79746f6b656e",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "parameters": {
+          "authorization_info": "mytoken"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE — missing track_namespace",
+      "hex": "0600",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

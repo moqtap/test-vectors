@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "unannounce",
+  "message_type_id": "0x09",
+  "spec_section": "6.13",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "UNANNOUNCE for namespace 'live'",
+      "hex": "0905046c697665",
+      "decoded": {
+        "track_namespace": "live"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated UNANNOUNCE — missing track_namespace",
+      "hex": "0900",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

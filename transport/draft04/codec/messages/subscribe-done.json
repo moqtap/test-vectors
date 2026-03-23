@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_done",
+  "message_type_id": "0x0b",
+  "spec_section": "6.14",
+  "vectors": [
+    {
+      "id": "unsubscribed-no-content",
+      "description": "SUBSCRIBE_DONE with status=0, no content",
+      "hex": "0b0401000000",
+      "decoded": {
+        "subscribe_id": "1",
+        "status_code": "0",
+        "reason_phrase": "",
+        "content_exists": "0"
+      }
+    },
+    {
+      "id": "with-final-position",
+      "description": "SUBSCRIBE_DONE with content and final group/object",
+      "hex": "0b0a010004646f6e65010a05",
+      "decoded": {
+        "subscribe_id": "1",
+        "status_code": "0",
+        "reason_phrase": "done",
+        "content_exists": "1",
+        "final_group": "10",
+        "final_object": "5"
+      }
+    },
+    {
+      "id": "error-with-position",
+      "description": "SUBSCRIBE_DONE with error status and final position",
+      "hex": "0b1501010f7075626c6973686572206572726f72010302",
+      "decoded": {
+        "subscribe_id": "1",
+        "status_code": "1",
+        "reason_phrase": "publisher error",
+        "content_exists": "1",
+        "final_group": "3",
+        "final_object": "2"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_DONE — missing status_code",
+      "hex": "0b0101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading status_code"
+    }
+  ]
+}

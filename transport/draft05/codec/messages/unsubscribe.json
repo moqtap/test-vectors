@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "unsubscribe",
+  "message_type_id": "0x0a",
+  "spec_section": "6.6",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "UNSUBSCRIBE with subscribe_id=1",
+      "hex": "0a0101",
+      "decoded": {
+        "subscribe_id": "1"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated UNSUBSCRIBE — missing subscribe_id",
+      "hex": "0a00",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading subscribe_id"
+    }
+  ]
+}

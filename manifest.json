@@ -6,6 +6,41 @@
       "ietf_base": "draft-ietf-moq-transport",
       "versions": [
         {
+          "id": "draft00",
+          "spec": "draft-ietf-moq-transport-00",
+          "path": "transport/draft00/"
+        },
+        {
+          "id": "draft01",
+          "spec": "draft-ietf-moq-transport-01",
+          "path": "transport/draft01/"
+        },
+        {
+          "id": "draft02",
+          "spec": "draft-ietf-moq-transport-02",
+          "path": "transport/draft02/"
+        },
+        {
+          "id": "draft03",
+          "spec": "draft-ietf-moq-transport-03",
+          "path": "transport/draft03/"
+        },
+        {
+          "id": "draft04",
+          "spec": "draft-ietf-moq-transport-04",
+          "path": "transport/draft04/"
+        },
+        {
+          "id": "draft05",
+          "spec": "draft-ietf-moq-transport-05",
+          "path": "transport/draft05/"
+        },
+        {
+          "id": "draft06",
+          "spec": "draft-ietf-moq-transport-06",
+          "path": "transport/draft06/"
+        },
+        {
           "id": "draft07",
           "spec": "draft-ietf-moq-transport-07",
           "path": "transport/draft07/"

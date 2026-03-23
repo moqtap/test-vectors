@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce",
+  "message_type_id": "0x06",
+  "spec_section": "6.9",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "ANNOUNCE with namespace, no parameters",
+      "hex": "0606046c69766500",
+      "decoded": {
+        "track_namespace": "live",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-authorization-info",
+      "description": "ANNOUNCE with AUTHORIZATION_INFO parameter",
+      "hex": "060f046c6976650102076d79746f6b656e",
+      "decoded": {
+        "track_namespace": "live",
+        "parameters": {
+          "authorization_info": "mytoken"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE — missing track_namespace",
+      "hex": "0600",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

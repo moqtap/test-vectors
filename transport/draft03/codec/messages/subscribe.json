@@ -1,0 +1,97 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe",
+  "message_type_id": "0x03",
+  "spec_section": "6.4",
+  "vectors": [
+    {
+      "id": "now",
+      "description": "SUBSCRIBE 'now': StartGroup=RelPrev(0), StartObj=RelNext(0), open-ended",
+      "hex": "03140101046c69766505766964656f02000300000000",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "1",
+        "track_namespace": "live",
+        "track_name": "video",
+        "start_group": {
+          "mode": "2",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "3",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "absolute-range",
+      "description": "SUBSCRIBE absolute range: group 3 to group 4",
+      "hex": "03160202046c69766505766964656f010301000104010000",
+      "decoded": {
+        "subscribe_id": "2",
+        "track_alias": "2",
+        "track_namespace": "live",
+        "track_name": "video",
+        "start_group": {
+          "mode": "1",
+          "value": "3"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "1",
+          "value": "4"
+        },
+        "end_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-authorization-info",
+      "description": "SUBSCRIBE with AUTHORIZATION_INFO parameter",
+      "hex": "031d0101046c69766505766964656f0200030000000102076d79746f6b656e",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "1",
+        "track_namespace": "live",
+        "track_name": "video",
+        "start_group": {
+          "mode": "2",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "3",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {
+          "authorization_info": "mytoken"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE — missing track_name",
+      "hex": "03070101046c697665",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_name"
+    }
+  ]
+}

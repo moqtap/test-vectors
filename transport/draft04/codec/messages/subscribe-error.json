@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_error",
+  "message_type_id": "0x05",
+  "spec_section": "6.13",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "SUBSCRIBE_ERROR with error code 0",
+      "hex": "051201000e696e7465726e616c206572726f7201",
+      "decoded": {
+        "subscribe_id": "1",
+        "error_code": "0",
+        "reason_phrase": "internal error",
+        "track_alias": "1"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_ERROR — missing error_code",
+      "hex": "050101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code"
+    }
+  ]
+}

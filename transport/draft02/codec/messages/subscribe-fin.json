@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_fin",
+  "message_type_id": "0x0b",
+  "spec_section": "6.8",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "SUBSCRIBE_FIN with final_group=10, final_object=5",
+      "hex": "0b03010a05",
+      "decoded": {
+        "subscribe_id": "1",
+        "final_group": "10",
+        "final_object": "5"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_FIN — missing final_group",
+      "hex": "0b0101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading final_group"
+    }
+  ]
+}

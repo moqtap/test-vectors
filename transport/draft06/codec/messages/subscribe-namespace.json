@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_namespace",
+  "message_type_id": "0x11",
+  "spec_section": "6.11",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "SUBSCRIBE_NAMESPACE with single-element prefix, no parameters",
+      "hex": "110e010b6578616d706c652e636f6d00",
+      "decoded": {
+        "track_namespace_prefix": [
+          "example.com"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-element-prefix",
+      "description": "SUBSCRIBE_NAMESPACE with multi-element prefix",
+      "hex": "111a020b6578616d706c652e636f6d0b6d656574696e673d31323300",
+      "decoded": {
+        "track_namespace_prefix": [
+          "example.com",
+          "meeting=123"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-authorization-info",
+      "description": "SUBSCRIBE_NAMESPACE with AUTHORIZATION_INFO parameter",
+      "hex": "1117010b6578616d706c652e636f6d0102076e73746f6b656e",
+      "decoded": {
+        "track_namespace_prefix": [
+          "example.com"
+        ],
+        "parameters": {
+          "authorization_info": "nstoken"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_NAMESPACE — missing parameters",
+      "hex": "110d010b6578616d706c652e636f6d",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameters"
+    }
+  ]
+}

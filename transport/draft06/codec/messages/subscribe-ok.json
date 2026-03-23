@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_ok",
+  "message_type_id": "0x04",
+  "spec_section": "6.13",
+  "vectors": [
+    {
+      "id": "no-content",
+      "description": "SUBSCRIBE_OK with no content, ascending order",
+      "hex": "04050100010000",
+      "decoded": {
+        "subscribe_id": "1",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-content",
+      "description": "SUBSCRIBE_OK with content, descending order, largest group=5 object=10",
+      "hex": "040701000201050a00",
+      "decoded": {
+        "subscribe_id": "1",
+        "expires": "0",
+        "group_order": "2",
+        "content_exists": "1",
+        "largest_group_id": "5",
+        "largest_object_id": "10",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE_OK with DELIVERY_TIMEOUT parameter",
+      "hex": "040b0100010103070103024bb8",
+      "decoded": {
+        "subscribe_id": "1",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "1",
+        "largest_group_id": "3",
+        "largest_object_id": "7",
+        "parameters": {
+          "delivery_timeout": "3000"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_OK — missing expires",
+      "hex": "040101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading expires"
+    }
+  ]
+}

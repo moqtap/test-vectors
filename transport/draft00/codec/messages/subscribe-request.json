@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_request",
+  "message_type_id": "0x03",
+  "spec_section": "6.3",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "SUBSCRIBE REQUEST with no parameters",
+      "hex": "030b0a6c6976652f766964656f",
+      "decoded": {
+        "full_track_name": "live/video",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-group-sequence",
+      "description": "SUBSCRIBE REQUEST with GROUP_SEQUENCE parameter",
+      "hex": "030e0a6c6976652f766964656f000105",
+      "decoded": {
+        "full_track_name": "live/video",
+        "parameters": {
+          "group_sequence": "5"
+        }
+      }
+    },
+    {
+      "id": "with-group-and-object-sequence",
+      "description": "SUBSCRIBE REQUEST with GROUP_SEQUENCE and OBJECT_SEQUENCE parameters",
+      "hex": "03110a6c6976652f766964656f000105010103",
+      "decoded": {
+        "full_track_name": "live/video",
+        "parameters": {
+          "group_sequence": "5",
+          "object_sequence": "3"
+        }
+      }
+    },
+    {
+      "id": "with-authorization-info",
+      "description": "SUBSCRIBE REQUEST with AUTHORIZATION_INFO parameter",
+      "hex": "03140a6c6976652f766964656f02076d79746f6b656e",
+      "decoded": {
+        "full_track_name": "live/video",
+        "parameters": {
+          "authorization_info": "mytoken"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE REQUEST — missing full_track_name",
+      "hex": "03010a",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading full_track_name"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "unsubscribe",
+  "message_type_id": "0x0a",
+  "spec_section": "6.7",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "UNSUBSCRIBE for live/video",
+      "hex": "0a0b046c69766505766964656f",
+      "decoded": {
+        "track_namespace": "live",
+        "track_name": "video"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated UNSUBSCRIBE — missing track_name",
+      "hex": "0a05046c697665",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_name"
+    }
+  ]
+}

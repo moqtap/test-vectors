@@ -16,6 +16,13 @@ See [`examples/`](examples/README.md) for copy-pasteable integration snippets in
 
 ```
 transport/
+  draft00/                  MoQ Transport draft-00
+  draft01/                  MoQ Transport draft-01
+  draft02/                  MoQ Transport draft-02
+  draft03/                  MoQ Transport draft-03
+  draft04/                  MoQ Transport draft-04
+  draft05/                  MoQ Transport draft-05
+  draft06/                  MoQ Transport draft-06
   draft07/                  MoQ Transport draft-07
   draft08/                  MoQ Transport draft-08
   draft09/                  MoQ Transport draft-09
@@ -124,10 +131,17 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 
 ## Specs covered
 
-Coverage begins at draft-07, the first draft to establish the modern MoQT wire format (VarInt-framed control messages, subgroup-based data streams). Earlier drafts (00–06) used substantially different framing and message structures; they will be added for historical completeness.
+Coverage spans drafts 00 through 17. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
 
 | Spec | Draft | Messages | Data streams | Total vectors |
 |------|-------|----------|-------------|---------------|
+| MoQ Transport | draft-00 | 11 control messages | — | 52 |
+| MoQ Transport | draft-01 | 16 control messages | — | 62 |
+| MoQ Transport | draft-02 | 14 control messages | 4 stream types | 64 |
+| MoQ Transport | draft-03 | 14 control messages | 4 stream types | 64 |
+| MoQ Transport | draft-04 | 17 control messages | 4 stream types | 76 |
+| MoQ Transport | draft-05 | 17 control messages | 4 stream types | 76 |
+| MoQ Transport | draft-06 | 22 control messages | 3 stream types | 89 |
 | MoQ Transport | draft-07 | 26 control messages | 3 stream types | 122 |
 | MoQ Transport | draft-08 | 27 control messages | 4 stream types | 133 |
 | MoQ Transport | draft-09 | 27 control messages | 4 stream types | 135 |

@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_ok",
+  "message_type_id": "0x04",
+  "spec_section": "6.12",
+  "vectors": [
+    {
+      "id": "no-content",
+      "description": "SUBSCRIBE_OK with no content (content_exists=0)",
+      "hex": "0403010000",
+      "decoded": {
+        "subscribe_id": "1",
+        "expires": "0",
+        "content_exists": "0"
+      }
+    },
+    {
+      "id": "with-content",
+      "description": "SUBSCRIBE_OK with content (content_exists=1, largest group=5, object=10)",
+      "hex": "0405010001050a",
+      "decoded": {
+        "subscribe_id": "1",
+        "expires": "0",
+        "content_exists": "1",
+        "largest_group_id": "5",
+        "largest_object_id": "10"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_OK — missing expires",
+      "hex": "040101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading expires"
+    }
+  ]
+}

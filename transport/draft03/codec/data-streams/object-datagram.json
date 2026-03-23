@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "object",
+  "message_type_id": "0x01",
+  "spec_section": "6.3.2",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "OBJECT_DATAGRAM with subscribe_id=1, track_alias=2, group=0, object=0",
+      "hex": "010102000000cafe",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "0",
+        "object_id": "0",
+        "object_send_order": "0",
+        "payload_length": "2",
+        "payload_hex": "cafe"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated OBJECT_DATAGRAM — missing track_alias",
+      "hex": "0101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_alias"
+    }
+  ]
+}

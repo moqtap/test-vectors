@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_rst",
+  "message_type_id": "0x0c",
+  "spec_section": "6.9",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "SUBSCRIBE_RST with error and final position",
+      "hex": "0c1401010f7075626c6973686572206572726f720a05",
+      "decoded": {
+        "subscribe_id": "1",
+        "error_code": "1",
+        "reason_phrase": "publisher error",
+        "final_group": "10",
+        "final_object": "5"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_RST — missing error_code",
+      "hex": "0c0101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code"
+    }
+  ]
+}

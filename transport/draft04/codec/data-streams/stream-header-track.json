@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "object",
+  "message_type_id": "0x50",
+  "spec_section": "6.11",
+  "vectors": [
+    {
+      "id": "single-object",
+      "description": "STREAM_HEADER_TRACK with one normal object",
+      "hex": "4050010200000004deadbeef",
+      "decoded": {
+        "stream_type": "track",
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "object_send_order": "0",
+        "objects": [
+          {
+            "group_id": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-end-of-group",
+      "description": "STREAM_HEADER_TRACK with objects including EndOfGroup status",
+      "hex": "4050010200000004deadbeef000102cafe00050003",
+      "decoded": {
+        "stream_type": "track",
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "object_send_order": "0",
+        "objects": [
+          {
+            "group_id": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "group_id": "0",
+            "object_id": "1",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          },
+          {
+            "group_id": "0",
+            "object_id": "5",
+            "payload_length": "0",
+            "object_status": "3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated STREAM_HEADER_TRACK — missing track_alias",
+      "hex": "405001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_alias"
+    }
+  ]
+}

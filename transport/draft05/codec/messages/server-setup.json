@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "server_setup",
+  "message_type_id": "0x41",
+  "spec_section": "6.2",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal SERVER_SETUP with draft-05 version, no parameters",
+      "hex": "404109c0000000ff00000500",
+      "decoded": {
+        "selected_version": "4278190085",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SERVER_SETUP — missing selected_version",
+      "hex": "404100",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading selected_version"
+    }
+  ]
+}

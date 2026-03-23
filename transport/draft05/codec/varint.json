@@ -1,0 +1,160 @@
+{
+  "$schema": "../../../schema/codec-vector.schema.json",
+  "message_type": "varint",
+  "spec_section": "RFC 9000 §16",
+  "vectors": [
+    {
+      "id": "1b-zero",
+      "description": "1-byte: 0",
+      "hex": "00",
+      "decoded": {
+        "value": "0"
+      }
+    },
+    {
+      "id": "1b-one",
+      "description": "1-byte: 1",
+      "hex": "01",
+      "decoded": {
+        "value": "1"
+      }
+    },
+    {
+      "id": "1b-37",
+      "description": "1-byte: 37",
+      "hex": "25",
+      "decoded": {
+        "value": "37"
+      }
+    },
+    {
+      "id": "1b-max",
+      "description": "1-byte max: 63",
+      "hex": "3f",
+      "decoded": {
+        "value": "63"
+      }
+    },
+    {
+      "id": "2b-min",
+      "description": "2-byte min: 64",
+      "hex": "4040",
+      "decoded": {
+        "value": "64"
+      }
+    },
+    {
+      "id": "2b-15293",
+      "description": "2-byte: 15293",
+      "hex": "7bbd",
+      "decoded": {
+        "value": "15293"
+      }
+    },
+    {
+      "id": "2b-max",
+      "description": "2-byte max: 16383",
+      "hex": "7fff",
+      "decoded": {
+        "value": "16383"
+      }
+    },
+    {
+      "id": "4b-min",
+      "description": "4-byte min: 16384",
+      "hex": "80004000",
+      "decoded": {
+        "value": "16384"
+      }
+    },
+    {
+      "id": "4b-494878333",
+      "description": "4-byte: 494878333",
+      "hex": "9d7f3e7d",
+      "decoded": {
+        "value": "494878333"
+      }
+    },
+    {
+      "id": "4b-max",
+      "description": "4-byte max: 1073741823",
+      "hex": "bfffffff",
+      "decoded": {
+        "value": "1073741823"
+      }
+    },
+    {
+      "id": "8b-min",
+      "description": "8-byte min: 1073741824",
+      "hex": "c000000040000000",
+      "decoded": {
+        "value": "1073741824"
+      }
+    },
+    {
+      "id": "8b-max",
+      "description": "8-byte max: 2^62-1",
+      "hex": "ffffffffffffffff",
+      "decoded": {
+        "value": "4611686018427387903"
+      }
+    },
+    {
+      "id": "non-canonical-2b-zero",
+      "description": "non-canonical 2-byte encoding of 0",
+      "hex": "4000",
+      "decoded": {
+        "value": "0"
+      },
+      "canonical": false
+    },
+    {
+      "id": "non-canonical-2b-63",
+      "description": "non-canonical 2-byte encoding of 63",
+      "hex": "403f",
+      "decoded": {
+        "value": "63"
+      },
+      "canonical": false
+    },
+    {
+      "id": "non-canonical-4b-63",
+      "description": "non-canonical 4-byte encoding of 63",
+      "hex": "8000003f",
+      "decoded": {
+        "value": "63"
+      },
+      "canonical": false
+    },
+    {
+      "id": "non-canonical-8b-zero",
+      "description": "non-canonical 8-byte encoding of 0",
+      "hex": "c000000000000000",
+      "decoded": {
+        "value": "0"
+      },
+      "canonical": false
+    },
+    {
+      "id": "truncated-2b",
+      "description": "truncated 2-byte varint",
+      "hex": "40",
+      "error": "incomplete",
+      "error_detail": "2-byte varint requires 2 bytes, only 1 available"
+    },
+    {
+      "id": "truncated-4b",
+      "description": "truncated 4-byte varint",
+      "hex": "800040",
+      "error": "incomplete",
+      "error_detail": "4-byte varint requires 4 bytes, only 3 available"
+    },
+    {
+      "id": "truncated-8b",
+      "description": "truncated 8-byte varint — only 4 bytes",
+      "hex": "c0000000",
+      "error": "incomplete",
+      "error_detail": "8-byte varint requires 8 bytes, only 4 available"
+    }
+  ]
+}

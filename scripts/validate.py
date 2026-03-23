@@ -57,6 +57,9 @@ PROTOCOL_INT_FIELDS = {
     "timeout",
     "object_id_delta",
     "required_request_id_delta",
+    # draft-00/01
+    "track_id", "group_sequence", "object_sequence", "object_send_order",
+    "mode",
 }
 
 # Fields that are string integers inside version arrays
@@ -65,12 +68,19 @@ VERSION_INT_FIELDS = set()  # versions are already strings in our format
 INT_PATTERN = re.compile(r"^[0-9]+$")
 HEX_PATTERN = re.compile(r"^([0-9a-f]{2})+$")
 
-def check_protocol_ints(obj, path, filename):
+# Fields that are Location objects ({mode, value}) in early drafts but plain int strings in draft07+
+_LOCATION_FIELDS = {"start_group", "start_object", "end_group", "end_object"}
+# Drafts where Location fields are objects rather than plain int strings
+_LOCATION_OBJECT_DRAFTS = {"draft01", "draft02", "draft03"}
+
+def check_protocol_ints(obj, path, filename, draft_id=None):
     """Recursively check that protocol integer fields are strings."""
     if isinstance(obj, dict):
         for k, v in obj.items():
             if k in PROTOCOL_INT_FIELDS:
-                if not isinstance(v, str) or not INT_PATTERN.match(v):
+                if isinstance(v, dict) and k in _LOCATION_FIELDS and draft_id in _LOCATION_OBJECT_DRAFTS:
+                    check_protocol_ints(v, f"{path}.{k}", filename, draft_id)
+                elif not isinstance(v, str) or not INT_PATTERN.match(v):
                     err(f"{filename}: {path}.{k} = {v!r} must be a string of digits")
             elif k == "supported_versions":
                 if isinstance(v, list):
@@ -81,10 +91,10 @@ def check_protocol_ints(obj, path, filename):
                 if not isinstance(v, str) or not INT_PATTERN.match(v):
                     err(f"{filename}: {path}.selected_version = {v!r} must be a string of digits")
             else:
-                check_protocol_ints(v, f"{path}.{k}", filename)
+                check_protocol_ints(v, f"{path}.{k}", filename, draft_id)
     elif isinstance(obj, list):
         for i, item in enumerate(obj):
-            check_protocol_ints(item, f"{path}[{i}]", filename)
+            check_protocol_ints(item, f"{path}[{i}]", filename, draft_id)
 
 ID_PATTERN = re.compile(r"^[a-z0-9-]+$")
 
@@ -102,7 +112,7 @@ def validate_vector_ids(filepath, vectors):
             err(f"{filepath}: [{i}] duplicate id '{vid}'")
         seen_ids.add(vid)
 
-def validate_codec_vectors(filepath, data):
+def validate_codec_vectors(filepath, data, draft_id=None):
     """Validate a codec vector file."""
     if "vectors" not in data:
         err(f"{filepath}: missing 'vectors' array")
@@ -129,7 +139,7 @@ def validate_codec_vectors(filepath, data):
 
         # Check protocol integers in decoded
         if has_decoded:
-            check_protocol_ints(v["decoded"], f"[{i}].decoded", filepath)
+            check_protocol_ints(v["decoded"], f"[{i}].decoded", filepath, draft_id)
 
 def _dvi(data, off):
     """Decode a QUIC varint at offset. Returns (value, bytes_consumed) or (None, 0)."""
@@ -150,7 +160,7 @@ def _dvi(data, off):
         return struct.unpack('>Q', bytes([b & 0x3f]) + data[off + 1:off + 8])[0], 8
 
 # Drafts where ALL control messages use varint length framing
-_VARINT_FRAMED_DRAFTS = {'draft10', 'draft09', 'draft07', 'draft08', 'draft11'}
+_VARINT_FRAMED_DRAFTS = {'draft00', 'draft01', 'draft02', 'draft03', 'draft04', 'draft05', 'draft06', 'draft10', 'draft09', 'draft07', 'draft08', 'draft11'}
 # Message types that use varint length even in 16-bit-BE drafts (draft12/13 only)
 _VARINT_LENGTH_MESSAGES = {'publish', 'publish_ok', 'publish_error'}
 
@@ -165,8 +175,6 @@ def _extract_draft_id(filepath):
 def validate_message_framing(filepath, data, draft_id):
     """Validate that control message hex has correct type + length framing."""
     mt = data.get('message_type', '')
-    if mt == 'unknown_type':
-        return
 
     for i, v in enumerate(data['vectors']):
         if 'hex' not in v:
@@ -245,11 +253,11 @@ for filepath in glob.glob(os.path.join(REPO_ROOT, "transport/**/codec/**/*.json"
         err(f"{relpath}: JSON parse error: {e}")
         continue
 
-    validate_codec_vectors(relpath, data)
+    draft_id = _extract_draft_id(relpath)
+    validate_codec_vectors(relpath, data, draft_id)
 
     # Check message framing (only for control messages, not data streams or varint)
     if os.sep + "messages" + os.sep in filepath or "/messages/" in filepath:
-        draft_id = _extract_draft_id(relpath)
         if draft_id:
             validate_message_framing(relpath, data, draft_id)
 

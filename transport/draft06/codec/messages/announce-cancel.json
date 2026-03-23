@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce_cancel",
+  "message_type_id": "0x0c",
+  "spec_section": "6.9",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "ANNOUNCE_CANCEL for namespace ['live']",
+      "hex": "0c0801046c6976650000",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "error_code": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "with-reason",
+      "description": "ANNOUNCE_CANCEL with error code and reason",
+      "hex": "0c1801046c69766501106e6f206c6f6e676572206e6565646564",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "error_code": "1",
+        "reason_phrase": "no longer needed"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE_CANCEL — missing error_code",
+      "hex": "0c0601046c697665",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code"
+    }
+  ]
+}

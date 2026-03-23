@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce_ok",
+  "message_type_id": "0x07",
+  "spec_section": "6.7",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "ANNOUNCE OK for namespace 'live'",
+      "hex": "07046c697665",
+      "decoded": {
+        "track_namespace": "live"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE OK — empty payload",
+      "hex": "0700",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

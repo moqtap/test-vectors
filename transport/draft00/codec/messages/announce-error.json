@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce_error",
+  "message_type_id": "0x08",
+  "spec_section": "6.8",
+  "vectors": [
+    {
+      "id": "unauthorized",
+      "description": "ANNOUNCE ERROR with error code 0",
+      "hex": "0813046c697665000c756e617574686f72697a6564",
+      "decoded": {
+        "track_namespace": "live",
+        "error_code": "0",
+        "reason_phrase": "unauthorized"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE ERROR — missing error_code",
+      "hex": "0805046c697665",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_error",
+  "message_type_id": "0x05",
+  "spec_section": "6.5",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "SUBSCRIBE ERROR with error code 0",
+      "hex": "051b0a6c6976652f766964656f000e696e7465726e616c206572726f72",
+      "decoded": {
+        "full_track_name": "live/video",
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "SUBSCRIBE ERROR with Unauthorized error",
+      "hex": "051b0a6c6976652f766964656f010e6e6f7420617574686f72697a6564",
+      "decoded": {
+        "full_track_name": "live/video",
+        "error_code": "1",
+        "reason_phrase": "not authorized"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE ERROR — missing error_code",
+      "hex": "050b0a6c6976652f766964656f",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code"
+    }
+  ]
+}

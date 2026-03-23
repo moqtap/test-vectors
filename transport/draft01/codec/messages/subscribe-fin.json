@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_fin",
+  "message_type_id": "0x0b",
+  "spec_section": "6.8",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "SUBSCRIBE_FIN with final_group=10, final_object=5",
+      "hex": "0b0d046c69766505766964656f0a05",
+      "decoded": {
+        "track_namespace": "live",
+        "track_name": "video",
+        "final_group": "10",
+        "final_object": "5"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_FIN — missing final_group",
+      "hex": "0b0b046c69766505766964656f",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading final_group"
+    }
+  ]
+}

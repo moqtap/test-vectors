@@ -1,0 +1,42 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "client_setup",
+  "message_type_id": "0x40",
+  "spec_section": "6.2",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal CLIENT_SETUP with draft-03 version, ROLE=PubSub",
+      "hex": "40400d01c0000000ff00000301000103",
+      "decoded": {
+        "supported_versions": [
+          "4278190083"
+        ],
+        "parameters": {
+          "role": "3"
+        }
+      }
+    },
+    {
+      "id": "with-path",
+      "description": "CLIENT_SETUP with ROLE and PATH parameters",
+      "hex": "40401301c0000000ff0000030200010301042f6d6f71",
+      "decoded": {
+        "supported_versions": [
+          "4278190083"
+        ],
+        "parameters": {
+          "role": "3",
+          "path": "/moq"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated CLIENT_SETUP — payload shorter than declared length",
+      "hex": "404040ff",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input"
+    }
+  ]
+}

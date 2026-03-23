@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce_cancel",
+  "message_type_id": "0x0c",
+  "spec_section": "6.13",
+  "vectors": [
+    {
+      "id": "simple",
+      "description": "ANNOUNCE_CANCEL for namespace 'live'",
+      "hex": "0c05046c697665",
+      "decoded": {
+        "track_namespace": "live"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE_CANCEL — missing track_namespace",
+      "hex": "0c00",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}
