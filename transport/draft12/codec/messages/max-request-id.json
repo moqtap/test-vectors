@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "max_request_id",
+  "message_type_id": "0x15",
+  "spec_section": "8.5",
+  "vectors": [
+    {
+      "id": "value-100",
+      "description": "MAX_REQUEST_ID set to 100",
+      "hex": "1500024064",
+      "decoded": {
+        "request_id": "100"
+      }
+    },
+    {
+      "id": "value-0",
+      "description": "MAX_REQUEST_ID set to 0",
+      "hex": "15000100",
+      "decoded": {
+        "request_id": "0"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated MAX_REQUEST_ID \u2014 missing request_id",
+      "hex": "150000",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading request_id"
+    }
+  ]
+}

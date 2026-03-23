@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "unsubscribe_announces",
+  "message_type_id": "0x14",
+  "spec_section": "8.30",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "UNSUBSCRIBE_ANNOUNCES for single-element prefix",
+      "hex": "14000601046c697665",
+      "decoded": {
+        "track_namespace_prefix": [
+          "live"
+        ]
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated UNSUBSCRIBE_ANNOUNCES \u2014 missing prefix",
+      "hex": "140000",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace_prefix"
+    }
+  ]
+}

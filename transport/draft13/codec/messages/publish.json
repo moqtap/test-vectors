@@ -1,0 +1,70 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish",
+  "message_type_id": "0x1D",
+  "spec_section": "8.13",
+  "vectors": [
+    {
+      "id": "basic-publish",
+      "description": "PUBLISH with single-element namespace, no content, forward=1",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "1",
+        "group_order": "1",
+        "content_exists": "0",
+        "forward": "1",
+        "parameters": {}
+      },
+      "hex": "1d120101046c69766505766964656f0101000100"
+    },
+    {
+      "id": "with-content-exists",
+      "description": "PUBLISH with content_exists=1 and largest location",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "2",
+        "group_order": "1",
+        "content_exists": "1",
+        "largest_location": {
+          "group": "10",
+          "object": "5"
+        },
+        "forward": "1",
+        "parameters": {}
+      },
+      "hex": "1d140201046c69766505766964656f0201010a050100"
+    },
+    {
+      "id": "not-forwarded",
+      "description": "PUBLISH with forward=0",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "audio",
+        "track_alias": "3",
+        "group_order": "2",
+        "content_exists": "0",
+        "forward": "0",
+        "parameters": {}
+      },
+      "hex": "1d120301046c69766505617564696f0302000000"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH \u2014 missing track_name",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_name",
+      "hex": "1d090101046c6976650576"
+    }
+  ]
+}

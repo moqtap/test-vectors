@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_error",
+  "message_type_id": "0x1F",
+  "spec_section": "8.15",
+  "vectors": [
+    {
+      "id": "unauthorized",
+      "description": "PUBLISH_ERROR with Unauthorized error",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "1",
+        "reason_phrase": "not allowed"
+      },
+      "hex": "1f0e01010b6e6f7420616c6c6f776564"
+    },
+    {
+      "id": "uninterested",
+      "description": "PUBLISH_ERROR with Uninterested error",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "4",
+        "reason_phrase": "not interested"
+      },
+      "hex": "1f1102040e6e6f7420696e7465726573746564"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_ERROR \u2014 missing error_code",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code",
+      "hex": "1f0101"
+    }
+  ]
+}

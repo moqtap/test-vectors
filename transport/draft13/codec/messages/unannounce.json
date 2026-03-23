@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "unannounce",
+  "message_type_id": "0x09",
+  "spec_section": "8.26",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "UNANNOUNCE for single-element namespace",
+      "hex": "09000601046c697665",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ]
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated UNANNOUNCE \u2014 missing namespace",
+      "hex": "090000",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

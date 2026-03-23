@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status_error",
+  "message_type_id": "0x0F",
+  "spec_section": "8.22",
+  "vectors": [
+    {
+      "id": "track-not-found",
+      "description": "TRACK_STATUS_ERROR with Track Does Not Exist error",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "4",
+        "reason_phrase": "track not found"
+      },
+      "hex": "0f001201040f747261636b206e6f7420666f756e64"
+    },
+    {
+      "id": "unauthorized",
+      "description": "TRACK_STATUS_ERROR with Unauthorized error",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "1",
+        "reason_phrase": "not authorized"
+      },
+      "hex": "0f001102010e6e6f7420617574686f72697a6564"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS_ERROR \u2014 missing error_code",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code",
+      "hex": "0f000101"
+    }
+  ]
+}

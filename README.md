@@ -18,6 +18,8 @@ See [`examples/`](examples/README.md) for copy-pasteable integration snippets in
 transport/
   draft07/                  MoQ Transport draft-07
   draft11/                  MoQ Transport draft-11
+  draft12/                  MoQ Transport draft-12
+  draft13/                  MoQ Transport draft-13
   draft14/                  MoQ Transport draft-14
   draft15/                  MoQ Transport draft-15
   draft16/                  MoQ Transport draft-16
@@ -122,6 +124,8 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 |------|-------|----------|-------------|---------------|
 | MoQ Transport | draft-07 | 26 control messages | 3 stream types | 122 |
 | MoQ Transport | draft-11 | 27 control messages | 3 stream types | 129 |
+| MoQ Transport | draft-12 | 30 control messages | 3 stream types | 120 |
+| MoQ Transport | draft-13 | 31 control messages | 3 stream types | 121 |
 | MoQ Transport | draft-14 | 31 control messages | 3 stream types | 134 |
 | MoQ Transport | draft-15 | 24 control messages | 3 stream types | 110 |
 | MoQ Transport | draft-16 | 25 control messages | 3 stream types | 115 |
@@ -129,15 +133,6 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 ## Scope
 
 This repo tests **codec correctness** — wire encoding and decoding of individual messages. It does not test session state machines, transport-layer behavior, or media-layer concerns. Session conformance testing (state transitions, race conditions, interop flows) requires a dynamic test harness.
-
-## Adding a new draft
-
-```bash
-make new-draft SPEC=transport FROM=draft16 TO=draft17
-# Edit transport/draft17/meta.json
-# Modify only the vector files affected by spec changes
-# Update manifest.json
-```
 
 ## License
 

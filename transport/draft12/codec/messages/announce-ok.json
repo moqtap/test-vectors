@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce_ok",
+  "message_type_id": "0x07",
+  "spec_section": "8.23",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "ANNOUNCE_OK for request_id 1",
+      "hex": "07000101",
+      "decoded": {
+        "request_id": "1"
+      }
+    },
+    {
+      "id": "multi-namespace",
+      "description": "ANNOUNCE_OK for request_id 3",
+      "hex": "07000103",
+      "decoded": {
+        "request_id": "3"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE_OK \u2014 missing request_id",
+      "hex": "070000",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading request_id"
+    }
+  ]
+}

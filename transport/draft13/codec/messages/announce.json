@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce",
+  "message_type_id": "0x06",
+  "spec_section": "8.23",
+  "vectors": [
+    {
+      "id": "single-namespace",
+      "description": "ANNOUNCE with single-element namespace",
+      "hex": "0600080101046c69766500",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-namespace-with-auth",
+      "description": "ANNOUNCE with multi-element namespace and AUTHORIZATION_TOKEN",
+      "hex": "06001e03020a636f6e666572656e636506726f6f6d34320101070300746f6b656e",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "token"
+          }
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE \u2014 missing namespace",
+      "hex": "06000101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

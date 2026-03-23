@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status_ok",
+  "message_type_id": "0x0E",
+  "spec_section": "8.21",
+  "vectors": [
+    {
+      "id": "track-in-progress",
+      "description": "TRACK_STATUS_OK for track in progress with content",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "1",
+        "largest_location": {
+          "group": "10",
+          "object": "5"
+        },
+        "parameters": {}
+      },
+      "hex": "0e000801000001010a0500"
+    },
+    {
+      "id": "no-content",
+      "description": "TRACK_STATUS_OK for track with no content",
+      "decoded": {
+        "request_id": "2",
+        "track_alias": "0",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "0",
+        "parameters": {}
+      },
+      "hex": "0e0006020000010000"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS_OK \u2014 missing group_order",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading group_order",
+      "hex": "0e0003010000"
+    }
+  ]
+}

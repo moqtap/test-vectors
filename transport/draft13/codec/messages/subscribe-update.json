@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_update",
+  "message_type_id": "0x02",
+  "spec_section": "8.10",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "SUBSCRIBE_UPDATE changing range and priority",
+      "hex": "020007020a0314ff0100",
+      "decoded": {
+        "request_id": "2",
+        "start_group": "10",
+        "start_object": "3",
+        "end_group": "20",
+        "subscriber_priority": "255",
+        "forward": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "open-ended",
+      "description": "SUBSCRIBE_UPDATE with open-ended range (end_group=0)",
+      "hex": "02000704050000800100",
+      "decoded": {
+        "request_id": "4",
+        "start_group": "5",
+        "start_object": "0",
+        "end_group": "0",
+        "subscriber_priority": "128",
+        "forward": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "not-forwarded",
+      "description": "SUBSCRIBE_UPDATE setting forward=0",
+      "hex": "020007020a0314800000",
+      "decoded": {
+        "request_id": "2",
+        "start_group": "10",
+        "start_object": "3",
+        "end_group": "20",
+        "subscriber_priority": "128",
+        "forward": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_UPDATE \u2014 missing end_group",
+      "hex": "020003020a03",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading end_group"
+    }
+  ]
+}

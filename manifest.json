@@ -16,6 +16,16 @@
           "path": "transport/draft11/"
         },
         {
+          "id": "draft12",
+          "spec": "draft-ietf-moq-transport-12",
+          "path": "transport/draft12/"
+        },
+        {
+          "id": "draft13",
+          "spec": "draft-ietf-moq-transport-13",
+          "path": "transport/draft13/"
+        },
+        {
           "id": "draft14",
           "spec": "draft-ietf-moq-transport-14",
           "path": "transport/draft14/"

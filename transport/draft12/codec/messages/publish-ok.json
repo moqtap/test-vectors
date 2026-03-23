@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_ok",
+  "message_type_id": "0x1E",
+  "spec_section": "8.14",
+  "vectors": [
+    {
+      "id": "basic-publish-ok",
+      "description": "PUBLISH_OK with forward=1, ascending order, LatestObject filter",
+      "decoded": {
+        "request_id": "1",
+        "forward": "1",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "filter_type": "2",
+        "parameters": {}
+      },
+      "hex": "1e06010180010200"
+    },
+    {
+      "id": "with-absolute-range",
+      "description": "PUBLISH_OK with AbsoluteRange filter",
+      "decoded": {
+        "request_id": "2",
+        "forward": "1",
+        "subscriber_priority": "64",
+        "group_order": "2",
+        "filter_type": "4",
+        "start_group": "5",
+        "start_object": "0",
+        "end_group": "20",
+        "parameters": {}
+      },
+      "hex": "1e09020140020405001400"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_OK \u2014 missing filter_type",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading filter_type",
+      "hex": "1e0401018001"
+    }
+  ]
+}

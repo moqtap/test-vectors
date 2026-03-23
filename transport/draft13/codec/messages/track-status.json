@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status",
+  "message_type_id": "0x0D",
+  "spec_section": "8.20",
+  "vectors": [
+    {
+      "id": "basic-track-status",
+      "description": "TRACK_STATUS request with NextGroupStart filter",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "1",
+        "parameters": {}
+      },
+      "hex": "0d00120101046c69766505766964656f8000000100"
+    },
+    {
+      "id": "with-latest-object",
+      "description": "TRACK_STATUS with LatestObject filter and multi-element namespace",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "2",
+        "parameters": {}
+      },
+      "hex": "0d001f02020a636f6e666572656e636506726f6f6d343205617564696f8000000200"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS \u2014 missing track_name",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_name",
+      "hex": "0d00070101046c697665"
+    }
+  ]
+}

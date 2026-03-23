@@ -1,0 +1,71 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "client_setup",
+  "message_type_id": "0x20",
+  "spec_section": "8.3",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal CLIENT_SETUP with draft-12 version, no parameters",
+      "hex": "20000a01c0000000ff00000c00",
+      "decoded": {
+        "supported_versions": [
+          "4278190092"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "two-versions",
+      "description": "CLIENT_SETUP with two versions (draft-11 and draft-12)",
+      "hex": "20001202c0000000ff00000bc0000000ff00000c00",
+      "decoded": {
+        "supported_versions": [
+          "4278190091",
+          "4278190092"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-path-and-max-request-id",
+      "description": "CLIENT_SETUP with PATH and MAX_REQUEST_ID parameters",
+      "hex": "20001301c0000000ff00000c020104746573740240c8",
+      "decoded": {
+        "supported_versions": [
+          "4278190092"
+        ],
+        "parameters": {
+          "path": "test",
+          "max_request_id": "200"
+        }
+      }
+    },
+    {
+      "id": "non-canonical-version-count",
+      "description": "non-canonical CLIENT_SETUP: version count uses 2-byte varint for value 1",
+      "hex": "20000b4001c0000000ff00000c00",
+      "canonical": false,
+      "decoded": {
+        "supported_versions": [
+          "4278190092"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "no-versions-error",
+      "description": "CLIENT_SETUP with no versions \u2014 invalid",
+      "hex": "2000020000",
+      "error": "invalid_value",
+      "error_detail": "supported_versions must not be empty"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated CLIENT_SETUP \u2014 payload shorter than declared length",
+      "hex": "20ffff",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input"
+    }
+  ]
+}
