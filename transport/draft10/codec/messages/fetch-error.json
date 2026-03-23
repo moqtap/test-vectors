@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch_error",
+  "message_type_id": "0x19",
+  "spec_section": "8.14",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "FETCH_ERROR with Internal Error (0x0)",
+      "hex": "191102000e696e7465726e616c206572726f72",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
+      "id": "track-does-not-exist",
+      "description": "FETCH_ERROR with Track Does Not Exist (0x4)",
+      "hex": "191202040f747261636b206e6f7420666f756e64",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "4",
+        "reason_phrase": "track not found"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "FETCH_ERROR with Unauthorized (0x1)",
+      "hex": "191102010e6e6f7420617574686f72697a6564",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "1",
+        "reason_phrase": "not authorized"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH_ERROR — missing reason_phrase",
+      "hex": "19020200",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading reason_phrase"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "announce_ok",
+  "message_type_id": "0x07",
+  "spec_section": "8.19",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "ANNOUNCE_OK for single-element namespace",
+      "hex": "070601046c697665",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ]
+      }
+    },
+    {
+      "id": "multi-namespace",
+      "description": "ANNOUNCE_OK for multi-element namespace",
+      "hex": "0713020a636f6e666572656e636506726f6f6d3432",
+      "decoded": {
+        "track_namespace": [
+          "conference",
+          "room42"
+        ]
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated ANNOUNCE_OK — missing namespace",
+      "hex": "0700",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

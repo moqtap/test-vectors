@@ -18,6 +18,8 @@ See [`examples/`](examples/README.md) for copy-pasteable integration snippets in
 transport/
   draft07/                  MoQ Transport draft-07
   draft08/                  MoQ Transport draft-08
+  draft09/                  MoQ Transport draft-09
+  draft10/                  MoQ Transport draft-10
   draft11/                  MoQ Transport draft-11
   draft12/                  MoQ Transport draft-12
   draft13/                  MoQ Transport draft-13
@@ -125,6 +127,8 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 |------|-------|----------|-------------|---------------|
 | MoQ Transport | draft-07 | 26 control messages | 3 stream types | 122 |
 | MoQ Transport | draft-08 | 27 control messages | 4 stream types | 133 |
+| MoQ Transport | draft-09 | 27 control messages | 4 stream types | 135 |
+| MoQ Transport | draft-10 | 27 control messages | 4 stream types | 135 |
 | MoQ Transport | draft-11 | 27 control messages | 3 stream types | 129 |
 | MoQ Transport | draft-12 | 30 control messages | 3 stream types | 120 |
 | MoQ Transport | draft-13 | 31 control messages | 3 stream types | 121 |

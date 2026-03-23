@@ -1,0 +1,92 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_error",
+  "message_type_id": "0x05",
+  "spec_section": "8.8",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "SUBSCRIBE_ERROR with Internal Error (0x0)",
+      "hex": "051202000e696e7465726e616c206572726f7201",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "0",
+        "reason_phrase": "internal error",
+        "track_alias": "1"
+      }
+    },
+    {
+      "id": "invalid-range",
+      "description": "SUBSCRIBE_ERROR with Invalid Range (0x5)",
+      "hex": "051102050d696e76616c69642072616e676501",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "5",
+        "reason_phrase": "invalid range",
+        "track_alias": "1"
+      }
+    },
+    {
+      "id": "retry-track-alias",
+      "description": "SUBSCRIBE_ERROR with Retry Track Alias (0x6)",
+      "hex": "051e02061a7265747279207769746820646966666572656e7420616c69617301",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "6",
+        "reason_phrase": "retry with different alias",
+        "track_alias": "1"
+      }
+    },
+    {
+      "id": "track-does-not-exist",
+      "description": "SUBSCRIBE_ERROR with Track Does Not Exist (0x4)",
+      "hex": "051302040f747261636b206e6f7420666f756e6401",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "4",
+        "reason_phrase": "track not found",
+        "track_alias": "1"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "SUBSCRIBE_ERROR with Unauthorized (0x1)",
+      "hex": "051202010e6e6f7420617574686f72697a656401",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "1",
+        "reason_phrase": "not authorized",
+        "track_alias": "1"
+      }
+    },
+    {
+      "id": "timeout",
+      "description": "SUBSCRIBE_ERROR with Timeout (0x2)",
+      "hex": "0515020211726571756573742074696d6564206f757401",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "2",
+        "reason_phrase": "request timed out",
+        "track_alias": "1"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "SUBSCRIBE_ERROR with Not Supported (0x3)",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "3",
+        "reason_phrase": "not supported",
+        "track_alias": "1"
+      },
+      "hex": "051102030d6e6f7420737570706f7274656401"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_ERROR — missing reason_phrase",
+      "hex": "05020200",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading reason_phrase"
+    }
+  ]
+}

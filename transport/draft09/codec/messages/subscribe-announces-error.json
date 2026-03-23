@@ -1,0 +1,75 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_announces_error",
+  "message_type_id": "0x13",
+  "spec_section": "7.26",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "SUBSCRIBE_ANNOUNCES_ERROR with Internal Error (0x0)",
+      "hex": "131601046c697665000e696e7465726e616c206572726f72",
+      "decoded": {
+        "track_namespace_prefix": [
+          "live"
+        ],
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "SUBSCRIBE_ANNOUNCES_ERROR with Unauthorized (0x1)",
+      "hex": "131601046c697665010e6e6f7420617574686f72697a6564",
+      "decoded": {
+        "track_namespace_prefix": [
+          "live"
+        ],
+        "error_code": "1",
+        "reason_phrase": "not authorized"
+      }
+    },
+    {
+      "id": "timeout",
+      "description": "SUBSCRIBE_ANNOUNCES_ERROR with Timeout (0x2)",
+      "hex": "131901046c6976650211726571756573742074696d6564206f7574",
+      "decoded": {
+        "track_namespace_prefix": [
+          "live"
+        ],
+        "error_code": "2",
+        "reason_phrase": "request timed out"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "SUBSCRIBE_ANNOUNCES_ERROR with Not Supported (0x3)",
+      "hex": "131501046c697665030d6e6f7420737570706f72746564",
+      "decoded": {
+        "track_namespace_prefix": [
+          "live"
+        ],
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "namespace-prefix-unknown",
+      "description": "SUBSCRIBE_ANNOUNCES_ERROR with Namespace Prefix Unknown (0x4)",
+      "hex": "132001046c69766504186e616d6573706163652070726566697820756e6b6e6f776e",
+      "decoded": {
+        "track_namespace_prefix": [
+          "live"
+        ],
+        "error_code": "4",
+        "reason_phrase": "namespace prefix unknown"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_ANNOUNCES_ERROR — missing reason_phrase",
+      "hex": "130701046c69766500",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading reason_phrase"
+    }
+  ]
+}

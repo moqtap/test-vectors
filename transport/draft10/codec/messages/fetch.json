@@ -1,0 +1,77 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch",
+  "message_type_id": "0x16",
+  "spec_section": "8.12",
+  "vectors": [
+    {
+      "id": "standalone-basic",
+      "description": "standalone FETCH with range group 0-10",
+      "decoded": {
+        "subscribe_id": "2",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {}
+      },
+      "hex": "16150280010101046c69766505766964656f00000a0000"
+    },
+    {
+      "id": "standalone-multi-namespace",
+      "description": "standalone FETCH with multi-element namespace and descending order",
+      "decoded": {
+        "subscribe_id": "4",
+        "subscriber_priority": "0",
+        "group_order": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "start_group": "5",
+        "start_object": "3",
+        "end_group": "20",
+        "end_object": "0",
+        "parameters": {}
+      },
+      "hex": "162204000201020a636f6e666572656e636506726f6f6d343205617564696f0503140000"
+    },
+    {
+      "id": "joining",
+      "description": "joining FETCH with preceding group offset 5",
+      "decoded": {
+        "subscribe_id": "6",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "fetch_type": "2",
+        "joining_subscribe_id": "2",
+        "preceding_group_offset": "5",
+        "parameters": {}
+      },
+      "hex": "160706800002020500"
+    },
+    {
+      "id": "invalid-fetch-type",
+      "description": "FETCH with invalid fetch_type=0",
+      "error": "invalid_value",
+      "error_detail": "fetch_type 0 is not a defined fetch type",
+      "hex": "16050280010000"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH — missing start_group",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading start_group",
+      "hex": "16100280010101046c69766505766964656f"
+    }
+  ]
+}

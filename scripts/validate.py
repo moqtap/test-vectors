@@ -147,7 +147,7 @@ def _dvi(data, off):
         return struct.unpack('>Q', bytes([b & 0x3f]) + data[off + 1:off + 8])[0], 8
 
 # Drafts where ALL control messages use varint length framing
-_VARINT_FRAMED_DRAFTS = {'draft07', 'draft08', 'draft11'}
+_VARINT_FRAMED_DRAFTS = {'draft10', 'draft09', 'draft07', 'draft08', 'draft11'}
 # Message types that use varint length even in 16-bit-BE drafts (draft12/13 only)
 _VARINT_LENGTH_MESSAGES = {'publish', 'publish_ok', 'publish_error'}
 

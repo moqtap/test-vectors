@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribes_blocked",
+  "message_type_id": "0x1a",
+  "spec_section": "8.5",
+  "vectors": [
+    {
+      "id": "value-100",
+      "description": "SUBSCRIBES_BLOCKED at Maximum Subscribe ID 100",
+      "decoded": {
+        "maximum_subscribe_id": "100"
+      },
+      "hex": "1a024064"
+    },
+    {
+      "id": "value-0",
+      "description": "SUBSCRIBES_BLOCKED at Maximum Subscribe ID 0",
+      "decoded": {
+        "maximum_subscribe_id": "0"
+      },
+      "hex": "1a0100"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBES_BLOCKED — missing maximum_subscribe_id",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading maximum_subscribe_id",
+      "hex": "1a00"
+    }
+  ]
+}
