@@ -1,39 +1,56 @@
 {
   "$schema": "../../../../schema/codec-vector.schema.json",
   "message_type": "object",
-  "message_type_id": "0x01",
+  "message_type_id": "0x00",
   "spec_section": "10.3.1",
   "vectors": [
     {
       "id": "datagram-4byte-payload",
-      "description": "object datagram with 4-byte payload",
-      "hex": "01020004deadbeef",
+      "description": "type 0x00 datagram (objectId present, payload) with 4-byte payload",
+      "hex": "0001020080deadbeef",
       "decoded": {
         "stream_type": "datagram",
+        "datagram_type": "0",
         "track_alias": "1",
         "group_id": "2",
         "object_id": "0",
-        "payload_length": "4",
+        "publisher_priority": "128",
         "payload_hex": "deadbeef"
       }
     },
     {
-      "id": "datagram-zero-payload",
-      "description": "object datagram with zero-length payload",
-      "hex": "0540643200",
+      "id": "datagram-status",
+      "description": "type 0x20 datagram (objectId present, status instead of payload)",
+      "hex": "20054064328000",
       "decoded": {
         "stream_type": "datagram",
+        "datagram_type": "32",
         "track_alias": "5",
         "group_id": "100",
         "object_id": "50",
-        "payload_length": "0",
-        "payload_hex": ""
+        "publisher_priority": "128",
+        "object_status": "0"
+      }
+    },
+    {
+      "id": "datagram-end-of-group",
+      "description": "type 0x02 datagram (objectId present, end-of-group, payload)",
+      "hex": "020102008061626364",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "2",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "end_of_group": true,
+        "payload_hex": "61626364"
       }
     },
     {
       "id": "truncated",
-      "description": "truncated datagram — missing object_id",
-      "hex": "0102",
+      "description": "truncated type 0x00 datagram — missing object_id",
+      "hex": "000102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading object_id"
     }

@@ -1,16 +1,16 @@
 {
   "$schema": "../../../../schema/codec-vector.schema.json",
   "message_type": "object",
-  "message_type_id": "0x08",
+  "message_type_id": "0x10",
   "spec_section": "9.4.2",
   "vectors": [
     {
       "id": "subgroup-single-object",
-      "description": "subgroup stream (type 0x08, subgroup_id=0, no extensions) with one object",
-      "hex": "080100800004deadbeef",
+      "description": "subgroup stream (type 0x10: subgroup_id=0, no extensions, no end-of-group) with one object",
+      "hex": "100100800004deadbeef",
       "decoded": {
         "stream_type": "subgroup_header",
-        "stream_type_id": "8",
+        "stream_type_id": "16",
         "track_alias": "1",
         "group_id": "0",
         "subgroup_id": "0",
@@ -26,11 +26,11 @@
     },
     {
       "id": "subgroup-two-objects",
-      "description": "subgroup stream with two objects",
-      "hex": "080100800004deadbeef0102cafe",
+      "description": "subgroup stream (type 0x10) with two objects",
+      "hex": "100100800004deadbeef0102cafe",
       "decoded": {
         "stream_type": "subgroup_header",
-        "stream_type_id": "8",
+        "stream_type_id": "16",
         "track_alias": "1",
         "group_id": "0",
         "subgroup_id": "0",
@@ -51,11 +51,11 @@
     },
     {
       "id": "subgroup-end-of-group",
-      "description": "subgroup stream with end-of-group marker (status=3)",
-      "hex": "080100800004deadbeef010003",
+      "description": "subgroup stream (type 0x10) with end-of-group marker (status=3)",
+      "hex": "100100800004deadbeef010003",
       "decoded": {
         "stream_type": "subgroup_header",
-        "stream_type_id": "8",
+        "stream_type_id": "16",
         "track_alias": "1",
         "group_id": "0",
         "subgroup_id": "0",
@@ -77,11 +77,11 @@
     },
     {
       "id": "subgroup-explicit-subgroup-id",
-      "description": "subgroup stream with explicit subgroup_id (type 0x0C)",
-      "hex": "0c010005800004deadbeef",
+      "description": "subgroup stream with explicit subgroup_id (type 0x14)",
+      "hex": "14010005800004deadbeef",
       "decoded": {
         "stream_type": "subgroup_header",
-        "stream_type_id": "12",
+        "stream_type_id": "20",
         "track_alias": "1",
         "group_id": "0",
         "subgroup_id": "5",
@@ -96,9 +96,29 @@
       }
     },
     {
+      "id": "subgroup-with-extensions",
+      "description": "subgroup stream (type 0x11: extensions present) with one object having empty extensions",
+      "hex": "11010080000004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "17",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
       "id": "subgroup-truncated",
-      "description": "truncated subgroup header \u2014 missing publisher_priority",
-      "hex": "080100",
+      "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
+      "hex": "100100",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading publisher_priority"
     }

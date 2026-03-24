@@ -17,7 +17,6 @@
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
-            "extension_headers_length": "0",
             "payload_length": "4",
             "payload_hex": "deadbeef"
           }
@@ -37,7 +36,6 @@
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
-            "extension_headers_length": "0",
             "payload_length": "4",
             "payload_hex": "deadbeef"
           },
@@ -46,9 +44,29 @@
             "subgroup_id": "0",
             "object_id": "1",
             "publisher_priority": "128",
-            "extension_headers_length": "0",
             "payload_length": "2",
             "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-zero-payload-status",
+      "description": "fetch stream with one zero-payload object (status=3, end of group)",
+      "canonical": false,
+      "hex": "050200000180000003",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "1",
+            "publisher_priority": "128",
+            "payload_length": "0",
+            "object_status": "3",
+            "payload_hex": ""
           }
         ]
       }

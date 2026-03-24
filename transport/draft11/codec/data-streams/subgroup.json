@@ -6,7 +6,7 @@
   "vectors": [
     {
       "id": "subgroup-single-object",
-      "description": "subgroup stream (type 0x08, subgroup_id=0, no extensions) with one object",
+      "description": "subgroup stream (type 0x08: subgroup_id=0, no extensions) with one object",
       "hex": "080100800004deadbeef",
       "decoded": {
         "stream_type": "subgroup_header",
@@ -26,7 +26,7 @@
     },
     {
       "id": "subgroup-two-objects",
-      "description": "subgroup stream with two objects",
+      "description": "subgroup stream (type 0x08) with two objects",
       "hex": "080100800004deadbeef0102cafe",
       "decoded": {
         "stream_type": "subgroup_header",
@@ -51,7 +51,7 @@
     },
     {
       "id": "subgroup-end-of-group",
-      "description": "subgroup stream with end-of-group marker (status=3)",
+      "description": "subgroup stream (type 0x08) with end-of-group marker (status=3)",
       "hex": "080100800004deadbeef010003",
       "decoded": {
         "stream_type": "subgroup_header",
@@ -71,6 +71,66 @@
             "payload_length": "0",
             "object_status": "3",
             "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-with-extensions",
+      "description": "subgroup stream (type 0x09: extensions present) with one object having empty extensions",
+      "hex": "09010080000004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "9",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-first-obj-id",
+      "description": "subgroup stream (type 0x0A: subgroup_id = first object ID, no extensions) with one object",
+      "hex": "0a0100800504deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "10",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-first-obj-id-extensions",
+      "description": "subgroup stream (type 0x0B: subgroup_id = first object ID, extensions present) with one object",
+      "hex": "0b010080050004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "11",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
           }
         ]
       }
@@ -96,8 +156,28 @@
       }
     },
     {
+      "id": "subgroup-explicit-subgroup-id-extensions",
+      "description": "subgroup stream (type 0x0D: explicit subgroup_id, extensions present) with one object",
+      "hex": "0d01000580000004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "13",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
       "id": "subgroup-truncated",
-      "description": "truncated subgroup header \u2014 missing publisher_priority",
+      "description": "truncated subgroup header (type 0x08) — missing publisher_priority",
       "hex": "080100",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading publisher_priority"

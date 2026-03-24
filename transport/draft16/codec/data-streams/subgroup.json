@@ -90,6 +90,26 @@
       }
     },
     {
+      "id": "subgroup-with-extensions",
+      "description": "subgroup stream (type 0x11: extensions present) with one object having empty extensions",
+      "hex": "11010080000004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x11",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
       "id": "subgroup-truncated",
       "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
       "hex": "100100",

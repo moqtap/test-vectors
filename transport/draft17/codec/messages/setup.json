@@ -45,7 +45,7 @@
     },
     {
       "id": "truncated-payload",
-      "description": "truncated SETUP � payload shorter than declared length",
+      "description": "truncated SETUP — payload shorter than declared length",
       "hex": "6f00000501",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading setup options"

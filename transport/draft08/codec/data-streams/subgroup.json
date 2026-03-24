@@ -82,6 +82,26 @@
       "hex": "0401000080000004deadbeef01000003"
     },
     {
+      "id": "subgroup-with-extensions",
+      "description": "subgroup stream with one object having 2 extensions (even-type varint + odd-type length-prefixed)",
+      "decoded": {
+        "stream_type": "stream_header_subgroup",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "extension_count": "2",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      },
+      "hex": "04010000800002022a0302cafe04deadbeef"
+    },
+    {
       "id": "subgroup-truncated",
       "description": "truncated subgroup header — missing publisher_priority",
       "hex": "04010000",
