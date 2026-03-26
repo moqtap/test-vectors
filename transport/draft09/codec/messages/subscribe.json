@@ -63,8 +63,8 @@
     },
     {
       "id": "with-auth-param",
-      "description": "SUBSCRIBE with AUTHORIZATION_INFO parameter",
-      "hex": "031c020101046c69766505766964656f800001010208746f6b656e313233",
+      "description": "SUBSCRIBE with AUTHORIZATION_INFO parameter and LatestObject filter",
+      "hex": "031c020101046c69766505766964656f800002010208746f6b656e313233",
       "decoded": {
         "subscribe_id": "2",
         "track_alias": "1",
@@ -74,7 +74,7 @@
         "track_name": "video",
         "subscriber_priority": "128",
         "group_order": "0",
-        "filter_type": "1",
+        "filter_type": "2",
         "parameters": {
           "authorization_info": "token123"
         }
