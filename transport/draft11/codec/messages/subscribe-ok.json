@@ -7,7 +7,7 @@
     {
       "id": "no-content",
       "description": "SUBSCRIBE_OK with no content",
-      "hex": "04050200000000",
+      "hex": "0400050200000000",
       "decoded": {
         "request_id": "2",
         "expires": "0",
@@ -19,7 +19,7 @@
     {
       "id": "content-exists",
       "description": "SUBSCRIBE_OK with content exists and largest location",
-      "hex": "0407021e0201050a00",
+      "hex": "040007021e0201050a00",
       "decoded": {
         "request_id": "2",
         "expires": "30",
@@ -35,7 +35,7 @@
     {
       "id": "with-delivery-timeout",
       "description": "SUBSCRIBE_OK with DELIVERY_TIMEOUT parameter",
-      "hex": "04080200010001025388",
+      "hex": "0400080200010001025388",
       "decoded": {
         "request_id": "2",
         "expires": "0",
@@ -48,8 +48,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_OK \u2014 missing group_order",
-      "hex": "04020200",
+      "description": "truncated SUBSCRIBE_OK — missing group_order",
+      "hex": "0400020200",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading group_order"
     }

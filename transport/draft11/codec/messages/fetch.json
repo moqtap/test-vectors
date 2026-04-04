@@ -7,7 +7,7 @@
     {
       "id": "standalone-basic",
       "description": "Standalone FETCH (type=1) with range group 0-10",
-      "hex": "16150280010101046c69766505766964656f00000a0000",
+      "hex": "1600150280010101046c69766505766964656f00000a0000",
       "decoded": {
         "request_id": "2",
         "subscriber_priority": "128",
@@ -27,7 +27,7 @@
     {
       "id": "standalone-multi-namespace",
       "description": "Standalone FETCH with multi-element namespace and descending order",
-      "hex": "162204000201020a636f6e666572656e636506726f6f6d343205617564696f0503140000",
+      "hex": "16002204000201020a636f6e666572656e636506726f6f6d343205617564696f0503140000",
       "decoded": {
         "request_id": "4",
         "subscriber_priority": "0",
@@ -48,7 +48,7 @@
     {
       "id": "joining-relative",
       "description": "Relative Joining FETCH (type=2) with offset=3",
-      "hex": "160706800102020300",
+      "hex": "16000706800102020300",
       "decoded": {
         "request_id": "6",
         "subscriber_priority": "128",
@@ -62,7 +62,7 @@
     {
       "id": "joining-absolute",
       "description": "Absolute Joining FETCH (type=3) starting at group 5",
-      "hex": "160708800103020500",
+      "hex": "16000708800103020500",
       "decoded": {
         "request_id": "8",
         "subscriber_priority": "128",
@@ -75,8 +75,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated FETCH \u2014 missing start_group",
-      "hex": "16100280010101046c69766505766964656f",
+      "description": "truncated FETCH — missing start_group",
+      "hex": "1600100280010101046c69766505766964656f",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading start_group"
     }

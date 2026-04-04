@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../schema/codec-vector.schema.json",
   "message_type": "track_status_ok",
-  "message_type_id": "0x0E",
+  "message_type_id": "0x0e",
   "spec_section": "8.21",
   "vectors": [
     {

@@ -7,7 +7,7 @@
     {
       "id": "internal-error",
       "description": "SUBSCRIBE_ANNOUNCES_ERROR with Internal Error (0x0)",
-      "hex": "131101000e696e7465726e616c206572726f72",
+      "hex": "13001101000e696e7465726e616c206572726f72",
       "decoded": {
         "request_id": "1",
         "error_code": "0",
@@ -17,7 +17,7 @@
     {
       "id": "unauthorized",
       "description": "SUBSCRIBE_ANNOUNCES_ERROR with Unauthorized (0x1)",
-      "hex": "131101010e6e6f7420617574686f72697a6564",
+      "hex": "13001101010e6e6f7420617574686f72697a6564",
       "decoded": {
         "request_id": "1",
         "error_code": "1",
@@ -26,8 +26,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_ANNOUNCES_ERROR \u2014 missing reason_phrase",
-      "hex": "13020100",
+      "description": "truncated SUBSCRIBE_ANNOUNCES_ERROR — missing reason_phrase",
+      "hex": "1300020100",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading reason_phrase"
     }

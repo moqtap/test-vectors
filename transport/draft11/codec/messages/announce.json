@@ -7,7 +7,7 @@
     {
       "id": "single-namespace",
       "description": "ANNOUNCE with single-element namespace",
-      "hex": "06080101046c69766500",
+      "hex": "0600080101046c69766500",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
@@ -19,7 +19,7 @@
     {
       "id": "multi-namespace-with-auth",
       "description": "ANNOUNCE with multi-element namespace and AUTHORIZATION_TOKEN",
-      "hex": "061e03020a636f6e666572656e636506726f6f6d34320101070300746f6b656e",
+      "hex": "06001e03020a636f6e666572656e636506726f6f6d34320101070300746f6b656e",
       "decoded": {
         "request_id": "3",
         "track_namespace": [
@@ -37,8 +37,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated ANNOUNCE \u2014 missing namespace",
-      "hex": "060101",
+      "description": "truncated ANNOUNCE — missing namespace",
+      "hex": "06000101",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_namespace"
     }

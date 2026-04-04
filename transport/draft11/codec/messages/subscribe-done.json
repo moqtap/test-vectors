@@ -7,7 +7,7 @@
     {
       "id": "internal-error",
       "description": "SUBSCRIBE_DONE with Internal Error (0x0), stream_count=5",
-      "hex": "0b0402000500",
+      "hex": "0b000402000500",
       "decoded": {
         "request_id": "2",
         "status_code": "0",
@@ -18,7 +18,7 @@
     {
       "id": "unauthorized",
       "description": "SUBSCRIBE_DONE with Unauthorized (0x1)",
-      "hex": "0b1202010a0e6e6f7420617574686f72697a6564",
+      "hex": "0b001202010a0e6e6f7420617574686f72697a6564",
       "decoded": {
         "request_id": "2",
         "status_code": "1",
@@ -29,7 +29,7 @@
     {
       "id": "track-ended",
       "description": "SUBSCRIBE_DONE with Track Ended (0x2)",
-      "hex": "0b130202140f747261636b2068617320656e646564",
+      "hex": "0b00130202140f747261636b2068617320656e646564",
       "decoded": {
         "request_id": "2",
         "status_code": "2",
@@ -40,7 +40,7 @@
     {
       "id": "subscription-ended",
       "description": "SUBSCRIBE_DONE with Subscription Ended (0x3)",
-      "hex": "0b1602030512737562736372697074696f6e20656e646564",
+      "hex": "0b001602030512737562736372697074696f6e20656e646564",
       "decoded": {
         "request_id": "2",
         "status_code": "3",
@@ -51,7 +51,7 @@
     {
       "id": "going-away",
       "description": "SUBSCRIBE_DONE with Going Away (0x4)",
-      "hex": "0b150204001173657276657220676f696e672061776179",
+      "hex": "0b00150204001173657276657220676f696e672061776179",
       "decoded": {
         "request_id": "2",
         "status_code": "4",
@@ -62,7 +62,7 @@
     {
       "id": "expired",
       "description": "SUBSCRIBE_DONE with Expired (0x5)",
-      "hex": "0b1802050014737562736372697074696f6e2065787069726564",
+      "hex": "0b001802050014737562736372697074696f6e2065787069726564",
       "decoded": {
         "request_id": "2",
         "status_code": "5",
@@ -72,8 +72,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_DONE \u2014 missing status_code",
-      "hex": "0b0102",
+      "description": "truncated SUBSCRIBE_DONE — missing status_code",
+      "hex": "0b000102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading status_code"
     }

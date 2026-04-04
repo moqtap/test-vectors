@@ -7,7 +7,7 @@
     {
       "id": "basic",
       "description": "UNANNOUNCE for single-element namespace",
-      "hex": "090601046c697665",
+      "hex": "09000601046c697665",
       "decoded": {
         "track_namespace": [
           "live"
@@ -16,8 +16,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated UNANNOUNCE \u2014 missing namespace",
-      "hex": "0900",
+      "description": "truncated UNANNOUNCE — missing namespace",
+      "hex": "090000",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_namespace"
     }

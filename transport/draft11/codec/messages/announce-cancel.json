@@ -7,7 +7,7 @@
     {
       "id": "basic",
       "description": "ANNOUNCE_CANCEL with error code and reason",
-      "hex": "0c1101046c697665000963616e63656c6c6564",
+      "hex": "0c001101046c697665000963616e63656c6c6564",
       "decoded": {
         "track_namespace": [
           "live"
@@ -18,8 +18,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated ANNOUNCE_CANCEL \u2014 missing error_code",
-      "hex": "0c0601046c697665",
+      "description": "truncated ANNOUNCE_CANCEL — missing error_code",
+      "hex": "0c000601046c697665",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading error_code"
     }

@@ -7,7 +7,7 @@
     {
       "id": "basic",
       "description": "UNSUBSCRIBE with request_id 2",
-      "hex": "0a0102",
+      "hex": "0a000102",
       "decoded": {
         "request_id": "2"
       }
@@ -15,15 +15,15 @@
     {
       "id": "large-request-id",
       "description": "UNSUBSCRIBE with large request_id",
-      "hex": "0a0243e8",
+      "hex": "0a000243e8",
       "decoded": {
         "request_id": "1000"
       }
     },
     {
       "id": "truncated",
-      "description": "truncated UNSUBSCRIBE \u2014 missing request_id",
-      "hex": "0a00",
+      "description": "truncated UNSUBSCRIBE — missing request_id",
+      "hex": "0a0000",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"
     }

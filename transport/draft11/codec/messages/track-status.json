@@ -7,7 +7,7 @@
     {
       "id": "in-progress",
       "description": "TRACK_STATUS with In Progress (0x0)",
-      "hex": "0e050100050a00",
+      "hex": "0e00050100050a00",
       "decoded": {
         "request_id": "1",
         "status_code": "0",
@@ -21,7 +21,7 @@
     {
       "id": "does-not-exist",
       "description": "TRACK_STATUS with Does Not Exist (0x1)",
-      "hex": "0e050101000000",
+      "hex": "0e00050101000000",
       "decoded": {
         "request_id": "1",
         "status_code": "1",
@@ -35,7 +35,7 @@
     {
       "id": "not-yet-begun",
       "description": "TRACK_STATUS with Not Yet Begun (0x2)",
-      "hex": "0e050102000000",
+      "hex": "0e00050102000000",
       "decoded": {
         "request_id": "1",
         "status_code": "2",
@@ -49,7 +49,7 @@
     {
       "id": "finished",
       "description": "TRACK_STATUS with Finished (0x3)",
-      "hex": "0e0501030a1400",
+      "hex": "0e000501030a1400",
       "decoded": {
         "request_id": "1",
         "status_code": "3",
@@ -63,7 +63,7 @@
     {
       "id": "relay-no-info",
       "description": "TRACK_STATUS with Relay No Info (0x4)",
-      "hex": "0e050104000000",
+      "hex": "0e00050104000000",
       "decoded": {
         "request_id": "1",
         "status_code": "4",
@@ -76,8 +76,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated TRACK_STATUS \u2014 missing status_code",
-      "hex": "0e0101",
+      "description": "truncated TRACK_STATUS — missing status_code",
+      "hex": "0e000101",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading status_code"
     }

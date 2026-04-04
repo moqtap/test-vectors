@@ -7,7 +7,7 @@
     {
       "id": "filter-next-group-start",
       "description": "SUBSCRIBE with NextGroupStart filter, forward=1, no parameters",
-      "hex": "0313020101046c69766505766964656f8000010100",
+      "hex": "030013020101046c69766505766964656f8000010100",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -25,7 +25,7 @@
     {
       "id": "filter-latest-object",
       "description": "SUBSCRIBE with LatestObject filter and multi-element namespace",
-      "hex": "03200402020a636f6e666572656e636506726f6f6d343205617564696f8000010200",
+      "hex": "0300200402020a636f6e666572656e636506726f6f6d343205617564696f8000010200",
       "decoded": {
         "request_id": "4",
         "track_alias": "2",
@@ -44,7 +44,7 @@
     {
       "id": "filter-absolute-start",
       "description": "SUBSCRIBE with AbsoluteStart filter",
-      "hex": "0315020101046c69766505766964656f800001030a0300",
+      "hex": "030015020101046c69766505766964656f800001030a0300",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -64,7 +64,7 @@
     {
       "id": "filter-absolute-range",
       "description": "SUBSCRIBE with AbsoluteRange filter",
-      "hex": "0316020101046c69766505766964656f800001040a031400",
+      "hex": "030016020101046c69766505766964656f800001040a031400",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -85,7 +85,7 @@
     {
       "id": "with-auth-param",
       "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (USE_VALUE)",
-      "hex": "031f020101046c69766505766964656f8000010101010a0300746f6b656e313233",
+      "hex": "03001f020101046c69766505766964656f8000010101010a0300746f6b656e313233",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -109,7 +109,7 @@
     {
       "id": "not-forwarded",
       "description": "SUBSCRIBE with forward=0 (not forwarded)",
-      "hex": "0313020101046c69766505766964656f8000000100",
+      "hex": "030013020101046c69766505766964656f8000000100",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",
@@ -126,15 +126,15 @@
     },
     {
       "id": "invalid-filter-type",
-      "description": "SUBSCRIBE with filter_type=0 \u2014 reserved/undefined value",
-      "hex": "0313020101046c69766505766964656f8000010000",
+      "description": "SUBSCRIBE with filter_type=0 — reserved/undefined value",
+      "hex": "030013020101046c69766505766964656f8000010000",
       "error": "invalid_value",
       "error_detail": "filter_type 0 is not a defined filter type"
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE \u2014 missing track_name",
-      "hex": "0308020101046c69",
+      "description": "truncated SUBSCRIBE — missing track_name",
+      "hex": "03000c020101046c69766505766964",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_name"
     }

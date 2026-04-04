@@ -7,7 +7,7 @@
     {
       "id": "more-data",
       "description": "FETCH_OK with more data available",
-      "hex": "1806020100050a00",
+      "hex": "180006020100050a00",
       "decoded": {
         "request_id": "2",
         "group_order": "1",
@@ -22,7 +22,7 @@
     {
       "id": "end-of-track",
       "description": "FETCH_OK with end of track",
-      "hex": "18060202010a1400",
+      "hex": "1800060202010a1400",
       "decoded": {
         "request_id": "2",
         "group_order": "2",
@@ -36,8 +36,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated FETCH_OK \u2014 missing end_of_track",
-      "hex": "18020201",
+      "description": "truncated FETCH_OK — missing end_of_track",
+      "hex": "1800020201",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading end_of_track"
     }

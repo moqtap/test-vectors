@@ -6,7 +6,7 @@
     {
       "id": "unknown-type-with-payload",
       "description": "message with unrecognized type 0x3F — implementations must skip or reject",
-      "hex": "3f04deadbeef",
+      "hex": "3f0004deadbeef",
       "error": "unknown_message",
       "error_detail": "unknown message type 0x3F"
     }
