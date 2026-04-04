@@ -36,6 +36,20 @@
       }
     },
     {
+      "id": "three-element-namespace",
+      "description": "ANNOUNCE with 3-element namespace — payload=28 bytes, uint16 length 0x001c; a varint decoder would misread 0x00 as length=0",
+      "hex": "06001c0a030a636f6e666572656e636506726f6f6d343206666c6f6f723100",
+      "decoded": {
+        "request_id": "10",
+        "track_namespace": [
+          "conference",
+          "room42",
+          "floor1"
+        ],
+        "parameters": {}
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated ANNOUNCE — missing namespace",
       "hex": "06000101",

@@ -60,6 +60,24 @@
       "hex": "1d00120301046c69766505617564696f0302000000"
     },
     {
+      "id": "multi-element-namespace",
+      "description": "PUBLISH with multi-element namespace — payload=36 bytes, uint16 length 0x0024; a varint decoder would misread 0x00 as length=0",
+      "decoded": {
+        "request_id": "5",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio-main",
+        "track_alias": "5",
+        "group_order": "1",
+        "content_exists": "0",
+        "forward": "1",
+        "parameters": {}
+      },
+      "hex": "1d002405020a636f6e666572656e636506726f6f6d34320a617564696f2d6d61696e0501000100"
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH — missing track_name",
       "error": "incomplete",

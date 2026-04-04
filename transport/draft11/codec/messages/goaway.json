@@ -21,6 +21,14 @@
       }
     },
     {
+      "id": "long-uri",
+      "description": "GOAWAY with 62-byte URI — payload=63 bytes, uint16 length 0x003f; a varint decoder would misread 0x00 as length=0",
+      "hex": "10003f3e68747470733a2f2f6578616d706c652e636f6d2f72656469726563742f746f2f6e65772f656e64706f696e742f73657373696f6e2f76322f6c6174657374",
+      "decoded": {
+        "new_session_uri": "https://example.com/redirect/to/new/endpoint/session/v2/latest"
+      }
+    },
+    {
       "id": "non-canonical-uri-length",
       "description": "non-canonical GOAWAY: URI length uses 2-byte varint for value 0",
       "hex": "1000024000",
