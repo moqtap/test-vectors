@@ -19,6 +19,26 @@
       }
     },
     {
+      "id": "with-auth-token",
+      "description": "TRACK_STATUS with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='ts-token')",
+      "hex": "0d001c010001046c69766505766964656f01030b03000874732d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "ts-token"
+          }
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated TRACK_STATUS — missing track_namespace",
       "hex": "0d000e010001046c69",

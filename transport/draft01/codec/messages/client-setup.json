@@ -58,6 +58,34 @@
       }
     },
     {
+      "id": "multi-version",
+      "description": "CLIENT_SETUP offering draft-00 and draft-01 versions, ROLE=PubSub",
+      "hex": "40401502c0000000ff000000c0000000ff00000101000103",
+      "decoded": {
+        "supported_versions": [
+          "4278190080",
+          "4278190081"
+        ],
+        "parameters": {
+          "role": "3"
+        }
+      }
+    },
+    {
+      "id": "invalid-role",
+      "description": "CLIENT_SETUP with invalid ROLE value 0",
+      "hex": "40400d01c0000000ff00000101000100",
+      "error": "invalid_value",
+      "error_detail": "role must be 1, 2, or 3"
+    },
+    {
+      "id": "missing-role",
+      "description": "CLIENT_SETUP with no ROLE parameter — invalid",
+      "hex": "40400a01c0000000ff00000100",
+      "error": "invalid_value",
+      "error_detail": "client MUST send a ROLE parameter"
+    },
+    {
       "id": "no-versions-error",
       "description": "CLIENT_SETUP with no versions — invalid",
       "hex": "4040050001000103",

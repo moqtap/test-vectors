@@ -22,7 +22,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated ANNOUNCE_OK \u2014 missing request_id",
+      "description": "truncated ANNOUNCE_OK — missing request_id",
       "hex": "070000",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

@@ -15,6 +15,26 @@
       }
     },
     {
+      "id": "generic-error",
+      "description": "ANNOUNCE_ERROR with error code 1",
+      "hex": "0814046c697665010d67656e65726963206572726f72",
+      "decoded": {
+        "track_namespace": "live",
+        "error_code": "1",
+        "reason_phrase": "generic error"
+      }
+    },
+    {
+      "id": "empty-reason",
+      "description": "ANNOUNCE_ERROR with empty reason phrase",
+      "hex": "0807046c6976650100",
+      "decoded": {
+        "track_namespace": "live",
+        "error_code": "1",
+        "reason_phrase": ""
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated ANNOUNCE_ERROR — missing error_code",
       "hex": "0805046c697665",

@@ -6,7 +6,7 @@
   "vectors": [
     {
       "id": "internal-error",
-      "description": "PUBLISH_NAMESPACE_ERROR with INTERNAL_ERROR (0x0)",
+      "description": "INTERNAL_ERROR (0x0)",
       "hex": "08001101000e696e7465726e616c206572726f72",
       "decoded": {
         "request_id": "1",
@@ -16,7 +16,7 @@
     },
     {
       "id": "unauthorized",
-      "description": "PUBLISH_NAMESPACE_ERROR with UNAUTHORIZED (0x1)",
+      "description": "UNAUTHORIZED (0x1)",
       "hex": "08000f01010c756e617574686f72697a6564",
       "decoded": {
         "request_id": "1",
@@ -25,11 +25,71 @@
       }
     },
     {
+      "id": "timeout",
+      "description": "TIMEOUT (0x2)",
+      "hex": "08000a01020774696d656f7574",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "2",
+        "reason_phrase": "timeout"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "NOT_SUPPORTED (0x3)",
+      "hex": "08001001030d6e6f7420737570706f72746564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "uninterested",
+      "description": "UNINTERESTED (0x4)",
+      "hex": "08000f01040c756e696e7465726573746564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "4",
+        "reason_phrase": "uninterested"
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "MALFORMED_AUTH_TOKEN (0x10)",
+      "hex": "0800170110146d616c666f726d6564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "16",
+        "reason_phrase": "malformed auth token"
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "EXPIRED_AUTH_TOKEN (0x12)",
+      "hex": "08001501121265787069726564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "18",
+        "reason_phrase": "expired auth token"
+      }
+    },
+    {
+      "id": "empty-reason",
+      "description": "empty reason phrase",
+      "hex": "080003010000",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated PUBLISH_NAMESPACE_ERROR \u00e2\u20ac\u201d missing reason phrase",
-      "hex": "08000f0101",
+      "description": "truncated — missing error_code",
+      "hex": "08000101",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading reason phrase"
+      "error_detail": "unexpected end of input while reading error_code"
     }
   ]
 }

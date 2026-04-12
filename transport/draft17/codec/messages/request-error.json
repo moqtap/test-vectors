@@ -45,6 +45,136 @@
       }
     },
     {
+      "id": "timeout",
+      "description": "REQUEST_ERROR with TIMEOUT (0x2), not retryable",
+      "hex": "05000a02000774696d656f7574",
+      "decoded": {
+        "error_code": "2",
+        "retry_interval": "0",
+        "reason_phrase": "timeout"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "REQUEST_ERROR with NOT_SUPPORTED (0x3), not retryable",
+      "hex": "05001003000d6e6f7420737570706f72746564",
+      "decoded": {
+        "error_code": "3",
+        "retry_interval": "0",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "REQUEST_ERROR with MALFORMED_AUTH_TOKEN (0x4), not retryable",
+      "hex": "0500170400146d616c666f726d6564206175746820746f6b656e",
+      "decoded": {
+        "error_code": "4",
+        "retry_interval": "0",
+        "reason_phrase": "malformed auth token"
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "REQUEST_ERROR with EXPIRED_AUTH_TOKEN (0x5), not retryable",
+      "hex": "05001505001265787069726564206175746820746f6b656e",
+      "decoded": {
+        "error_code": "5",
+        "retry_interval": "0",
+        "reason_phrase": "expired auth token"
+      }
+    },
+    {
+      "id": "going-away",
+      "description": "REQUEST_ERROR with GOING_AWAY (0x6), not retryable",
+      "hex": "05000d06000a676f696e672061776179",
+      "decoded": {
+        "error_code": "6",
+        "retry_interval": "0",
+        "reason_phrase": "going away"
+      }
+    },
+    {
+      "id": "excessive-load",
+      "description": "REQUEST_ERROR with EXCESSIVE_LOAD (0x9), not retryable",
+      "hex": "05001109000e657863657373697665206c6f6164",
+      "decoded": {
+        "error_code": "9",
+        "retry_interval": "0",
+        "reason_phrase": "excessive load"
+      }
+    },
+    {
+      "id": "invalid-range",
+      "description": "REQUEST_ERROR with INVALID_RANGE (0x11), not retryable",
+      "hex": "05001011000d696e76616c69642072616e6765",
+      "decoded": {
+        "error_code": "17",
+        "retry_interval": "0",
+        "reason_phrase": "invalid range"
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "REQUEST_ERROR with MALFORMED_TRACK (0x12), not retryable",
+      "hex": "05001212000f6d616c666f726d656420747261636b",
+      "decoded": {
+        "error_code": "18",
+        "retry_interval": "0",
+        "reason_phrase": "malformed track"
+      }
+    },
+    {
+      "id": "duplicate-subscription",
+      "description": "REQUEST_ERROR with DUPLICATE_SUBSCRIPTION (0x19), not retryable",
+      "hex": "0500191900166475706c696361746520737562736372697074696f6e",
+      "decoded": {
+        "error_code": "25",
+        "retry_interval": "0",
+        "reason_phrase": "duplicate subscription"
+      }
+    },
+    {
+      "id": "uninterested",
+      "description": "REQUEST_ERROR with UNINTERESTED (0x20), not retryable",
+      "hex": "05000f20000c756e696e7465726573746564",
+      "decoded": {
+        "error_code": "32",
+        "retry_interval": "0",
+        "reason_phrase": "uninterested"
+      }
+    },
+    {
+      "id": "prefix-overlap",
+      "description": "REQUEST_ERROR with PREFIX_OVERLAP (0x30), not retryable",
+      "hex": "05001130000e707265666978206f7665726c6170",
+      "decoded": {
+        "error_code": "48",
+        "retry_interval": "0",
+        "reason_phrase": "prefix overlap"
+      }
+    },
+    {
+      "id": "namespace-too-large",
+      "description": "REQUEST_ERROR with NAMESPACE_TOO_LARGE (0x31), not retryable",
+      "hex": "0500163100136e616d65737061636520746f6f206c61726765",
+      "decoded": {
+        "error_code": "49",
+        "retry_interval": "0",
+        "reason_phrase": "namespace too large"
+      }
+    },
+    {
+      "id": "invalid-joining-request-id",
+      "description": "REQUEST_ERROR with INVALID_JOINING_REQUEST_ID (0x32), not retryable",
+      "hex": "05001d32001a696e76616c6964206a6f696e696e672072657175657374206964",
+      "decoded": {
+        "error_code": "50",
+        "retry_interval": "0",
+        "reason_phrase": "invalid joining request id"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated REQUEST_ERROR — missing error_code",
       "hex": "050002",

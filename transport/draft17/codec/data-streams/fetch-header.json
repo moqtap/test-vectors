@@ -73,6 +73,87 @@
       }
     },
     {
+      "id": "fetch-with-properties",
+      "description": "fetch stream with properties flag (flags=0x3c: PROPERTIES+PRIORITY+GROUP_ID+OBJECT_ID) and PRIOR_GROUP_ID_GAP=2 object property",
+      "hex": "05043c000080023c0204deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x3c",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "object_properties": {
+              "prior_group_id_gap": "2"
+            },
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-unknown-range",
+      "description": "fetch stream with end-of-unknown-range serialization flags (0x10C), group_id=5, object_id=10",
+      "hex": "0504410c050a00",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x10c",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id": "10",
+            "publisher_priority": "128",
+            "payload_length": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-datagram-flag",
+      "description": "fetch stream with DATAGRAM flag (flags=0x5c: DATAGRAM+PRIORITY+GROUP_ID+OBJECT_ID) encoding an object as datagram-like",
+      "hex": "0504405c03008004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x5c",
+            "group_id": "3",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-with-subgroup-id-present",
+      "description": "fetch stream with explicit subgroup_id (flags=0x1f: subgroup_id=0b11 present, PRIORITY+GROUP_ID+OBJECT_ID)",
+      "hex": "05041f0007008004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1f",
+            "group_id": "0",
+            "subgroup_id": "7",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated fetch header — missing request_id",
       "hex": "05",

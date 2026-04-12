@@ -16,6 +16,61 @@
       }
     },
     {
+      "id": "invalid-range",
+      "description": "SUBSCRIBE_ERROR with error code 1 (Invalid Range)",
+      "hex": "051101010d696e76616c69642072616e676501",
+      "decoded": {
+        "subscribe_id": "1",
+        "error_code": "1",
+        "reason_phrase": "invalid range",
+        "track_alias": "1"
+      }
+    },
+    {
+      "id": "retry-track-alias",
+      "description": "SUBSCRIBE_ERROR with error code 2 (Retry Track Alias), suggested alias=5",
+      "hex": "0515010211726574727920747261636b20616c69617305",
+      "decoded": {
+        "subscribe_id": "1",
+        "error_code": "2",
+        "reason_phrase": "retry track alias",
+        "track_alias": "5"
+      }
+    },
+    {
+      "id": "track-does-not-exist",
+      "description": "SUBSCRIBE_ERROR with error code 3 (Track Does Not Exist)",
+      "hex": "0518020314747261636b20646f6573206e6f7420657869737402",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "3",
+        "reason_phrase": "track does not exist",
+        "track_alias": "2"
+      }
+    },
+    {
+      "id": "unauthorized",
+      "description": "SUBSCRIBE_ERROR with error code 4 (Unauthorized)",
+      "hex": "051001040c756e617574686f72697a656401",
+      "decoded": {
+        "subscribe_id": "1",
+        "error_code": "4",
+        "reason_phrase": "unauthorized",
+        "track_alias": "1"
+      }
+    },
+    {
+      "id": "timeout",
+      "description": "SUBSCRIBE_ERROR with error code 5 (Timeout)",
+      "hex": "050b03050774696d656f757403",
+      "decoded": {
+        "subscribe_id": "3",
+        "error_code": "5",
+        "reason_phrase": "timeout",
+        "track_alias": "3"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_ERROR — missing error_code",
       "hex": "050101",

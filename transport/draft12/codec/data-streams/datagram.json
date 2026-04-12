@@ -47,8 +47,80 @@
       }
     },
     {
+      "id": "datagram-with-extensions",
+      "description": "object datagram (type 0x01) with 2 extensions (6 bytes total) and a 4-byte payload",
+      "hex": "010100008006022a0302cafedeadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "1",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "6",
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "datagram-status-does-not-exist",
+      "description": "object datagram status (type 0x02) signaling object does not exist (status 0x1)",
+      "hex": "020105078001",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "2",
+        "track_alias": "1",
+        "group_id": "5",
+        "object_id": "7",
+        "publisher_priority": "128",
+        "object_status": "1"
+      }
+    },
+    {
+      "id": "datagram-status-end-of-track-and-group",
+      "description": "object datagram status (type 0x02) signaling end of track and group (status 0x4)",
+      "hex": "02010a068004",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "2",
+        "track_alias": "1",
+        "group_id": "10",
+        "object_id": "6",
+        "publisher_priority": "128",
+        "object_status": "4"
+      }
+    },
+    {
+      "id": "datagram-status-end-of-track",
+      "description": "object datagram status (type 0x02) signaling end of track (status 0x5)",
+      "hex": "02010b008005",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "2",
+        "track_alias": "1",
+        "group_id": "11",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_status": "5"
+      }
+    },
+    {
+      "id": "datagram-status-with-extensions",
+      "description": "object datagram status (type 0x03) with 2 extensions and end-of-group status",
+      "hex": "030100008006022a0302cafe03",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "3",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "6",
+        "object_status": "3"
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated datagram \u2014 missing object_id",
+      "description": "truncated datagram — missing object_id",
       "hex": "000102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading object_id"

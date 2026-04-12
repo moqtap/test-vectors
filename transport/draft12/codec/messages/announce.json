@@ -37,7 +37,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated ANNOUNCE \u2014 missing namespace",
+      "description": "truncated ANNOUNCE — missing namespace",
       "hex": "06000101",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_namespace"

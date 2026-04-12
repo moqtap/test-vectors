@@ -109,6 +109,297 @@
         "objects": [
           {
             "object_id": "0",
+            "extension_headers_length": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-with-populated-extensions",
+      "description": "subgroup stream (type 0x11) with one object carrying 2 extensions (6 bytes total) and a 4-byte payload",
+      "hex": "110100800006022a0302cafe04deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "17",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "extension_headers_length": "6",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-does-not-exist",
+      "description": "subgroup stream (type 0x10) where second object signals does-not-exist (status 0x1)",
+      "hex": "100100800004deadbeef010001",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "16",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "1",
+            "payload_length": "0",
+            "object_status": "1",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-end-of-track-and-group",
+      "description": "subgroup stream (type 0x10) terminated by end-of-track-and-group marker (status 0x4)",
+      "hex": "100100800004deadbeef010004",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "16",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "1",
+            "payload_length": "0",
+            "object_status": "4",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-end-of-track",
+      "description": "subgroup stream (type 0x10) terminated by end-of-track marker (status 0x5)",
+      "hex": "100100800004deadbeef010005",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "16",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "1",
+            "payload_length": "0",
+            "object_status": "5",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-first-obj-id",
+      "description": "subgroup stream (type 0x12: subgroup_id = first object ID, no extensions) with one object",
+      "hex": "120100800504deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "18",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-first-obj-id-extensions",
+      "description": "subgroup stream (type 0x13: subgroup_id = first object ID, extensions present) with one object carrying 2 extensions",
+      "hex": "130100800506022a0302cafe04deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "19",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "5",
+            "extension_headers_length": "6",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-explicit-subgroup-id-extensions",
+      "description": "subgroup stream (type 0x15: explicit subgroup_id, extensions present) with one object carrying 2 extensions",
+      "hex": "15010005800006022a0302cafe04deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "21",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "extension_headers_length": "6",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-contains-end-of-group",
+      "description": "subgroup stream (type 0x18: subgroup_id=0, no extensions, Contains End of Group) — last object before FIN is end of group",
+      "hex": "180100800004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "24",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "contains_end_of_group": "1",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-contains-end-of-group-extensions",
+      "description": "subgroup stream (type 0x19: subgroup_id=0, extensions present, Contains End of Group) with one object",
+      "hex": "190100800006022a0302cafe04deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "25",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "contains_end_of_group": "1",
+        "objects": [
+          {
+            "object_id": "0",
+            "extension_headers_length": "6",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-contains-end-of-group-first-obj-id",
+      "description": "subgroup stream (type 0x1A: subgroup_id = first object ID, no extensions, Contains End of Group)",
+      "hex": "1a0100800504deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "26",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "contains_end_of_group": "1",
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-contains-end-of-group-first-obj-id-extensions",
+      "description": "subgroup stream (type 0x1B: subgroup_id = first object ID, extensions present, Contains End of Group)",
+      "hex": "1b0100800506022a0302cafe04deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "27",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "contains_end_of_group": "1",
+        "objects": [
+          {
+            "object_id": "5",
+            "extension_headers_length": "6",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-contains-end-of-group-explicit-subgroup-id",
+      "description": "subgroup stream (type 0x1C: explicit subgroup_id, no extensions, Contains End of Group)",
+      "hex": "1c010005800004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "28",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "contains_end_of_group": "1",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-contains-end-of-group-explicit-subgroup-id-extensions",
+      "description": "subgroup stream (type 0x1D: explicit subgroup_id, extensions present, Contains End of Group)",
+      "hex": "1d010005800006022a0302cafe04deadbeef",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "29",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "contains_end_of_group": "1",
+        "objects": [
+          {
+            "object_id": "0",
+            "extension_headers_length": "6",
             "payload_length": "4",
             "payload_hex": "deadbeef"
           }

@@ -54,6 +54,39 @@
       }
     },
     {
+      "id": "absolute-joining",
+      "description": "absolute joining FETCH referencing subscription request_id=2, start at group 5",
+      "hex": "1600050603020500",
+      "decoded": {
+        "request_id": "6",
+        "fetch_type": "3",
+        "joining_request_id": "2",
+        "joining_start": "5",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-params",
+      "description": "standalone FETCH with SUBSCRIBER_PRIORITY=128 and GROUP_ORDER=ascending parameters",
+      "hex": "160018020101046c69766505766964656f00000a00022040802201",
+      "decoded": {
+        "request_id": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "subscriber_priority": "128",
+          "group_order": "1"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated FETCH — missing fetch content",
       "hex": "160013020101046c69",

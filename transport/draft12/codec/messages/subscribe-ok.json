@@ -50,8 +50,23 @@
       }
     },
     {
+      "id": "with-max-cache-duration",
+      "description": "SUBSCRIBE_OK with MAX_CACHE_DURATION parameter",
+      "hex": "040009020100010001046710",
+      "decoded": {
+        "request_id": "2",
+        "track_alias": "1",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "0",
+        "parameters": {
+          "max_cache_duration": "10000"
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_OK \u2014 missing group_order",
+      "description": "truncated SUBSCRIBE_OK — missing group_order",
       "hex": "040003020100",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading group_order"

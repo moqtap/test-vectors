@@ -81,7 +81,7 @@
     {
       "id": "with-auth-param",
       "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (USE_VALUE)",
-      "hex": "03001e0201046c69766505766964656f8000010101010a0300746f6b656e313233",
+      "hex": "03001e0201046c69766505766964656f8000010101030a0300746f6b656e313233",
       "decoded": {
         "request_id": "2",
         "track_namespace": [
@@ -98,6 +98,93 @@
             "token_type": "0",
             "token_value": "token123"
           }
+        }
+      }
+    },
+    {
+      "id": "with-auth-register",
+      "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (REGISTER alias)",
+      "hex": "03001e0201046c69766505766964656f8000010101030a0101006d79746f6b656e",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "1",
+        "filter_type": "1",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "1",
+            "token_alias": "1",
+            "token_type": "0",
+            "token_value": "mytoken"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-auth-use-alias",
+      "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (USE_ALIAS)",
+      "hex": "0300160401046c69766505766964656f800001010103020201",
+      "decoded": {
+        "request_id": "4",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "1",
+        "filter_type": "1",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "2",
+            "token_alias": "1"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-auth-delete",
+      "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (DELETE alias)",
+      "hex": "0300160601046c69766505766964656f800001010103020001",
+      "decoded": {
+        "request_id": "6",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "1",
+        "filter_type": "1",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "0",
+            "token_alias": "1"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE with DELIVERY_TIMEOUT parameter",
+      "hex": "0300150201046c69766505766964656f8000010101026710",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "1",
+        "filter_type": "1",
+        "parameters": {
+          "delivery_timeout": "10000"
         }
       }
     },
@@ -120,14 +207,14 @@
     },
     {
       "id": "invalid-filter-type",
-      "description": "SUBSCRIBE with filter_type=0 \u2014 reserved/undefined value",
+      "description": "SUBSCRIBE with filter_type=0 — reserved/undefined value",
       "hex": "0300120201046c69766505766964656f8000010000",
       "error": "invalid_value",
       "error_detail": "filter_type 0 is not a defined filter type"
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE \u2014 missing track_name",
+      "description": "truncated SUBSCRIBE — missing track_name",
       "hex": "0300070201046c697665",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_name"

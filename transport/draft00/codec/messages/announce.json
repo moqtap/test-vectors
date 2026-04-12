@@ -25,6 +25,15 @@
       }
     },
     {
+      "id": "long-namespace",
+      "description": "ANNOUNCE with longer namespace, no parameters",
+      "hex": "06161573747265616d696e672e6578616d706c652e636f6d",
+      "decoded": {
+        "track_namespace": "streaming.example.com",
+        "parameters": {}
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated ANNOUNCE — missing track_namespace",
       "hex": "0600",

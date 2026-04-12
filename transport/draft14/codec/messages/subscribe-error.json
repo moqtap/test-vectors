@@ -6,7 +6,7 @@
   "vectors": [
     {
       "id": "internal-error",
-      "description": "SUBSCRIBE_ERROR with INTERNAL_ERROR (0x0)",
+      "description": "INTERNAL_ERROR (0x0)",
       "hex": "05001101000e696e7465726e616c206572726f72",
       "decoded": {
         "request_id": "1",
@@ -16,7 +16,7 @@
     },
     {
       "id": "unauthorized",
-      "description": "SUBSCRIBE_ERROR with UNAUTHORIZED (0x1)",
+      "description": "UNAUTHORIZED (0x1)",
       "hex": "05000f01010c756e617574686f72697a6564",
       "decoded": {
         "request_id": "1",
@@ -25,28 +25,68 @@
       }
     },
     {
-      "id": "track-does-not-exist",
-      "description": "SUBSCRIBE_ERROR with TRACK_DOES_NOT_EXIST (0x2)",
-      "hex": "050017010214747261636b20646f6573206e6f74206578697374",
+      "id": "timeout",
+      "description": "TIMEOUT (0x2)",
+      "hex": "05000a01020774696d656f7574",
       "decoded": {
         "request_id": "1",
         "error_code": "2",
+        "reason_phrase": "timeout"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "NOT_SUPPORTED (0x3)",
+      "hex": "05001001030d6e6f7420737570706f72746564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "track-does-not-exist",
+      "description": "TRACK_DOES_NOT_EXIST (0x4)",
+      "hex": "050017010414747261636b20646f6573206e6f74206578697374",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "4",
         "reason_phrase": "track does not exist"
       }
     },
     {
-      "id": "malformed-track",
-      "description": "SUBSCRIBE_ERROR with MALFORMED_TRACK (0x3)",
-      "hex": "05001201030f6d616c666f726d656420747261636b",
+      "id": "invalid-range",
+      "description": "INVALID_RANGE (0x5)",
+      "hex": "05001001050d696e76616c69642072616e6765",
       "decoded": {
         "request_id": "1",
-        "error_code": "3",
-        "reason_phrase": "malformed track"
+        "error_code": "5",
+        "reason_phrase": "invalid range"
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "MALFORMED_AUTH_TOKEN (0x10)",
+      "hex": "0500170110146d616c666f726d6564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "16",
+        "reason_phrase": "malformed auth token"
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "EXPIRED_AUTH_TOKEN (0x12)",
+      "hex": "05001501121265787069726564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "18",
+        "reason_phrase": "expired auth token"
       }
     },
     {
       "id": "empty-reason",
-      "description": "SUBSCRIBE_ERROR with empty reason phrase",
+      "description": "empty reason phrase",
       "hex": "050003010000",
       "decoded": {
         "request_id": "1",
@@ -56,8 +96,8 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_ERROR \u00e2\u20ac\u201d missing reason phrase",
-      "hex": "05001101",
+      "description": "truncated — missing error_code",
+      "hex": "05000101",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading error_code"
     }

@@ -33,12 +33,70 @@
       }
     },
     {
-      "id": "datagram-status",
-      "description": "object datagram status (type 0x02, no extensions) signaling end of group",
-      "hex": "020100058003",
+      "id": "datagram-with-extensions",
+      "description": "object datagram (type 0x01, with extensions) with 2-byte payload",
+      "hex": "010102008002102adead",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "1",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "2",
+        "extension_headers": [
+          {
+            "type": "16",
+            "value": "42"
+          }
+        ],
+        "payload_hex": "dead"
+      }
+    },
+    {
+      "id": "datagram-end-of-group",
+      "description": "object datagram (type 0x02, end of group, no extensions) with 2-byte payload",
+      "hex": "0201030580cafe",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "2",
+        "track_alias": "1",
+        "group_id": "3",
+        "object_id": "5",
+        "publisher_priority": "128",
+        "end_of_group": true,
+        "payload_hex": "cafe"
+      }
+    },
+    {
+      "id": "datagram-eog-with-extensions",
+      "description": "object datagram (type 0x03, end of group, with extensions) with 2-byte payload",
+      "hex": "030103058002102acafe",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "3",
+        "track_alias": "1",
+        "group_id": "3",
+        "object_id": "5",
+        "publisher_priority": "128",
+        "end_of_group": true,
+        "extension_headers_length": "2",
+        "extension_headers": [
+          {
+            "type": "16",
+            "value": "42"
+          }
+        ],
+        "payload_hex": "cafe"
+      }
+    },
+    {
+      "id": "datagram-status-end-of-group",
+      "description": "object datagram status (type 0x04, no extensions) signaling end of group",
+      "hex": "040100058003",
       "decoded": {
         "stream_type": "object_datagram_status",
-        "stream_type_id": "2",
+        "stream_type_id": "4",
         "track_alias": "1",
         "group_id": "0",
         "object_id": "5",
@@ -47,8 +105,57 @@
       }
     },
     {
+      "id": "datagram-status-with-extensions",
+      "description": "object datagram status (type 0x05, with extensions) signaling end of group",
+      "hex": "050100058002102a03",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "5",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "5",
+        "publisher_priority": "128",
+        "extension_headers_length": "2",
+        "extension_headers": [
+          {
+            "type": "16",
+            "value": "42"
+          }
+        ],
+        "object_status": "3"
+      }
+    },
+    {
+      "id": "datagram-status-not-exist",
+      "description": "object datagram status (type 0x04) signaling object does not exist (status=1)",
+      "hex": "040102038001",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "4",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "3",
+        "publisher_priority": "128",
+        "object_status": "1"
+      }
+    },
+    {
+      "id": "datagram-status-end-of-track",
+      "description": "object datagram status (type 0x04) signaling end of track (status=4)",
+      "hex": "04010a008004",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "4",
+        "track_alias": "1",
+        "group_id": "10",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_status": "4"
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated datagram \u2014 missing object_id",
+      "description": "truncated datagram — missing object_id",
       "hex": "000102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading object_id"

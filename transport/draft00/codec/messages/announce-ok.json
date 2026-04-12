@@ -13,6 +13,14 @@
       }
     },
     {
+      "id": "long-namespace",
+      "description": "ANNOUNCE OK for longer namespace",
+      "hex": "071573747265616d696e672e6578616d706c652e636f6d",
+      "decoded": {
+        "track_namespace": "streaming.example.com"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated ANNOUNCE OK — empty payload",
       "hex": "0700",

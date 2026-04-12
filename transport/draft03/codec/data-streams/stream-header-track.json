@@ -49,6 +49,31 @@
       }
     },
     {
+      "id": "non-zero-send-order",
+      "description": "STREAM_HEADER_TRACK with send_order=7, objects in group 3",
+      "hex": "4050030107030002face030103c0ffee",
+      "decoded": {
+        "stream_type": "track",
+        "subscribe_id": "3",
+        "track_alias": "1",
+        "object_send_order": "7",
+        "objects": [
+          {
+            "group_id": "3",
+            "object_id": "0",
+            "payload_length": "2",
+            "payload_hex": "face"
+          },
+          {
+            "group_id": "3",
+            "object_id": "1",
+            "payload_length": "3",
+            "payload_hex": "c0ffee"
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated STREAM_HEADER_TRACK — missing track_alias",
       "hex": "405001",

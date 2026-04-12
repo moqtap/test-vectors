@@ -26,6 +26,54 @@
       }
     },
     {
+      "id": "with-subscription-filter",
+      "description": "PUBLISH_OK with SUBSCRIPTION_FILTER parameter (AbsoluteStart, group=5, object=0)",
+      "hex": "1e000701012103030500",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "3",
+            "start_group": "5",
+            "start_object": "0"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "PUBLISH_OK with FORWARD parameter set to 0",
+      "hex": "1e000401011000",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "forward": "0"
+        }
+      }
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "PUBLISH_OK with NEW_GROUP_REQUEST parameter set to 5",
+      "hex": "1e000401013205",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "new_group_request": "5"
+        }
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "PUBLISH_OK with EXPIRES parameter set to 10000ms",
+      "hex": "1e00050101086710",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "expires": "10000"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH_OK — missing parameter count",
       "hex": "1e000201",

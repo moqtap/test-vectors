@@ -76,8 +76,91 @@
       }
     },
     {
+      "id": "fetch-object-does-not-exist",
+      "description": "fetch stream with a single object signaling does-not-exist (status 0x1)",
+      "hex": "050200000380000001",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "3",
+            "publisher_priority": "128",
+            "extension_headers_length": "0",
+            "payload_length": "0",
+            "object_status": "1",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-track-and-group",
+      "description": "fetch stream with end-of-track-and-group marker (status 0x4)",
+      "hex": "05020a000080000004",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "10",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_headers_length": "0",
+            "payload_length": "0",
+            "object_status": "4",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-track",
+      "description": "fetch stream with end-of-track marker (status 0x5)",
+      "hex": "05020b000080000005",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "11",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_headers_length": "0",
+            "payload_length": "0",
+            "object_status": "5",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-with-extensions",
+      "description": "fetch stream with one object carrying 2 extensions (6 bytes total) and a 4-byte payload",
+      "hex": "05020000008006022a0302cafe04deadbeef",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_headers_length": "6",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated fetch header \u2014 missing request_id",
+      "description": "truncated fetch header — missing request_id",
       "hex": "05",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

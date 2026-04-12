@@ -24,6 +24,86 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "PUBLISH_OK with DELIVERY_TIMEOUT parameter (5000ms)",
+      "hex": "1e000401025388",
+      "decoded": {
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "PUBLISH_OK with EXPIRES parameter (60000ms)",
+      "hex": "1e000601088000ea60",
+      "decoded": {
+        "parameters": {
+          "expires": "60000"
+        }
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "PUBLISH_OK with LARGEST_OBJECT parameter (group=20, object=5)",
+      "hex": "1e000401091405",
+      "decoded": {
+        "parameters": {
+          "largest_object": {
+            "group": "20",
+            "object": "5"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "PUBLISH_OK with FORWARD parameter (forward=0, don't forward)",
+      "hex": "1e0003011000",
+      "decoded": {
+        "parameters": {
+          "forward": "0"
+        }
+      }
+    },
+    {
+      "id": "with-subscription-filter",
+      "description": "PUBLISH_OK with SUBSCRIPTION_FILTER parameter (AbsoluteRange, start=5:0, end=20)",
+      "hex": "1e000701210404050014",
+      "decoded": {
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "4",
+            "start_group": "5",
+            "start_object": "0",
+            "end_group": "20"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "PUBLISH_OK with NEW_GROUP_REQUEST parameter (group_id=100)",
+      "hex": "1e000401324064",
+      "decoded": {
+        "parameters": {
+          "new_group_request": "100"
+        }
+      }
+    },
+    {
+      "id": "with-multiple-params",
+      "description": "PUBLISH_OK with SUBSCRIBER_PRIORITY (64), GROUP_ORDER (ascending=1), and NEW_GROUP_REQUEST (10)",
+      "hex": "1e00070320400201100a",
+      "decoded": {
+        "parameters": {
+          "subscriber_priority": "64",
+          "group_order": "1",
+          "new_group_request": "10"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH_OK — missing parameter count",
       "hex": "1e000201",

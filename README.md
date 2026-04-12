@@ -135,24 +135,24 @@ Coverage spans drafts 00 through 17. Drafts 00–06 use an earlier wire format (
 
 | Spec | Draft | Messages | Data streams | Total vectors |
 |------|-------|----------|-------------|---------------|
-| MoQ Transport | draft-00 | 11 control messages | — | 52 |
-| MoQ Transport | draft-01 | 16 control messages | — | 62 |
-| MoQ Transport | draft-02 | 14 control messages | 4 stream types | 64 |
-| MoQ Transport | draft-03 | 14 control messages | 4 stream types | 64 |
-| MoQ Transport | draft-04 | 17 control messages | 4 stream types | 76 |
-| MoQ Transport | draft-05 | 17 control messages | 4 stream types | 76 |
-| MoQ Transport | draft-06 | 22 control messages | 3 stream types | 89 |
-| MoQ Transport | draft-07 | 26 control messages | 3 stream types | 122 |
-| MoQ Transport | draft-08 | 27 control messages | 4 stream types | 133 |
-| MoQ Transport | draft-09 | 27 control messages | 4 stream types | 135 |
-| MoQ Transport | draft-10 | 27 control messages | 4 stream types | 135 |
-| MoQ Transport | draft-11 | 27 control messages | 3 stream types | 129 |
-| MoQ Transport | draft-12 | 30 control messages | 3 stream types | 139 |
-| MoQ Transport | draft-13 | 31 control messages | 3 stream types | 140 |
-| MoQ Transport | draft-14 | 31 control messages | 3 stream types | 134 |
-| MoQ Transport | draft-15 | 24 control messages | 3 stream types | 110 |
-| MoQ Transport | draft-16 | 25 control messages | 3 stream types | 115 |
-| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 100 |
+| MoQ Transport | draft-00 | 11 control messages | — | 68 |
+| MoQ Transport | draft-01 | 16 control messages | — | 77 |
+| MoQ Transport | draft-02 | 14 control messages | 4 stream types | 85 |
+| MoQ Transport | draft-03 | 14 control messages | 4 stream types | 84 |
+| MoQ Transport | draft-04 | 17 control messages | 4 stream types | 104 |
+| MoQ Transport | draft-05 | 17 control messages | 4 stream types | 100 |
+| MoQ Transport | draft-06 | 22 control messages | 3 stream types | 117 |
+| MoQ Transport | draft-07 | 26 control messages | 3 stream types | 130 |
+| MoQ Transport | draft-08 | 27 control messages | 4 stream types | 152 |
+| MoQ Transport | draft-09 | 27 control messages | 4 stream types | 154 |
+| MoQ Transport | draft-10 | 27 control messages | 4 stream types | 154 |
+| MoQ Transport | draft-11 | 27 control messages | 3 stream types | 158 |
+| MoQ Transport | draft-12 | 30 control messages | 3 stream types | 188 |
+| MoQ Transport | draft-13 | 31 control messages | 3 stream types | 212 |
+| MoQ Transport | draft-14 | 31 control messages | 3 stream types | 222 |
+| MoQ Transport | draft-15 | 24 control messages | 3 stream types | 170 |
+| MoQ Transport | draft-16 | 25 control messages | 3 stream types | 183 |
+| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 185 |
 
 ## Scope
 

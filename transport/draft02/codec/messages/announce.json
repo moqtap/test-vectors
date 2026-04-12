@@ -25,6 +25,24 @@
       }
     },
     {
+      "id": "with-multiple-params",
+      "description": "ANNOUNCE with AUTHORIZATION_INFO and an unknown parameter",
+      "hex": "0615046c6976650202076d79746f6b656e40ff03aabbcc",
+      "decoded": {
+        "track_namespace": "live",
+        "parameters": {
+          "authorization_info": "mytoken",
+          "unknown": [
+            {
+              "id": "0xff",
+              "length": "3",
+              "raw_hex": "aabbcc"
+            }
+          ]
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated ANNOUNCE — missing track_namespace",
       "hex": "0600",

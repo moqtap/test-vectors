@@ -99,6 +99,44 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE with DELIVERY_TIMEOUT parameter (5000ms)",
+      "hex": "0316020101046c69766505766964656f8000010103025388",
+      "decoded": {
+        "subscribe_id": "2",
+        "track_alias": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "filter_type": "1",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-max-cache-duration",
+      "description": "SUBSCRIBE with MAX_CACHE_DURATION parameter (10000ms)",
+      "hex": "0316020101046c69766505766964656f8000010104026710",
+      "decoded": {
+        "subscribe_id": "2",
+        "track_alias": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "filter_type": "1",
+        "parameters": {
+          "max_cache_duration": "10000"
+        }
+      }
+    },
+    {
       "id": "invalid-filter-type",
       "description": "SUBSCRIBE with filter_type=0 — reserved/undefined value",
       "hex": "0312020101046c69766505766964656f80000000",
@@ -107,7 +145,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE \u2014 missing track_name",
+      "description": "truncated SUBSCRIBE — missing track_name",
       "hex": "0308020101046c69",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_name"

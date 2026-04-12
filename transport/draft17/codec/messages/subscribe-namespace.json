@@ -48,6 +48,42 @@
       }
     },
     {
+      "id": "with-auth-token",
+      "description": "SUBSCRIBE_NAMESPACE with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='ns-token')",
+      "hex": "11001d0100010a636f6e666572656e63650001030b0300086e732d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "subscribe_options": "0",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "ns-token"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "SUBSCRIBE_NAMESPACE with FORWARD parameter (forward=1)",
+      "hex": "1100120100010a636f6e666572656e636500011001",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "subscribe_options": "0",
+        "parameters": {
+          "forward": "1"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_NAMESPACE — missing namespace_prefix",
       "hex": "11000f0100010a636f6e",

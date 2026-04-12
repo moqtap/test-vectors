@@ -46,6 +46,28 @@
       "hex": "162204000201020a636f6e666572656e636506726f6f6d343205617564696f0503140000"
     },
     {
+      "id": "standalone-with-auth-param",
+      "description": "standalone FETCH with AUTHORIZATION_INFO parameter",
+      "decoded": {
+        "subscribe_id": "2",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "authorization_info": "token123"
+        }
+      },
+      "hex": "161f0280010101046c69766505766964656f00000a00010208746f6b656e313233"
+    },
+    {
       "id": "joining",
       "description": "joining FETCH with preceding group offset 5",
       "decoded": {

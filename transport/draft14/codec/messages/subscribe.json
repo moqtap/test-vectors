@@ -79,6 +79,65 @@
       }
     },
     {
+      "id": "descending-forward-enabled",
+      "description": "SUBSCRIBE with descending group order and forward enabled",
+      "hex": "0300120201046c69766505766964656f4002010100",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "64",
+        "group_order": "2",
+        "forward": "1",
+        "filter_type": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "SUBSCRIBE with AUTHORIZATION TOKEN parameter (USE_VALUE)",
+      "hex": "03001e0101046c69766505766964656f8000000101030a0301746f6b656e313233",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "1",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "1",
+            "token_value": "746f6b656e313233"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE with DELIVERY_TIMEOUT parameter",
+      "hex": "0300150101046c69766505766964656f8001010201025388",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "forward": "1",
+        "filter_type": "2",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
       "id": "unknown-extension-param",
       "description": "SUBSCRIBE with unknown extension parameter — must be skipped",
       "hex": "0300180101046c69766505766964656f80000001012104deadbeef",

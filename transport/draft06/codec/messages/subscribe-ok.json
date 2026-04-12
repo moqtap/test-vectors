@@ -47,6 +47,20 @@
       }
     },
     {
+      "id": "with-expires",
+      "description": "SUBSCRIBE_OK with non-zero expires (5000ms)",
+      "hex": "040801538801010a0300",
+      "decoded": {
+        "subscribe_id": "1",
+        "expires": "5000",
+        "group_order": "1",
+        "content_exists": "1",
+        "largest_group_id": "10",
+        "largest_object_id": "3",
+        "parameters": {}
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_OK — missing expires",
       "hex": "040101",

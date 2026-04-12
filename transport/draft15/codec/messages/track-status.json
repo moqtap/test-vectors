@@ -18,6 +18,56 @@
       }
     },
     {
+      "id": "with-priority-and-group-order",
+      "description": "TRACK_STATUS with SUBSCRIBER_PRIORITY=128 and GROUP_ORDER=ascending parameters",
+      "hex": "0d00130101046c69766505766964656f022040802201",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscriber_priority": "128",
+          "group_order": "1"
+        }
+      }
+    },
+    {
+      "id": "with-delivery-timeout",
+      "description": "TRACK_STATUS with DELIVERY_TIMEOUT parameter set to 5000ms",
+      "hex": "0d00110101046c69766505766964656f01025388",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-subscription-filter",
+      "description": "TRACK_STATUS with SUBSCRIPTION_FILTER parameter (AbsoluteStart, group=0, object=0)",
+      "hex": "0d00130101046c69766505766964656f012103030000",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "3",
+            "start_group": "0",
+            "start_object": "0"
+          }
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated TRACK_STATUS — missing track_name",
       "hex": "0d000e0101046c69",

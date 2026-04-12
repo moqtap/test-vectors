@@ -5,31 +5,32 @@
   "spec_section": "9.26",
   "vectors": [
     {
-      "id": "status-ok",
-      "description": "PUBLISH_NAMESPACE_DONE with status 0, empty reason",
-      "hex": "090003010000",
+      "id": "single-namespace",
+      "description": "PUBLISH_NAMESPACE_DONE with single-element namespace",
+      "hex": "09000c010a636f6e666572656e6365",
       "decoded": {
-        "request_id": "1",
-        "status_code": "0",
-        "reason_phrase": ""
+        "track_namespace": [
+          "conference"
+        ]
       }
     },
     {
-      "id": "internal-error",
-      "description": "PUBLISH_NAMESPACE_DONE with INTERNAL_ERROR (0x1)",
-      "hex": "09001101010e696e7465726e616c206572726f72",
+      "id": "multi-namespace",
+      "description": "PUBLISH_NAMESPACE_DONE with multi-element namespace",
+      "hex": "09000d02046c6976650673706f727473",
       "decoded": {
-        "request_id": "1",
-        "status_code": "1",
-        "reason_phrase": "internal error"
+        "track_namespace": [
+          "live",
+          "sports"
+        ]
       }
     },
     {
       "id": "truncated",
-      "description": "truncated PUBLISH_NAMESPACE_DONE \u00e2\u20ac\u201d missing status_code",
-      "hex": "09000301",
+      "description": "truncated PUBLISH_NAMESPACE_DONE — missing namespace element",
+      "hex": "09000401046c69",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading status_code"
+      "error_detail": "unexpected end of input while reading track_namespace"
     }
   ]
 }

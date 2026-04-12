@@ -33,6 +33,65 @@
       }
     },
     {
+      "id": "with-authority-param",
+      "description": "CLIENT_SETUP with AUTHORITY parameter",
+      "hex": "20000e01050b6578616d706c652e636f6d",
+      "decoded": {
+        "parameters": {
+          "authority": "example.com"
+        }
+      }
+    },
+    {
+      "id": "with-implementation-param",
+      "description": "CLIENT_SETUP with MOQT_IMPLEMENTATION parameter",
+      "hex": "20000d01070a6d6f717461702f312e30",
+      "decoded": {
+        "parameters": {
+          "moqt_implementation": "moqtap/1.0"
+        }
+      }
+    },
+    {
+      "id": "with-max-auth-cache-param",
+      "description": "CLIENT_SETUP with MAX_AUTH_TOKEN_CACHE_SIZE parameter set to 1024",
+      "hex": "20000401044400",
+      "decoded": {
+        "parameters": {
+          "max_auth_token_cache_size": "1024"
+        }
+      }
+    },
+    {
+      "id": "with-auth-token-register",
+      "description": "CLIENT_SETUP with AUTHORIZATION_TOKEN — REGISTER alias_type (0x1)",
+      "hex": "20000c010309010001736563726574",
+      "decoded": {
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "1",
+            "token_alias": "0",
+            "token_type": "1",
+            "token_value_hex": "736563726574"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-auth-token-use-value",
+      "description": "CLIENT_SETUP with AUTHORIZATION_TOKEN — USE_VALUE alias_type (0x3)",
+      "hex": "2000080103050301746f6b",
+      "decoded": {
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "1",
+            "token_value_hex": "746f6b"
+          }
+        }
+      }
+    },
+    {
       "id": "non-canonical-param-count",
       "description": "non-canonical CLIENT_SETUP — parameter count uses 2-byte varint for value 0",
       "hex": "2000024000",

@@ -19,6 +19,20 @@
       }
     },
     {
+      "id": "non-zero-send-order",
+      "description": "OBJECT_DATAGRAM with group=5, object=2, send_order=255",
+      "hex": "010301050240ff6162",
+      "decoded": {
+        "subscribe_id": "3",
+        "track_alias": "1",
+        "group_id": "5",
+        "object_id": "2",
+        "object_send_order": "255",
+        "payload_length": "2",
+        "payload_hex": "6162"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated OBJECT_DATAGRAM — missing track_alias",
       "hex": "0101",

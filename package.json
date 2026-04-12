@@ -1,6 +1,6 @@
 {
   "name": "@moqtap/test-vectors",
-  "version": "0.7.3",
+  "version": "0.8.0",
   "description": "MoQT protocol test vectors — language-agnostic JSON",
   "type": "module",
   "exports": {
@@ -19,14 +19,19 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/moqtap/test-vectors.git"
+    "url": "git+https://github.com/moqtap/test-vectors.git"
   },
   "homepage": "https://github.com/moqtap/test-vectors#readme",
   "bugs": {
     "url": "https://github.com/moqtap/test-vectors/issues"
   },
   "scripts": {
-    "validate": "python scripts/validate.py"
+    "validate": "python scripts/validate.py",
+    "validate:schema": "node scripts/validate-schema.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.0",
+    "ajv-formats": "^3.0.0"
   },
   "keywords": [
     "moqt",

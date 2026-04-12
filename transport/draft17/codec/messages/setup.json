@@ -44,6 +44,61 @@
       }
     },
     {
+      "id": "with-authority",
+      "description": "SETUP with AUTHORITY option (example.com:443)",
+      "hex": "6f000011050f6578616d706c652e636f6d3a343433",
+      "decoded": {
+        "options": {
+          "authority": "example.com:443"
+        }
+      }
+    },
+    {
+      "id": "with-auth-token-register",
+      "description": "SETUP with AUTHORIZATION_TOKEN option (REGISTER alias=0, type=1, value='setup-bearer')",
+      "hex": "6f00001203100100010c73657475702d626561726572",
+      "decoded": {
+        "options": {
+          "authorization_token": {
+            "alias_type": "1",
+            "token_alias": "0",
+            "token_type": "1",
+            "token_value": "setup-bearer"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-auth-token-delete",
+      "description": "SETUP with AUTHORIZATION_TOKEN option (DELETE alias=0)",
+      "hex": "6f00000403020000",
+      "decoded": {
+        "options": {
+          "authorization_token": {
+            "alias_type": "0",
+            "token_alias": "0"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-path-auth-authority",
+      "description": "SETUP with PATH, AUTHORIZATION_TOKEN (REGISTER), and AUTHORITY options",
+      "hex": "6f00002701042f6d6f71020c010001086d792d746f6b656e021172656c61792e6578616d706c652e636f6d",
+      "decoded": {
+        "options": {
+          "path": "/moq",
+          "authorization_token": {
+            "alias_type": "1",
+            "token_alias": "0",
+            "token_type": "1",
+            "token_value": "my-token"
+          },
+          "authority": "relay.example.com"
+        }
+      }
+    },
+    {
       "id": "truncated-payload",
       "description": "truncated SETUP — payload shorter than declared length",
       "hex": "6f00000501",

@@ -35,8 +35,25 @@
       }
     },
     {
+      "id": "with-max-cache-duration",
+      "description": "FETCH_OK with MAX_CACHE_DURATION parameter",
+      "hex": "18000b020100050a010480007530",
+      "decoded": {
+        "request_id": "2",
+        "group_order": "1",
+        "end_of_track": "0",
+        "end_location": {
+          "group": "5",
+          "object": "10"
+        },
+        "parameters": {
+          "max_cache_duration": "30000"
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated FETCH_OK \u2014 missing end_of_track",
+      "description": "truncated FETCH_OK — missing end_of_track",
       "hex": "1800020201",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading end_of_track"

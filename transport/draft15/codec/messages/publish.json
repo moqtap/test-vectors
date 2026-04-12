@@ -34,6 +34,74 @@
       }
     },
     {
+      "id": "with-publisher-priority",
+      "description": "PUBLISH with PUBLISHER_PRIORITY parameter set to 64",
+      "hex": "1d00120101046c69766505766964656f00010e4040",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "publisher_priority": "64"
+        }
+      }
+    },
+    {
+      "id": "with-delivery-timeout",
+      "description": "PUBLISH with DELIVERY_TIMEOUT parameter set to 5000ms",
+      "hex": "1d00120101046c69766505766964656f0001025388",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-forward-and-dynamic-groups",
+      "description": "PUBLISH with FORWARD=1 and DYNAMIC_GROUPS=1 parameters",
+      "hex": "1d00130101046c69766505766964656f000210013001",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "forward": "1",
+          "dynamic_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "PUBLISH with LARGEST_OBJECT parameter (group=5, object=2)",
+      "hex": "1d00130101046c69766505766964656f000109020502",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "largest_object": {
+            "group": "5",
+            "object": "2"
+          }
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH — missing track_name",
       "hex": "1d000f0101046c69",

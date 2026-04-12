@@ -27,6 +27,17 @@
       }
     },
     {
+      "id": "empty-reason",
+      "description": "SUBSCRIBE_ERROR with empty reason phrase",
+      "hex": "050d046c69766505766964656f0200",
+      "decoded": {
+        "track_namespace": "live",
+        "track_name": "video",
+        "error_code": "2",
+        "reason_phrase": ""
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_ERROR — missing error_code",
       "hex": "050b046c69766505766964656f",

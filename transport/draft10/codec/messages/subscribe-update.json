@@ -31,6 +31,21 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE_UPDATE with DELIVERY_TIMEOUT parameter (5000ms)",
+      "hex": "020a020a0314ff0103025388",
+      "decoded": {
+        "subscribe_id": "2",
+        "start_group": "10",
+        "start_object": "3",
+        "end_group": "20",
+        "subscriber_priority": "255",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_UPDATE — missing end_group",
       "hex": "0203020a03",

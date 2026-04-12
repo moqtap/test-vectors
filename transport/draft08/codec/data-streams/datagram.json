@@ -53,6 +53,37 @@
       "hex": "0101000580000003"
     },
     {
+      "id": "datagram-object-does-not-exist",
+      "description": "object datagram signaling object does not exist (status 0x1)",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "track_alias": "1",
+        "group_id": "5",
+        "object_id": "7",
+        "publisher_priority": "128",
+        "extension_count": "0",
+        "object_status": "1",
+        "payload_length": "0",
+        "payload_hex": ""
+      },
+      "hex": "0101050780000001"
+    },
+    {
+      "id": "datagram-with-extensions",
+      "description": "object datagram with 2 extensions (even-type varint + odd-type length-prefixed)",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_count": "2",
+        "payload_length": "4",
+        "payload_hex": "deadbeef"
+      },
+      "hex": "010100008002022a0302cafe04deadbeef"
+    },
+    {
       "id": "truncated",
       "description": "truncated datagram — missing object_id",
       "hex": "010102",

@@ -27,28 +27,50 @@
         "expires": "0",
         "group_order": "1",
         "content_exists": "1",
-        "largest_group": "10",
-        "largest_object": "3",
+        "largest_location": {
+          "group": "10",
+          "object": "3"
+        },
         "parameters": {}
       }
     },
     {
-      "id": "with-expiry",
-      "description": "SUBSCRIBE_OK with expiry set to 30",
-      "hex": "04000601001e000000",
+      "id": "descending-with-expiry",
+      "description": "SUBSCRIBE_OK with descending group order and expiry of 30",
+      "hex": "04000601001e020000",
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
         "expires": "30",
-        "group_order": "0",
+        "group_order": "2",
         "content_exists": "0",
         "parameters": {}
       }
     },
     {
+      "id": "with-params",
+      "description": "SUBSCRIBE_OK with DELIVERY_TIMEOUT and MAX_CACHE_DURATION parameters",
+      "hex": "04001001050001010a03020253880480007530",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "5",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "1",
+        "largest_location": {
+          "group": "10",
+          "object": "3"
+        },
+        "parameters": {
+          "delivery_timeout": "5000",
+          "max_cache_duration": "30000"
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_OK \u00e2\u20ac\u201d missing group_order and beyond",
-      "hex": "040006010000",
+      "description": "truncated SUBSCRIBE_OK — missing group_order and beyond",
+      "hex": "040003010000",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading group_order"
     }

@@ -14,7 +14,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated FETCH_CANCEL \u2014 missing request_id",
+      "description": "truncated FETCH_CANCEL — missing request_id",
       "hex": "170000",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

@@ -22,7 +22,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated MAX_REQUEST_ID \u2014 missing request_id",
+      "description": "truncated MAX_REQUEST_ID — missing request_id",
       "hex": "150000",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

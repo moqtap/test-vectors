@@ -27,6 +27,17 @@
       }
     },
     {
+      "id": "large-track-id",
+      "description": "SUBSCRIBE_OK with 2-byte varint track_id=256, no expiry",
+      "hex": "040e046c69766505766964656f410000",
+      "decoded": {
+        "track_namespace": "live",
+        "track_name": "video",
+        "track_id": "256",
+        "expires": "0"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_OK — missing track_name",
       "hex": "0405046c697665",

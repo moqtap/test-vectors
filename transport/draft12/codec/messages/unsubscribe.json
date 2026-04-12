@@ -22,7 +22,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated UNSUBSCRIBE \u2014 missing request_id",
+      "description": "truncated UNSUBSCRIBE — missing request_id",
       "hex": "0a0000",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

@@ -47,6 +47,34 @@
       "hex": "02010b00800005"
     },
     {
+      "id": "object-does-not-exist",
+      "description": "datagram status signaling object does not exist (status 0x1)",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "track_alias": "1",
+        "group_id": "5",
+        "object_id": "7",
+        "publisher_priority": "128",
+        "extension_headers_length": "0",
+        "object_status": "1"
+      },
+      "hex": "02010507800001"
+    },
+    {
+      "id": "with-extensions",
+      "description": "datagram status with 2 extensions (6 bytes total) and end-of-group status",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "6",
+        "object_status": "3"
+      },
+      "hex": "020100008006022a0302cafe03"
+    },
+    {
       "id": "truncated",
       "description": "truncated datagram status — missing object_id",
       "hex": "020100",

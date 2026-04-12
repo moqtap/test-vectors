@@ -42,6 +42,38 @@
       }
     },
     {
+      "id": "with-auth-and-cache",
+      "description": "CLIENT_SETUP with AUTHORIZATION_TOKEN (REGISTER) and MAX_AUTH_TOKEN_CACHE_SIZE",
+      "hex": "20001901c0000000ff00000d02030a0101006d79746f6b656e044400",
+      "decoded": {
+        "supported_versions": [
+          "4278190093"
+        ],
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "1",
+            "token_alias": "1",
+            "token_type": "0",
+            "token_value": "mytoken"
+          },
+          "max_auth_token_cache_size": "1024"
+        }
+      }
+    },
+    {
+      "id": "with-max-auth-cache",
+      "description": "CLIENT_SETUP with MAX_AUTH_TOKEN_CACHE_SIZE only",
+      "hex": "20000d01c0000000ff00000d01044400",
+      "decoded": {
+        "supported_versions": [
+          "4278190093"
+        ],
+        "parameters": {
+          "max_auth_token_cache_size": "1024"
+        }
+      }
+    },
+    {
       "id": "non-canonical-version-count",
       "description": "non-canonical CLIENT_SETUP: version count uses 2-byte varint for value 1",
       "hex": "20000b4001c0000000ff00000d00",
@@ -55,14 +87,14 @@
     },
     {
       "id": "no-versions-error",
-      "description": "CLIENT_SETUP with no versions \u2014 invalid",
+      "description": "CLIENT_SETUP with no versions — invalid",
       "hex": "2000020000",
       "error": "invalid_value",
       "error_detail": "supported_versions must not be empty"
     },
     {
       "id": "truncated",
-      "description": "truncated CLIENT_SETUP \u2014 payload shorter than declared length",
+      "description": "truncated CLIENT_SETUP — payload shorter than declared length",
       "hex": "20ffff",
       "error": "incomplete",
       "error_detail": "unexpected end of input"

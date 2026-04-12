@@ -71,6 +71,115 @@
       }
     },
     {
+      "id": "with-filter-next-group-start",
+      "description": "SUBSCRIBE with SUBSCRIPTION_FILTER parameter (NextGroupStart)",
+      "hex": "0300110101046c69766505766964656f01210101",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "1"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-largest-object",
+      "description": "SUBSCRIBE with SUBSCRIPTION_FILTER parameter (LargestObject)",
+      "hex": "0300110101046c69766505766964656f01210102",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "2"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "SUBSCRIBE with SUBSCRIBER_PRIORITY parameter set to 128",
+      "hex": "0300110101046c69766505766964656f01204080",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscriber_priority": "128"
+        }
+      }
+    },
+    {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE with DELIVERY_TIMEOUT parameter set to 5000ms",
+      "hex": "0300110101046c69766505766964656f01025388",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "SUBSCRIBE with FORWARD parameter set to 1 (forward)",
+      "hex": "0300100101046c69766505766964656f011001",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "forward": "1"
+        }
+      }
+    },
+    {
+      "id": "with-group-order",
+      "description": "SUBSCRIBE with GROUP_ORDER parameter set to 2 (descending)",
+      "hex": "0300100101046c69766505766964656f012202",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "group_order": "2"
+        }
+      }
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "SUBSCRIBE with NEW_GROUP_REQUEST parameter set to 0",
+      "hex": "0300100101046c69766505766964656f013200",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "new_group_request": "0"
+        }
+      }
+    },
+    {
       "id": "unknown-extension-param",
       "description": "SUBSCRIBE with unknown extension parameter — must be skipped",
       "hex": "0300150101046c69766505766964656f01404104deadbeef",

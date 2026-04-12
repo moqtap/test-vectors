@@ -29,6 +29,37 @@
       }
     },
     {
+      "id": "with-track-properties",
+      "description": "FETCH_OK with track properties: DELIVERY_TIMEOUT=5000ms, DYNAMIC_GROUPS=1",
+      "hex": "180009000a03000253882e01",
+      "decoded": {
+        "end_of_track": "0",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {},
+        "track_properties": {
+          "delivery_timeout": "5000",
+          "dynamic_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "with-params-and-properties",
+      "description": "FETCH_OK with EXPIRES parameter (30ms) and track property MAX_CACHE_DURATION=30000ms",
+      "hex": "18000b000a0301081e0480007530",
+      "decoded": {
+        "end_of_track": "0",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {
+          "expires": "30"
+        },
+        "track_properties": {
+          "max_cache_duration": "30000"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated FETCH_OK — missing end_of_track",
       "hex": "18000502",

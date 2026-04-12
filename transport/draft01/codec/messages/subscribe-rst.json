@@ -18,6 +18,19 @@
       }
     },
     {
+      "id": "zero-position",
+      "description": "SUBSCRIBE_RST with error_code=0 and final_group=0, final_object=0",
+      "hex": "0c1a046c69766505766964656f000b747261636b20656e6465640000",
+      "decoded": {
+        "track_namespace": "live",
+        "track_name": "video",
+        "error_code": "0",
+        "reason_phrase": "track ended",
+        "final_group": "0",
+        "final_object": "0"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_RST — missing error_code",
       "hex": "0c0b046c69766505766964656f",

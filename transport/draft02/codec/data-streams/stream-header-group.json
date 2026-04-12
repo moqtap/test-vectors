@@ -48,6 +48,49 @@
       }
     },
     {
+      "id": "empty-payload-object",
+      "description": "STREAM_HEADER_GROUP with a zero-length payload object",
+      "hex": "4051010200000000",
+      "decoded": {
+        "stream_type": "group",
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "0",
+        "object_send_order": "0",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "0",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "non-sequential-objects",
+      "description": "STREAM_HEADER_GROUP with non-sequential object IDs and non-zero send_order",
+      "hex": "40510102030a0004deadbeef0502cafe",
+      "decoded": {
+        "stream_type": "group",
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "3",
+        "object_send_order": "10",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "5",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated STREAM_HEADER_GROUP — missing track_alias",
       "hex": "405101",

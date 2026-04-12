@@ -77,6 +77,58 @@
       }
     },
     {
+      "id": "subgroup-end-of-track-and-group",
+      "description": "subgroup stream terminated by end-of-track-and-group marker (status 0x4)",
+      "hex": "04010000800004deadbeef010004",
+      "decoded": {
+        "stream_type": "stream_header_subgroup",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "object_status": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "1",
+            "object_status": "4",
+            "payload_length": "0",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-end-of-subgroup",
+      "description": "subgroup stream terminated by end-of-subgroup marker (status 0x5)",
+      "hex": "04010000800004deadbeef010005",
+      "decoded": {
+        "stream_type": "stream_header_subgroup",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "object_status": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "1",
+            "object_status": "5",
+            "payload_length": "0",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
       "id": "subgroup-truncated",
       "description": "truncated subgroup header — missing publisher_priority",
       "hex": "04010000",

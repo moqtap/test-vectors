@@ -5,6 +5,16 @@
   "spec_section": "8.22",
   "vectors": [
     {
+      "id": "internal-error",
+      "description": "TRACK_STATUS_ERROR with Internal Error (0x0)",
+      "hex": "0f001101000e696e7465726e616c206572726f72",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
       "id": "track-not-found",
       "description": "TRACK_STATUS_ERROR with Track Does Not Exist error",
       "decoded": {
@@ -25,8 +35,58 @@
       "hex": "0f001102010e6e6f7420617574686f72697a6564"
     },
     {
+      "id": "timeout",
+      "description": "TRACK_STATUS_ERROR with Timeout (0x2)",
+      "hex": "0f0014010211726571756573742074696d6564206f7574",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "2",
+        "reason_phrase": "request timed out"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "TRACK_STATUS_ERROR with Not Supported (0x3)",
+      "hex": "0f001001030d6e6f7420737570706f72746564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "invalid-range",
+      "description": "TRACK_STATUS_ERROR with Invalid Range (0x5)",
+      "hex": "0f001001050d696e76616c69642072616e6765",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "5",
+        "reason_phrase": "invalid range"
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "TRACK_STATUS_ERROR with Malformed Auth Token (0x10)",
+      "hex": "0f00170110146d616c666f726d6564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "16",
+        "reason_phrase": "malformed auth token"
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "TRACK_STATUS_ERROR with Expired Auth Token (0x12)",
+      "hex": "0f001501121265787069726564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "18",
+        "reason_phrase": "expired auth token"
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated TRACK_STATUS_ERROR \u2014 missing error_code",
+      "description": "truncated TRACK_STATUS_ERROR — missing error_code",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading error_code",
       "hex": "0f000101"

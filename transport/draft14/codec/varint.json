@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schema/codec-vector.schema.json",
   "message_type": "varint",
-  "spec_section": "RFC 9000 \u00a716",
+  "spec_section": "RFC 9000 §16",
   "vectors": [
     {
       "id": "1b-zero",
@@ -151,7 +151,7 @@
     },
     {
       "id": "truncated-8b",
-      "description": "truncated 8-byte varint \u00e2\u20ac\u201d only 4 bytes",
+      "description": "truncated 8-byte varint — only 4 bytes",
       "hex": "c0000000",
       "error": "incomplete",
       "error_detail": "expected 8 bytes for varint but got 4"

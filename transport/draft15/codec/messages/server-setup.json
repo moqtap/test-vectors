@@ -23,6 +23,16 @@
       }
     },
     {
+      "id": "with-implementation-param",
+      "description": "SERVER_SETUP with MOQT_IMPLEMENTATION parameter",
+      "hex": "21000d01070a6c69626d6f712f302e35",
+      "decoded": {
+        "parameters": {
+          "moqt_implementation": "libmoq/0.5"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SERVER_SETUP — payload shorter than declared length",
       "hex": "21000201",

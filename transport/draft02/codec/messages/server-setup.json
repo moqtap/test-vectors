@@ -14,6 +14,23 @@
       }
     },
     {
+      "id": "with-unknown-param",
+      "description": "SERVER_SETUP with an unknown setup parameter — must be skipped",
+      "hex": "40410ec0000000ff0000020140ff02beef",
+      "decoded": {
+        "selected_version": "4278190082",
+        "parameters": {
+          "unknown": [
+            {
+              "id": "0xff",
+              "length": "2",
+              "raw_hex": "beef"
+            }
+          ]
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SERVER_SETUP — missing selected_version",
       "hex": "404100",

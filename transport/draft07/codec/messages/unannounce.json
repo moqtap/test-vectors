@@ -16,7 +16,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated UNANNOUNCE \u2014 missing namespace",
+      "description": "truncated UNANNOUNCE — missing namespace",
       "hex": "0900",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_namespace"

@@ -29,6 +29,20 @@
       }
     },
     {
+      "id": "with-max-cache-duration",
+      "description": "FETCH_OK with MAX_CACHE_DURATION parameter set to 10000ms",
+      "hex": "18000802000a0301046710",
+      "decoded": {
+        "request_id": "2",
+        "end_of_track": "0",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {
+          "max_cache_duration": "10000"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated FETCH_OK — missing end_of_track",
       "hex": "18000502",

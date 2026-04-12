@@ -30,9 +30,27 @@
       }
     },
     {
+      "id": "with-auth-token",
+      "description": "SUBSCRIBE_NAMESPACE with AUTHORIZATION TOKEN parameter",
+      "hex": "11001a01010a636f6e666572656e636501030a0301746f6b656e313233",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "1",
+            "token_value": "746f6b656e313233"
+          }
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_NAMESPACE \u00e2\u20ac\u201d missing namespace_prefix",
-      "hex": "11000e01010a",
+      "description": "truncated SUBSCRIBE_NAMESPACE — missing namespace_prefix",
+      "hex": "11000701010a636f6e66",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading namespace_prefix"
     }

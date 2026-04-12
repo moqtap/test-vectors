@@ -19,6 +19,34 @@
       }
     },
     {
+      "id": "large-ids-with-send-order",
+      "description": "OBJECT_STREAM with group=100, object=42, send_order=10",
+      "hex": "00050340642a0a68656c6c6f",
+      "decoded": {
+        "subscribe_id": "5",
+        "track_alias": "3",
+        "group_id": "100",
+        "object_id": "42",
+        "object_send_order": "10",
+        "payload_length": "5",
+        "payload_hex": "68656c6c6f"
+      }
+    },
+    {
+      "id": "empty-payload",
+      "description": "OBJECT_STREAM with empty payload",
+      "hex": "000102000000",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "0",
+        "object_id": "0",
+        "object_send_order": "0",
+        "payload_length": "0",
+        "payload_hex": ""
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated OBJECT_STREAM — missing track_alias",
       "hex": "0001",

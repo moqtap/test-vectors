@@ -5,33 +5,68 @@
   "spec_section": "9.14",
   "vectors": [
     {
-      "id": "forward-disabled",
-      "description": "PUBLISH_OK with track alias 0, forward disabled",
-      "hex": "1e000401000000",
+      "id": "basic-latest-object",
+      "description": "PUBLISH_OK with forward=1, ascending order, LatestObject filter",
+      "hex": "1e0006010180010200",
       "decoded": {
         "request_id": "1",
-        "track_alias": "0",
-        "forward": "0",
+        "forward": "1",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "filter_type": "2",
         "parameters": {}
       }
     },
     {
-      "id": "forward-enabled",
-      "description": "PUBLISH_OK with track alias 5, forward enabled",
-      "hex": "1e000403050100",
+      "id": "with-absolute-range",
+      "description": "PUBLISH_OK with AbsoluteRange filter, descending order",
+      "hex": "1e0009020140020405001400",
+      "decoded": {
+        "request_id": "2",
+        "forward": "1",
+        "subscriber_priority": "64",
+        "group_order": "2",
+        "filter_type": "4",
+        "start_group": "5",
+        "start_object": "0",
+        "end_group": "20",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-absolute-start",
+      "description": "PUBLISH_OK with AbsoluteStart filter, forward disabled",
+      "hex": "1e000803008001030a0300",
       "decoded": {
         "request_id": "3",
-        "track_alias": "5",
+        "forward": "0",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "filter_type": "3",
+        "start_group": "10",
+        "start_object": "3",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "next-group-start",
+      "description": "PUBLISH_OK with NextGroupStart filter",
+      "hex": "1e0006010180010100",
+      "decoded": {
+        "request_id": "1",
         "forward": "1",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "filter_type": "1",
         "parameters": {}
       }
     },
     {
       "id": "truncated",
-      "description": "truncated PUBLISH_OK \u00e2\u20ac\u201d missing forward",
-      "hex": "1e000401",
+      "description": "truncated PUBLISH_OK — missing filter_type",
+      "hex": "1e000401018001",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading track_alias"
+      "error_detail": "unexpected end of input while reading filter_type"
     }
   ]
 }

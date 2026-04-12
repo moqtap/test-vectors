@@ -31,6 +31,75 @@
       }
     },
     {
+      "id": "with-filter-absolute-range",
+      "description": "REQUEST_UPDATE with SUBSCRIPTION_FILTER parameter (AbsoluteRange, start group=5 object=0, end group=10)",
+      "hex": "02000901030121040405000a",
+      "decoded": {
+        "request_id": "1",
+        "existing_request_id": "3",
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "4",
+            "start_group": "5",
+            "start_object": "0",
+            "end_group": "10"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-next-group-start",
+      "description": "REQUEST_UPDATE with SUBSCRIPTION_FILTER parameter (NextGroupStart)",
+      "hex": "020006010301210101",
+      "decoded": {
+        "request_id": "1",
+        "existing_request_id": "3",
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "1"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-largest-object",
+      "description": "REQUEST_UPDATE with SUBSCRIPTION_FILTER parameter (LargestObject)",
+      "hex": "020006010301210102",
+      "decoded": {
+        "request_id": "1",
+        "existing_request_id": "3",
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "2"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "REQUEST_UPDATE with SUBSCRIBER_PRIORITY parameter set to 128",
+      "hex": "020006020101204080",
+      "decoded": {
+        "request_id": "2",
+        "existing_request_id": "1",
+        "parameters": {
+          "subscriber_priority": "128"
+        }
+      }
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "REQUEST_UPDATE with NEW_GROUP_REQUEST parameter set to 5",
+      "hex": "0200050201013205",
+      "decoded": {
+        "request_id": "2",
+        "existing_request_id": "1",
+        "parameters": {
+          "new_group_request": "5"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated REQUEST_UPDATE — missing existing_request_id",
       "hex": "02000302",

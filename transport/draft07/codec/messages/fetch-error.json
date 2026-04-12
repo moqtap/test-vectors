@@ -36,7 +36,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated FETCH_ERROR \u2014 missing reason_phrase",
+      "description": "truncated FETCH_ERROR — missing reason_phrase",
       "hex": "19020200",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading reason_phrase"

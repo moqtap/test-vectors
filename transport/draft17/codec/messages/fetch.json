@@ -57,6 +57,86 @@
       }
     },
     {
+      "id": "absolute-joining",
+      "description": "absolute joining FETCH (fetch_type=3) referencing subscription request_id=2, start at absolute group 10",
+      "hex": "160006060003020a00",
+      "decoded": {
+        "request_id": "6",
+        "required_request_id_delta": "0",
+        "fetch_type": "3",
+        "joining_request_id": "2",
+        "joining_start": "10",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "standalone-with-auth-token",
+      "description": "standalone FETCH with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='fetch-token')",
+      "hex": "16002402000101046c69766505766964656f00000a0001030e03000b66657463682d746f6b656e",
+      "decoded": {
+        "request_id": "2",
+        "required_request_id_delta": "0",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "fetch-token"
+          }
+        }
+      }
+    },
+    {
+      "id": "standalone-with-subscriber-priority",
+      "description": "standalone FETCH with SUBSCRIBER_PRIORITY parameter (priority=16)",
+      "hex": "16001602000101046c69766505766964656f00000a00012010",
+      "decoded": {
+        "request_id": "2",
+        "required_request_id_delta": "0",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "subscriber_priority": "16"
+        }
+      }
+    },
+    {
+      "id": "standalone-with-group-order",
+      "description": "standalone FETCH with GROUP_ORDER parameter (descending=2)",
+      "hex": "16001602000101046c69766505766964656f00000a00012202",
+      "decoded": {
+        "request_id": "2",
+        "required_request_id_delta": "0",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "group_order": "2"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated FETCH — missing fetch content",
       "hex": "16001302000101046c69",

@@ -73,6 +73,85 @@
       }
     },
     {
+      "id": "fetch-with-extensions",
+      "description": "fetch stream object with extensions flag (0x3c: group_id, obj_id, priority, extensions present) with DELIVERY_TIMEOUT extension",
+      "hex": "05043c0000800302538804deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x3c",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_headers": {
+              "delivery_timeout": "5000"
+            },
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-unknown-range",
+      "description": "fetch stream with end-of-unknown-range serialization flags 0x10C (varint-encoded as 0x410c), followed by groupId=5, objectId=10, payloadLength=0",
+      "hex": "0504410c050a00",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x10c",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id": "10",
+            "publisher_priority": "128",
+            "payload_length": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-with-explicit-subgroup",
+      "description": "fetch stream object with explicit subgroup_id (flags=0x0f: subgroup_mode=0b11, group_id, obj_id present)",
+      "hex": "05040f02030004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x0f",
+            "group_id": "2",
+            "subgroup_id": "3",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-datagram-forwarding",
+      "description": "fetch stream object with datagram forwarding flag (flags=0x4c: datagram, group_id, obj_id present)",
+      "hex": "0504404c000004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x4c",
+            "group_id": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated fetch header — missing request_id",
       "hex": "05",

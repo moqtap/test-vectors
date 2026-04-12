@@ -32,6 +32,66 @@
       }
     },
     {
+      "id": "role-publisher",
+      "description": "CLIENT_SETUP with ROLE=Publisher (ingestion)",
+      "hex": "40400d01c0000000ff00000201000101",
+      "decoded": {
+        "supported_versions": [
+          "4278190082"
+        ],
+        "parameters": {
+          "role": "1"
+        }
+      }
+    },
+    {
+      "id": "role-subscriber",
+      "description": "CLIENT_SETUP with ROLE=Subscriber (delivery)",
+      "hex": "40400d01c0000000ff00000201000102",
+      "decoded": {
+        "supported_versions": [
+          "4278190082"
+        ],
+        "parameters": {
+          "role": "2"
+        }
+      }
+    },
+    {
+      "id": "multi-version",
+      "description": "CLIENT_SETUP offering draft-01 and draft-02",
+      "hex": "40401502c0000000ff000001c0000000ff00000201000103",
+      "decoded": {
+        "supported_versions": [
+          "4278190081",
+          "4278190082"
+        ],
+        "parameters": {
+          "role": "3"
+        }
+      }
+    },
+    {
+      "id": "with-unknown-param",
+      "description": "CLIENT_SETUP with ROLE and an unknown setup parameter — must be skipped",
+      "hex": "40401201c0000000ff0000020200010340ff02beef",
+      "decoded": {
+        "supported_versions": [
+          "4278190082"
+        ],
+        "parameters": {
+          "role": "3",
+          "unknown": [
+            {
+              "id": "0xff",
+              "length": "2",
+              "raw_hex": "beef"
+            }
+          ]
+        }
+      }
+    },
+    {
       "id": "no-versions-error",
       "description": "CLIENT_SETUP with no versions — invalid",
       "hex": "4040050001000103",

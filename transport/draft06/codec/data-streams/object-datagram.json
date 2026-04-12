@@ -33,6 +33,48 @@
       }
     },
     {
+      "id": "object-does-not-exist",
+      "description": "OBJECT_DATAGRAM with ObjectDoesNotExist status (1), payload_length=0",
+      "hex": "0101020003800001",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "0",
+        "object_id": "3",
+        "publisher_priority": "128",
+        "payload_length": "0",
+        "object_status": "1"
+      }
+    },
+    {
+      "id": "end-of-track-and-group",
+      "description": "OBJECT_DATAGRAM with EndOfTrackAndGroup status (4), payload_length=0",
+      "hex": "0101020100800004",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "1",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "payload_length": "0",
+        "object_status": "4"
+      }
+    },
+    {
+      "id": "empty-payload-normal",
+      "description": "OBJECT_DATAGRAM with Normal status (0) and empty payload",
+      "hex": "0101020001800000",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "0",
+        "object_id": "1",
+        "publisher_priority": "128",
+        "payload_length": "0",
+        "object_status": "0"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated OBJECT_DATAGRAM — missing track_alias",
       "hex": "0101",

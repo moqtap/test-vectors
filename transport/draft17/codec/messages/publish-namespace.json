@@ -32,6 +32,25 @@
       }
     },
     {
+      "id": "with-auth-token",
+      "description": "PUBLISH_NAMESPACE with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='pns-token')",
+      "hex": "06001d0100010a636f6e666572656e636501030c030009706e732d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "conference"
+        ],
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "pns-token"
+          }
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH_NAMESPACE — missing namespace",
       "hex": "06000e01",

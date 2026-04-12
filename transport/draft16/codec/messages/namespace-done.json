@@ -23,6 +23,17 @@
       }
     },
     {
+      "id": "multi-suffix",
+      "description": "NAMESPACE_DONE with multi-element suffix",
+      "hex": "0e000c020673706f72747303666f6f",
+      "decoded": {
+        "namespace_suffix": [
+          "sports",
+          "foo"
+        ]
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated NAMESPACE_DONE — missing suffix data",
       "hex": "0e000801",

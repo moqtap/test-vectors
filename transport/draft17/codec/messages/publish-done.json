@@ -35,6 +35,76 @@
       }
     },
     {
+      "id": "subscription-ended",
+      "description": "PUBLISH_DONE with SUBSCRIPTION_ENDED (0x3), stream_count=3",
+      "hex": "0b0003030300",
+      "decoded": {
+        "status_code": "3",
+        "stream_count": "3",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "going-away",
+      "description": "PUBLISH_DONE with GOING_AWAY (0x4), stream_count=0",
+      "hex": "0b0003040000",
+      "decoded": {
+        "status_code": "4",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "expired",
+      "description": "PUBLISH_DONE with EXPIRED (0x5), stream_count=0",
+      "hex": "0b0003050000",
+      "decoded": {
+        "status_code": "5",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "too-far-behind",
+      "description": "PUBLISH_DONE with TOO_FAR_BEHIND (0x6), stream_count=2",
+      "hex": "0b0003060200",
+      "decoded": {
+        "status_code": "6",
+        "stream_count": "2",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "update-failed",
+      "description": "PUBLISH_DONE with UPDATE_FAILED (0x8) and reason phrase",
+      "hex": "0b001008000d757064617465206661696c6564",
+      "decoded": {
+        "status_code": "8",
+        "stream_count": "0",
+        "reason_phrase": "update failed"
+      }
+    },
+    {
+      "id": "excessive-load",
+      "description": "PUBLISH_DONE with EXCESSIVE_LOAD (0x9), stream_count=0",
+      "hex": "0b0003090000",
+      "decoded": {
+        "status_code": "9",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "PUBLISH_DONE with MALFORMED_TRACK (0x12) and reason phrase",
+      "hex": "0b001212000f6d616c666f726d656420747261636b",
+      "decoded": {
+        "status_code": "18",
+        "stream_count": "0",
+        "reason_phrase": "malformed track"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH_DONE — missing status_code",
       "hex": "0b000401",

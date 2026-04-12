@@ -31,7 +31,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated GOAWAY \u2014 missing URI length",
+      "description": "truncated GOAWAY — missing URI length",
       "hex": "100000",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading URI length"

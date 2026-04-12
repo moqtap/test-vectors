@@ -34,6 +34,47 @@
       "hex": "1e0009020140020405001400"
     },
     {
+      "id": "filter-next-group-start",
+      "description": "PUBLISH_OK with NextGroupStart filter",
+      "decoded": {
+        "request_id": "1",
+        "forward": "1",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "filter_type": "1",
+        "parameters": {}
+      },
+      "hex": "1e0006010180010100"
+    },
+    {
+      "id": "filter-absolute-start",
+      "description": "PUBLISH_OK with AbsoluteStart filter",
+      "decoded": {
+        "request_id": "1",
+        "forward": "1",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "filter_type": "3",
+        "start_group": "10",
+        "start_object": "3",
+        "parameters": {}
+      },
+      "hex": "1e000801018001030a0300"
+    },
+    {
+      "id": "not-forwarded",
+      "description": "PUBLISH_OK with forward=0",
+      "decoded": {
+        "request_id": "1",
+        "forward": "0",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "filter_type": "2",
+        "parameters": {}
+      },
+      "hex": "1e0006010080010200"
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH_OK — missing filter_type",
       "error": "incomplete",

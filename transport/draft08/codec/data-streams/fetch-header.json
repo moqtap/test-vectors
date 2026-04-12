@@ -57,6 +57,110 @@
       "hex": "0504000000800004deadbeef000001800002cafe"
     },
     {
+      "id": "fetch-object-does-not-exist",
+      "description": "fetch stream with a single object signaling does-not-exist (status 0x1)",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "subscribe_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "3",
+            "publisher_priority": "128",
+            "extension_count": "0",
+            "object_status": "1",
+            "payload_length": "0",
+            "payload_hex": ""
+          }
+        ]
+      },
+      "hex": "050200000380000001"
+    },
+    {
+      "id": "fetch-end-of-group",
+      "description": "fetch stream with end-of-group marker (status 0x3)",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "subscribe_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "5",
+            "publisher_priority": "128",
+            "extension_count": "0",
+            "object_status": "3",
+            "payload_length": "0",
+            "payload_hex": ""
+          }
+        ]
+      },
+      "hex": "050200000580000003"
+    },
+    {
+      "id": "fetch-end-of-track-and-group",
+      "description": "fetch stream with end-of-track-and-group marker (status 0x4)",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "subscribe_id": "2",
+        "objects": [
+          {
+            "group_id": "10",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_count": "0",
+            "object_status": "4",
+            "payload_length": "0",
+            "payload_hex": ""
+          }
+        ]
+      },
+      "hex": "05020a000080000004"
+    },
+    {
+      "id": "fetch-end-of-track",
+      "description": "fetch stream with end-of-track marker (status 0x5)",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "subscribe_id": "2",
+        "objects": [
+          {
+            "group_id": "11",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_count": "0",
+            "object_status": "5",
+            "payload_length": "0",
+            "payload_hex": ""
+          }
+        ]
+      },
+      "hex": "05020b000080000005"
+    },
+    {
+      "id": "fetch-with-extensions",
+      "description": "fetch stream with one object having 2 extensions (even-type varint + odd-type length-prefixed)",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "subscribe_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_count": "2",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      },
+      "hex": "05020000008002022a0302cafe04deadbeef"
+    },
+    {
       "id": "truncated",
       "description": "truncated fetch header — missing subscribe_id",
       "hex": "05",

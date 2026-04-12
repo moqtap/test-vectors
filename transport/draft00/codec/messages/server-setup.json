@@ -14,6 +14,20 @@
       }
     },
     {
+      "id": "with-role-error",
+      "description": "SERVER_SETUP with ROLE parameter — server MUST NOT send ROLE (§6.1.1.1)",
+      "hex": "010bc0000000ff000000000103",
+      "error": "invalid_parameter",
+      "error_detail": "server MUST NOT send ROLE parameter"
+    },
+    {
+      "id": "with-path-error",
+      "description": "SERVER_SETUP with PATH parameter — server MUST NOT send PATH (§6.1.1.2)",
+      "hex": "010ec0000000ff00000001042f6d6f71",
+      "error": "invalid_parameter",
+      "error_detail": "server MUST NOT send PATH parameter"
+    },
+    {
       "id": "truncated",
       "description": "truncated SERVER_SETUP — missing selected_version",
       "hex": "0100",

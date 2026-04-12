@@ -18,6 +18,19 @@
       }
     },
     {
+      "id": "empty-payload",
+      "description": "OBJECT (type 0x02, without payload length) with zero-length payload",
+      "hex": "020401000000",
+      "decoded": {
+        "track_id": "1",
+        "group_sequence": "0",
+        "object_sequence": "0",
+        "object_send_order": "0",
+        "payload_length": "0",
+        "payload_hex": ""
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated OBJECT (type 0x02) — missing group_sequence",
       "hex": "020101",

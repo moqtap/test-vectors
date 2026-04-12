@@ -5,6 +5,36 @@
   "spec_section": "8.15",
   "vectors": [
     {
+      "id": "internal-error",
+      "description": "PUBLISH_ERROR with Internal Error (0x0)",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      },
+      "hex": "1f001101000e696e7465726e616c206572726f72"
+    },
+    {
+      "id": "timeout",
+      "description": "PUBLISH_ERROR with Timeout (0x2)",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "2",
+        "reason_phrase": "timeout"
+      },
+      "hex": "1f000a01020774696d656f7574"
+    },
+    {
+      "id": "not-supported",
+      "description": "PUBLISH_ERROR with Not Supported (0x3)",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      },
+      "hex": "1f001001030d6e6f7420737570706f72746564"
+    },
+    {
       "id": "unauthorized",
       "description": "PUBLISH_ERROR with Unauthorized error",
       "decoded": {

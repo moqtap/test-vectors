@@ -75,6 +75,52 @@
       }
     },
     {
+      "id": "datagram-with-empty-properties",
+      "description": "object datagram (type 0x01: PROPERTIES set, object_id present, priority present) with empty properties and 4-byte payload",
+      "hex": "010100008000deadbeef",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "0x01",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_properties": {},
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "datagram-with-properties-content",
+      "description": "object datagram (type 0x01: PROPERTIES set) with PRIOR_GROUP_ID_GAP=2 property and 2-byte payload",
+      "hex": "0101000080023c02cafe",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "0x01",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_properties": {
+          "prior_group_id_gap": "2"
+        },
+        "payload_hex": "cafe"
+      }
+    },
+    {
+      "id": "datagram-end-of-track-status",
+      "description": "object datagram (type 0x20: status) with end-of-track status (0x4)",
+      "hex": "200100038004",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "0x20",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "3",
+        "publisher_priority": "128",
+        "object_status": "4"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated datagram (type 0x00) — missing object_id",
       "hex": "000102",

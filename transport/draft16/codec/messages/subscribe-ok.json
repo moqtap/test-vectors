@@ -42,6 +42,46 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE_OK with DELIVERY_TIMEOUT parameter set to 5000ms",
+      "hex": "040006010001025388",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-track-extensions",
+      "description": "SUBSCRIBE_OK with track extension DEFAULT_PUBLISHER_PRIORITY=128",
+      "hex": "0400060105000e4080",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "5",
+        "parameters": {},
+        "track_extensions": {
+          "default_publisher_priority": "128"
+        }
+      }
+    },
+    {
+      "id": "with-params-and-extensions",
+      "description": "SUBSCRIBE_OK with EXPIRES parameter and track extension MAX_CACHE_DURATION=10000ms",
+      "hex": "040009010001086710046710",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "parameters": {
+          "expires": "10000"
+        },
+        "track_extensions": {
+          "max_cache_duration": "10000"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_OK — missing track_alias",
       "hex": "04000301",

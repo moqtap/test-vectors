@@ -14,7 +14,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated FETCH_CANCEL \u2014 missing subscribe_id",
+      "description": "truncated FETCH_CANCEL — missing subscribe_id",
       "hex": "1700",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading subscribe_id"

@@ -31,6 +31,19 @@
       }
     },
     {
+      "id": "large-values",
+      "description": "OBJECT with multi-byte varint fields: track_id=200, group=1000, object=50, send_order=16384",
+      "hex": "000d40c843e8328000400003c0ffee",
+      "decoded": {
+        "track_id": "200",
+        "group_sequence": "1000",
+        "object_sequence": "50",
+        "object_send_order": "16384",
+        "payload_length": "3",
+        "payload_hex": "c0ffee"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated OBJECT (type 0x00) — missing group_sequence",
       "hex": "000101",

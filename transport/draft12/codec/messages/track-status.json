@@ -75,8 +75,40 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "TRACK_STATUS with DELIVERY_TIMEOUT parameter (5000 ms)",
+      "hex": "0e00080100050a01025388",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "0",
+        "largest_location": {
+          "group": "5",
+          "object": "10"
+        },
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-max-cache-duration",
+      "description": "TRACK_STATUS with MAX_CACHE_DURATION parameter (10000 ms)",
+      "hex": "0e00080100050a01046710",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "0",
+        "largest_location": {
+          "group": "5",
+          "object": "10"
+        },
+        "parameters": {
+          "max_cache_duration": "10000"
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated TRACK_STATUS \u2014 missing status_code",
+      "description": "truncated TRACK_STATUS — missing status_code",
       "hex": "0e000101",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading status_code"

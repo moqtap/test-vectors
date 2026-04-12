@@ -99,6 +99,64 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE with LatestGroup and DELIVERY_TIMEOUT parameter (3000ms)",
+      "hex": "0316010101046c69766505766964656f8000010103024bb8",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "filter_type": "1",
+        "parameters": {
+          "delivery_timeout": "3000"
+        }
+      }
+    },
+    {
+      "id": "with-max-cache-duration",
+      "description": "SUBSCRIBE with LatestGroup and MAX_CACHE_DURATION parameter (10000ms)",
+      "hex": "0316050501046c69766505766964656f8000010104026710",
+      "decoded": {
+        "subscribe_id": "5",
+        "track_alias": "5",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "filter_type": "1",
+        "parameters": {
+          "max_cache_duration": "10000"
+        }
+      }
+    },
+    {
+      "id": "with-auth-and-delivery-timeout",
+      "description": "SUBSCRIBE with LatestGroup, AUTHORIZATION_INFO and DELIVERY_TIMEOUT parameters",
+      "hex": "031f010101046c69766505766964656f8000010202076d79746f6b656e03024bb8",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "filter_type": "1",
+        "parameters": {
+          "authorization_info": "mytoken",
+          "delivery_timeout": "3000"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE — missing track_name",
       "hex": "0308010101046c697665",

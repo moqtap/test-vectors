@@ -14,7 +14,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated REQUESTS_BLOCKED \u00e2\u20ac\u201d missing request ID",
+      "description": "truncated REQUESTS_BLOCKED — missing request ID",
       "hex": "1a0002",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

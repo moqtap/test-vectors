@@ -59,6 +59,84 @@
       }
     },
     {
+      "id": "current",
+      "description": "SUBSCRIBE 'current': StartGroup=RelPrev(0), StartObj=Abs(0), open-ended",
+      "hex": "03130101046c69766505766964656f020001000000",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "1",
+        "track_namespace": "live",
+        "track_name": "video",
+        "start_group": {
+          "mode": "2",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "relative-previous-offset",
+      "description": "SUBSCRIBE starting 5 groups back: StartGroup=RelPrev(5), StartObj=Abs(0)",
+      "hex": "03130303046c69766505766964656f020501000000",
+      "decoded": {
+        "subscribe_id": "3",
+        "track_alias": "3",
+        "track_namespace": "live",
+        "track_name": "video",
+        "start_group": {
+          "mode": "2",
+          "value": "5"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "relative-next-offset",
+      "description": "SUBSCRIBE skipping ahead: StartGroup=RelNext(3), StartObj=RelNext(0)",
+      "hex": "03130404046c69766505766964656f030303000000",
+      "decoded": {
+        "subscribe_id": "4",
+        "track_alias": "4",
+        "track_namespace": "live",
+        "track_name": "video",
+        "start_group": {
+          "mode": "3",
+          "value": "3"
+        },
+        "start_object": {
+          "mode": "3",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
       "id": "with-authorization-info",
       "description": "SUBSCRIBE with AUTHORIZATION_INFO parameter",
       "hex": "031c0101046c69766505766964656f02000300000002076d79746f6b656e",
@@ -83,6 +161,40 @@
         },
         "parameters": {
           "authorization_info": "mytoken"
+        }
+      }
+    },
+    {
+      "id": "with-unknown-param",
+      "description": "SUBSCRIBE with unknown track request parameter — must be skipped",
+      "hex": "03190101046c69766505766964656f02000300000040f003aabbcc",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "1",
+        "track_namespace": "live",
+        "track_name": "video",
+        "start_group": {
+          "mode": "2",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "3",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {
+          "unknown": [
+            {
+              "id": "0xf0",
+              "length": "3",
+              "raw_hex": "aabbcc"
+            }
+          ]
         }
       }
     },

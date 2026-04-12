@@ -48,7 +48,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_UPDATE \u2014 missing end_group",
+      "description": "truncated SUBSCRIBE_UPDATE — missing end_group",
       "hex": "020003020a03",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading end_group"

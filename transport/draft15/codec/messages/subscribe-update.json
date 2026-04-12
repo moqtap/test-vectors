@@ -31,6 +31,18 @@
       }
     },
     {
+      "id": "with-new-group-request",
+      "description": "SUBSCRIBE_UPDATE with NEW_GROUP_REQUEST parameter set to 5",
+      "hex": "0200050200013205",
+      "decoded": {
+        "request_id": "2",
+        "subscription_request_id": "0",
+        "parameters": {
+          "new_group_request": "5"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_UPDATE — missing subscription_request_id",
       "hex": "02000302",

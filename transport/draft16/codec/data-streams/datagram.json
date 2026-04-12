@@ -50,7 +50,7 @@
     {
       "id": "datagram-status",
       "description": "object datagram (type 0x20: status, no extensions, object_id present, priority present) with object status",
-      "hex": "200100058001",
+      "hex": "200100058003",
       "decoded": {
         "stream_type": "datagram",
         "datagram_type": "0x20",
@@ -58,7 +58,51 @@
         "group_id": "0",
         "object_id": "5",
         "publisher_priority": "128",
-        "object_status": "1"
+        "object_status": "3"
+      }
+    },
+    {
+      "id": "datagram-with-extensions",
+      "description": "object datagram (type 0x01: extensions present, object_id present, priority present) with DELIVERY_TIMEOUT extension",
+      "hex": "010102008003025388deadbeef",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "0x01",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers": {
+          "delivery_timeout": "5000"
+        },
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "datagram-default-priority",
+      "description": "object datagram (type 0x08: DEFAULT_PRIORITY set, object_id present) with 4-byte payload — priority inherited from control message",
+      "hex": "08010000deadbeef",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "0x08",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "0",
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "datagram-end-of-track-status",
+      "description": "object datagram (type 0x20: status) with End of Track object status (0x4)",
+      "hex": "20010a008004",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "0x20",
+        "track_alias": "1",
+        "group_id": "10",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_status": "4"
       }
     },
     {

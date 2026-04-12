@@ -47,6 +47,20 @@
       }
     },
     {
+      "id": "with-max-cache-duration",
+      "description": "SUBSCRIBE_OK with MAX_CACHE_DURATION parameter",
+      "hex": "0400080200010001046710",
+      "decoded": {
+        "request_id": "2",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "0",
+        "parameters": {
+          "max_cache_duration": "10000"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_OK — missing group_order",
       "hex": "0400020200",

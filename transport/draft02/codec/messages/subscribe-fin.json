@@ -15,6 +15,16 @@
       }
     },
     {
+      "id": "zero-position",
+      "description": "SUBSCRIBE_FIN with final_group=0, final_object=0 (delivered nothing)",
+      "hex": "0b03020000",
+      "decoded": {
+        "subscribe_id": "2",
+        "final_group": "0",
+        "final_object": "0"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_FIN — missing final_group",
       "hex": "0b0101",

@@ -35,6 +35,46 @@
       }
     },
     {
+      "id": "timeout",
+      "description": "FETCH_ERROR with Timeout (0x2)",
+      "hex": "19000a02020774696d656f7574",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "2",
+        "reason_phrase": "timeout"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "FETCH_ERROR with Not Supported (0x3)",
+      "hex": "19001002030d6e6f7420737570706f72746564",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "invalid-range",
+      "description": "FETCH_ERROR with Invalid Range (0x5)",
+      "hex": "19001002050d696e76616c69642072616e6765",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "5",
+        "reason_phrase": "invalid range"
+      }
+    },
+    {
+      "id": "no-objects",
+      "description": "FETCH_ERROR with No Objects (0x6)",
+      "hex": "19000d02060a6e6f206f626a65637473",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "6",
+        "reason_phrase": "no objects"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated FETCH_ERROR — missing reason_phrase",
       "hex": "1900020200",

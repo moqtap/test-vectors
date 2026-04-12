@@ -102,6 +102,25 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE with DELIVERY_TIMEOUT parameter (type=0x02, even → varint value)",
+      "hex": "0300150201046c69766505766964656f8000010101025388",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "1",
+        "filter_type": "1",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
       "id": "not-forwarded",
       "description": "SUBSCRIBE with forward=0 (not forwarded)",
       "hex": "0300120201046c69766505766964656f8000000100",
@@ -120,14 +139,14 @@
     },
     {
       "id": "invalid-filter-type",
-      "description": "SUBSCRIBE with filter_type=0 \u2014 reserved/undefined value",
+      "description": "SUBSCRIBE with filter_type=0 — reserved/undefined value",
       "hex": "0300120201046c69766505766964656f8000010000",
       "error": "invalid_value",
       "error_detail": "filter_type 0 is not a defined filter type"
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE \u2014 missing track_name",
+      "description": "truncated SUBSCRIBE — missing track_name",
       "hex": "0300070201046c697665",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_name"

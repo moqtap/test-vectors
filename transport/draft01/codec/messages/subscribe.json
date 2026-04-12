@@ -76,6 +76,52 @@
       }
     },
     {
+      "id": "previous",
+      "description": "SUBSCRIBE 'previous': StartGroup=RelPrev(1), StartObj=Abs(0), open-ended",
+      "hex": "03110a6c6976652f766964656f020101000000",
+      "decoded": {
+        "full_track_name": "live/video",
+        "start_group": {
+          "mode": "2",
+          "value": "1"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "next",
+      "description": "SUBSCRIBE 'next': StartGroup=RelNext(0), StartObj=Abs(0), open-ended",
+      "hex": "03110a6c6976652f766964656f030001000000",
+      "decoded": {
+        "full_track_name": "live/video",
+        "start_group": {
+          "mode": "3",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
       "id": "with-authorization-info",
       "description": "SUBSCRIBE with AUTHORIZATION_INFO parameter",
       "hex": "031a0a6c6976652f766964656f02000300000002076d79746f6b656e",
@@ -97,6 +143,57 @@
         },
         "parameters": {
           "authorization_info": "mytoken"
+        }
+      }
+    },
+    {
+      "id": "with-group-sequence",
+      "description": "SUBSCRIBE with GROUP_SEQUENCE parameter (key 0x00)",
+      "hex": "03140a6c6976652f766964656f020003000000000105",
+      "decoded": {
+        "full_track_name": "live/video",
+        "start_group": {
+          "mode": "2",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "3",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {
+          "group_sequence": "5"
+        }
+      }
+    },
+    {
+      "id": "with-group-and-object-sequence",
+      "description": "SUBSCRIBE with GROUP_SEQUENCE and OBJECT_SEQUENCE parameters",
+      "hex": "03170a6c6976652f766964656f020003000000000105010103",
+      "decoded": {
+        "full_track_name": "live/video",
+        "start_group": {
+          "mode": "2",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "3",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {
+          "group_sequence": "5",
+          "object_sequence": "3"
         }
       }
     },

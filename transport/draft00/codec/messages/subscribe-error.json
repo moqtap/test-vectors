@@ -25,6 +25,16 @@
       }
     },
     {
+      "id": "track-not-found",
+      "description": "SUBSCRIBE ERROR with error code 2 — track not found",
+      "hex": "051c0a6c6976652f766964656f020f747261636b206e6f7420666f756e64",
+      "decoded": {
+        "full_track_name": "live/video",
+        "error_code": "2",
+        "reason_phrase": "track not found"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE ERROR — missing error_code",
       "hex": "050b0a6c6976652f766964656f",

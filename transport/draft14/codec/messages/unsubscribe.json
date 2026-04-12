@@ -22,7 +22,7 @@
     },
     {
       "id": "non-canonical-request-id",
-      "description": "non-canonical UNSUBSCRIBE \u00e2\u20ac\u201d request_id uses 2-byte varint for value 1",
+      "description": "non-canonical UNSUBSCRIBE — request_id uses 2-byte varint for value 1",
       "hex": "0a00024001",
       "canonical": false,
       "decoded": {
@@ -31,7 +31,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated UNSUBSCRIBE \u00e2\u20ac\u201d missing request ID",
+      "description": "truncated UNSUBSCRIBE — missing request ID",
       "hex": "0a0001",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

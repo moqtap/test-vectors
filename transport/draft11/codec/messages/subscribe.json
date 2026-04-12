@@ -107,6 +107,26 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE with DELIVERY_TIMEOUT parameter (type=0x02, even → varint value)",
+      "hex": "030016020101046c69766505766964656f8000010101025388",
+      "decoded": {
+        "request_id": "2",
+        "track_alias": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "1",
+        "filter_type": "1",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
       "id": "not-forwarded",
       "description": "SUBSCRIBE with forward=0 (not forwarded)",
       "hex": "030013020101046c69766505766964656f8000000100",

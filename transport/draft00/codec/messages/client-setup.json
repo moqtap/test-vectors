@@ -58,11 +58,53 @@
       }
     },
     {
+      "id": "multiple-versions",
+      "description": "CLIENT_SETUP offering two versions with ROLE=PubSub",
+      "hex": "011402c0000000ff000000c0000000ff000001000103",
+      "decoded": {
+        "supported_versions": [
+          "4278190080",
+          "4278190081"
+        ],
+        "parameters": {
+          "role": "3"
+        }
+      }
+    },
+    {
       "id": "no-versions-error",
       "description": "CLIENT_SETUP with no versions — invalid",
       "hex": "010400000103",
       "error": "invalid_value",
       "error_detail": "supported_versions must not be empty"
+    },
+    {
+      "id": "missing-role",
+      "description": "CLIENT_SETUP with no ROLE parameter — server MUST close (§6.1.1.1)",
+      "hex": "010901c0000000ff000000",
+      "error": "missing_parameter",
+      "error_detail": "ROLE parameter is mandatory for client"
+    },
+    {
+      "id": "invalid-role-zero",
+      "description": "CLIENT_SETUP with ROLE=0x00 — not a valid role value (§6.1.1.1)",
+      "hex": "010c01c0000000ff000000000100",
+      "error": "invalid_value",
+      "error_detail": "ROLE must be 0x01 (Publisher), 0x02 (Subscriber), or 0x03 (PubSub)"
+    },
+    {
+      "id": "invalid-role-too-high",
+      "description": "CLIENT_SETUP with ROLE=0x04 — not a valid role value (§6.1.1.1)",
+      "hex": "010c01c0000000ff000000000104",
+      "error": "invalid_value",
+      "error_detail": "ROLE must be 0x01 (Publisher), 0x02 (Subscriber), or 0x03 (PubSub)"
+    },
+    {
+      "id": "duplicate-role-param",
+      "description": "CLIENT_SETUP with ROLE parameter appearing twice — peers SHOULD close (§6.1.1)",
+      "hex": "010f01c0000000ff000000000103000102",
+      "error": "duplicate_parameter",
+      "error_detail": "ROLE parameter appears more than once"
     },
     {
       "id": "truncated",

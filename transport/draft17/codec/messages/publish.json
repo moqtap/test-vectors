@@ -38,6 +38,123 @@
       }
     },
     {
+      "id": "with-auth-token",
+      "description": "PUBLISH with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='pub-token')",
+      "hex": "1d001e010001046c69766505766964656f0001030c0300097075622d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "pub-token"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "PUBLISH with EXPIRES parameter (60000ms)",
+      "hex": "1d0015010001046c69766505766964656f0001088000ea60",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "expires": "60000"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "PUBLISH with LARGEST_OBJECT parameter (group=5, object=10)",
+      "hex": "1d0013010001046c69766505766964656f000109050a",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "largest_object": {
+            "group": "5",
+            "object": "10"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "PUBLISH with FORWARD parameter (forward=1)",
+      "hex": "1d0012010001046c69766505766964656f00011001",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "forward": "1"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-track-properties",
+      "description": "PUBLISH with track properties: DELIVERY_TIMEOUT=10000ms, MAX_CACHE_DURATION=30000ms, DEFAULT_PUBLISHER_PRIORITY=64",
+      "hex": "1d001b010001046c69766505766964656f000002671002800075300a4040",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {},
+        "track_properties": {
+          "delivery_timeout": "10000",
+          "max_cache_duration": "30000",
+          "default_publisher_priority": "64"
+        }
+      }
+    },
+    {
+      "id": "with-immutable-properties",
+      "description": "PUBLISH with IMMUTABLE_PROPERTIES track property containing a nested KVP",
+      "hex": "1d0014010001046c69766505766964656f00000b02022a",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {},
+        "track_properties": {
+          "immutable_properties": "022a"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH — missing track_namespace",
       "hex": "1d000f010001046c69",

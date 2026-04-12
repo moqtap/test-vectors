@@ -87,6 +87,84 @@
       }
     },
     {
+      "id": "absolute-start-open-ended",
+      "description": "SUBSCRIBE from absolute group 5, open-ended",
+      "hex": "03140303046c69766505766964656f01050100000000",
+      "decoded": {
+        "subscribe_id": "3",
+        "track_alias": "3",
+        "track_namespace": "live",
+        "track_name": "video",
+        "start_group": {
+          "mode": "1",
+          "value": "5"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "relative-previous-lookback",
+      "description": "SUBSCRIBE starting 5 groups back from latest",
+      "hex": "03140404046c69766505766964656f02050100000000",
+      "decoded": {
+        "subscribe_id": "4",
+        "track_alias": "4",
+        "track_namespace": "live",
+        "track_name": "video",
+        "start_group": {
+          "mode": "2",
+          "value": "5"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
+      "id": "relative-next-start-group",
+      "description": "SUBSCRIBE starting from next group (RelativeNext mode)",
+      "hex": "03140505046c69766505617564696f03000100000000",
+      "decoded": {
+        "subscribe_id": "5",
+        "track_alias": "5",
+        "track_namespace": "live",
+        "track_name": "audio",
+        "start_group": {
+          "mode": "3",
+          "value": "0"
+        },
+        "start_object": {
+          "mode": "1",
+          "value": "0"
+        },
+        "end_group": {
+          "mode": "0"
+        },
+        "end_object": {
+          "mode": "0"
+        },
+        "parameters": {}
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE — missing track_name",
       "hex": "03070101046c697665",

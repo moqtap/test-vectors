@@ -33,6 +33,46 @@
       }
     },
     {
+      "id": "publisher-role",
+      "description": "CLIENT_SETUP with ROLE=Publisher (1)",
+      "hex": "40400d01c0000000ff00000601000101",
+      "decoded": {
+        "supported_versions": [
+          "4278190086"
+        ],
+        "parameters": {
+          "role": "1"
+        }
+      }
+    },
+    {
+      "id": "subscriber-role",
+      "description": "CLIENT_SETUP with ROLE=Subscriber (2)",
+      "hex": "40400d01c0000000ff00000601000102",
+      "decoded": {
+        "supported_versions": [
+          "4278190086"
+        ],
+        "parameters": {
+          "role": "2"
+        }
+      }
+    },
+    {
+      "id": "multi-version",
+      "description": "CLIENT_SETUP offering draft-06 and draft-05 versions",
+      "hex": "40401502c0000000ff000006c0000000ff00000501000103",
+      "decoded": {
+        "supported_versions": [
+          "4278190086",
+          "4278190085"
+        ],
+        "parameters": {
+          "role": "3"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated CLIENT_SETUP — payload shorter than declared length",
       "hex": "404040ff",

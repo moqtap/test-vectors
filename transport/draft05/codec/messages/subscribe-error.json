@@ -16,6 +16,28 @@
       }
     },
     {
+      "id": "invalid-range",
+      "description": "SUBSCRIBE_ERROR with Invalid Range error code (1)",
+      "hex": "051102010d696e76616c69642072616e676502",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "1",
+        "reason_phrase": "invalid range",
+        "track_alias": "2"
+      }
+    },
+    {
+      "id": "retry-track-alias",
+      "description": "SUBSCRIBE_ERROR with Retry Track Alias error code (2)",
+      "hex": "0515030211726574727920747261636b20616c69617305",
+      "decoded": {
+        "subscribe_id": "3",
+        "error_code": "2",
+        "reason_phrase": "retry track alias",
+        "track_alias": "5"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_ERROR — missing error_code",
       "hex": "050101",

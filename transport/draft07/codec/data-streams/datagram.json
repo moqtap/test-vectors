@@ -50,6 +50,21 @@
       }
     },
     {
+      "id": "datagram-end-of-track-and-group",
+      "description": "object datagram signaling end of track and group (status 0x4)",
+      "hex": "01010a00800004",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "track_alias": "1",
+        "group_id": "10",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_status": "4",
+        "payload_length": "0",
+        "payload_hex": ""
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated datagram — missing object_id",
       "hex": "010102",

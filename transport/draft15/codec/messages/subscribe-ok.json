@@ -42,6 +42,66 @@
       }
     },
     {
+      "id": "with-publisher-priority",
+      "description": "SUBSCRIBE_OK with PUBLISHER_PRIORITY parameter set to 64",
+      "hex": "0400060105010e4040",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "5",
+        "parameters": {
+          "publisher_priority": "64"
+        }
+      }
+    },
+    {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE_OK with DELIVERY_TIMEOUT parameter set to 5000ms",
+      "hex": "040006010001025388",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-max-cache-duration",
+      "description": "SUBSCRIBE_OK with MAX_CACHE_DURATION parameter set to 10000ms",
+      "hex": "040006010001046710",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "parameters": {
+          "max_cache_duration": "10000"
+        }
+      }
+    },
+    {
+      "id": "with-dynamic-groups",
+      "description": "SUBSCRIBE_OK with DYNAMIC_GROUPS parameter set to 1",
+      "hex": "0400050100013001",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "parameters": {
+          "dynamic_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "with-group-order",
+      "description": "SUBSCRIBE_OK with GROUP_ORDER parameter set to descending (0x2)",
+      "hex": "0400050100012202",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "parameters": {
+          "group_order": "2"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_OK — missing track_alias",
       "hex": "04000301",

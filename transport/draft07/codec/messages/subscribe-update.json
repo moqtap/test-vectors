@@ -33,8 +33,24 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE_UPDATE with DELIVERY_TIMEOUT parameter (5000ms)",
+      "hex": "020b020a031400ff0103025388",
+      "decoded": {
+        "subscribe_id": "2",
+        "start_group": "10",
+        "start_object": "3",
+        "end_group": "20",
+        "end_object": "0",
+        "subscriber_priority": "255",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_UPDATE \u2014 missing end_group",
+      "description": "truncated SUBSCRIBE_UPDATE — missing end_group",
       "hex": "0203020a03",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading end_group"

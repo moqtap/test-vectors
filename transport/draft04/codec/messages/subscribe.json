@@ -63,6 +63,23 @@
       }
     },
     {
+      "id": "absolute-range-with-end-object",
+      "description": "SUBSCRIBE with AbsoluteRange filter and specific end_object",
+      "hex": "03130505046c69766505766964656f040300050800",
+      "decoded": {
+        "subscribe_id": "5",
+        "track_alias": "5",
+        "track_namespace": "live",
+        "track_name": "video",
+        "filter_type": "4",
+        "start_group": "3",
+        "start_object": "0",
+        "end_group": "5",
+        "end_object": "8",
+        "parameters": {}
+      }
+    },
+    {
       "id": "with-authorization-info",
       "description": "SUBSCRIBE with LatestGroup and AUTHORIZATION_INFO parameter",
       "hex": "03180101046c69766505766964656f010102076d79746f6b656e",

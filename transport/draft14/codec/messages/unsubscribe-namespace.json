@@ -6,18 +6,31 @@
   "vectors": [
     {
       "id": "basic",
-      "description": "UNSUBSCRIBE_NAMESPACE with request ID 1",
-      "hex": "14000101",
+      "description": "UNSUBSCRIBE_NAMESPACE with single-element prefix",
+      "hex": "14000601046c697665",
       "decoded": {
-        "request_id": "1"
+        "track_namespace_prefix": [
+          "live"
+        ]
+      }
+    },
+    {
+      "id": "multi-prefix",
+      "description": "UNSUBSCRIBE_NAMESPACE with multi-element prefix",
+      "hex": "140013020a636f6e666572656e636506726f6f6d3432",
+      "decoded": {
+        "track_namespace_prefix": [
+          "conference",
+          "room42"
+        ]
       }
     },
     {
       "id": "truncated",
-      "description": "truncated UNSUBSCRIBE_NAMESPACE \u00e2\u20ac\u201d missing request ID",
-      "hex": "140001",
+      "description": "truncated UNSUBSCRIBE_NAMESPACE — missing namespace_prefix element",
+      "hex": "14000401046c69",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading request_id"
+      "error_detail": "unexpected end of input while reading track_namespace_prefix"
     }
   ]
 }

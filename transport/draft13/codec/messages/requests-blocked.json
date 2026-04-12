@@ -22,7 +22,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated REQUESTS_BLOCKED \u2014 missing maximum_request_id",
+      "description": "truncated REQUESTS_BLOCKED — missing maximum_request_id",
       "hex": "1a0000",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading maximum_request_id"

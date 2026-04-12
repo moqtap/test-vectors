@@ -5,14 +5,44 @@
   "spec_section": "8.15",
   "vectors": [
     {
+      "id": "internal-error",
+      "description": "PUBLISH_ERROR with Internal Error (0x0)",
+      "hex": "1f001101000e696e7465726e616c206572726f72",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
       "id": "unauthorized",
-      "description": "PUBLISH_ERROR with Unauthorized error",
+      "description": "PUBLISH_ERROR with Unauthorized (0x1)",
+      "hex": "1f000e01010b6e6f7420616c6c6f776564",
       "decoded": {
         "request_id": "1",
         "error_code": "1",
         "reason_phrase": "not allowed"
-      },
-      "hex": "1f000e01010b6e6f7420616c6c6f776564"
+      }
+    },
+    {
+      "id": "timeout",
+      "description": "PUBLISH_ERROR with Timeout (0x2)",
+      "hex": "1f0014010211726571756573742074696d6564206f7574",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "2",
+        "reason_phrase": "request timed out"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "PUBLISH_ERROR with Not Supported (0x3)",
+      "hex": "1f001001030d6e6f7420737570706f72746564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
     },
     {
       "id": "uninterested",

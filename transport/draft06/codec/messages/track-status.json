@@ -33,6 +33,48 @@
       }
     },
     {
+      "id": "has-not-yet-begun",
+      "description": "TRACK_STATUS with status=2 (has not yet begun), zeroed position",
+      "hex": "0e0f01046c69766505766964656f020000",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "2",
+        "last_group_id": "0",
+        "last_object_id": "0"
+      }
+    },
+    {
+      "id": "finished",
+      "description": "TRACK_STATUS with status=3 (finished), last group=15 object=10",
+      "hex": "0e0f01046c69766505766964656f030f0a",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "3",
+        "last_group_id": "15",
+        "last_object_id": "10"
+      }
+    },
+    {
+      "id": "relay-cannot-determine",
+      "description": "TRACK_STATUS with status=4 (relay cannot determine status)",
+      "hex": "0e0f01046c69766505766964656f040503",
+      "decoded": {
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "status_code": "4",
+        "last_group_id": "5",
+        "last_object_id": "3"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated TRACK_STATUS — missing status_code",
       "hex": "0e0c01046c69766505766964656f",

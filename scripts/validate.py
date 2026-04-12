@@ -7,7 +7,7 @@ Checks:
 3. Every codec vector has exactly one of decoded or error
 4. Protocol integer fields in decoded objects are strings matching ^[0-9]+$
 5. Control message framing: declared length matches actual payload length
-   (varint framing for draft07/11, 16-bit BE for draft12+)
+   (varint framing for draft00..10, 16-bit BE for draft11+)
 6. Every version directory has a meta.json
 7. meta.json entries are consistent with manifest.json
 """
@@ -159,10 +159,12 @@ def _dvi(data, off):
         if off + 8 > len(data): return None, 0
         return struct.unpack('>Q', bytes([b & 0x3f]) + data[off + 1:off + 8])[0], 8
 
-# Drafts where ALL control messages use varint length framing
-_VARINT_FRAMED_DRAFTS = {'draft00', 'draft01', 'draft02', 'draft03', 'draft04', 'draft05', 'draft06', 'draft10', 'draft09', 'draft07', 'draft08', 'draft11'}
-# Message types that use varint length even in 16-bit-BE drafts (draft12/13 only)
-_VARINT_LENGTH_MESSAGES = {'publish', 'publish_ok', 'publish_error'}
+# Drafts where control messages use varint length framing (draft00..draft10).
+# From draft11 onward, all control messages use 16-bit BE length framing.
+_VARINT_FRAMED_DRAFTS = {
+    'draft00', 'draft01', 'draft02', 'draft03', 'draft04', 'draft05',
+    'draft06', 'draft07', 'draft08', 'draft09', 'draft10',
+}
 
 def _extract_draft_id(filepath):
     """Extract draft id (e.g. 'draft12') from a file path."""
@@ -174,8 +176,6 @@ def _extract_draft_id(filepath):
 
 def validate_message_framing(filepath, data, draft_id):
     """Validate that control message hex has correct type + length framing."""
-    mt = data.get('message_type', '')
-
     for i, v in enumerate(data['vectors']):
         if 'hex' not in v:
             continue
@@ -187,12 +187,7 @@ def validate_message_framing(filepath, data, draft_id):
         if t is None:
             continue
 
-        if draft_id in _VARINT_FRAMED_DRAFTS:
-            use_varint = True
-        elif mt in _VARINT_LENGTH_MESSAGES and draft_id in ('draft12', 'draft13'):
-            use_varint = True
-        else:
-            use_varint = False
+        use_varint = draft_id in _VARINT_FRAMED_DRAFTS
 
         if use_varint:
             length, ll = _dvi(raw, tl)

@@ -14,6 +14,17 @@
       }
     },
     {
+      "id": "with-role",
+      "description": "SERVER_SETUP with ROLE=PubSub parameter",
+      "hex": "40410cc0000000ff00000401000103",
+      "decoded": {
+        "selected_version": "4278190084",
+        "parameters": {
+          "role": "3"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SERVER_SETUP — missing selected_version",
       "hex": "404100",

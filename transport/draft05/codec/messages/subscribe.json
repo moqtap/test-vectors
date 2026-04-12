@@ -88,6 +88,40 @@
       }
     },
     {
+      "id": "absolute-range-end-object",
+      "description": "SUBSCRIBE with AbsoluteRange filter and specific end_object",
+      "hex": "03150505046c69766505766964656f8000040000030500",
+      "decoded": {
+        "subscribe_id": "5",
+        "track_alias": "5",
+        "track_namespace": "live",
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "filter_type": "4",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "3",
+        "end_object": "5",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "large-ids",
+      "description": "SUBSCRIBE with multi-byte varint subscribe_id and track_alias",
+      "hex": "0313412c4190046c69766505766964656f40010100",
+      "decoded": {
+        "subscribe_id": "300",
+        "track_alias": "400",
+        "track_namespace": "live",
+        "track_name": "video",
+        "subscriber_priority": "64",
+        "group_order": "1",
+        "filter_type": "1",
+        "parameters": {}
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE — missing track_name",
       "hex": "03070101046c697665",

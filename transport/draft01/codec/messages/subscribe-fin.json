@@ -16,6 +16,17 @@
       }
     },
     {
+      "id": "zero-position",
+      "description": "SUBSCRIBE_FIN with final_group=0, final_object=0",
+      "hex": "0b0d046c69766505766964656f0000",
+      "decoded": {
+        "track_namespace": "live",
+        "track_name": "video",
+        "final_group": "0",
+        "final_object": "0"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_FIN — missing final_group",
       "hex": "0b0b046c69766505766964656f",

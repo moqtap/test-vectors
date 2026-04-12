@@ -5,24 +5,65 @@
   "spec_section": "9.20",
   "vectors": [
     {
-      "id": "basic",
-      "description": "TRACK_STATUS request for live/video",
-      "hex": "0d000e0101046c69766505766964656f00",
+      "id": "basic-next-group-start",
+      "description": "TRACK_STATUS with NextGroupStart filter",
+      "hex": "0d00120101046c69766505766964656f8000000100",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
           "live"
         ],
         "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "latest-object-multi-namespace",
+      "description": "TRACK_STATUS with LatestObject filter and multi-element namespace",
+      "hex": "0d001f03020a636f6e666572656e636506726f6f6d343205617564696f8001000200",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "subscriber_priority": "128",
+        "group_order": "1",
+        "forward": "0",
+        "filter_type": "2",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "absolute-start",
+      "description": "TRACK_STATUS with AbsoluteStart filter",
+      "hex": "0d00140101046c69766505766964656f800000030a0000",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "subscriber_priority": "128",
+        "group_order": "0",
+        "forward": "0",
+        "filter_type": "3",
+        "start_group": "10",
+        "start_object": "0",
         "parameters": {}
       }
     },
     {
       "id": "truncated",
-      "description": "truncated TRACK_STATUS \u00e2\u20ac\u201d missing track_name",
-      "hex": "0d000e0101046c69",
+      "description": "truncated TRACK_STATUS — missing track_name",
+      "hex": "0d00070101046c697665",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading track_namespace"
+      "error_detail": "unexpected end of input while reading track_name"
     }
   ]
 }

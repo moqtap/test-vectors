@@ -53,6 +53,59 @@
       }
     },
     {
+      "id": "with-missing-statuses",
+      "description": "STREAM_HEADER_GROUP with ObjectDoesNotExist (1) and GroupDoesNotExist (2)",
+      "hex": "4051010200800004deadbeef030001050002",
+      "decoded": {
+        "stream_type": "group",
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "3",
+            "payload_length": "0",
+            "object_status": "1"
+          },
+          {
+            "object_id": "5",
+            "payload_length": "0",
+            "object_status": "2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-end-of-track",
+      "description": "STREAM_HEADER_GROUP with EndOfTrackAndGroup status (4)",
+      "hex": "4051010203800004cafebabe010004",
+      "decoded": {
+        "stream_type": "group",
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "3",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "cafebabe"
+          },
+          {
+            "object_id": "1",
+            "payload_length": "0",
+            "object_status": "4"
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated STREAM_HEADER_GROUP — missing track_alias",
       "hex": "405101",

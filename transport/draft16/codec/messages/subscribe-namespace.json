@@ -45,6 +45,40 @@
       }
     },
     {
+      "id": "with-auth-token",
+      "description": "SUBSCRIBE_NAMESPACE with AUTHORIZATION_TOKEN — USE_VALUE alias_type (0x3), token_type=1",
+      "hex": "11001701010a636f6e666572656e636500010306030170617373",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "subscribe_options": "0",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "1",
+            "token_value_hex": "70617373"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "SUBSCRIBE_NAMESPACE with FORWARD parameter set to 1",
+      "hex": "11001101010a636f6e666572656e636500011001",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "subscribe_options": "0",
+        "parameters": {
+          "forward": "1"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_NAMESPACE — missing namespace_prefix",
       "hex": "11000f01010a",

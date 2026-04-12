@@ -115,6 +115,124 @@
       }
     },
     {
+      "id": "subgroup-end-of-group",
+      "description": "subgroup stream (type 0x18: END_OF_GROUP bit set, subgroup_id=0, priority present) with one 4-byte object",
+      "hex": "180105800004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x18",
+        "track_alias": "1",
+        "group_id": "5",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "end_of_group": true,
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-id-mode-01",
+      "description": "subgroup stream (type 0x12: SUBGROUP_ID_MODE=0b01, subgroup_id equals first object's object_id) with one object",
+      "hex": "120100800504deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x12",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "5",
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-with-object-properties",
+      "description": "subgroup stream (type 0x11: PROPERTIES set) with one object having PRIOR_GROUP_ID_GAP=2 and PRIOR_OBJECT_ID_GAP=1 properties",
+      "hex": "1101008000043c02020104deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x11",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "object_properties": {
+              "prior_group_id_gap": "2",
+              "prior_object_id_gap": "1"
+            },
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-object-status-end-of-group",
+      "description": "subgroup stream (type 0x10) with a normal object followed by an end-of-group status object (status=3)",
+      "hex": "100100800004deadbeef000003",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x10",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id_delta": "0",
+            "object_id": "1",
+            "payload_length": "0",
+            "status": "3",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-object-status-end-of-track",
+      "description": "subgroup stream (type 0x10) with a single end-of-track status object (status=4)",
+      "hex": "10010080000004",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x10",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "payload_length": "0",
+            "status": "4",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
       "id": "subgroup-truncated",
       "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
       "hex": "100100",

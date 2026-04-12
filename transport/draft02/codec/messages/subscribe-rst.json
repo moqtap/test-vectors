@@ -17,6 +17,18 @@
       }
     },
     {
+      "id": "generic-error",
+      "description": "SUBSCRIBE_RST with Generic Error (0x0) and zero final position",
+      "hex": "0c1202000d67656e65726963206572726f720000",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "0",
+        "reason_phrase": "generic error",
+        "final_group": "0",
+        "final_object": "0"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_RST — missing error_code",
       "hex": "0c0101",

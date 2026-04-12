@@ -71,8 +71,30 @@
       }
     },
     {
+      "id": "too-far-behind",
+      "description": "SUBSCRIBE_DONE with Too Far Behind (0x6)",
+      "hex": "0b00120206000e746f6f2066617220626568696e64",
+      "decoded": {
+        "request_id": "2",
+        "status_code": "6",
+        "stream_count": "0",
+        "reason_phrase": "too far behind"
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "SUBSCRIBE_DONE with Malformed Track (0x7)",
+      "hex": "0b00130207000f6d616c666f726d656420747261636b",
+      "decoded": {
+        "request_id": "2",
+        "status_code": "7",
+        "stream_count": "0",
+        "reason_phrase": "malformed track"
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_DONE \u2014 missing status_code",
+      "description": "truncated SUBSCRIBE_DONE — missing status_code",
       "hex": "0b000102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading status_code"

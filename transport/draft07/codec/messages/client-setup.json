@@ -62,14 +62,14 @@
     },
     {
       "id": "no-versions-error",
-      "description": "CLIENT_SETUP with no versions \u2014 invalid",
+      "description": "CLIENT_SETUP with no versions — invalid",
       "hex": "4040020000",
       "error": "invalid_value",
       "error_detail": "supported_versions must not be empty"
     },
     {
       "id": "truncated",
-      "description": "truncated CLIENT_SETUP \u2014 payload shorter than declared length",
+      "description": "truncated CLIENT_SETUP — payload shorter than declared length",
       "hex": "4040ff",
       "error": "incomplete",
       "error_detail": "unexpected end of input"

@@ -18,7 +18,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated ANNOUNCE_CANCEL \u2014 missing error_code",
+      "description": "truncated ANNOUNCE_CANCEL — missing error_code",
       "hex": "0c0601046c697665",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading error_code"

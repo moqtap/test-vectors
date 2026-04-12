@@ -38,6 +38,72 @@
       }
     },
     {
+      "id": "subscription-ended",
+      "description": "PUBLISH_DONE with SUBSCRIPTION_ENDED (0x3), stream_count=3",
+      "hex": "0b000401030300",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "3",
+        "stream_count": "3",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "going-away",
+      "description": "PUBLISH_DONE with GOING_AWAY (0x4), stream_count=0",
+      "hex": "0b000401040000",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "4",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "expired",
+      "description": "PUBLISH_DONE with EXPIRED (0x5), stream_count=2",
+      "hex": "0b000401050200",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "5",
+        "stream_count": "2",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "too-far-behind",
+      "description": "PUBLISH_DONE with TOO_FAR_BEHIND (0x6), stream_count=0",
+      "hex": "0b000401060000",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "6",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "PUBLISH_DONE with MALFORMED_TRACK (0x7), stream_count=0",
+      "hex": "0b000401070000",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "7",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "update-failed",
+      "description": "PUBLISH_DONE with UPDATE_FAILED (0x8), stream_count=0",
+      "hex": "0b000401080000",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "8",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH_DONE — missing status_code",
       "hex": "0b000401",

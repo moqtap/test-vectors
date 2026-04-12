@@ -55,18 +55,38 @@
       }
     },
     {
-      "id": "retry-track-alias",
-      "description": "SUBSCRIBE_ERROR with Retry Track Alias (0x6)",
-      "hex": "05001d02061a7265747279207769746820646966666572656e7420616c696173",
+      "id": "not-supported",
+      "description": "SUBSCRIBE_ERROR with Not Supported (0x3)",
+      "hex": "05001002030d6e6f7420737570706f72746564",
       "decoded": {
         "request_id": "2",
-        "error_code": "6",
-        "reason_phrase": "retry with different alias"
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "SUBSCRIBE_ERROR with Malformed Auth Token (0x10)",
+      "hex": "0500170210146d616c666f726d6564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "16",
+        "reason_phrase": "malformed auth token"
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "SUBSCRIBE_ERROR with Expired Auth Token (0x12)",
+      "hex": "05001502121265787069726564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "18",
+        "reason_phrase": "expired auth token"
       }
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_ERROR \u2014 missing reason_phrase",
+      "description": "truncated SUBSCRIBE_ERROR — missing reason_phrase",
       "hex": "0500020200",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading reason_phrase"

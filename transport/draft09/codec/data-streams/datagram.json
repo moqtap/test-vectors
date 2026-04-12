@@ -33,6 +33,20 @@
       "hex": "01054064324000"
     },
     {
+      "id": "datagram-with-extensions",
+      "description": "object datagram with 2 extensions (even-type varint + odd-type length-prefixed, 6 bytes total)",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "track_alias": "1",
+        "group_id": "0",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "6",
+        "payload_hex": "deadbeef"
+      },
+      "hex": "010100008006022a0302cafedeadbeef"
+    },
+    {
       "id": "truncated",
       "description": "truncated datagram — missing object_id",
       "hex": "010102",

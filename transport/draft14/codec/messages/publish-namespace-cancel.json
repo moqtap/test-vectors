@@ -6,18 +6,35 @@
   "vectors": [
     {
       "id": "basic",
-      "description": "PUBLISH_NAMESPACE_CANCEL with request ID 1",
-      "hex": "0c000101",
+      "description": "PUBLISH_NAMESPACE_CANCEL with INTERNAL_ERROR, empty reason",
+      "hex": "0c000e010a636f6e666572656e63650000",
       "decoded": {
-        "request_id": "1"
+        "track_namespace": [
+          "conference"
+        ],
+        "error_code": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "uninterested",
+      "description": "PUBLISH_NAMESPACE_CANCEL with UNINTERESTED error",
+      "hex": "0c001b02046c6976650673706f727473040c756e696e7465726573746564",
+      "decoded": {
+        "track_namespace": [
+          "live",
+          "sports"
+        ],
+        "error_code": "4",
+        "reason_phrase": "uninterested"
       }
     },
     {
       "id": "truncated",
-      "description": "truncated PUBLISH_NAMESPACE_CANCEL \u00e2\u20ac\u201d missing request ID",
-      "hex": "0c0001",
+      "description": "truncated PUBLISH_NAMESPACE_CANCEL — missing error_code",
+      "hex": "0c000c010a636f6e666572656e6365",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading request_id"
+      "error_detail": "unexpected end of input while reading error_code"
     }
   ]
 }

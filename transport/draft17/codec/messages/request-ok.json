@@ -26,6 +26,16 @@
       }
     },
     {
+      "id": "with-expires",
+      "description": "REQUEST_OK with EXPIRES parameter (60000ms)",
+      "hex": "07000601088000ea60",
+      "decoded": {
+        "parameters": {
+          "expires": "60000"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated REQUEST_OK — missing parameter count",
       "hex": "070001",

@@ -45,6 +45,106 @@
       }
     },
     {
+      "id": "timeout",
+      "description": "REQUEST_ERROR with TIMEOUT (0x2)",
+      "hex": "050003010200",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "2",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "REQUEST_ERROR with NOT_SUPPORTED (0x3)",
+      "hex": "050003010300",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "3",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "REQUEST_ERROR with MALFORMED_AUTH_TOKEN (0x4)",
+      "hex": "050003010400",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "4",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "REQUEST_ERROR with EXPIRED_AUTH_TOKEN (0x5)",
+      "hex": "050003010500",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "5",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "invalid-range",
+      "description": "REQUEST_ERROR with INVALID_RANGE (0x11)",
+      "hex": "050003011100",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "17",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "REQUEST_ERROR with MALFORMED_TRACK (0x12)",
+      "hex": "050003011200",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "18",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "uninterested",
+      "description": "REQUEST_ERROR with UNINTERESTED (0x20)",
+      "hex": "050003012000",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "32",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "prefix-overlap",
+      "description": "REQUEST_ERROR with PREFIX_OVERLAP (0x30)",
+      "hex": "050003013000",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "48",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "invalid-joining-request-id",
+      "description": "REQUEST_ERROR with INVALID_JOINING_REQUEST_ID (0x32)",
+      "hex": "050003013200",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "50",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "unknown-status-in-range",
+      "description": "REQUEST_ERROR with UNKNOWN_STATUS_IN_RANGE (0x33)",
+      "hex": "050003013300",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "51",
+        "reason_phrase": ""
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated REQUEST_ERROR — missing error_code",
       "hex": "05001101",

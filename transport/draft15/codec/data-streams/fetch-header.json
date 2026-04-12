@@ -54,6 +54,77 @@
       }
     },
     {
+      "id": "fetch-stream-with-extensions",
+      "description": "fetch stream object with extensions flag (flags=0x3c: extensions, group_id, obj_id, priority present) and empty extensions",
+      "hex": "05043c0000800004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x3c",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_headers": {},
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-explicit-subgroup",
+      "description": "fetch stream object with explicit subgroup_id (flags=0x1f: explicit subgroup, group_id, obj_id, priority present)",
+      "hex": "05041f0003008004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1f",
+            "group_id": "0",
+            "subgroup_id": "3",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-with-status",
+      "description": "fetch stream with two objects: one normal, one with End of Group status (0x3)",
+      "hex": "05041c00008004deadbeef04010003",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "serialization_flags": "0x04",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "1",
+            "publisher_priority": "128",
+            "payload_length": "0",
+            "status": "3",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated fetch header — missing request_id",
       "hex": "05",

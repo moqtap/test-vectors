@@ -5,51 +5,110 @@
   "spec_section": "9.12",
   "vectors": [
     {
-      "id": "unsubscribed",
-      "description": "PUBLISH_DONE with UNSUBSCRIBED (0x0), empty reason",
-      "hex": "0b0003010000",
+      "id": "internal-error",
+      "description": "PUBLISH_DONE with INTERNAL_ERROR (0x0), stream_count=5",
+      "hex": "0b00120100050e696e7465726e616c206572726f72",
       "decoded": {
         "request_id": "1",
         "status_code": "0",
-        "reason_phrase": ""
-      }
-    },
-    {
-      "id": "internal-error",
-      "description": "PUBLISH_DONE with INTERNAL_ERROR (0x1)",
-      "hex": "0b001101010e696e7465726e616c206572726f72",
-      "decoded": {
-        "request_id": "1",
-        "status_code": "1",
+        "stream_count": "5",
         "reason_phrase": "internal error"
       }
     },
     {
       "id": "unauthorized",
-      "description": "PUBLISH_DONE with UNAUTHORIZED (0x2)",
-      "hex": "0b000f01020c756e617574686f72697a6564",
+      "description": "PUBLISH_DONE with UNAUTHORIZED (0x1), stream_count=5",
+      "hex": "0b00100101050c756e617574686f72697a6564",
       "decoded": {
         "request_id": "1",
-        "status_code": "2",
+        "status_code": "1",
+        "stream_count": "5",
         "reason_phrase": "unauthorized"
       }
     },
     {
-      "id": "track-does-not-exist",
-      "description": "PUBLISH_DONE with TRACK_DOES_NOT_EXIST (0x3)",
-      "hex": "0b0017010314747261636b20646f6573206e6f74206578697374",
+      "id": "track-ended",
+      "description": "PUBLISH_DONE with TRACK_ENDED (0x2), stream_count=5",
+      "hex": "0b000f0102050b747261636b20656e646564",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "2",
+        "stream_count": "5",
+        "reason_phrase": "track ended"
+      }
+    },
+    {
+      "id": "subscription-ended",
+      "description": "PUBLISH_DONE with SUBSCRIPTION_ENDED (0x3), stream_count=5",
+      "hex": "0b001601030512737562736372697074696f6e20656e646564",
       "decoded": {
         "request_id": "1",
         "status_code": "3",
-        "reason_phrase": "track does not exist"
+        "stream_count": "5",
+        "reason_phrase": "subscription ended"
+      }
+    },
+    {
+      "id": "going-away",
+      "description": "PUBLISH_DONE with GOING_AWAY (0x4), stream_count=5",
+      "hex": "0b000e0104050a676f696e672061776179",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "4",
+        "stream_count": "5",
+        "reason_phrase": "going away"
+      }
+    },
+    {
+      "id": "expired",
+      "description": "PUBLISH_DONE with EXPIRED (0x5), stream_count=5",
+      "hex": "0b000b0105050765787069726564",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "5",
+        "stream_count": "5",
+        "reason_phrase": "expired"
+      }
+    },
+    {
+      "id": "too-far-behind",
+      "description": "PUBLISH_DONE with TOO_FAR_BEHIND (0x6), stream_count=5",
+      "hex": "0b00120106050e746f6f2066617220626568696e64",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "6",
+        "stream_count": "5",
+        "reason_phrase": "too far behind"
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "PUBLISH_DONE with MALFORMED_TRACK (0x7), stream_count=5",
+      "hex": "0b00130107050f6d616c666f726d656420747261636b",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "7",
+        "stream_count": "5",
+        "reason_phrase": "malformed track"
+      }
+    },
+    {
+      "id": "zero-stream-count",
+      "description": "PUBLISH_DONE with stream_count=0 (datagram forwarding)",
+      "hex": "0b000401020000",
+      "decoded": {
+        "request_id": "1",
+        "status_code": "2",
+        "stream_count": "0",
+        "reason_phrase": ""
       }
     },
     {
       "id": "truncated",
-      "description": "truncated PUBLISH_DONE \u00e2\u20ac\u201d missing status_code",
-      "hex": "0b000301",
+      "description": "truncated PUBLISH_DONE — missing stream_count",
+      "hex": "0b00020100",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading status_code"
+      "error_detail": "unexpected end of input while reading stream_count"
     }
   ]
 }

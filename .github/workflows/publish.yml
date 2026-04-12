@@ -13,7 +13,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-python@v5
         with:
@@ -22,38 +22,27 @@ jobs:
       - name: Validate vector files
         run: python scripts/validate.py
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: "22"
+          node-version: 24
+          registry-url: https://registry.npmjs.org
 
-      - name: Install ajv-cli
-        run: npm install -g ajv-cli ajv-formats
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Validate codec vectors against schema
-        run: |
-          for f in transport/*/codec/**/*.json; do
-            ajv validate -s schema/codec-vector.schema.json -d "$f" --spec=draft2020 || exit 1
-          done
-
-      - name: Validate meta.json files against schema
-        run: |
-          for f in transport/*/meta.json; do
-            ajv validate -s schema/meta.schema.json -d "$f" --spec=draft2020 || exit 1
-          done
-
-      - name: Validate manifest.json against schema
-        run: ajv validate -s schema/manifest.schema.json -d manifest.json --spec=draft2020
+      - name: Validate schemas
+        run: npm run validate:schema
 
   publish:
     needs: validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: "22"
-          registry-url: "https://registry.npmjs.org"
+          node-version: 24
+          registry-url: https://registry.npmjs.org
 
       - name: Verify tag matches package.json version
         run: |

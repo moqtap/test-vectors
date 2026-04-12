@@ -5,40 +5,107 @@
   "spec_section": "9.13",
   "vectors": [
     {
-      "id": "forward-disabled",
-      "description": "PUBLISH with single-element namespace, forward disabled",
-      "hex": "1d000f0101046c69766505766964656f0000",
+      "id": "basic-no-content",
+      "description": "PUBLISH with no content exists, forward enabled",
+      "hex": "1d00120101046c69766505766964656f0101000100",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
           "live"
         ],
         "track_name": "video",
-        "forward": "0",
-        "parameters": {}
-      }
-    },
-    {
-      "id": "forward-enabled",
-      "description": "PUBLISH with multi-element namespace, forward enabled",
-      "hex": "1d001c03020a636f6e666572656e636506726f6f6d343205617564696f0100",
-      "decoded": {
-        "request_id": "3",
-        "track_namespace": [
-          "conference",
-          "room42"
-        ],
-        "track_name": "audio",
+        "track_alias": "1",
+        "group_order": "1",
+        "content_exists": "0",
         "forward": "1",
         "parameters": {}
       }
     },
     {
+      "id": "with-content-exists",
+      "description": "PUBLISH with content_exists=1 and largest location",
+      "hex": "1d00140201046c69766505766964656f0201010a050100",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "2",
+        "group_order": "1",
+        "content_exists": "1",
+        "largest_location": {
+          "group": "10",
+          "object": "5"
+        },
+        "forward": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "not-forwarded-descending",
+      "description": "PUBLISH with forward=0, descending group order",
+      "hex": "1d00120301046c69766505617564696f0302000000",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "audio",
+        "track_alias": "3",
+        "group_order": "2",
+        "content_exists": "0",
+        "forward": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-element-namespace",
+      "description": "PUBLISH with multi-element namespace",
+      "hex": "1d002405020a636f6e666572656e636506726f6f6d34320a617564696f2d6d61696e0501000100",
+      "decoded": {
+        "request_id": "5",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio-main",
+        "track_alias": "5",
+        "group_order": "1",
+        "content_exists": "0",
+        "forward": "1",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "PUBLISH with AUTHORIZATION TOKEN parameter",
+      "hex": "1d001e0101046c69766505766964656f0101000101030a0301746f6b656e313233",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "1",
+        "group_order": "1",
+        "content_exists": "0",
+        "forward": "1",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "1",
+            "token_value": "746f6b656e313233"
+          }
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated PUBLISH \u00e2\u20ac\u201d missing track_name",
-      "hex": "1d000f0101046c69",
+      "description": "truncated PUBLISH — missing track_name",
+      "hex": "1d000a0101046c697665057669",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading track_namespace"
+      "error_detail": "unexpected end of input while reading track_name"
     }
   ]
 }

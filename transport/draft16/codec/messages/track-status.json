@@ -18,6 +18,39 @@
       }
     },
     {
+      "id": "multi-namespace",
+      "description": "TRACK_STATUS request with multi-element namespace",
+      "hex": "0d001b03020a636f6e666572656e636506726f6f6d343205617564696f00",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "TRACK_STATUS with AUTHORIZATION_TOKEN — USE_VALUE alias_type (0x3), token_type=1",
+      "hex": "0d00160101046c69766505766964656f010306030170617373",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "1",
+            "token_value_hex": "70617373"
+          }
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated TRACK_STATUS — missing track_name",
       "hex": "0d000e0101046c69",

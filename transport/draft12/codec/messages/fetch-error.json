@@ -35,8 +35,98 @@
       }
     },
     {
+      "id": "timeout",
+      "description": "FETCH_ERROR with Timeout (0x2)",
+      "hex": "19000a02020774696d656f7574",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "2",
+        "reason_phrase": "timeout"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "FETCH_ERROR with Not Supported (0x3)",
+      "hex": "19001002030d6e6f7420737570706f72746564",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "invalid-range",
+      "description": "FETCH_ERROR with Invalid Range (0x5)",
+      "hex": "19001002050d696e76616c69642072616e6765",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "5",
+        "reason_phrase": "invalid range"
+      }
+    },
+    {
+      "id": "no-objects",
+      "description": "FETCH_ERROR with No Objects (0x6)",
+      "hex": "19000d02060a6e6f206f626a65637473",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "6",
+        "reason_phrase": "no objects"
+      }
+    },
+    {
+      "id": "invalid-joining-request-id",
+      "description": "FETCH_ERROR with Invalid Joining Request ID (0x7)",
+      "hex": "19001d02071a696e76616c6964206a6f696e696e672072657175657374206964",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "7",
+        "reason_phrase": "invalid joining request id"
+      }
+    },
+    {
+      "id": "unknown-status-in-range",
+      "description": "FETCH_ERROR with Unknown Status in Range (0x8)",
+      "hex": "19001a020817756e6b6e6f776e2073746174757320696e2072616e6765",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "8",
+        "reason_phrase": "unknown status in range"
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "FETCH_ERROR with Malformed Track (0x9)",
+      "hex": "19001202090f6d616c666f726d656420747261636b",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "9",
+        "reason_phrase": "malformed track"
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "FETCH_ERROR with Malformed Auth Token (0x10)",
+      "hex": "1900170210146d616c666f726d6564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "16",
+        "reason_phrase": "malformed auth token"
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "FETCH_ERROR with Expired Auth Token (0x12)",
+      "hex": "19001502121265787069726564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "18",
+        "reason_phrase": "expired auth token"
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated FETCH_ERROR \u2014 missing reason_phrase",
+      "description": "truncated FETCH_ERROR — missing reason_phrase",
       "hex": "1900020200",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading reason_phrase"

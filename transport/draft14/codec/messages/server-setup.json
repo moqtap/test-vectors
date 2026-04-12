@@ -5,8 +5,8 @@
   "spec_section": "9.3",
   "vectors": [
     {
-      "id": "minimal",
-      "description": "minimal SERVER_SETUP with draft-14 version, no parameters",
+      "id": "basic",
+      "description": "SERVER_SETUP selecting draft-14 version",
       "hex": "210009c0000000ff00000e00",
       "decoded": {
         "selected_version": "4278190094",
@@ -15,7 +15,7 @@
     },
     {
       "id": "max-request-id-param",
-      "description": "SERVER_SETUP with MAX_REQUEST_ID parameter set to 100",
+      "description": "SERVER_SETUP with MAX_REQUEST_ID parameter",
       "hex": "21000cc0000000ff00000e01024064",
       "decoded": {
         "selected_version": "4278190094",
@@ -25,11 +25,22 @@
       }
     },
     {
+      "id": "max-auth-token-cache-size-param",
+      "description": "SERVER_SETUP with MAX_AUTH_TOKEN_CACHE_SIZE parameter",
+      "hex": "21000cc0000000ff00000e01046000",
+      "decoded": {
+        "selected_version": "4278190094",
+        "parameters": {
+          "max_auth_token_cache_size": "8192"
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated SERVER_SETUP \u00e2\u20ac\u201d missing parameter count",
-      "hex": "210009c0000000ff00000e",
+      "description": "truncated SERVER_SETUP — missing selected version",
+      "hex": "210000",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading parameter count"
+      "error_detail": "unexpected end of input while reading selected_version"
     }
   ]
 }

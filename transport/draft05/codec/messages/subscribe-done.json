@@ -42,6 +42,65 @@
       }
     },
     {
+      "id": "unauthorized",
+      "description": "SUBSCRIBE_DONE with Unauthorized status (2), no content",
+      "hex": "0b1001020c756e617574686f72697a656400",
+      "decoded": {
+        "subscribe_id": "1",
+        "status_code": "2",
+        "reason_phrase": "unauthorized",
+        "content_exists": "0"
+      }
+    },
+    {
+      "id": "track-ended",
+      "description": "SUBSCRIBE_DONE with Track Ended status (3) and final position",
+      "hex": "0b1101030b747261636b20656e646564011403",
+      "decoded": {
+        "subscribe_id": "1",
+        "status_code": "3",
+        "reason_phrase": "track ended",
+        "content_exists": "1",
+        "final_group": "20",
+        "final_object": "3"
+      }
+    },
+    {
+      "id": "subscription-ended",
+      "description": "SUBSCRIBE_DONE with Subscription Ended status (4), no content",
+      "hex": "0b0402040000",
+      "decoded": {
+        "subscribe_id": "2",
+        "status_code": "4",
+        "reason_phrase": "",
+        "content_exists": "0"
+      }
+    },
+    {
+      "id": "going-away",
+      "description": "SUBSCRIBE_DONE with Going Away status (5) and final position",
+      "hex": "0b1003050a676f696e672061776179010802",
+      "decoded": {
+        "subscribe_id": "3",
+        "status_code": "5",
+        "reason_phrase": "going away",
+        "content_exists": "1",
+        "final_group": "8",
+        "final_object": "2"
+      }
+    },
+    {
+      "id": "expired",
+      "description": "SUBSCRIBE_DONE with Expired status (6), no content",
+      "hex": "0b0b0406076578706972656400",
+      "decoded": {
+        "subscribe_id": "4",
+        "status_code": "6",
+        "reason_phrase": "expired",
+        "content_exists": "0"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_DONE — missing status_code",
       "hex": "0b0101",

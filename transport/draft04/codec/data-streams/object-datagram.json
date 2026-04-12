@@ -34,6 +34,34 @@
       }
     },
     {
+      "id": "object-does-not-exist",
+      "description": "OBJECT_DATAGRAM with ObjectDoesNotExist status (1), no payload",
+      "hex": "01010200030001",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "0",
+        "object_id": "3",
+        "object_send_order": "0",
+        "object_status": "1",
+        "payload_length": "0"
+      }
+    },
+    {
+      "id": "group-does-not-exist",
+      "description": "OBJECT_DATAGRAM with GroupDoesNotExist status (2), no payload",
+      "hex": "01010205000002",
+      "decoded": {
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "group_id": "5",
+        "object_id": "0",
+        "object_send_order": "0",
+        "object_status": "2",
+        "payload_length": "0"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated OBJECT_DATAGRAM — missing track_alias",
       "hex": "0101",

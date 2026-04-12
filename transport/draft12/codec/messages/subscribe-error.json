@@ -65,8 +65,18 @@
       }
     },
     {
+      "id": "not-supported",
+      "description": "SUBSCRIBE_ERROR with Not Supported (0x3)",
+      "hex": "05001002030d6e6f7420737570706f72746564",
+      "decoded": {
+        "request_id": "2",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_ERROR \u2014 missing reason_phrase",
+      "description": "truncated SUBSCRIBE_ERROR — missing reason_phrase",
       "hex": "0500020200",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading reason_phrase"

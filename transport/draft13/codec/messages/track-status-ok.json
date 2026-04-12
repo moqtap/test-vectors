@@ -35,8 +35,46 @@
       "hex": "0e0006020000010000"
     },
     {
+      "id": "with-max-cache-duration",
+      "description": "TRACK_STATUS_OK with MAX_CACHE_DURATION parameter",
+      "hex": "0e000d01000001010a0501048001d4c0",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "1",
+        "largest_location": {
+          "group": "10",
+          "object": "5"
+        },
+        "parameters": {
+          "max_cache_duration": "120000"
+        }
+      }
+    },
+    {
+      "id": "with-delivery-timeout",
+      "description": "TRACK_STATUS_OK with DELIVERY_TIMEOUT parameter",
+      "hex": "0e000b01000001010a0501025388",
+      "decoded": {
+        "request_id": "1",
+        "track_alias": "0",
+        "expires": "0",
+        "group_order": "1",
+        "content_exists": "1",
+        "largest_location": {
+          "group": "10",
+          "object": "5"
+        },
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated TRACK_STATUS_OK \u2014 missing group_order",
+      "description": "truncated TRACK_STATUS_OK — missing group_order",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading group_order",
       "hex": "0e0003010000"

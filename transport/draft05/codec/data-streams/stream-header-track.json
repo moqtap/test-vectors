@@ -55,6 +55,37 @@
       }
     },
     {
+      "id": "with-all-statuses",
+      "description": "STREAM_HEADER_TRACK with ObjectDoesNotExist (1) and EndOfTrackAndGroup (4)",
+      "hex": "4050010280000004deadbeef0003000101000004",
+      "decoded": {
+        "stream_type": "track",
+        "subscribe_id": "1",
+        "track_alias": "2",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "group_id": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "group_id": "0",
+            "object_id": "3",
+            "payload_length": "0",
+            "object_status": "1"
+          },
+          {
+            "group_id": "1",
+            "object_id": "0",
+            "payload_length": "0",
+            "object_status": "4"
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated STREAM_HEADER_TRACK — missing track_alias",
       "hex": "405001",

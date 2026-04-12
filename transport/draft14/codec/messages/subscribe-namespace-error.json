@@ -6,7 +6,7 @@
   "vectors": [
     {
       "id": "internal-error",
-      "description": "SUBSCRIBE_NAMESPACE_ERROR with INTERNAL_ERROR (0x0)",
+      "description": "INTERNAL_ERROR (0x0)",
       "hex": "13001101000e696e7465726e616c206572726f72",
       "decoded": {
         "request_id": "1",
@@ -16,7 +16,7 @@
     },
     {
       "id": "unauthorized",
-      "description": "SUBSCRIBE_NAMESPACE_ERROR with UNAUTHORIZED (0x1)",
+      "description": "UNAUTHORIZED (0x1)",
       "hex": "13000f01010c756e617574686f72697a6564",
       "decoded": {
         "request_id": "1",
@@ -25,11 +25,81 @@
       }
     },
     {
+      "id": "timeout",
+      "description": "TIMEOUT (0x2)",
+      "hex": "13000a01020774696d656f7574",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "2",
+        "reason_phrase": "timeout"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "NOT_SUPPORTED (0x3)",
+      "hex": "13001001030d6e6f7420737570706f72746564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "namespace-prefix-unknown",
+      "description": "NAMESPACE_PREFIX_UNKNOWN (0x4)",
+      "hex": "13001b0104186e616d6573706163652070726566697820756e6b6e6f776e",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "4",
+        "reason_phrase": "namespace prefix unknown"
+      }
+    },
+    {
+      "id": "namespace-prefix-overlap",
+      "description": "NAMESPACE_PREFIX_OVERLAP (0x5)",
+      "hex": "13001b0105186e616d65737061636520707265666978206f7665726c6170",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "5",
+        "reason_phrase": "namespace prefix overlap"
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "MALFORMED_AUTH_TOKEN (0x10)",
+      "hex": "1300170110146d616c666f726d6564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "16",
+        "reason_phrase": "malformed auth token"
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "EXPIRED_AUTH_TOKEN (0x12)",
+      "hex": "13001501121265787069726564206175746820746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "18",
+        "reason_phrase": "expired auth token"
+      }
+    },
+    {
+      "id": "empty-reason",
+      "description": "empty reason phrase",
+      "hex": "130003010000",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_NAMESPACE_ERROR \u00e2\u20ac\u201d missing reason phrase",
-      "hex": "1300110100",
+      "description": "truncated — missing error_code",
+      "hex": "13000101",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading reason phrase"
+      "error_detail": "unexpected end of input while reading error_code"
     }
   ]
 }

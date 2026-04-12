@@ -27,6 +27,17 @@
       }
     },
     {
+      "id": "invalid-range",
+      "description": "SUBSCRIBE_ERROR with Invalid Range error (0x1)",
+      "hex": "051101010d696e76616c69642072616e676501",
+      "decoded": {
+        "subscribe_id": "1",
+        "error_code": "1",
+        "reason_phrase": "invalid range",
+        "track_alias": "1"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_ERROR — missing error_code",
       "hex": "050101",

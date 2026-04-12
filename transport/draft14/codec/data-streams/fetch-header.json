@@ -5,19 +5,18 @@
   "spec_section": "10.4.4",
   "vectors": [
     {
-      "id": "fetch-stream-single-object",
-      "description": "fetch stream (type 0x05) with one object — all fields present per-object",
-      "hex": "0504000000800004deadbeef",
+      "id": "single-object",
+      "description": "fetch stream with single object and payload",
+      "hex": "05020000008004deadbeef",
       "decoded": {
-        "stream_type": "fetch",
-        "request_id": "4",
+        "stream_type": "fetch_header",
+        "request_id": "2",
         "objects": [
           {
             "group_id": "0",
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
-            "extension_headers_length": "0",
             "payload_length": "4",
             "payload_hex": "deadbeef"
           }
@@ -25,11 +24,11 @@
       }
     },
     {
-      "id": "fetch-stream-zero-payload",
-      "description": "fetch stream with one zero-payload object (status follows)",
-      "hex": "050400000080000000",
+      "id": "zero-payload-with-status",
+      "description": "fetch stream with zero-length object and Normal status",
+      "hex": "0504000000800000",
       "decoded": {
-        "stream_type": "fetch",
+        "stream_type": "fetch_header",
         "request_id": "4",
         "objects": [
           {
@@ -37,7 +36,6 @@
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
-            "extension_headers_length": "0",
             "payload_length": "0",
             "object_status": "0"
           }
@@ -45,11 +43,65 @@
       }
     },
     {
+      "id": "multi-object",
+      "description": "fetch stream with multiple objects across groups",
+      "hex": "05020000008004deadbeef0000018002cafe0100008004baadf00d",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "1",
+            "publisher_priority": "128",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          },
+          {
+            "group_id": "1",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "baadf00d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "end-of-track-status",
+      "description": "fetch stream with End of Track object status",
+      "hex": "0502050003800004",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id": "3",
+            "publisher_priority": "128",
+            "payload_length": "0",
+            "object_status": "4"
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated fetch header — missing request_id",
-      "hex": "05",
+      "description": "truncated fetch stream — missing subgroup_id",
+      "hex": "050200",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading request_id"
+      "error_detail": "unexpected end of input while reading subgroup_id"
     }
   ]
 }

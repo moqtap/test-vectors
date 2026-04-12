@@ -7,31 +7,56 @@
     {
       "id": "more-data",
       "description": "FETCH_OK with end_of_track=0 (more data available)",
-      "hex": "18000402010000",
+      "hex": "180006020100050a00",
       "decoded": {
         "request_id": "2",
-        "track_alias": "1",
+        "group_order": "1",
         "end_of_track": "0",
+        "end_location": {
+          "group": "5",
+          "object": "10"
+        },
         "parameters": {}
       }
     },
     {
       "id": "end-of-track",
-      "description": "FETCH_OK with end_of_track=1 (track has ended)",
-      "hex": "18000402010100",
+      "description": "FETCH_OK with end_of_track=1, descending order",
+      "hex": "1800060202010a1400",
       "decoded": {
         "request_id": "2",
-        "track_alias": "1",
+        "group_order": "2",
         "end_of_track": "1",
+        "end_location": {
+          "group": "10",
+          "object": "20"
+        },
         "parameters": {}
       }
     },
     {
+      "id": "with-max-cache-duration",
+      "description": "FETCH_OK with MAX_CACHE_DURATION parameter",
+      "hex": "18000b020100050a010480007530",
+      "decoded": {
+        "request_id": "2",
+        "group_order": "1",
+        "end_of_track": "0",
+        "end_location": {
+          "group": "5",
+          "object": "10"
+        },
+        "parameters": {
+          "max_cache_duration": "30000"
+        }
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated FETCH_OK \u00e2\u20ac\u201d missing end_of_track",
-      "hex": "18000402",
+      "description": "truncated FETCH_OK — missing end_of_track",
+      "hex": "1800020201",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading track_alias"
+      "error_detail": "unexpected end of input while reading end_of_track"
     }
   ]
 }

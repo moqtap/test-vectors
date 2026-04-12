@@ -5,12 +5,12 @@
   "spec_section": "10.3.1",
   "vectors": [
     {
-      "id": "datagram-4byte-payload",
-      "description": "type 0x00 datagram (objectId present, payload) with 4-byte payload",
+      "id": "type-0x00",
+      "description": "type 0x00 datagram (objectId, payload)",
       "hex": "0001020080deadbeef",
       "decoded": {
-        "stream_type": "datagram",
-        "datagram_type": "0",
+        "stream_type": "object_datagram",
+        "stream_type_id": "0",
         "track_alias": "1",
         "group_id": "2",
         "object_id": "0",
@@ -19,32 +19,216 @@
       }
     },
     {
-      "id": "datagram-status",
-      "description": "type 0x20 datagram (objectId present, status instead of payload)",
-      "hex": "20054064328000",
+      "id": "type-0x01",
+      "description": "type 0x01 datagram (extensions, objectId, payload)",
+      "hex": "0101020080023c01deadbeef",
       "decoded": {
-        "stream_type": "datagram",
-        "datagram_type": "32",
-        "track_alias": "5",
-        "group_id": "100",
-        "object_id": "50",
+        "stream_type": "object_datagram",
+        "stream_type_id": "1",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "2",
+        "extension_headers": [
+          {
+            "type": "60",
+            "value": "1"
+          }
+        ],
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "type-0x02",
+      "description": "type 0x02 datagram (end-of-group, objectId, payload)",
+      "hex": "0201020080deadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "2",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "type-0x03",
+      "description": "type 0x03 datagram (end-of-group, extensions, objectId, payload)",
+      "hex": "0301020080023c01deadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "3",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "2",
+        "extension_headers": [
+          {
+            "type": "60",
+            "value": "1"
+          }
+        ],
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "type-0x04",
+      "description": "type 0x04 datagram (no-objectId, payload)",
+      "hex": "04010280deadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "4",
+        "track_alias": "1",
+        "group_id": "2",
+        "publisher_priority": "128",
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "type-0x05",
+      "description": "type 0x05 datagram (extensions, no-objectId, payload)",
+      "hex": "05010280023c01deadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "5",
+        "track_alias": "1",
+        "group_id": "2",
+        "publisher_priority": "128",
+        "extension_headers_length": "2",
+        "extension_headers": [
+          {
+            "type": "60",
+            "value": "1"
+          }
+        ],
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "type-0x06",
+      "description": "type 0x06 datagram (end-of-group, no-objectId, payload)",
+      "hex": "06010280deadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "6",
+        "track_alias": "1",
+        "group_id": "2",
+        "publisher_priority": "128",
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "type-0x07",
+      "description": "type 0x07 datagram (end-of-group, extensions, no-objectId, payload)",
+      "hex": "07010280023c01deadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "7",
+        "track_alias": "1",
+        "group_id": "2",
+        "publisher_priority": "128",
+        "extension_headers_length": "2",
+        "extension_headers": [
+          {
+            "type": "60",
+            "value": "1"
+          }
+        ],
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "type-0x20",
+      "description": "type 0x20 datagram (objectId, status)",
+      "hex": "200102008001",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "32",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_status": "1"
+      }
+    },
+    {
+      "id": "type-0x21",
+      "description": "type 0x21 datagram (extensions, objectId, status)",
+      "hex": "2101020080023c0101",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "33",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "2",
+        "extension_headers": [
+          {
+            "type": "60",
+            "value": "1"
+          }
+        ],
+        "object_status": "1"
+      }
+    },
+    {
+      "id": "status-0x0",
+      "description": "type 0x20 datagram with object_status=Normal (0x0)",
+      "hex": "200102008000",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "32",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
         "publisher_priority": "128",
         "object_status": "0"
       }
     },
     {
-      "id": "datagram-end-of-group",
-      "description": "type 0x02 datagram (objectId present, end-of-group, payload)",
-      "hex": "020102008061626364",
+      "id": "status-0x1",
+      "description": "type 0x20 datagram with object_status=Object Does Not Exist (0x1)",
+      "hex": "200102008001",
       "decoded": {
-        "stream_type": "datagram",
-        "datagram_type": "2",
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "32",
         "track_alias": "1",
         "group_id": "2",
         "object_id": "0",
         "publisher_priority": "128",
-        "end_of_group": true,
-        "payload_hex": "61626364"
+        "object_status": "1"
+      }
+    },
+    {
+      "id": "status-0x3",
+      "description": "type 0x20 datagram with object_status=End of Group (0x3)",
+      "hex": "200102008003",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "32",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_status": "3"
+      }
+    },
+    {
+      "id": "status-0x4",
+      "description": "type 0x20 datagram with object_status=End of Track (0x4)",
+      "hex": "200102008004",
+      "decoded": {
+        "stream_type": "object_datagram_status",
+        "stream_type_id": "32",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_status": "4"
       }
     },
     {

@@ -35,6 +35,26 @@
       }
     },
     {
+      "id": "timeout",
+      "description": "FETCH_ERROR with Timeout (0x2)",
+      "hex": "190a02020774696d656f7574",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "2",
+        "reason_phrase": "timeout"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "FETCH_ERROR with Not Supported (0x3)",
+      "hex": "191002030d6e6f7420737570706f72746564",
+      "decoded": {
+        "subscribe_id": "2",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated FETCH_ERROR — missing reason_phrase",
       "hex": "19020200",

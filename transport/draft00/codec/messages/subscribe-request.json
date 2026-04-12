@@ -48,6 +48,26 @@
       }
     },
     {
+      "id": "with-all-params",
+      "description": "SUBSCRIBE REQUEST with GROUP_SEQUENCE, OBJECT_SEQUENCE, and AUTHORIZATION_INFO",
+      "hex": "031a0a6c6976652f766964656f00010501010302076d79746f6b656e",
+      "decoded": {
+        "full_track_name": "live/video",
+        "parameters": {
+          "group_sequence": "5",
+          "object_sequence": "3",
+          "authorization_info": "mytoken"
+        }
+      }
+    },
+    {
+      "id": "object-sequence-without-group",
+      "description": "SUBSCRIBE REQUEST with OBJECT_SEQUENCE but no GROUP_SEQUENCE — invalid (§6.6.1)",
+      "hex": "030e0a6c6976652f766964656f010103",
+      "error": "invalid_value",
+      "error_detail": "OBJECT_SEQUENCE requires GROUP_SEQUENCE to be set"
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE REQUEST — missing full_track_name",
       "hex": "03010a",

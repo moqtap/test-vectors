@@ -62,6 +62,35 @@
       }
     },
     {
+      "id": "datagram-with-extensions",
+      "description": "object datagram (type 0x01: extensions present, object_id present, priority present) with empty extensions and 4-byte payload",
+      "hex": "010102008000deadbeef",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "0x01",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers": {},
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "datagram-end-of-track-status",
+      "description": "object datagram (type 0x20: status) with End of Track object status (0x4)",
+      "hex": "20010a008004",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "0x20",
+        "track_alias": "1",
+        "group_id": "10",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "object_status": "4"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated datagram (type 0x00) — missing object_id",
       "hex": "000102",

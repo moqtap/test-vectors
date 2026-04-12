@@ -31,6 +31,72 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "REQUEST_UPDATE with DELIVERY_TIMEOUT parameter (5000ms)",
+      "hex": "020006010001025388",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "REQUEST_UPDATE with FORWARD parameter (forward=1)",
+      "hex": "0200050100011001",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "parameters": {
+          "forward": "1"
+        }
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "REQUEST_UPDATE with SUBSCRIBER_PRIORITY parameter (priority=16)",
+      "hex": "0200050100012010",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "parameters": {
+          "subscriber_priority": "16"
+        }
+      }
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "REQUEST_UPDATE with NEW_GROUP_REQUEST parameter (group_id=25)",
+      "hex": "0200050100013219",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "parameters": {
+          "new_group_request": "25"
+        }
+      }
+    },
+    {
+      "id": "with-multiple-params",
+      "description": "REQUEST_UPDATE with DELIVERY_TIMEOUT (5000ms), SUBSCRIBER_PRIORITY (16), and SUBSCRIPTION_FILTER (AbsoluteStart, group=5, object=0)",
+      "hex": "02000d0100030253881e100103030500",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "parameters": {
+          "delivery_timeout": "5000",
+          "subscriber_priority": "16",
+          "subscription_filter": {
+            "filter_type": "3",
+            "start_group": "5",
+            "start_object": "0"
+          }
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated REQUEST_UPDATE — missing required_request_id_delta",
       "hex": "02000302",

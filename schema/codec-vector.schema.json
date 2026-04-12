@@ -60,7 +60,7 @@
         },
         "error": {
           "type": "string",
-          "enum": ["incomplete", "invalid_value", "unknown_message"],
+          "enum": ["incomplete", "invalid_value", "invalid_parameter", "missing_parameter", "duplicate_parameter", "unknown_message"],
           "description": "Error category for invalid vectors."
         },
         "error_detail": {

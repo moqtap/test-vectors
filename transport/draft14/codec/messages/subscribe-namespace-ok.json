@@ -15,7 +15,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated SUBSCRIBE_NAMESPACE_OK \u00e2\u20ac\u201d missing parameter count",
+      "description": "truncated SUBSCRIBE_NAMESPACE_OK — missing parameter count",
       "hex": "12000201",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading parameter count"

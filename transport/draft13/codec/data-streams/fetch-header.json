@@ -72,8 +72,74 @@
       }
     },
     {
+      "id": "fetch-with-extensions",
+      "description": "fetch stream with one object having extension headers",
+      "hex": "05020000008002102a04deadbeef",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_headers_length": "2",
+            "extension_headers": [
+              {
+                "type": "16",
+                "value": "42"
+              }
+            ],
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-obj-not-exist",
+      "description": "fetch stream with object status Does Not Exist (0x1)",
+      "hex": "050200000380000001",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "3",
+            "publisher_priority": "128",
+            "payload_length": "0",
+            "object_status": "1",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-obj-end-of-track",
+      "description": "fetch stream with object status End of Track (0x4)",
+      "hex": "050205000080000004",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "0",
+            "object_status": "4",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
-      "description": "truncated fetch header \u2014 missing request_id",
+      "description": "truncated fetch header — missing request_id",
       "hex": "05",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

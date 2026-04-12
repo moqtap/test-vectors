@@ -34,6 +34,59 @@
       }
     },
     {
+      "id": "with-auth-token",
+      "description": "PUBLISH with AUTHORIZATION_TOKEN — USE_VALUE alias_type (0x3), token_type=1",
+      "hex": "1d00160101046c69766505766964656f000103050301746f6b",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "1",
+            "token_value_hex": "746f6b"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "PUBLISH with FORWARD parameter set to 1 (forward)",
+      "hex": "1d00110101046c69766505766964656f00011001",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "forward": "1"
+        }
+      }
+    },
+    {
+      "id": "with-track-extensions",
+      "description": "PUBLISH with track extension DELIVERY_TIMEOUT=5000ms",
+      "hex": "1d00120101046c69766505766964656f0000025388",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {},
+        "track_extensions": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated PUBLISH — missing track_name",
       "hex": "1d000f0101046c69",

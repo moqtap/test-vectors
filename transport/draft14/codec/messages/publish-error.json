@@ -6,7 +6,7 @@
   "vectors": [
     {
       "id": "internal-error",
-      "description": "PUBLISH_ERROR with INTERNAL_ERROR (0x0)",
+      "description": "INTERNAL_ERROR (0x0)",
       "hex": "1f001101000e696e7465726e616c206572726f72",
       "decoded": {
         "request_id": "1",
@@ -16,7 +16,7 @@
     },
     {
       "id": "unauthorized",
-      "description": "PUBLISH_ERROR with UNAUTHORIZED (0x1)",
+      "description": "UNAUTHORIZED (0x1)",
       "hex": "1f000f01010c756e617574686f72697a6564",
       "decoded": {
         "request_id": "1",
@@ -25,21 +25,51 @@
       }
     },
     {
-      "id": "track-does-not-exist",
-      "description": "PUBLISH_ERROR with TRACK_DOES_NOT_EXIST (0x2)",
-      "hex": "1f0017010214747261636b20646f6573206e6f74206578697374",
+      "id": "timeout",
+      "description": "TIMEOUT (0x2)",
+      "hex": "1f000a01020774696d656f7574",
       "decoded": {
         "request_id": "1",
         "error_code": "2",
-        "reason_phrase": "track does not exist"
+        "reason_phrase": "timeout"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "NOT_SUPPORTED (0x3)",
+      "hex": "1f001001030d6e6f7420737570706f72746564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "3",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "uninterested",
+      "description": "UNINTERESTED (0x4)",
+      "hex": "1f000f01040c756e696e7465726573746564",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "4",
+        "reason_phrase": "uninterested"
+      }
+    },
+    {
+      "id": "empty-reason",
+      "description": "empty reason phrase",
+      "hex": "1f0003010000",
+      "decoded": {
+        "request_id": "1",
+        "error_code": "0",
+        "reason_phrase": ""
       }
     },
     {
       "id": "truncated",
-      "description": "truncated PUBLISH_ERROR \u00e2\u20ac\u201d missing reason phrase",
-      "hex": "1f00110100",
+      "description": "truncated — missing error_code",
+      "hex": "1f000101",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading reason phrase"
+      "error_detail": "unexpected end of input while reading error_code"
     }
   ]
 }

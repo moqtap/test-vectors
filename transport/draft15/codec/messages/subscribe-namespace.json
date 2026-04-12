@@ -30,6 +30,24 @@
       }
     },
     {
+      "id": "with-auth-token",
+      "description": "SUBSCRIBE_NAMESPACE with AUTHORIZATION_TOKEN parameter (USE_VALUE, token_type=1)",
+      "hex": "11001601010a636f6e666572656e6365010306030170617373",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "1",
+            "token_value_hex": "70617373"
+          }
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_NAMESPACE — missing namespace_prefix",
       "hex": "11000e01010a",

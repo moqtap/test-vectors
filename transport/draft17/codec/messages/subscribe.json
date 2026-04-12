@@ -89,6 +89,216 @@
       }
     },
     {
+      "id": "with-delivery-timeout",
+      "description": "SUBSCRIBE with DELIVERY_TIMEOUT parameter (5000ms)",
+      "hex": "030012010001046c69766505766964656f01025388",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-auth-token-register",
+      "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (REGISTER alias=1, type=0, value='secret-token')",
+      "hex": "030021010001046c69766505766964656f0103100101000c7365637265742d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "1",
+            "token_alias": "1",
+            "token_type": "0",
+            "token_value": "secret-token"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-auth-token-use-alias",
+      "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (USE_ALIAS alias=1)",
+      "hex": "030013010001046c69766505766964656f0103020201",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "2",
+            "token_alias": "1"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-auth-token-use-value",
+      "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='my-bearer-token')",
+      "hex": "030023010001046c69766505766964656f01031203000f6d792d6265617265722d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "my-bearer-token"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-rendezvous-timeout",
+      "description": "SUBSCRIBE with RENDEZVOUS_TIMEOUT parameter (3000ms)",
+      "hex": "030012010001046c69766505766964656f01044bb8",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "rendezvous_timeout": "3000"
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "SUBSCRIBE with FORWARD parameter (forward=1)",
+      "hex": "030011010001046c69766505766964656f011001",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "forward": "1"
+        }
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "SUBSCRIBE with SUBSCRIBER_PRIORITY parameter (priority=32)",
+      "hex": "030011010001046c69766505766964656f012020",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscriber_priority": "32"
+        }
+      }
+    },
+    {
+      "id": "with-group-order",
+      "description": "SUBSCRIBE with GROUP_ORDER parameter (descending=2)",
+      "hex": "030011010001046c69766505766964656f012202",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "group_order": "2"
+        }
+      }
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "SUBSCRIBE with NEW_GROUP_REQUEST parameter (group_id=50)",
+      "hex": "030011010001046c69766505766964656f013232",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "new_group_request": "50"
+        }
+      }
+    },
+    {
+      "id": "with-filter-next-group-start",
+      "description": "SUBSCRIBE with SUBSCRIPTION_FILTER parameter (NextGroupStart)",
+      "hex": "030012010001046c69766505766964656f01210101",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "1"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-largest-object",
+      "description": "SUBSCRIBE with SUBSCRIPTION_FILTER parameter (LargestObject)",
+      "hex": "030012010001046c69766505766964656f01210102",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscription_filter": {
+            "filter_type": "2"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-multiple-params",
+      "description": "SUBSCRIBE with DELIVERY_TIMEOUT (5000ms), SUBSCRIBER_PRIORITY (32), and GROUP_ORDER (ascending=1)",
+      "hex": "030016010001046c69766505766964656f030253881e200201",
+      "decoded": {
+        "request_id": "1",
+        "required_request_id_delta": "0",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "delivery_timeout": "5000",
+          "subscriber_priority": "32",
+          "group_order": "1"
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE — missing track_name",
       "hex": "03000e010001046c697665",
