@@ -81,7 +81,7 @@
     {
       "id": "with-auth-param",
       "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (USE_VALUE)",
-      "hex": "03001e0201046c69766505766964656f8000010101010a0300746f6b656e313233",
+      "hex": "03001e0201046c69766505766964656f8000010101030a0300746f6b656e313233",
       "decoded": {
         "request_id": "2",
         "track_namespace": [

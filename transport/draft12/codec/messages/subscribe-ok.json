@@ -37,7 +37,7 @@
     {
       "id": "with-delivery-timeout",
       "description": "SUBSCRIBE_OK with DELIVERY_TIMEOUT parameter",
-      "hex": "04000a02010001000103025388",
+      "hex": "040009020100010001025388",
       "decoded": {
         "request_id": "2",
         "track_alias": "1",

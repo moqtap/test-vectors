@@ -20,7 +20,7 @@
     {
       "id": "with-auth-param",
       "description": "TRACK_STATUS_REQUEST carrying AUTHORIZATION_TOKEN parameter (USE_VALUE)",
-      "hex": "0d001a0101046c69766505766964656f01010a0300746f6b656e313233",
+      "hex": "0d001a0101046c69766505766964656f01030a0300746f6b656e313233",
       "decoded": {
         "request_id": "1",
         "track_namespace": [

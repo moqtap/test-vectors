@@ -98,7 +98,7 @@
     {
       "id": "subgroup-with-populated-extensions",
       "description": "subgroup stream (type 0x09) with one object carrying 2 extensions (6 bytes total) and a 4-byte payload",
-      "hex": "09010000800006022a0302cafe04deadbeef",
+      "hex": "090100800006022a0302cafe04deadbeef",
       "decoded": {
         "stream_type": "subgroup_header",
         "stream_type_id": "9",

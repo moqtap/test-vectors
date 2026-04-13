@@ -76,7 +76,7 @@
     {
       "id": "standalone-with-auth-param",
       "description": "Standalone FETCH carrying AUTHORIZATION_TOKEN parameter (USE_VALUE)",
-      "hex": "1600210280010101046c69766505766964656f00000a0001010a0300746f6b656e313233",
+      "hex": "1600210280010101046c69766505766964656f00000a0001030a0300746f6b656e313233",
       "decoded": {
         "request_id": "2",
         "subscriber_priority": "128",
