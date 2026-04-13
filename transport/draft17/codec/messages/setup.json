@@ -63,7 +63,7 @@
             "alias_type": "1",
             "token_alias": "0",
             "token_type": "1",
-            "token_value": "setup-bearer"
+            "token_value": "73657475702d626561726572"
           }
         }
       }
@@ -92,7 +92,7 @@
             "alias_type": "1",
             "token_alias": "0",
             "token_type": "1",
-            "token_value": "my-token"
+            "token_value": "6d792d746f6b656e"
           },
           "authority": "relay.example.com"
         }

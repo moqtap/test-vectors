@@ -42,7 +42,7 @@
           "authorization_token": {
             "alias_type": "3",
             "token_type": "1",
-            "token_value_hex": "70617373"
+            "token_value": "70617373"
           }
         }
       }

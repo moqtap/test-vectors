@@ -54,7 +54,7 @@
             "alias_type": "1",
             "token_alias": "1",
             "token_type": "0",
-            "token_value": "mytoken"
+            "token_value": "6d79746f6b656e"
           },
           "max_auth_token_cache_size": "1024"
         }

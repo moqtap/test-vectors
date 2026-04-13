@@ -96,7 +96,7 @@
           "authorization_token": {
             "alias_type": "3",
             "token_type": "0",
-            "token_value": "token123"
+            "token_value": "746f6b656e313233"
           }
         }
       }
@@ -120,7 +120,7 @@
             "alias_type": "1",
             "token_alias": "1",
             "token_type": "0",
-            "token_value": "mytoken"
+            "token_value": "6d79746f6b656e"
           }
         }
       }

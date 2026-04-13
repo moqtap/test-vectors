@@ -72,7 +72,7 @@
             "alias_type": "1",
             "token_alias": "0",
             "token_type": "1",
-            "token_value_hex": "736563726574"
+            "token_value": "736563726574"
           }
         }
       }
@@ -86,7 +86,7 @@
           "authorization_token": {
             "alias_type": "3",
             "token_type": "1",
-            "token_value_hex": "746f6b"
+            "token_value": "746f6b"
           }
         }
       }
