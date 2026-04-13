@@ -7,7 +7,7 @@
     {
       "id": "single-object",
       "description": "fetch stream with single object and payload",
-      "hex": "05020000008004deadbeef",
+      "hex": "0502000000800004deadbeef",
       "decoded": {
         "stream_type": "fetch_header",
         "request_id": "2",
@@ -17,6 +17,7 @@
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
+            "extension_headers_length": "0",
             "payload_length": "4",
             "payload_hex": "deadbeef"
           }
@@ -26,7 +27,7 @@
     {
       "id": "zero-payload-with-status",
       "description": "fetch stream with zero-length object and Normal status",
-      "hex": "0504000000800000",
+      "hex": "050400000080000000",
       "decoded": {
         "stream_type": "fetch_header",
         "request_id": "4",
@@ -36,6 +37,7 @@
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
+            "extension_headers_length": "0",
             "payload_length": "0",
             "object_status": "0"
           }
@@ -45,7 +47,7 @@
     {
       "id": "multi-object",
       "description": "fetch stream with multiple objects across groups",
-      "hex": "05020000008004deadbeef0000018002cafe0100008004baadf00d",
+      "hex": "0502000000800004deadbeef000001800002cafe010000800004baadf00d",
       "decoded": {
         "stream_type": "fetch_header",
         "request_id": "2",
@@ -55,6 +57,7 @@
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
+            "extension_headers_length": "0",
             "payload_length": "4",
             "payload_hex": "deadbeef"
           },
@@ -63,6 +66,7 @@
             "subgroup_id": "0",
             "object_id": "1",
             "publisher_priority": "128",
+            "extension_headers_length": "0",
             "payload_length": "2",
             "payload_hex": "cafe"
           },
@@ -71,6 +75,7 @@
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
+            "extension_headers_length": "0",
             "payload_length": "4",
             "payload_hex": "baadf00d"
           }
@@ -80,7 +85,7 @@
     {
       "id": "end-of-track-status",
       "description": "fetch stream with End of Track object status",
-      "hex": "0502050003800004",
+      "hex": "050205000380000004",
       "decoded": {
         "stream_type": "fetch_header",
         "request_id": "2",
@@ -90,8 +95,60 @@
             "subgroup_id": "0",
             "object_id": "3",
             "publisher_priority": "128",
+            "extension_headers_length": "0",
             "payload_length": "0",
             "object_status": "4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-extension-headers",
+      "description": "fetch stream with extension headers (Prior Group ID Gap)",
+      "hex": "050200000080023c0204deadbeef",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_headers_length": "2",
+            "extension_headers_hex": "3c02",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "multi-object-with-extensions",
+      "description": "fetch stream with multiple objects, some with extensions",
+      "hex": "050200000080023c0204deadbeef000001800002cafe",
+      "decoded": {
+        "stream_type": "fetch_header",
+        "request_id": "2",
+        "objects": [
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "extension_headers_length": "2",
+            "extension_headers_hex": "3c02",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "1",
+            "publisher_priority": "128",
+            "extension_headers_length": "0",
+            "payload_length": "2",
+            "payload_hex": "cafe"
           }
         ]
       }
