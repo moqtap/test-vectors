@@ -35,6 +35,14 @@
       "hex": "100001",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading new_session_uri length"
+    },
+    {
+      "id": "long-uri",
+      "description": "GOAWAY with long URI (payload > 64 bytes) to verify 16-bit length framing",
+      "hex": "100051404f68747470733a2f2f72656c61792e6578616d706c652e636f6d2f6d6f71742f73657373696f6e2f72656469726563742f746f2f612f766572792f6c6f6e672f706174682f666f722f74657374696e67",
+      "decoded": {
+        "new_session_uri": "https://relay.example.com/moqt/session/redirect/to/a/very/long/path/for/testing"
+      }
     }
   ]
 }

@@ -435,6 +435,47 @@
       }
     },
     {
+      "id": "with-extension-content-multi-object",
+      "description": "type 0x11 subgroup with two objects, each carrying a Prior Group ID Gap extension header; second object is status-only",
+      "hex": "1101008000023c0104deadbeef00023c020003",
+      "decoded": {
+        "stream_type": "subgroup_header",
+        "stream_type_id": "17",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "extension_headers_length": "2",
+            "extension_headers": [
+              {
+                "type": "60",
+                "value": "1"
+              }
+            ],
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id_delta": "0",
+            "object_id": "1",
+            "extension_headers_length": "2",
+            "extension_headers": [
+              {
+                "type": "60",
+                "value": "2"
+              }
+            ],
+            "payload_length": "0",
+            "object_status": "3"
+          }
+        ]
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated subgroup — missing group_id",
       "hex": "1001",

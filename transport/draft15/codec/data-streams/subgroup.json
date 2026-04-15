@@ -206,6 +206,86 @@
       }
     },
     {
+      "id": "subgroup-extensions-two-objects-empty",
+      "description": "subgroup stream (type 0x11: extensions present) with two objects, each carrying an empty extensions blob",
+      "hex": "11010080000004deadbeef010002cafe",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x11",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "1",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-extensions-two-objects-nonempty",
+      "description": "subgroup stream (type 0x11: extensions present) with two objects, each carrying a Prior Group ID Gap extension",
+      "hex": "1101008000023c0204deadbeef01023c0302cafe",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x11",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "extension_headers": {
+              "prior_group_id_gap": "2"
+            },
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "1",
+            "extension_headers": {
+              "prior_group_id_gap": "3"
+            },
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-extensions-status-object",
+      "description": "subgroup stream (type 0x11: extensions present) with one status-only object (End of Group) carrying a non-empty extensions blob",
+      "hex": "1101008000023c010003",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x11",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "0",
+            "extension_headers": {
+              "prior_group_id_gap": "1"
+            },
+            "payload_length": "0",
+            "status": "3",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
       "id": "subgroup-truncated",
       "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
       "hex": "100100",

@@ -233,6 +233,91 @@
       }
     },
     {
+      "id": "subgroup-properties-two-objects-empty",
+      "description": "subgroup stream (type 0x11: PROPERTIES set) with two objects, each carrying an empty properties blob",
+      "hex": "11010080000004deadbeef000002cafe",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x11",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id_delta": "0",
+            "object_id": "1",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-properties-two-objects-nonempty",
+      "description": "subgroup stream (type 0x11: PROPERTIES set) with two objects, each carrying a PRIOR_GROUP_ID_GAP property",
+      "hex": "1101008000023c0204deadbeef00023c0302cafe",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x11",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "object_properties": {
+              "prior_group_id_gap": "2"
+            },
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id_delta": "0",
+            "object_id": "1",
+            "object_properties": {
+              "prior_group_id_gap": "3"
+            },
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-properties-status-object",
+      "description": "subgroup stream (type 0x11: PROPERTIES set) with one status-only object (End of Group) carrying a non-empty properties blob",
+      "hex": "1101008000023c010003",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x11",
+        "track_alias": "1",
+        "group_id": "0",
+        "subgroup_id": "0",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id_delta": "0",
+            "object_id": "0",
+            "object_properties": {
+              "prior_group_id_gap": "1"
+            },
+            "payload_length": "0",
+            "status": "3",
+            "payload_hex": ""
+          }
+        ]
+      }
+    },
+    {
       "id": "subgroup-truncated",
       "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
       "hex": "100100",

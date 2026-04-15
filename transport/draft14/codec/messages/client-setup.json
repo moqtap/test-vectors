@@ -104,6 +104,19 @@
       "hex": "20000101",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading supported versions"
+    },
+    {
+      "id": "long-path-param",
+      "description": "CLIENT_SETUP with long PATH (payload > 64 bytes) to verify 16-bit length framing",
+      "hex": "20005c01c0000000ff00000e0101404f2f6d6f71742f746573742f706174682f746861742d69732d6c6f6e672d656e6f7567682d746f2d707573682d7061796c6f61642d6f7665722d73697874792d666f75722d62797465732d746f74616c",
+      "decoded": {
+        "supported_versions": [
+          "4278190094"
+        ],
+        "parameters": {
+          "path": "/moqt/test/path/that-is-long-enough-to-push-payload-over-sixty-four-bytes-total"
+        }
+      }
     }
   ]
 }
