@@ -228,7 +228,7 @@
     {
       "id": "subgroup-extensions-two-objects-empty",
       "description": "subgroup stream (type 0x11: extensions present) with two objects, each carrying an empty extensions blob",
-      "hex": "11010080000004deadbeef010002cafe",
+      "hex": "11010080000004deadbeef000002cafe",
       "decoded": {
         "stream_type": "subgroup",
         "header_type": "0x11",
@@ -253,7 +253,7 @@
     {
       "id": "subgroup-extensions-two-objects-nonempty",
       "description": "subgroup stream (type 0x11: extensions present) with two objects, each carrying a PRIOR_GROUP_ID_GAP extension",
-      "hex": "1101008000023c0204deadbeef01023c0302cafe",
+      "hex": "1101008000023c0204deadbeef00023c0302cafe",
       "decoded": {
         "stream_type": "subgroup",
         "header_type": "0x11",
