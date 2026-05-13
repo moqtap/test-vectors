@@ -1,0 +1,174 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish",
+  "message_type_id": "0x1d",
+  "spec_section": "10.10",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "PUBLISH with single-element namespace, track alias 0",
+      "hex": "1d000f0101046c69766505766964656f0000",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "multi-namespace",
+      "description": "PUBLISH with multi-element namespace, track alias 1",
+      "hex": "1d001c03020a636f6e666572656e636506726f6f6d343205617564696f0100",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "track_alias": "1",
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "PUBLISH with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='pub-token')",
+      "hex": "1d001c0101046c69766505766964656f0001030b03007075622d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "7075622d746f6b656e"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "PUBLISH with EXPIRES parameter (60000ms)",
+      "hex": "1d00140101046c69766505766964656f0001088000ea60",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "expires": "60000"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "PUBLISH with LARGEST_OBJECT parameter (group=5, object=10)",
+      "hex": "1d00130101046c69766505766964656f00010902050a",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "largest_object": {
+            "group": "5",
+            "object": "10"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "PUBLISH with FORWARD parameter (forward=1)",
+      "hex": "1d00110101046c69766505766964656f00011001",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {
+          "forward": "1"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-track-properties",
+      "description": "PUBLISH with track properties: OBJECT_DELIVERY_TIMEOUT=10000ms, MAX_CACHE_DURATION=30000ms, DEFAULT_PUBLISHER_PRIORITY=64",
+      "hex": "1d001a0101046c69766505766964656f000002671002800075300a4040",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {},
+        "track_properties": {
+          "object_delivery_timeout": "10000",
+          "max_cache_duration": "30000",
+          "default_publisher_priority": "64"
+        }
+      }
+    },
+    {
+      "id": "with-subgroup-delivery-timeout-property",
+      "description": "PUBLISH with SUBGROUP_DELIVERY_TIMEOUT track property (8000ms, type 0x06, new in draft-18)",
+      "hex": "1d00120101046c69766505766964656f0000065f40",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {},
+        "track_properties": {
+          "subgroup_delivery_timeout": "8000"
+        }
+      }
+    },
+    {
+      "id": "with-immutable-properties",
+      "description": "PUBLISH with IMMUTABLE_PROPERTIES track property containing a nested KVP",
+      "hex": "1d00130101046c69766505766964656f00000b02022a",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": {},
+        "track_properties": {
+          "immutable_properties": "022a"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH — missing track_namespace",
+      "hex": "1d000e0101046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

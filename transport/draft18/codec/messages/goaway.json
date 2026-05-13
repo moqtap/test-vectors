@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "goaway",
+  "message_type_id": "0x10",
+  "spec_section": "10.4",
+  "vectors": [
+    {
+      "id": "empty-uri-control",
+      "description": "GOAWAY on control stream with empty new session URI, timeout=0, and request_id=0",
+      "hex": "100003000000",
+      "decoded": {
+        "new_session_uri": "",
+        "timeout": "0",
+        "request_id": "0"
+      }
+    },
+    {
+      "id": "with-uri-control",
+      "description": "GOAWAY on control stream with new session URI 'moqt://relay/path', timeout=5000ms, request_id=8",
+      "hex": "100015116d6f71743a2f2f72656c61792f70617468538808",
+      "decoded": {
+        "new_session_uri": "moqt://relay/path",
+        "timeout": "5000",
+        "request_id": "8"
+      }
+    },
+    {
+      "id": "request-stream-empty-uri",
+      "description": "GOAWAY on an individual request stream with empty new session URI and timeout=1000ms (no request_id — migration of a single request, new in draft-18)",
+      "hex": "1000030043e8",
+      "decoded": {
+        "new_session_uri": "",
+        "timeout": "1000"
+      }
+    },
+    {
+      "id": "request-stream-with-uri",
+      "description": "GOAWAY on an individual request stream with URI and timeout=0 (migrate this request to the given URI)",
+      "hex": "10001a186d6f71743a2f2f6f746865722e6578616d706c652e636f6d00",
+      "decoded": {
+        "new_session_uri": "moqt://other.example.com",
+        "timeout": "0"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated GOAWAY — missing URI length",
+      "hex": "100001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading new_session_uri length"
+    }
+  ]
+}

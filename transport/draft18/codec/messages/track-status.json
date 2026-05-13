@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status",
+  "message_type_id": "0x0d",
+  "spec_section": "10.14",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "TRACK_STATUS request for live/video (format identical to SUBSCRIBE; Required Request ID Delta removed in draft-18)",
+      "hex": "0d000e0101046c69766505766964656f00",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "TRACK_STATUS with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='ts-token')",
+      "hex": "0d001a0101046c69766505766964656f01030a030074732d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "74732d746f6b656e"
+          }
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS — missing track_namespace",
+      "hex": "0d000d0101046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}
