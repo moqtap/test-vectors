@@ -16,7 +16,7 @@
     {
       "id": "with-params",
       "description": "PUBLISH_OK with SUBSCRIBER_PRIORITY (64) and GROUP_ORDER (ascending=1)",
-      "hex": "070006022040400201",
+      "hex": "0700050220400201",
       "decoded": {
         "parameters": {
           "subscriber_priority": "64",
@@ -88,7 +88,74 @@
     {
       "id": "with-multiple-params",
       "description": "PUBLISH_OK with SUBSCRIBER_PRIORITY (64), GROUP_ORDER (ascending=1), and NEW_GROUP_REQUEST (10)",
+      "hex": "0700070320400201100a",
+      "decoded": {
+        "parameters": {
+          "subscriber_priority": "64",
+          "group_order": "1",
+          "new_group_request": "10"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-params-noncanonical-2b-delta",
+      "description": "non-canonical PUBLISH_OK — same params as with-params, but the GROUP_ORDER parameter type delta (value 2) is encoded as a 2-byte varint (4002) instead of the canonical 1-byte form (02); decoders MUST accept",
+      "hex": "070006022040400201",
+      "canonical": false,
+      "decoded": {
+        "parameters": {
+          "subscriber_priority": "64",
+          "group_order": "1"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-params-noncanonical-4b-delta",
+      "description": "non-canonical PUBLISH_OK — GROUP_ORDER parameter type delta (value 2) is encoded as a 4-byte varint (80000002) instead of the canonical 1-byte form (02); decoders MUST accept",
+      "hex": "0700080220408000000201",
+      "canonical": false,
+      "decoded": {
+        "parameters": {
+          "subscriber_priority": "64",
+          "group_order": "1"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-params-noncanonical-8b-delta",
+      "description": "non-canonical PUBLISH_OK — GROUP_ORDER parameter type delta (value 2) is encoded as an 8-byte varint (c000000000000002) instead of the canonical 1-byte form (02); decoders MUST accept",
+      "hex": "07000c022040c00000000000000201",
+      "canonical": false,
+      "decoded": {
+        "parameters": {
+          "subscriber_priority": "64",
+          "group_order": "1"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-multiple-params-noncanonical-2b-delta",
+      "description": "non-canonical PUBLISH_OK with three parameters — the GROUP_ORDER parameter type delta (value 2) is encoded as a 2-byte varint (4002); the NEW_GROUP_REQUEST delta remains canonical to exercise mixed encodings within one message",
       "hex": "070008032040400201100a",
+      "canonical": false,
+      "decoded": {
+        "parameters": {
+          "subscriber_priority": "64",
+          "group_order": "1",
+          "new_group_request": "10"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-multiple-params-noncanonical-4b-delta",
+      "description": "non-canonical PUBLISH_OK with three parameters — GROUP_ORDER parameter type delta (value 2) is encoded as a 4-byte varint (80000002); the NEW_GROUP_REQUEST delta remains canonical",
+      "hex": "07000a0320408000000201100a",
+      "canonical": false,
       "decoded": {
         "parameters": {
           "subscriber_priority": "64",

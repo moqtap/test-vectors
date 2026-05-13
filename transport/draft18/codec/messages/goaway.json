@@ -43,6 +43,17 @@
       }
     },
     {
+      "id": "non-canonical-uri-length-control",
+      "description": "non-canonical GOAWAY on control stream — URI length (0) is encoded as a 2-byte varint (4000) instead of the canonical 1-byte form (00); decoders MUST accept. Timeout and request_id remain canonical.",
+      "hex": "10000440000000",
+      "canonical": false,
+      "decoded": {
+        "new_session_uri": "",
+        "timeout": "0",
+        "request_id": "0"
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated GOAWAY — missing URI length",
       "hex": "100001",

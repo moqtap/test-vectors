@@ -99,6 +99,17 @@
       }
     },
     {
+      "id": "non-canonical-path-length",
+      "description": "non-canonical SETUP — PATH option string length (4) is encoded as a 2-byte varint (4004) instead of the canonical 1-byte form (04); decoders MUST accept",
+      "hex": "6f0000070140042f6d6f71",
+      "canonical": false,
+      "decoded": {
+        "options": {
+          "path": "/moq"
+        }
+      }
+    },
+    {
       "id": "truncated-payload",
       "description": "truncated SETUP — payload shorter than declared length",
       "hex": "6f00000501",
