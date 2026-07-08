@@ -1,0 +1,236 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch",
+  "message_type_id": "0x16",
+  "spec_section": "10.12",
+  "vectors": [
+    {
+      "id": "standalone-single-namespace",
+      "description": "standalone FETCH with single-element namespace, range group 0-10",
+      "hex": "160013020101046c69766505766964656f00000a0000",
+      "decoded": {
+        "request_id": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "standalone-multi-namespace",
+      "description": "standalone FETCH with multi-element namespace, range group 5:3 to 20:0",
+      "hex": "1600200401020a636f6e666572656e636506726f6f6d343205617564696f0503140000",
+      "decoded": {
+        "request_id": "4",
+        "fetch_type": "1",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "start_group": "5",
+        "start_object": "3",
+        "end_group": "20",
+        "end_object": "0",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "relative-joining",
+      "description": "relative joining FETCH referencing subscription request_id=2, start=3 groups back",
+      "hex": "1600050602020300",
+      "decoded": {
+        "request_id": "6",
+        "fetch_type": "2",
+        "joining_request_id": "2",
+        "joining_start": "3",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "absolute-joining",
+      "description": "absolute joining FETCH (fetch_type=3) referencing subscription request_id=2, start at absolute group 10",
+      "hex": "1600050603020a00",
+      "decoded": {
+        "request_id": "6",
+        "fetch_type": "3",
+        "joining_request_id": "2",
+        "joining_start": "10",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "standalone-with-auth-token",
+      "description": "standalone FETCH with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='fetch-token')",
+      "hex": "160022020101046c69766505766964656f00000a0001030d030066657463682d746f6b656e",
+      "decoded": {
+        "request_id": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "66657463682d746f6b656e"
+          }
+        }
+      }
+    },
+    {
+      "id": "standalone-with-subscriber-priority",
+      "description": "standalone FETCH with SUBSCRIBER_PRIORITY parameter (priority=16)",
+      "hex": "160015020101046c69766505766964656f00000a00012010",
+      "decoded": {
+        "request_id": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "subscriber_priority": "16"
+        }
+      }
+    },
+    {
+      "id": "standalone-with-group-order",
+      "description": "standalone FETCH with GROUP_ORDER parameter (descending=2)",
+      "hex": "160015020101046c69766505766964656f00000a00012202",
+      "decoded": {
+        "request_id": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "group_order": "2"
+        }
+      }
+    },
+    {
+      "id": "standalone-with-fill-timeout",
+      "description": "standalone FETCH with FILL_TIMEOUT parameter (5000ms, type 0x0A, new in draft-18)",
+      "hex": "160016020101046c69766505766964656f00000a00010a5388",
+      "decoded": {
+        "request_id": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "fill_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "standalone-fill-timeout-zero",
+      "description": "standalone FETCH with FILL_TIMEOUT=0 (no wait for upstream — report unavailable objects as Unknown)",
+      "hex": "160015020101046c69766505766964656f00000a00010a00",
+      "decoded": {
+        "request_id": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "fill_timeout": "0"
+        }
+      }
+    },
+    {
+      "id": "standalone-with-objectid-filter",
+      "description": "standalone FETCH with OBJECTID_FILTER parameter (Type 0x26, new in draft-19): SetID 0, Object ID range 2-5",
+      "hex": "160018020101046c69766505766964656f00000a00012603000203",
+      "decoded": {
+        "request_id": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "objectid_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "2",
+                "end": "5"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "standalone-with-priority-filter",
+      "description": "standalone FETCH with PRIORITY_FILTER parameter (Type 0x27, new in draft-19): SetID 0, Publisher Priority range 0-63",
+      "hex": "160018020101046c69766505766964656f00000a0001270300003f",
+      "decoded": {
+        "request_id": "2",
+        "fetch_type": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "start_group": "0",
+        "start_object": "0",
+        "end_group": "10",
+        "end_object": "0",
+        "parameters": {
+          "priority_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "0",
+                "end": "63"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH — missing fetch content",
+      "hex": "1600110201046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

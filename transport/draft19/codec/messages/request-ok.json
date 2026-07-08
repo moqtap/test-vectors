@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "request_ok",
+  "message_type_id": "0x07",
+  "spec_section": "10.5",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "REQUEST_OK with no parameters and empty Track Properties (used as a PUBLISH_OK alias and for other request responses)",
+      "hex": "07000100",
+      "decoded": {
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "REQUEST_OK with LARGEST_OBJECT parameter (group=10, object=3) — typically a REQUEST_UPDATE_OK",
+      "hex": "0700050109020a03",
+      "decoded": {
+        "parameters": {
+          "largest_object": {
+            "group": "10",
+            "object": "3"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "REQUEST_OK with EXPIRES parameter (60000ms)",
+      "hex": "07000601088000ea60",
+      "decoded": {
+        "parameters": {
+          "expires": "60000"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "track-status-ok-with-properties",
+      "description": "TRACK_STATUS_OK (REQUEST_OK in response to TRACK_STATUS) with LARGEST_OBJECT param and track properties — only TRACK_STATUS_OK populates Track Properties",
+      "hex": "07000a0109020f070253882e01",
+      "decoded": {
+        "parameters": {
+          "largest_object": {
+            "group": "15",
+            "object": "7"
+          }
+        },
+        "track_properties": {
+          "object_delivery_timeout": "5000",
+          "dynamic_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUEST_OK — missing parameter count",
+      "hex": "070001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch_ok",
+  "message_type_id": "0x18",
+  "spec_section": "10.13",
+  "vectors": [
+    {
+      "id": "more-data",
+      "description": "FETCH_OK with end_of_track=0 (more data available), end_location=(10,3)",
+      "hex": "180004000a0300",
+      "decoded": {
+        "end_of_track": "0",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "end-of-track",
+      "description": "FETCH_OK with end_of_track=1 (track has ended), end_location=(10,3)",
+      "hex": "180004010a0300",
+      "decoded": {
+        "end_of_track": "1",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-track-properties",
+      "description": "FETCH_OK with track properties: OBJECT_DELIVERY_TIMEOUT=5000ms, DYNAMIC_GROUPS=1",
+      "hex": "180009000a03000253882e01",
+      "decoded": {
+        "end_of_track": "0",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {},
+        "track_properties": {
+          "object_delivery_timeout": "5000",
+          "dynamic_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "with-params-and-properties",
+      "description": "FETCH_OK with EXPIRES parameter (30ms) and track property MAX_CACHE_DURATION=30000ms",
+      "hex": "18000b000a0301081e0480007530",
+      "decoded": {
+        "end_of_track": "0",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {
+          "expires": "30"
+        },
+        "track_properties": {
+          "max_cache_duration": "30000"
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH_OK — missing end_of_track",
+      "hex": "18000502",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading end_of_track"
+    }
+  ]
+}

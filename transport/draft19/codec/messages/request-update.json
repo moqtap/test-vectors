@@ -1,0 +1,157 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "request_update",
+  "message_type_id": "0x02",
+  "spec_section": "10.9",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal REQUEST_UPDATE with no parameters",
+      "hex": "0200020200",
+      "decoded": {
+        "request_id": "2",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-filter-param",
+      "description": "REQUEST_UPDATE with LOCATION_FILTER parameter (AbsoluteStart, group=5, object=0)",
+      "hex": "02000701012103030500",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "location_filter": {
+            "filter_type": "3",
+            "start_group": "5",
+            "start_object": "0"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-object-delivery-timeout",
+      "description": "REQUEST_UPDATE with OBJECT_DELIVERY_TIMEOUT parameter (5000ms)",
+      "hex": "0200050101025388",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "object_delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-subgroup-delivery-timeout",
+      "description": "REQUEST_UPDATE with SUBGROUP_DELIVERY_TIMEOUT parameter (8000ms, new in draft-18)",
+      "hex": "0200050101065f40",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "subgroup_delivery_timeout": "8000"
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "REQUEST_UPDATE with FORWARD parameter (forward=1)",
+      "hex": "02000401011001",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "forward": "1"
+        }
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "REQUEST_UPDATE with SUBSCRIBER_PRIORITY parameter (priority=16)",
+      "hex": "02000401012010",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "subscriber_priority": "16"
+        }
+      }
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "REQUEST_UPDATE with NEW_GROUP_REQUEST parameter (group_id=25)",
+      "hex": "02000401013219",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "new_group_request": "25"
+        }
+      }
+    },
+    {
+      "id": "with-track-namespace-prefix",
+      "description": "REQUEST_UPDATE with TRACK_NAMESPACE_PREFIX parameter (new in draft-18) to update a SUBSCRIBE_NAMESPACE/SUBSCRIBE_TRACKS prefix",
+      "hex": "0200110701340d02046c6976650673706f727473",
+      "decoded": {
+        "request_id": "7",
+        "parameters": {
+          "track_namespace_prefix": [
+            "live",
+            "sports"
+          ]
+        }
+      }
+    },
+    {
+      "id": "with-multiple-params",
+      "description": "REQUEST_UPDATE with OBJECT_DELIVERY_TIMEOUT (5000ms), SUBSCRIBER_PRIORITY (16), and LOCATION_FILTER (AbsoluteStart, group=5, object=0)",
+      "hex": "02000c01030253881e100103030500",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "object_delivery_timeout": "5000",
+          "subscriber_priority": "16",
+          "location_filter": {
+            "filter_type": "3",
+            "start_group": "5",
+            "start_object": "0"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-objectid-filter",
+      "description": "REQUEST_UPDATE with OBJECTID_FILTER parameter (Type 0x26, new in draft-19): SetID 0, Object ID range 0-9 — narrows an existing subscription",
+      "hex": "02000701012603000009",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "objectid_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "0",
+                "end": "9"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-removal",
+      "description": "REQUEST_UPDATE removing an OBJECTID_FILTER parameter (Type 0x26) by encoding a zero-length value; in REQUEST_UPDATE a filter Length of 0 removes that filter",
+      "hex": "02000401012600",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "objectid_filter": {
+            "removed": true
+          }
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUEST_UPDATE — missing parameters",
+      "hex": "02000202",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

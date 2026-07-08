@@ -35,6 +35,7 @@ transport/
   draft16/                  MoQ Transport draft-16
   draft17/                  MoQ Transport draft-17
   draft18/                  MoQ Transport draft-18
+  draft19/                  MoQ Transport draft-19
     codec/
       varint.json           VarInt encoding (RFC 9000 §16)
       messages/*.json       One file per control message type
@@ -132,7 +133,7 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 
 ## Specs covered
 
-Coverage spans drafts 00 through 18. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
+Coverage spans drafts 00 through 19. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
 
 | Spec | Draft | Messages | Data streams | Total vectors |
 |------|-------|----------|-------------|---------------|
@@ -155,6 +156,7 @@ Coverage spans drafts 00 through 18. Drafts 00–06 use an earlier wire format (
 | MoQ Transport | draft-16 | 25 control messages | 3 stream types | 183 |
 | MoQ Transport | draft-17 | 19 control messages | 3 stream types | 185 |
 | MoQ Transport | draft-18 | 20 control messages | 3 stream types | 209 |
+| MoQ Transport | draft-19 | 20 control messages | 3 stream types | 231 |
 
 ## Scope
 

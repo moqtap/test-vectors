@@ -1,0 +1,9 @@
+{
+  "$schema": "../../schema/meta.schema.json",
+  "id": "draft19",
+  "spec": "draft-ietf-moq-transport-19",
+  "spec_url": "https://www.ietf.org/archive/id/draft-ietf-moq-transport-19.txt",
+  "categories": [
+    "codec"
+  ]
+}

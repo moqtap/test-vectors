@@ -1,0 +1,151 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "setup",
+  "message_type_id": "0x2f00",
+  "spec_section": "10.3",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal SETUP with no options",
+      "hex": "6f000000",
+      "decoded": {
+        "options": {}
+      }
+    },
+    {
+      "id": "path-option",
+      "description": "SETUP with PATH option",
+      "hex": "6f00000601042f6d6f71",
+      "decoded": {
+        "options": {
+          "path": "/moq"
+        }
+      }
+    },
+    {
+      "id": "max-auth-token-cache",
+      "description": "SETUP with MAX_AUTH_TOKEN_CACHE_SIZE option set to 1024",
+      "hex": "6f000003044400",
+      "decoded": {
+        "options": {
+          "max_auth_token_cache_size": "1024"
+        }
+      }
+    },
+    {
+      "id": "path-and-implementation",
+      "description": "SETUP with PATH and MOQT_IMPLEMENTATION options",
+      "hex": "6f00000f01042f6d6f710607746573742d7631",
+      "decoded": {
+        "options": {
+          "path": "/moq",
+          "moqt_implementation": "test-v1"
+        }
+      }
+    },
+    {
+      "id": "with-authority",
+      "description": "SETUP with AUTHORITY option (example.com:443)",
+      "hex": "6f000011050f6578616d706c652e636f6d3a343433",
+      "decoded": {
+        "options": {
+          "authority": "example.com:443"
+        }
+      }
+    },
+    {
+      "id": "with-auth-token-register",
+      "description": "SETUP with AUTHORIZATION_TOKEN option (REGISTER alias=0, type=1, value='setup-bearer')",
+      "hex": "6f000011030f01000173657475702d626561726572",
+      "decoded": {
+        "options": {
+          "authorization_token": {
+            "alias_type": "1",
+            "token_alias": "0",
+            "token_type": "1",
+            "token_value": "73657475702d626561726572"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-auth-token-delete",
+      "description": "SETUP with AUTHORIZATION_TOKEN option (DELETE alias=0)",
+      "hex": "6f00000403020000",
+      "decoded": {
+        "options": {
+          "authorization_token": {
+            "alias_type": "0",
+            "token_alias": "0"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-path-auth-authority",
+      "description": "SETUP with PATH, AUTHORIZATION_TOKEN (REGISTER), and AUTHORITY options",
+      "hex": "6f00002601042f6d6f71020b0100016d792d746f6b656e021172656c61792e6578616d706c652e636f6d",
+      "decoded": {
+        "options": {
+          "path": "/moq",
+          "authorization_token": {
+            "alias_type": "1",
+            "token_alias": "0",
+            "token_type": "1",
+            "token_value": "6d792d746f6b656e"
+          },
+          "authority": "relay.example.com"
+        }
+      }
+    },
+    {
+      "id": "non-canonical-path-length",
+      "description": "non-canonical SETUP — PATH option string length (4) is encoded as a 2-byte varint (4004) instead of the canonical 1-byte form (04); decoders MUST accept",
+      "hex": "6f0000070140042f6d6f71",
+      "canonical": false,
+      "decoded": {
+        "options": {
+          "path": "/moq"
+        }
+      }
+    },
+    {
+      "id": "max-filter-ranges",
+      "description": "SETUP with MAX_FILTER_RANGES option (Type 0x06, new in draft-19) set to 4 — permits up to 4 total Ranges across a subscription's Range Filter parameters",
+      "hex": "6f0000020604",
+      "decoded": {
+        "options": {
+          "max_filter_ranges": "4"
+        }
+      }
+    },
+    {
+      "id": "max-request-updates",
+      "description": "SETUP with MAX_REQUEST_UPDATES option (Type 0x08, new in draft-19) set to 16 — max unacknowledged REQUEST_UPDATEs per request stream",
+      "hex": "6f0000020810",
+      "decoded": {
+        "options": {
+          "max_request_updates": "16"
+        }
+      }
+    },
+    {
+      "id": "with-filter-ranges-and-request-updates",
+      "description": "SETUP with both MAX_FILTER_RANGES (0x06 = 8) and MAX_REQUEST_UPDATES (0x08 = 32) options; demonstrates delta-type ordering of the new draft-19 options",
+      "hex": "6f00000406080220",
+      "decoded": {
+        "options": {
+          "max_filter_ranges": "8",
+          "max_request_updates": "32"
+        }
+      }
+    },
+    {
+      "id": "truncated-payload",
+      "description": "truncated SETUP — payload shorter than declared length",
+      "hex": "6f00000501",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading setup options"
+    }
+  ]
+}
