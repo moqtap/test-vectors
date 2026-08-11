@@ -28,7 +28,7 @@
     },
     {
       "id": "fetch-stream-two-objects",
-      "description": "fetch stream with two objects (Ascending group order); second uses pure delta encoding (flags=0x00) — Object ID is prior+1 within the same group",
+      "description": "fetch stream with two objects (Ascending group order); second uses pure delta encoding (flags=0x00) \u2014 Object ID is prior+1 within the same group",
       "hex": "05041c00008004deadbeef0002cafe",
       "decoded": {
         "stream_type": "fetch",
@@ -92,8 +92,8 @@
     },
     {
       "id": "fetch-end-of-non-existent-range",
-      "description": "fetch stream with End of Non-Existent Range marker (Serialization Flags=0x8C, encoded as 2-byte varint 0x408c); Group ID and Object ID fields are absolute values for this marker",
-      "hex": "0504408c050a00",
+      "description": "fetch stream with End of Non-Existent Range marker (Serialization Flags=0x8C, encoded as 2-byte varint 0x808c); Group ID and Object ID fields are absolute values for this marker",
+      "hex": "0504808c050a00",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
@@ -134,8 +134,8 @@
     },
     {
       "id": "fetch-end-of-unknown-range",
-      "description": "fetch stream with End of Unknown Range marker (Serialization Flags=0x10C, encoded as 2-byte varint 0x410c), group_id=5, object_id=10",
-      "hex": "0504410c050a00",
+      "description": "fetch stream with End of Unknown Range marker (Serialization Flags=0x10C, encoded as 2-byte varint 0x810c), group_id=5, object_id=10",
+      "hex": "0504810c050a00",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
@@ -152,7 +152,7 @@
     {
       "id": "fetch-datagram-flag",
       "description": "fetch stream with DATAGRAM flag (flags=0x5c: DATAGRAM+PRIORITY+GROUP_ID_DELTA+OBJECT_ID_DELTA); two LSBs are ignored and no Subgroup ID is present",
-      "hex": "0504405c03008004deadbeef",
+      "hex": "05045c03008004deadbeef",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
@@ -194,7 +194,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated fetch header — missing request_id",
+      "description": "truncated fetch header \u2014 missing request_id",
       "hex": "05",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

@@ -62,7 +62,7 @@
     {
       "id": "with-expires",
       "description": "PUBLISH with EXPIRES parameter (60000ms)",
-      "hex": "1d0015010001046c69766505766964656f0001088000ea60",
+      "hex": "1d0014010001046c69766505766964656f000108c0ea60",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
@@ -119,7 +119,7 @@
     {
       "id": "with-track-properties",
       "description": "PUBLISH with track properties: DELIVERY_TIMEOUT=10000ms, MAX_CACHE_DURATION=30000ms, DEFAULT_PUBLISHER_PRIORITY=64",
-      "hex": "1d001b010001046c69766505766964656f000002671002800075300a4040",
+      "hex": "1d0019010001046c69766505766964656f000002a71002c075300a40",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",

@@ -37,7 +37,7 @@ transport/
   draft18/                  MoQ Transport draft-18
   draft19/                  MoQ Transport draft-19
     codec/
-      varint.json           VarInt encoding (RFC 9000 §16)
+      varint.json           VarInt encoding (§1.4.1 from draft-17, RFC 9000 §16 before it)
       messages/*.json       One file per control message type
       data-streams/*.json   Subgroup, datagram, fetch header vectors
     meta.json               Version metadata
@@ -60,8 +60,8 @@ Every vector file is a JSON object with a `vectors` array. Each vector has a uni
   "spec_section": "9.7",
   "vectors": [
     {
-      "id": "filter-latest-group",
-      "description": "SUBSCRIBE with LatestGroup filter, no parameters",
+      "id": "filter-next-group-start",
+      "description": "minimal SUBSCRIBE with NextGroupStart filter, no parameters",
       "hex": "0300120101046c69766505766964656f8000000100",
       "decoded": {
         "request_id": "1",
@@ -75,11 +75,11 @@ Every vector file is a JSON object with a `vectors` array. Each vector has a uni
       }
     },
     {
-      "id": "truncated",
-      "description": "truncated SUBSCRIBE — missing track_name",
-      "hex": "0300120101046c697665",
-      "error": "incomplete",
-      "error_detail": "unexpected end of input while reading track_name"
+      "id": "invalid-filter-type",
+      "description": "SUBSCRIBE with filter_type=0 — reserved/undefined value",
+      "hex": "0300120101046c69766505766964656f8000000000",
+      "error": "invalid_value",
+      "error_detail": "filter_type 0 is not a defined filter type"
     }
   ]
 }
@@ -101,7 +101,7 @@ Valid vectors have a `decoded` object. Invalid vectors have an `error` category 
 
 **One file per message type.** Each control message gets its own file. Data streams (subgroup, datagram, fetch header) live under `data-streams/`. This makes selective consumption trivial.
 
-**Self-contained drafts.** VarInt vectors are duplicated across drafts even though the encoding is identical — each draft directory works in isolation with no cross-references.
+**Self-contained drafts.** VarInt vectors are repeated in every draft directory rather than shared, so each works in isolation with no cross-references. The encoding is not the same throughout: draft-00..16 use the RFC 9000 §16 varint, and draft-17 replaced it with MoQT's own (§1.4.1), where the number of leading 1 bits in the first byte gives the length, one byte covers 0–127, and nine bytes cover the full 64-bit range. Draft-17 alone omits the 7-byte form and treats it as a protocol violation.
 
 **Data, not code.** This repo ships JSON files. No runtime dependencies, no codec libraries. The `examples/` directory has copy-pasteable snippets showing the integration pattern, but they are not maintained libraries.
 
@@ -151,12 +151,12 @@ Coverage spans drafts 00 through 19. Drafts 00–06 use an earlier wire format (
 | MoQ Transport | draft-11 | 27 control messages | 3 stream types | 158 |
 | MoQ Transport | draft-12 | 30 control messages | 3 stream types | 188 |
 | MoQ Transport | draft-13 | 31 control messages | 3 stream types | 212 |
-| MoQ Transport | draft-14 | 31 control messages | 3 stream types | 222 |
-| MoQ Transport | draft-15 | 24 control messages | 3 stream types | 170 |
-| MoQ Transport | draft-16 | 25 control messages | 3 stream types | 183 |
-| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 185 |
-| MoQ Transport | draft-18 | 20 control messages | 3 stream types | 209 |
-| MoQ Transport | draft-19 | 20 control messages | 3 stream types | 231 |
+| MoQ Transport | draft-14 | 31 control messages | 3 stream types | 227 |
+| MoQ Transport | draft-15 | 24 control messages | 3 stream types | 175 |
+| MoQ Transport | draft-16 | 25 control messages | 3 stream types | 188 |
+| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 206 |
+| MoQ Transport | draft-18 | 20 control messages | 3 stream types | 234 |
+| MoQ Transport | draft-19 | 20 control messages | 3 stream types | 249 |
 
 ## Scope
 

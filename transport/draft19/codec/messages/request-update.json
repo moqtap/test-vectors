@@ -31,7 +31,7 @@
     {
       "id": "with-object-delivery-timeout",
       "description": "REQUEST_UPDATE with OBJECT_DELIVERY_TIMEOUT parameter (5000ms)",
-      "hex": "0200050101025388",
+      "hex": "0200050101029388",
       "decoded": {
         "request_id": "1",
         "parameters": {
@@ -42,7 +42,7 @@
     {
       "id": "with-subgroup-delivery-timeout",
       "description": "REQUEST_UPDATE with SUBGROUP_DELIVERY_TIMEOUT parameter (8000ms, new in draft-18)",
-      "hex": "0200050101065f40",
+      "hex": "0200050101069f40",
       "decoded": {
         "request_id": "1",
         "parameters": {
@@ -100,7 +100,7 @@
     {
       "id": "with-multiple-params",
       "description": "REQUEST_UPDATE with OBJECT_DELIVERY_TIMEOUT (5000ms), SUBSCRIBER_PRIORITY (16), and LOCATION_FILTER (AbsoluteStart, group=5, object=0)",
-      "hex": "02000c01030253881e100103030500",
+      "hex": "02000c01030293881e100103030500",
       "decoded": {
         "request_id": "1",
         "parameters": {

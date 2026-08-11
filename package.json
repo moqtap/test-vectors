@@ -1,6 +1,6 @@
 {
   "name": "@moqtap/test-vectors",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "description": "MoQT protocol test vectors — language-agnostic JSON",
   "type": "module",
   "exports": {

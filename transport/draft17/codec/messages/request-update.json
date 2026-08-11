@@ -33,7 +33,7 @@
     {
       "id": "with-delivery-timeout",
       "description": "REQUEST_UPDATE with DELIVERY_TIMEOUT parameter (5000ms)",
-      "hex": "020006010001025388",
+      "hex": "020006010001029388",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
@@ -81,7 +81,7 @@
     {
       "id": "with-multiple-params",
       "description": "REQUEST_UPDATE with DELIVERY_TIMEOUT (5000ms), SUBSCRIBER_PRIORITY (16), and SUBSCRIPTION_FILTER (AbsoluteStart, group=5, object=0)",
-      "hex": "02000d0100030253881e100103030500",
+      "hex": "02000d0100030293881e100103030500",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",

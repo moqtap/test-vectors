@@ -73,7 +73,7 @@
     {
       "id": "with-object-delivery-timeout",
       "description": "SUBSCRIBE with OBJECT_DELIVERY_TIMEOUT parameter (5000ms, type 0x02 renamed from DELIVERY_TIMEOUT)",
-      "hex": "0300110101046c69766505766964656f01025388",
+      "hex": "0300110101046c69766505766964656f01029388",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
@@ -88,7 +88,7 @@
     {
       "id": "with-subgroup-delivery-timeout",
       "description": "SUBSCRIBE with SUBGROUP_DELIVERY_TIMEOUT parameter (10000ms, type 0x06 added in draft-18)",
-      "hex": "0300110101046c69766505766964656f01066710",
+      "hex": "0300110101046c69766505766964656f0106a710",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
@@ -103,7 +103,7 @@
     {
       "id": "with-both-delivery-timeouts",
       "description": "SUBSCRIBE with both OBJECT_DELIVERY_TIMEOUT (3000ms) and SUBGROUP_DELIVERY_TIMEOUT (8000ms); demonstrates type-delta ordering",
-      "hex": "0300140101046c69766505766964656f02024bb8045f40",
+      "hex": "0300140101046c69766505766964656f02028bb8049f40",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
@@ -176,7 +176,7 @@
     {
       "id": "with-rendezvous-timeout",
       "description": "SUBSCRIBE with RENDEZVOUS_TIMEOUT parameter (3000ms)",
-      "hex": "0300110101046c69766505766964656f01044bb8",
+      "hex": "0300110101046c69766505766964656f01048bb8",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
@@ -285,7 +285,7 @@
     {
       "id": "with-multiple-params",
       "description": "SUBSCRIBE with OBJECT_DELIVERY_TIMEOUT (5000ms), SUBSCRIBER_PRIORITY (32), and GROUP_ORDER (ascending=1)",
-      "hex": "0300150101046c69766505766964656f030253881e200201",
+      "hex": "0300150101046c69766505766964656f030293881e200201",
       "decoded": {
         "request_id": "1",
         "track_namespace": [

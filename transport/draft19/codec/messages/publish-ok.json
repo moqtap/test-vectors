@@ -28,7 +28,7 @@
     {
       "id": "with-object-delivery-timeout",
       "description": "PUBLISH_OK with OBJECT_DELIVERY_TIMEOUT parameter (5000ms)",
-      "hex": "07000401025388",
+      "hex": "07000401029388",
       "decoded": {
         "parameters": {
           "object_delivery_timeout": "5000"
@@ -39,7 +39,7 @@
     {
       "id": "with-subgroup-delivery-timeout",
       "description": "PUBLISH_OK with SUBGROUP_DELIVERY_TIMEOUT parameter (10000ms)",
-      "hex": "07000401066710",
+      "hex": "0700040106a710",
       "decoded": {
         "parameters": {
           "subgroup_delivery_timeout": "10000"
@@ -50,7 +50,7 @@
     {
       "id": "with-expires",
       "description": "PUBLISH_OK with EXPIRES parameter (60000ms)",
-      "hex": "07000601088000ea60",
+      "hex": "0700050108c0ea60",
       "decoded": {
         "parameters": {
           "expires": "60000"
@@ -100,8 +100,8 @@
     },
     {
       "id": "with-params-noncanonical-2b-delta",
-      "description": "non-canonical PUBLISH_OK — same params as with-params, but the NEW_GROUP_REQUEST parameter type delta (value 0x12) is encoded as a 2-byte varint (4012) instead of the canonical 1-byte form (12); decoders MUST accept",
-      "hex": "07000602204040120a",
+      "description": "non-canonical PUBLISH_OK — same params as with-params, but the NEW_GROUP_REQUEST parameter type delta (value 0x12) is encoded as a 2-byte varint (8012) instead of the canonical 1-byte form (12); decoders MUST accept",
+      "hex": "07000602204080120a",
       "canonical": false,
       "decoded": {
         "parameters": {
@@ -113,8 +113,8 @@
     },
     {
       "id": "with-params-noncanonical-4b-delta",
-      "description": "non-canonical PUBLISH_OK — NEW_GROUP_REQUEST parameter type delta (value 0x12) is encoded as a 4-byte varint (80000012) instead of the canonical 1-byte form (12); decoders MUST accept",
-      "hex": "070008022040800000120a",
+      "description": "non-canonical PUBLISH_OK — NEW_GROUP_REQUEST parameter type delta (value 0x12) is encoded as a 4-byte varint (e0000012) instead of the canonical 1-byte form (12); decoders MUST accept",
+      "hex": "070008022040e00000120a",
       "canonical": false,
       "decoded": {
         "parameters": {
@@ -126,8 +126,8 @@
     },
     {
       "id": "with-params-noncanonical-8b-delta",
-      "description": "non-canonical PUBLISH_OK — NEW_GROUP_REQUEST parameter type delta (value 0x12) is encoded as an 8-byte varint (c000000000000012) instead of the canonical 1-byte form (12); decoders MUST accept",
-      "hex": "07000c022040c0000000000000120a",
+      "description": "non-canonical PUBLISH_OK — NEW_GROUP_REQUEST parameter type delta (value 0x12) is encoded as an 8-byte varint (fe00000000000012) instead of the canonical 1-byte form (12); decoders MUST accept",
+      "hex": "07000c022040fe000000000000120a",
       "canonical": false,
       "decoded": {
         "parameters": {

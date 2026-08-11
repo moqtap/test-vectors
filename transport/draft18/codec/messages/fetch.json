@@ -132,7 +132,7 @@
     {
       "id": "standalone-with-fill-timeout",
       "description": "standalone FETCH with FILL_TIMEOUT parameter (5000ms, type 0x0A, new in draft-18)",
-      "hex": "160016020101046c69766505766964656f00000a00010a5388",
+      "hex": "160016020101046c69766505766964656f00000a00010a9388",
       "decoded": {
         "request_id": "2",
         "fetch_type": "1",

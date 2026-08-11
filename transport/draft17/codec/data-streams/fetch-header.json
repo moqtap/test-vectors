@@ -55,8 +55,8 @@
     },
     {
       "id": "fetch-end-of-non-existent-range",
-      "description": "fetch stream with end-of-range serialization flags 0x8C (varint-encoded as 0x408c), followed by groupId=5, objectId=10, payloadLength=0",
-      "hex": "0504408c050a00",
+      "description": "fetch stream with end-of-range serialization flags 0x8C (varint-encoded as 0x808c), followed by groupId=5, objectId=10, payloadLength=0",
+      "hex": "0504808c050a00",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
@@ -98,7 +98,7 @@
     {
       "id": "fetch-end-of-unknown-range",
       "description": "fetch stream with end-of-unknown-range serialization flags (0x10C), group_id=5, object_id=10",
-      "hex": "0504410c050a00",
+      "hex": "0504810c050a00",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
@@ -117,7 +117,7 @@
     {
       "id": "fetch-datagram-flag",
       "description": "fetch stream with DATAGRAM flag (flags=0x5c: DATAGRAM+PRIORITY+GROUP_ID+OBJECT_ID) encoding an object as datagram-like",
-      "hex": "0504405c03008004deadbeef",
+      "hex": "05045c03008004deadbeef",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
@@ -155,7 +155,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated fetch header — missing request_id",
+      "description": "truncated fetch header \u2014 missing request_id",
       "hex": "05",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

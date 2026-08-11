@@ -141,7 +141,7 @@ def validate_codec_vectors(filepath, data, draft_id=None):
         if has_decoded:
             check_protocol_ints(v["decoded"], f"[{i}].decoded", filepath, draft_id)
 
-def _dvi(data, off):
+def _dvi_quic(data, off):
     """Decode a QUIC varint at offset. Returns (value, bytes_consumed) or (None, 0)."""
     if off >= len(data):
         return None, 0
@@ -158,6 +158,40 @@ def _dvi(data, off):
     else:
         if off + 8 > len(data): return None, 0
         return struct.unpack('>Q', bytes([b & 0x3f]) + data[off + 1:off + 8])[0], 8
+
+def _dvi_moqt(data, off):
+    """Decode a MoQT varint (draft-17+ §1.4.1) at offset.
+
+    The number of leading 1 bits in the first byte gives the length; the bits
+    after the terminating 0 and any following bytes carry the value. 0xff is
+    the 9-byte form, whose first byte is prefix only.
+    """
+    if off >= len(data):
+        return None, 0
+    b = data[off]
+    if b == 0xff:
+        if off + 9 > len(data): return None, 0
+        return struct.unpack('>Q', data[off + 1:off + 9])[0], 9
+    ones = 0
+    while ones < 8 and b & (0x80 >> ones):
+        ones += 1
+    n = ones + 1
+    if off + n > len(data): return None, 0
+    value = b & ((1 << (8 - n)) - 1)
+    for i in range(1, n):
+        value = (value << 8) | data[off + i]
+    return value, n
+
+# Draft-17 replaced the RFC 9000 varint with its own encoding (§1.4.1).
+_MOQT_VARINT_FIRST_DRAFT = 17
+
+def _dvi_for(draft_id):
+    """The varint decoder this draft uses."""
+    try:
+        n = int((draft_id or '')[len('draft'):])
+    except ValueError:
+        return _dvi_quic
+    return _dvi_moqt if n >= _MOQT_VARINT_FIRST_DRAFT else _dvi_quic
 
 # Drafts where control messages use varint length framing (draft00..draft10).
 # From draft11 onward, all control messages use 16-bit BE length framing.
@@ -183,14 +217,15 @@ def validate_message_framing(filepath, data, draft_id):
             continue
 
         raw = bytes.fromhex(v['hex'])
-        t, tl = _dvi(raw, 0)
+        dvi = _dvi_for(draft_id)
+        t, tl = dvi(raw, 0)
         if t is None:
             continue
 
         use_varint = draft_id in _VARINT_FRAMED_DRAFTS
 
         if use_varint:
-            length, ll = _dvi(raw, tl)
+            length, ll = dvi(raw, tl)
             if length is None:
                 continue
             payload = raw[tl + ll:]

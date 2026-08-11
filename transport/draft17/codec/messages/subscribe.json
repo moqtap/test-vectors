@@ -91,7 +91,7 @@
     {
       "id": "with-delivery-timeout",
       "description": "SUBSCRIBE with DELIVERY_TIMEOUT parameter (5000ms)",
-      "hex": "030012010001046c69766505766964656f01025388",
+      "hex": "030012010001046c69766505766964656f01029388",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
@@ -167,7 +167,7 @@
     {
       "id": "with-rendezvous-timeout",
       "description": "SUBSCRIBE with RENDEZVOUS_TIMEOUT parameter (3000ms)",
-      "hex": "030012010001046c69766505766964656f01044bb8",
+      "hex": "030012010001046c69766505766964656f01048bb8",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
@@ -283,7 +283,7 @@
     {
       "id": "with-multiple-params",
       "description": "SUBSCRIBE with DELIVERY_TIMEOUT (5000ms), SUBSCRIBER_PRIORITY (32), and GROUP_ORDER (ascending=1)",
-      "hex": "030016010001046c69766505766964656f030253881e200201",
+      "hex": "030016010001046c69766505766964656f030293881e200201",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",

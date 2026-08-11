@@ -21,7 +21,7 @@
     {
       "id": "datagram-no-object-id",
       "description": "object datagram (type 0x04: NO object_id, priority present) with empty payload",
-      "hex": "0405406480",
+      "hex": "04056480",
       "decoded": {
         "stream_type": "datagram",
         "datagram_type": "0x04",

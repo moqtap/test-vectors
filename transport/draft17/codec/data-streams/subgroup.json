@@ -55,7 +55,7 @@
     {
       "id": "subgroup-explicit-subgroup-id",
       "description": "subgroup stream (type 0x14: explicit subgroup_id, priority present) with zero-length object",
-      "hex": "140540640340000000",
+      "hex": "1405640340000000",
       "decoded": {
         "stream_type": "subgroup",
         "header_type": "0x14",

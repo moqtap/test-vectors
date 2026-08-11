@@ -7,7 +7,7 @@
     {
       "id": "single-prefix",
       "description": "SUBSCRIBE_TRACKS with single-element prefix (new message type 0x51 in draft-18; results in PUBLISH messages for matching tracks)",
-      "hex": "4051000e01010a636f6e666572656e636500",
+      "hex": "51000e01010a636f6e666572656e636500",
       "decoded": {
         "request_id": "1",
         "namespace_prefix": [
@@ -19,7 +19,7 @@
     {
       "id": "multi-prefix",
       "description": "SUBSCRIBE_TRACKS with multi-element prefix",
-      "hex": "4051000f0302046c6976650673706f72747300",
+      "hex": "51000f0302046c6976650673706f72747300",
       "decoded": {
         "request_id": "3",
         "namespace_prefix": [
@@ -32,7 +32,7 @@
     {
       "id": "with-forward-zero",
       "description": "SUBSCRIBE_TRACKS with FORWARD parameter set to 0 (resulting PUBLISH messages will have FORWARD=0)",
-      "hex": "4051001001010a636f6e666572656e6365011000",
+      "hex": "51001001010a636f6e666572656e6365011000",
       "decoded": {
         "request_id": "1",
         "namespace_prefix": [
@@ -46,7 +46,7 @@
     {
       "id": "with-auth-token",
       "description": "SUBSCRIBE_TRACKS with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='tracks-tok')",
-      "hex": "4051001c01010a636f6e666572656e636501030c0300747261636b732d746f6b",
+      "hex": "51001c01010a636f6e666572656e636501030c0300747261636b732d746f6b",
       "decoded": {
         "request_id": "1",
         "namespace_prefix": [
@@ -64,7 +64,7 @@
     {
       "id": "empty-prefix",
       "description": "SUBSCRIBE_TRACKS with zero-element prefix (subscribes to all tracks)",
-      "hex": "40510003070000",
+      "hex": "510003070000",
       "decoded": {
         "request_id": "7",
         "namespace_prefix": [],
@@ -74,7 +74,7 @@
     {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_TRACKS — missing namespace_prefix",
-      "hex": "4051000d0101",
+      "hex": "51000d0101",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading namespace_prefix"
     }

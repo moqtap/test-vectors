@@ -197,7 +197,7 @@
     {
       "id": "redirect-new-uri",
       "description": "REQUEST_ERROR with REDIRECT (0x34, new in draft-18) including Redirect structure pointing at moqt://relay.example.com/path and a new full track name",
-      "hex": "05003e3453880c676f20656c736577686572651d6d6f71743a2f2f72656c61792e6578616d706c652e636f6d2f7061746801046c697665096e65772d766964656f",
+      "hex": "05003e3493880c676f20656c736577686572651d6d6f71743a2f2f72656c61792e6578616d706c652e636f6d2f7061746801046c697665096e65772d766964656f",
       "decoded": {
         "error_code": "52",
         "retry_interval": "5000",

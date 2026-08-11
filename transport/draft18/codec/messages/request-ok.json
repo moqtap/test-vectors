@@ -30,7 +30,7 @@
     {
       "id": "with-expires",
       "description": "REQUEST_OK with EXPIRES parameter (60000ms)",
-      "hex": "07000601088000ea60",
+      "hex": "0700050108c0ea60",
       "decoded": {
         "parameters": {
           "expires": "60000"
@@ -41,7 +41,7 @@
     {
       "id": "track-status-ok-with-properties",
       "description": "TRACK_STATUS_OK (REQUEST_OK in response to TRACK_STATUS) with LARGEST_OBJECT param and track properties — only TRACK_STATUS_OK populates Track Properties",
-      "hex": "07000a0109020f070253882e01",
+      "hex": "07000a0109020f070293882e01",
       "decoded": {
         "parameters": {
           "largest_object": {

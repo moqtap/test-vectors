@@ -17,7 +17,7 @@
     {
       "id": "with-uri-control",
       "description": "GOAWAY on control stream with new session URI 'moqt://relay/path', timeout=5000ms, request_id=8",
-      "hex": "100015116d6f71743a2f2f72656c61792f70617468538808",
+      "hex": "100015116d6f71743a2f2f72656c61792f70617468938808",
       "decoded": {
         "new_session_uri": "moqt://relay/path",
         "timeout": "5000",
@@ -27,7 +27,7 @@
     {
       "id": "request-stream-empty-uri",
       "description": "GOAWAY on an individual request stream with empty new session URI and timeout=1000ms (no request_id — migration of a single request, new in draft-18)",
-      "hex": "1000030043e8",
+      "hex": "1000030083e8",
       "decoded": {
         "new_session_uri": "",
         "timeout": "1000"
@@ -44,8 +44,8 @@
     },
     {
       "id": "non-canonical-uri-length-control",
-      "description": "non-canonical GOAWAY on control stream — URI length (0) is encoded as a 2-byte varint (4000) instead of the canonical 1-byte form (00); decoders MUST accept. Timeout and request_id remain canonical.",
-      "hex": "10000440000000",
+      "description": "non-canonical GOAWAY on control stream — URI length (0) is encoded as a 2-byte varint (8000) instead of the canonical 1-byte form (00); decoders MUST accept. Timeout and request_id remain canonical.",
+      "hex": "10000480000000",
       "canonical": false,
       "decoded": {
         "new_session_uri": "",

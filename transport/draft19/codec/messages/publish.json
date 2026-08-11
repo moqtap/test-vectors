@@ -59,7 +59,7 @@
     {
       "id": "with-expires",
       "description": "PUBLISH with EXPIRES parameter (60000ms)",
-      "hex": "1d00140101046c69766505766964656f0001088000ea60",
+      "hex": "1d00130101046c69766505766964656f000108c0ea60",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
@@ -113,7 +113,7 @@
     {
       "id": "with-track-properties",
       "description": "PUBLISH with track properties: OBJECT_DELIVERY_TIMEOUT=10000ms, MAX_CACHE_DURATION=30000ms, DEFAULT_PUBLISHER_PRIORITY=64",
-      "hex": "1d001a0101046c69766505766964656f000002671002800075300a4040",
+      "hex": "1d00180101046c69766505766964656f000002a71002c075300a40",
       "decoded": {
         "request_id": "1",
         "track_namespace": [
@@ -132,7 +132,7 @@
     {
       "id": "with-subgroup-delivery-timeout-property",
       "description": "PUBLISH with SUBGROUP_DELIVERY_TIMEOUT track property (8000ms, type 0x06, new in draft-18)",
-      "hex": "1d00120101046c69766505766964656f0000065f40",
+      "hex": "1d00120101046c69766505766964656f0000069f40",
       "decoded": {
         "request_id": "1",
         "track_namespace": [

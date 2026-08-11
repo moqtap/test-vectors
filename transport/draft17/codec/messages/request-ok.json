@@ -28,7 +28,7 @@
     {
       "id": "with-expires",
       "description": "REQUEST_OK with EXPIRES parameter (60000ms)",
-      "hex": "07000601088000ea60",
+      "hex": "0700050108c0ea60",
       "decoded": {
         "parameters": {
           "expires": "60000"

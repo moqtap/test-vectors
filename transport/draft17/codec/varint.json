@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schema/codec-vector.schema.json",
   "message_type": "varint",
-  "spec_section": "RFC 9000 §16",
+  "spec_section": "1.4.1",
   "vectors": [
     {
       "id": "1b-zero",
@@ -28,25 +28,33 @@
       }
     },
     {
-      "id": "1b-max",
-      "description": "1-byte: max (63)",
+      "id": "1b-63",
+      "description": "1-byte: 63",
       "hex": "3f",
       "decoded": {
         "value": "63"
       }
     },
     {
-      "id": "2b-min",
-      "description": "2-byte: min (64)",
-      "hex": "4040",
+      "id": "1b-max",
+      "description": "1-byte: max (127)",
+      "hex": "7f",
       "decoded": {
-        "value": "64"
+        "value": "127"
+      }
+    },
+    {
+      "id": "2b-min",
+      "description": "2-byte: min (128)",
+      "hex": "8080",
+      "decoded": {
+        "value": "128"
       }
     },
     {
       "id": "2b-15293",
       "description": "2-byte: 15293",
-      "hex": "7bbd",
+      "hex": "bbbd",
       "decoded": {
         "value": "15293"
       }
@@ -54,82 +62,195 @@
     {
       "id": "2b-max",
       "description": "2-byte: max (16383)",
-      "hex": "7fff",
+      "hex": "bfff",
       "decoded": {
         "value": "16383"
       }
     },
     {
-      "id": "4b-min",
-      "description": "4-byte: min (16384)",
-      "hex": "80004000",
+      "id": "3b-min",
+      "description": "3-byte: min (16384)",
+      "hex": "c04000",
       "decoded": {
         "value": "16384"
       }
     },
     {
-      "id": "4b-494878333",
-      "description": "4-byte: 494878333",
-      "hex": "9d7f3e7d",
+      "id": "3b-max",
+      "description": "3-byte: max (2097151)",
+      "hex": "dfffff",
+      "decoded": {
+        "value": "2097151"
+      }
+    },
+    {
+      "id": "4b-min",
+      "description": "4-byte: min (2097152)",
+      "hex": "e0200000",
+      "decoded": {
+        "value": "2097152"
+      }
+    },
+    {
+      "id": "4b-226442877",
+      "description": "4-byte: 226442877",
+      "hex": "ed7f3e7d",
+      "decoded": {
+        "value": "226442877"
+      }
+    },
+    {
+      "id": "4b-max",
+      "description": "4-byte: max (268435455)",
+      "hex": "efffffff",
+      "decoded": {
+        "value": "268435455"
+      }
+    },
+    {
+      "id": "5b-min",
+      "description": "5-byte: min (268435456)",
+      "hex": "f010000000",
+      "decoded": {
+        "value": "268435456"
+      }
+    },
+    {
+      "id": "5b-494878333",
+      "description": "5-byte: 494878333",
+      "hex": "f01d7f3e7d",
       "decoded": {
         "value": "494878333"
       }
     },
     {
-      "id": "4b-max",
-      "description": "4-byte: max (1073741823)",
-      "hex": "bfffffff",
+      "id": "5b-max",
+      "description": "5-byte: max (34359738367)",
+      "hex": "f7ffffffff",
       "decoded": {
-        "value": "1073741823"
+        "value": "34359738367"
+      }
+    },
+    {
+      "id": "6b-min",
+      "description": "6-byte: min (34359738368)",
+      "hex": "f80800000000",
+      "decoded": {
+        "value": "34359738368"
+      }
+    },
+    {
+      "id": "6b-2893212287960",
+      "description": "6-byte: 2893212287960",
+      "hex": "faa1a0e403d8",
+      "decoded": {
+        "value": "2893212287960"
+      }
+    },
+    {
+      "id": "6b-max",
+      "description": "6-byte: max (4398046511103)",
+      "hex": "fbffffffffff",
+      "decoded": {
+        "value": "4398046511103"
       }
     },
     {
       "id": "8b-min",
-      "description": "8-byte: min (1073741824)",
-      "hex": "c000000040000000",
+      "description": "8-byte: min (4398046511104)",
+      "hex": "fe00040000000000",
       "decoded": {
-        "value": "1073741824"
+        "value": "4398046511104"
+      }
+    },
+    {
+      "id": "8b-151288809941952",
+      "description": "8-byte: 151288809941952",
+      "hex": "fe008998abc66bc0",
+      "decoded": {
+        "value": "151288809941952"
+      }
+    },
+    {
+      "id": "8b-70423237261249041",
+      "description": "8-byte: 70423237261249041",
+      "hex": "fefa318fa8e3ca11",
+      "decoded": {
+        "value": "70423237261249041"
       }
     },
     {
       "id": "8b-max",
-      "description": "8-byte: max (2^62 - 1)",
-      "hex": "ffffffffffffffff",
+      "description": "8-byte: max (72057594037927935)",
+      "hex": "feffffffffffffff",
       "decoded": {
-        "value": "4611686018427387903"
+        "value": "72057594037927935"
+      }
+    },
+    {
+      "id": "9b-min",
+      "description": "9-byte: min (72057594037927936)",
+      "hex": "ff0100000000000000",
+      "decoded": {
+        "value": "72057594037927936"
+      }
+    },
+    {
+      "id": "9b-2pow62",
+      "description": "9-byte: 4611686018427387904 (2^62)",
+      "hex": "ff4000000000000000",
+      "decoded": {
+        "value": "4611686018427387904"
+      }
+    },
+    {
+      "id": "9b-max",
+      "description": "9-byte: max (2^64 - 1)",
+      "hex": "ffffffffffffffffff",
+      "decoded": {
+        "value": "18446744073709551615"
       }
     },
     {
       "id": "non-canonical-2b-zero",
       "description": "non-canonical 2-byte encoding of 0",
-      "hex": "4000",
+      "hex": "8000",
       "canonical": false,
       "decoded": {
         "value": "0"
       }
     },
     {
-      "id": "non-canonical-2b-63",
-      "description": "non-canonical 2-byte encoding of 63",
-      "hex": "403f",
+      "id": "non-canonical-2b-37",
+      "description": "non-canonical 2-byte encoding of 37",
+      "hex": "8025",
       "canonical": false,
       "decoded": {
-        "value": "63"
+        "value": "37"
       }
     },
     {
-      "id": "non-canonical-4b-63",
-      "description": "non-canonical 4-byte encoding of 63",
-      "hex": "8000003f",
+      "id": "non-canonical-3b-zero",
+      "description": "non-canonical 3-byte encoding of 0",
+      "hex": "c00000",
       "canonical": false,
       "decoded": {
-        "value": "63"
+        "value": "0"
       }
     },
     {
-      "id": "non-canonical-8b-zero",
-      "description": "non-canonical 8-byte encoding of 0",
-      "hex": "c000000000000000",
+      "id": "non-canonical-4b-127",
+      "description": "non-canonical 4-byte encoding of 127",
+      "hex": "e000007f",
+      "canonical": false,
+      "decoded": {
+        "value": "127"
+      }
+    },
+    {
+      "id": "non-canonical-9b-zero",
+      "description": "non-canonical 9-byte encoding of 0",
+      "hex": "ff0000000000000000",
       "canonical": false,
       "decoded": {
         "value": "0"
@@ -137,24 +258,38 @@
     },
     {
       "id": "truncated-2b",
-      "description": "truncated 2-byte varint",
-      "hex": "40",
+      "description": "truncated 2-byte varint — only 1 byte",
+      "hex": "80",
       "error": "incomplete",
       "error_detail": "expected 2 bytes for varint but got 1"
     },
     {
+      "id": "truncated-3b",
+      "description": "truncated 3-byte varint — only 2 bytes",
+      "hex": "c000",
+      "error": "incomplete",
+      "error_detail": "expected 3 bytes for varint but got 2"
+    },
+    {
       "id": "truncated-4b",
-      "description": "truncated 4-byte varint",
-      "hex": "800000",
+      "description": "truncated 4-byte varint — only 3 bytes",
+      "hex": "e00000",
       "error": "incomplete",
       "error_detail": "expected 4 bytes for varint but got 3"
     },
     {
-      "id": "truncated-8b",
-      "description": "truncated 8-byte varint — only 4 bytes",
-      "hex": "c0000000",
+      "id": "truncated-9b",
+      "description": "truncated 9-byte varint — only 5 bytes",
+      "hex": "ff00000000",
       "error": "incomplete",
-      "error_detail": "expected 8 bytes for varint but got 4"
+      "error_detail": "expected 9 bytes for varint but got 5"
+    },
+    {
+      "id": "invalid-7b-code-point",
+      "description": "7-byte varint — not a defined encoding length in draft-17",
+      "hex": "fc8998abc66bc0",
+      "error": "invalid_value",
+      "error_detail": "leading bits 1111110 are an invalid code point"
     }
   ]
 }

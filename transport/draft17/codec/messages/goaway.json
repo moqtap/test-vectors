@@ -16,7 +16,7 @@
     {
       "id": "with-uri",
       "description": "GOAWAY with new session URI and timeout=5000ms",
-      "hex": "100007042f6d6f715388",
+      "hex": "100007042f6d6f719388",
       "decoded": {
         "new_session_uri": "/moq",
         "timeout": "5000"
@@ -25,7 +25,7 @@
     {
       "id": "non-canonical-uri-length",
       "description": "non-canonical GOAWAY — URI length uses 2-byte varint for value 0",
-      "hex": "100003400000",
+      "hex": "100003800000",
       "canonical": false,
       "decoded": {
         "new_session_uri": "",

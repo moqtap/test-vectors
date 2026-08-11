@@ -26,7 +26,7 @@
     {
       "id": "with-delivery-timeout",
       "description": "PUBLISH_OK with DELIVERY_TIMEOUT parameter (5000ms)",
-      "hex": "1e000401025388",
+      "hex": "1e000401029388",
       "decoded": {
         "parameters": {
           "delivery_timeout": "5000"
@@ -36,7 +36,7 @@
     {
       "id": "with-expires",
       "description": "PUBLISH_OK with EXPIRES parameter (60000ms)",
-      "hex": "1e000601088000ea60",
+      "hex": "1e00050108c0ea60",
       "decoded": {
         "parameters": {
           "expires": "60000"
@@ -84,7 +84,7 @@
     {
       "id": "with-new-group-request",
       "description": "PUBLISH_OK with NEW_GROUP_REQUEST parameter (group_id=100)",
-      "hex": "1e000401324064",
+      "hex": "1e0003013264",
       "decoded": {
         "parameters": {
           "new_group_request": "100"
