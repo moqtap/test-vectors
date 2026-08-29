@@ -318,6 +318,13 @@
       }
     },
     {
+      "id": "reserved-subgroup-id-mode",
+      "description": "subgroup stream header with Type 0x16, whose SUBGROUP_ID_MODE is the reserved 0b11 — must close the session. Section 10.4.2: \"The following Type values are invalid. If an endpoint receives a stream header with any of these Type values, it MUST close the session with a PROTOCOL_VIOLATION: Type values with SUBGROUP_ID_MODE set to 0b11: 0x16, 0x17, 0x1E, 0x1F, 0x36, 0x37, 0x3E, 0x3F. This mode is reserved for future use.\" Distinct from a Type outside the defined form, which no table assigns at all; this one is inside the form and separately named invalid. The bytes after the Type are those of the subgroup-single-object vector, which decodes.",
+      "hex": "160100800004deadbeef",
+      "error": "invalid_type",
+      "error_detail": "subgroup stream Type 0x16 sets SUBGROUP_ID_MODE to the reserved 0b11"
+    },
+    {
       "id": "subgroup-truncated",
       "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
       "hex": "100100",

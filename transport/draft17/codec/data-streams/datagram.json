@@ -120,6 +120,16 @@
       }
     },
     {
+      "id": "status-datagram-with-payload",
+      "description": "status datagram carrying payload bytes — must close the session. Section 10.3.1: \"The STATUS bit (0x20) indicates whether the datagram contains an Object Status or Object Payload.\" The two occupy the same position, so the four bytes after the status are not a payload this frame can hold. Identical to the datagram-status vector with those bytes appended. Bound to the endpoint profile: a relay forwards a datagram whole and needs no part of this to find where it ends.",
+      "hex": "200100058003deadbeef",
+      "error": "payload_not_permitted",
+      "error_detail": "the datagram Type sets the STATUS bit, so the four trailing bytes are not a payload",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
       "id": "truncated",
       "description": "truncated datagram (type 0x00) — missing object_id",
       "hex": "000102",
