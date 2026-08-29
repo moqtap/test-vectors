@@ -45,19 +45,13 @@
     },
     {
       "id": "with-params-and-properties",
-      "description": "FETCH_OK with EXPIRES parameter (30ms) and track property MAX_CACHE_DURATION=30000ms",
+      "description": "FETCH_OK carrying EXPIRES (0x8), which no FETCH_OK may carry",
       "hex": "18000a000a0301081e04c07530",
-      "decoded": {
-        "end_of_track": "0",
-        "end_group": "10",
-        "end_object": "3",
-        "parameters": {
-          "expires": "30"
-        },
-        "track_properties": {
-          "max_cache_duration": "30000"
-        }
-      }
+      "error": "parameter_out_of_scope",
+      "error_detail": "EXPIRES MAY appear in SUBSCRIBE_OK, PUBLISH, PUBLISH_OK or REQUEST_OK; a FETCH_OK is none of those. Each Message Parameter definition names the message types it may appear in, and a receiving endpoint MUST close the connection with a PROTOCOL_VIOLATION when one appears elsewhere",
+      "profiles": [
+        "endpoint"
+      ]
     },
     {
       "id": "truncated",

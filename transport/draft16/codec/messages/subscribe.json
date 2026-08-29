@@ -181,24 +181,10 @@
     },
     {
       "id": "unknown-extension-param",
-      "description": "SUBSCRIBE with unknown extension parameter — must be skipped",
+      "description": "SUBSCRIBE with a Message Parameter type draft-16 does not define — must close the session. Section 9.2: \"All Message Parameters MUST be defined in the negotiated version of MOQT or negotiated via Setup Parameters. An endpoint that receives an unknown Message Parameter MUST close the session with PROTOCOL_VIOLATION.\" Drafts 11 through 15 say the opposite about the same parameters, \"Receivers MUST allow duplicates of unknown parameters\", and their vectors of this name are decode-success cases for that reason. Draft-16 narrowed that sentence to unknown Setup Parameters in the same paragraph that added this rule.",
       "hex": "0300150101046c69766505766964656f01404104deadbeef",
-      "decoded": {
-        "request_id": "1",
-        "track_namespace": [
-          "live"
-        ],
-        "track_name": "video",
-        "parameters": {
-          "unknown": [
-            {
-              "id": "0x41",
-              "length": "4",
-              "raw_hex": "deadbeef"
-            }
-          ]
-        }
-      }
+      "error": "invalid_parameter",
+      "error_detail": "message parameter type 0x41 is not defined by draft-16"
     },
     {
       "id": "truncated",

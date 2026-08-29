@@ -15,8 +15,8 @@
     },
     {
       "id": "with-params",
-      "description": "PUBLISH_OK with SUBSCRIBER_PRIORITY and GROUP_ORDER parameters",
-      "hex": "1e000703022040402201",
+      "description": "PUBLISH_OK with SUBSCRIBER_PRIORITY and GROUP_ORDER parameters. Draft-16 Section 1.4.2 encodes a Key-Value-Pair Type as a delta from the previous Type, so GROUP_ORDER 0x22 follows SUBSCRIBER_PRIORITY 0x20 on the wire as 0x02",
+      "hex": "1e000703022040400201",
       "decoded": {
         "request_id": "3",
         "parameters": {

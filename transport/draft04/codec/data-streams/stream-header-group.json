@@ -25,8 +25,8 @@
     },
     {
       "id": "with-end-of-group",
-      "description": "STREAM_HEADER_GROUP with objects including EndOfGroup status",
-      "hex": "4051010200000004deadbeef0102cafe050003",
+      "description": "STREAM_HEADER_GROUP ending at Object ID 2, one greater than the largest object produced in the group, as Section 6.11.1.1 requires of an End of Group marker",
+      "hex": "4051010200000004deadbeef0102cafe020003",
       "decoded": {
         "stream_type": "group",
         "subscribe_id": "1",
@@ -45,7 +45,7 @@
             "payload_hex": "cafe"
           },
           {
-            "object_id": "5",
+            "object_id": "2",
             "payload_length": "0",
             "object_status": "3"
           }
@@ -54,22 +54,17 @@
     },
     {
       "id": "with-end-of-track",
-      "description": "STREAM_HEADER_GROUP with normal object then EndOfTrackAndGroup status",
-      "hex": "4051010200000004deadbeef050004",
+      "description": "STREAM_HEADER_GROUP opened on group 1 carrying only an EndOfTrackAndGroup marker at Object ID 0. Section 6.11.1.1 puts the marker one group past the largest produced, which a group stream can express only by opening that group and sending nothing else on it",
+      "hex": "405101020100000004",
       "decoded": {
         "stream_type": "group",
         "subscribe_id": "1",
         "track_alias": "2",
-        "group_id": "0",
+        "group_id": "1",
         "object_send_order": "0",
         "objects": [
           {
             "object_id": "0",
-            "payload_length": "4",
-            "payload_hex": "deadbeef"
-          },
-          {
-            "object_id": "5",
             "payload_length": "0",
             "object_status": "4"
           }

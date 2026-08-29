@@ -16,7 +16,7 @@
     {
       "id": "with-largest-object",
       "description": "REQUEST_OK with LARGEST_OBJECT parameter (group=10, object=3) — typically a REQUEST_UPDATE_OK",
-      "hex": "0700050109020a03",
+      "hex": "07000401090a03",
       "decoded": {
         "parameters": {
           "largest_object": {
@@ -41,7 +41,7 @@
     {
       "id": "track-status-ok-with-properties",
       "description": "TRACK_STATUS_OK (REQUEST_OK in response to TRACK_STATUS) with LARGEST_OBJECT param and track properties — only TRACK_STATUS_OK populates Track Properties",
-      "hex": "07000a0109020f070293882e01",
+      "hex": "07000901090f070293882e01",
       "decoded": {
         "parameters": {
           "largest_object": {

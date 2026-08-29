@@ -10,6 +10,15 @@ Checks:
    (varint framing for draft00..10, 16-bit BE for draft11+)
 6. Every version directory has a meta.json
 7. meta.json entries are consistent with manifest.json
+8. Vector fields, error categories and conformance profiles are ones the
+   schema names
+
+The last one overlaps validate-schema.mjs, which does it properly through ajv.
+It is repeated here because this script has no dependencies and that one needs
+npm install, so this is the check that runs by default — and a category
+misspelled by a letter is invisible to a consumer, which compares the vector's
+category against its own answer and reports a decoder refusing the bytes for a
+reason that does not exist.
 """
 
 import json
@@ -96,6 +105,22 @@ def check_protocol_ints(obj, path, filename, draft_id=None):
         for i, item in enumerate(obj):
             check_protocol_ints(item, f"{path}[{i}]", filename, draft_id)
 
+# The schema is the authority on field names, error categories and profiles;
+# read it rather than restating it, so a change upstream cannot be contradicted
+# here in silence.
+def _load_vector_schema():
+    path = os.path.join(REPO_ROOT, "schema", "codec-vector.schema.json")
+    with open(path) as f:
+        vector = json.load(f)["$defs"]["vector"]
+    return (
+        set(vector["properties"]),
+        set(vector["properties"]["error"]["enum"]),
+        set(vector["properties"]["profiles"]["items"]["enum"]),
+    )
+
+
+VECTOR_FIELDS, ERROR_CATEGORIES, PROFILES = _load_vector_schema()
+
 ID_PATTERN = re.compile(r"^[a-z0-9-]+$")
 
 def validate_vector_ids(filepath, vectors):
@@ -136,6 +161,28 @@ def validate_codec_vectors(filepath, data, draft_id=None):
             err(f"{filepath}: [{i}] '{desc}' has both decoded and error")
         elif not has_decoded and not has_error:
             err(f"{filepath}: [{i}] '{desc}' has neither decoded nor error")
+
+        # Check the vector against the shape the schema declares
+        extra = set(v) - VECTOR_FIELDS
+        if extra:
+            err(f"{filepath}: [{i}] '{desc}' carries {sorted(extra)}, which the schema does not declare")
+        if has_error and v["error"] not in ERROR_CATEGORIES:
+            err(f"{filepath}: [{i}] '{desc}' claims error category {v['error']!r}, which the schema does not name")
+
+        profiles = v.get("profiles")
+        if profiles is not None:
+            if not isinstance(profiles, list) or not profiles:
+                err(f"{filepath}: [{i}] '{desc}' profiles must be a non-empty list")
+            else:
+                if len(set(profiles)) != len(profiles):
+                    err(f"{filepath}: [{i}] '{desc}' names a profile twice")
+                for name in profiles:
+                    if name not in PROFILES:
+                        err(f"{filepath}: [{i}] '{desc}' names profile {name!r}, which the schema does not admit")
+            if has_decoded:
+                err(f"{filepath}: [{i}] '{desc}' names profiles and decodes; bytes decode the same for every reader")
+            if v.get("error") == "incomplete":
+                err(f"{filepath}: [{i}] '{desc}' restricts a truncation to some readers; a frame that ended early ended early for everyone")
 
         # Check protocol integers in decoded
         if has_decoded:

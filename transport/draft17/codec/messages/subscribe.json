@@ -299,6 +299,13 @@
       }
     },
     {
+      "id": "unknown-extension-param",
+      "description": "SUBSCRIBE with a Message Parameter type draft-17 does not define — must close the session. Section 9.3: \"All Message Parameters MUST be defined in the negotiated version of MOQT or negotiated via Setup Options. An endpoint that receives an unknown Message Parameter MUST close the session with PROTOCOL_VIOLATION. Because the receiver has to understand every Message Parameter, there is no need for a mechanism to skip unknown parameters.\" The rule arrived at draft-16; drafts 14 and 15 carry a vector of this name that decodes successfully, because their text says a receiver ignores an unrecognized parameter.",
+      "hex": "030015010001046c69766505766964656f014104deadbeef",
+      "error": "invalid_parameter",
+      "error_detail": "message parameter type 0x41 is not defined by draft-17"
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE — missing track_name",
       "hex": "03000e010001046c697665",

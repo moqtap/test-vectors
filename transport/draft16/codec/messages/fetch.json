@@ -67,8 +67,8 @@
     },
     {
       "id": "with-params",
-      "description": "standalone FETCH with SUBSCRIBER_PRIORITY=128 and GROUP_ORDER=ascending",
-      "hex": "160018020101046c69766505766964656f00000a00022040802201",
+      "description": "standalone FETCH with SUBSCRIBER_PRIORITY=128 and GROUP_ORDER=ascending. Draft-16 Section 1.4.2 encodes a Key-Value-Pair Type as a delta from the previous Type, so GROUP_ORDER 0x22 follows SUBSCRIBER_PRIORITY 0x20 on the wire as 0x02",
+      "hex": "160018020101046c69766505766964656f00000a00022040800201",
       "decoded": {
         "request_id": "2",
         "fetch_type": "1",

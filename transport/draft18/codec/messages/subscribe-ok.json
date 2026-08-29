@@ -17,7 +17,7 @@
     {
       "id": "with-largest-object",
       "description": "SUBSCRIBE_OK with LARGEST_OBJECT parameter (group=10, object=3)",
-      "hex": "040006050109020a03",
+      "hex": "0400050501090a03",
       "decoded": {
         "track_alias": "5",
         "parameters": {

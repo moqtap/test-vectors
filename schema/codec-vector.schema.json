@@ -4,7 +4,10 @@
   "title": "MoQT Codec Test Vector File",
   "description": "A collection of codec test vectors pairing hex-encoded wire bytes with expected decoded representations or errors.",
   "type": "object",
-  "required": ["message_type", "vectors"],
+  "required": [
+    "message_type",
+    "vectors"
+  ],
   "properties": {
     "$schema": {
       "type": "string"
@@ -33,7 +36,11 @@
   "$defs": {
     "vector": {
       "type": "object",
-      "required": ["id", "description", "hex"],
+      "required": [
+        "id",
+        "description",
+        "hex"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -60,22 +67,57 @@
         },
         "error": {
           "type": "string",
-          "enum": ["incomplete", "invalid_value", "invalid_parameter", "missing_parameter", "duplicate_parameter", "unknown_message"],
-          "description": "Error category for invalid vectors."
+          "enum": [
+            "incomplete",
+            "unknown_message",
+            "invalid_type",
+            "invalid_value",
+            "invalid_parameter",
+            "parameter_out_of_scope",
+            "duplicate_parameter",
+            "missing_parameter",
+            "payload_not_permitted"
+          ],
+          "description": "Error category for invalid vectors. Names the kind of complaint a conforming decoder must make, not the specific error it raises: there is more than one defensible way to notice most of these, and a vector is evidence about the protocol rather than about a particular parser. incomplete: The frame ended early. Nothing about the bytes present is wrong; there are not enough of them. unknown_message: The frame begins with a type code this version assigns to nothing - a control message, a data stream or a datagram. invalid_type: The type code is inside the form the version defines and is one the version separately names as invalid, such as a reserved bit combination. Distinct from unknown_message, which is about a code no table assigns at all. invalid_value: A field holds a value the version does not allow it. invalid_parameter: A parameter is wrong in itself: its type, its length, its value's range, or its position in a delta-coded run. parameter_out_of_scope: A parameter is well formed and appears in a message its own definition does not name. Only versions that require a receiver to reject it use this; earlier ones say such a parameter is ignored, and there is nothing to assert. duplicate_parameter: A parameter type appears twice where the version forbids repeating it. missing_parameter: A parameter the message requires is absent. payload_not_permitted: An object carries a payload where its status or its framing leaves no room for one."
         },
         "error_detail": {
           "type": "string",
           "description": "Optional human-readable detail about the expected failure."
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "endpoint",
+              "forwarder"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Which conformance profiles this vector's expectation binds. Omitted means both. 'endpoint' is a consumer bound by every rule the specification states for a receiver; 'forwarder' is one that carries bytes between endpoints and is bound only by what it must parse to find where a frame ends. A vector asserting that bytes MUST be refused can be true of the first and not of the second, and a corpus that cannot say so makes the second fail tests it was never meant to pass. A consumer runs the vectors naming its profile and should count what it leaves out rather than passing over it quietly: a profile is a claim about which rules apply, not a way to make a failing vector go away."
         }
       },
       "oneOf": [
         {
-          "required": ["decoded"],
-          "not": { "required": ["error"] }
+          "required": [
+            "decoded"
+          ],
+          "not": {
+            "required": [
+              "error"
+            ]
+          }
         },
         {
-          "required": ["error"],
-          "not": { "required": ["decoded"] }
+          "required": [
+            "error"
+          ],
+          "not": {
+            "required": [
+              "decoded"
+            ]
+          }
         }
       ],
       "additionalProperties": false

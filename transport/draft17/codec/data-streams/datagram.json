@@ -76,16 +76,15 @@
     },
     {
       "id": "datagram-with-empty-properties",
-      "description": "object datagram (type 0x01: PROPERTIES set, object_id present, priority present) with empty properties and 4-byte payload",
-      "hex": "010100008000deadbeef",
+      "description": "object datagram carrying no properties (type 0x00: PROPERTIES clear, object_id present, priority present) with a 4-byte payload. Draft-17 Section 10.3.1 says an endpoint that receives a datagram with the PROPERTIES bit set and a Properties Length of 0 MUST close the session with a PROTOCOL_VIOLATION, so an object with no properties leaves the bit clear and omits the field entirely",
+      "hex": "0001000080deadbeef",
       "decoded": {
         "stream_type": "datagram",
-        "datagram_type": "0x01",
+        "datagram_type": "0x00",
         "track_alias": "1",
         "group_id": "0",
         "object_id": "0",
         "publisher_priority": "128",
-        "object_properties": {},
         "payload_hex": "deadbeef"
       }
     },

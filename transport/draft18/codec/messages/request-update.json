@@ -86,7 +86,7 @@
     {
       "id": "with-track-namespace-prefix",
       "description": "REQUEST_UPDATE with TRACK_NAMESPACE_PREFIX parameter (new in draft-18) to update a SUBSCRIBE_NAMESPACE/SUBSCRIBE_TRACKS prefix",
-      "hex": "0200110701340d02046c6976650673706f727473",
+      "hex": "02001007013402046c6976650673706f727473",
       "decoded": {
         "request_id": "7",
         "parameters": {

@@ -87,6 +87,8 @@ Every vector file is a JSON object with a `vectors` array. Each vector has a uni
 
 Valid vectors have a `decoded` object. Invalid vectors have an `error` category and optional `error_detail`. These are mutually exclusive, enforced by JSON Schema.
 
+The `error` category names the kind of complaint a decoder must make, and `profiles` names which consumers a vector's expectation binds. Both are defined in [`schema/codec-vector.schema.json`](schema/codec-vector.schema.json), which is also what the validator reads.
+
 ## Design decisions
 
 **Integers as strings.** All protocol integer values — VarInts, fixed-width 8-bit fields, error codes, status codes — are JSON strings unconditionally. This avoids IEEE 754 precision loss for 64-bit values and eliminates type-checking ambiguity across languages. Same convention as Protocol Buffers' JSON mapping for `uint64`.
@@ -149,14 +151,14 @@ Coverage spans drafts 00 through 19. Drafts 00–06 use an earlier wire format (
 | MoQ Transport | draft-09 | 27 control messages | 4 stream types | 154 |
 | MoQ Transport | draft-10 | 27 control messages | 4 stream types | 154 |
 | MoQ Transport | draft-11 | 27 control messages | 3 stream types | 158 |
-| MoQ Transport | draft-12 | 30 control messages | 3 stream types | 188 |
+| MoQ Transport | draft-12 | 30 control messages | 3 stream types | 189 |
 | MoQ Transport | draft-13 | 31 control messages | 3 stream types | 212 |
 | MoQ Transport | draft-14 | 31 control messages | 3 stream types | 227 |
-| MoQ Transport | draft-15 | 24 control messages | 3 stream types | 175 |
+| MoQ Transport | draft-15 | 24 control messages | 3 stream types | 176 |
 | MoQ Transport | draft-16 | 25 control messages | 3 stream types | 188 |
-| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 206 |
-| MoQ Transport | draft-18 | 20 control messages | 3 stream types | 234 |
-| MoQ Transport | draft-19 | 20 control messages | 3 stream types | 249 |
+| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 207 |
+| MoQ Transport | draft-18 | 20 control messages | 3 stream types | 235 |
+| MoQ Transport | draft-19 | 20 control messages | 3 stream types | 250 |
 
 ## Scope
 

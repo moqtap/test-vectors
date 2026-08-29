@@ -45,16 +45,13 @@
     },
     {
       "id": "with-largest-object",
-      "description": "PUBLISH_OK with LARGEST_OBJECT parameter (group=20, object=5)",
+      "description": "PUBLISH_OK carrying LARGEST_OBJECT (0x9), which no PUBLISH_OK may carry",
       "hex": "1e000401091405",
-      "decoded": {
-        "parameters": {
-          "largest_object": {
-            "group": "20",
-            "object": "5"
-          }
-        }
-      }
+      "error": "parameter_out_of_scope",
+      "error_detail": "LARGEST_OBJECT MAY appear in SUBSCRIBE_OK, PUBLISH or REQUEST_OK; on this draft PUBLISH_OK is a message type of its own rather than a REQUEST_OK. Each Message Parameter definition names the message types it may appear in, and a receiving endpoint MUST close the connection with a PROTOCOL_VIOLATION when one appears elsewhere",
+      "profiles": [
+        "endpoint"
+      ]
     },
     {
       "id": "with-forward",

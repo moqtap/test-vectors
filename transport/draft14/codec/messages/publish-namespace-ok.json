@@ -6,19 +6,18 @@
   "vectors": [
     {
       "id": "basic",
-      "description": "PUBLISH_NAMESPACE_OK with request ID 1, no parameters",
-      "hex": "0700020100",
+      "description": "PUBLISH_NAMESPACE_OK with request ID 1",
+      "hex": "07000101",
       "decoded": {
-        "request_id": "1",
-        "parameters": {}
+        "request_id": "1"
       }
     },
     {
       "id": "truncated",
-      "description": "truncated PUBLISH_NAMESPACE_OK — missing parameter count",
-      "hex": "07000201",
+      "description": "truncated PUBLISH_NAMESPACE_OK — declares one payload byte and carries none",
+      "hex": "070001",
       "error": "incomplete",
-      "error_detail": "unexpected end of input while reading parameter count"
+      "error_detail": "unexpected end of input while reading the request ID"
     }
   ]
 }

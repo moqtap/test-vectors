@@ -53,7 +53,6 @@
     {
       "id": "fetch-zero-payload-status",
       "description": "fetch stream with one zero-payload object (status=3, end of group)",
-      "canonical": false,
       "hex": "050200000180000003",
       "decoded": {
         "stream_type": "fetch_header",

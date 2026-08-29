@@ -63,8 +63,8 @@
     },
     {
       "id": "datagram-with-extensions",
-      "description": "object datagram (type 0x01: extensions present, object_id present, priority present) with empty extensions and 4-byte payload",
-      "hex": "010102008000deadbeef",
+      "description": "object datagram (type 0x01: extensions present, object_id present, priority present) with one extension header and a 4-byte payload. The extension block is non-empty because Section 10.3.1 makes an Extension Headers Length of 0 on a datagram whose type announces extensions a session-closing offence.",
+      "hex": "010102008002102adeadbeef",
       "decoded": {
         "stream_type": "datagram",
         "datagram_type": "0x01",
@@ -72,7 +72,20 @@
         "group_id": "2",
         "object_id": "0",
         "publisher_priority": "128",
-        "extension_headers": {},
+        "extension_headers": [{ "type": "16", "value": "42" }],
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "datagram-default-priority",
+      "description": "object datagram (type 0x08: no end-of-group, no extensions, object_id present, Priority Present No) with 4-byte payload — the Publisher Priority field is omitted and the object inherits the priority the control message that established the subscription specified",
+      "hex": "08010200deadbeef",
+      "decoded": {
+        "stream_type": "datagram",
+        "datagram_type": "0x08",
+        "track_alias": "1",
+        "group_id": "2",
+        "object_id": "0",
         "payload_hex": "deadbeef"
       }
     },

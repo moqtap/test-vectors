@@ -33,12 +33,43 @@
       }
     },
     {
+      "id": "datagram-end-of-group",
+      "description": "object datagram (type 0x02, end of group, no extensions) with 2-byte payload",
+      "hex": "0201030580cafe",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "2",
+        "track_alias": "1",
+        "group_id": "3",
+        "object_id": "5",
+        "publisher_priority": "128",
+        "end_of_group": true,
+        "payload_hex": "cafe"
+      }
+    },
+    {
+      "id": "datagram-eog-with-extensions",
+      "description": "object datagram (type 0x03, end of group, with extensions) with 4-byte payload",
+      "hex": "030103058006022a0302cafedeadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "3",
+        "track_alias": "1",
+        "group_id": "3",
+        "object_id": "5",
+        "publisher_priority": "128",
+        "extension_headers_hex": "022a0302cafe",
+        "end_of_group": true,
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
       "id": "datagram-status",
-      "description": "object datagram status (type 0x02, no extensions) signaling end of group",
-      "hex": "020100058003",
+      "description": "object datagram status (type 0x04, no extensions) signaling end of group",
+      "hex": "040100058003",
       "decoded": {
         "stream_type": "object_datagram_status",
-        "stream_type_id": "2",
+        "stream_type_id": "4",
         "track_alias": "1",
         "group_id": "0",
         "object_id": "5",
@@ -63,11 +94,11 @@
     },
     {
       "id": "datagram-status-does-not-exist",
-      "description": "object datagram status (type 0x02) signaling object does not exist (status 0x1)",
-      "hex": "020105078001",
+      "description": "object datagram status (type 0x04) signaling object does not exist (status 0x1)",
+      "hex": "040105078001",
       "decoded": {
         "stream_type": "object_datagram_status",
-        "stream_type_id": "2",
+        "stream_type_id": "4",
         "track_alias": "1",
         "group_id": "5",
         "object_id": "7",
@@ -77,11 +108,11 @@
     },
     {
       "id": "datagram-status-end-of-track-and-group",
-      "description": "object datagram status (type 0x02) signaling end of track and group (status 0x4)",
-      "hex": "02010a068004",
+      "description": "object datagram status (type 0x04) carrying End of Track (status 0x4), in the form where the Group ID is the largest group produced and the Object ID is one greater than the largest object in that group (draft-12 Section 9.2.1.1)",
+      "hex": "04010a068004",
       "decoded": {
         "stream_type": "object_datagram_status",
-        "stream_type_id": "2",
+        "stream_type_id": "4",
         "track_alias": "1",
         "group_id": "10",
         "object_id": "6",
@@ -91,25 +122,25 @@
     },
     {
       "id": "datagram-status-end-of-track",
-      "description": "object datagram status (type 0x02) signaling end of track (status 0x5)",
-      "hex": "02010b008005",
+      "description": "object datagram status (type 0x04) carrying End of Track (status 0x4), in the form where the Group ID is one greater than the largest group produced and the Object ID is zero (draft-12 Section 9.2.1.1)",
+      "hex": "04010b008004",
       "decoded": {
         "stream_type": "object_datagram_status",
-        "stream_type_id": "2",
+        "stream_type_id": "4",
         "track_alias": "1",
         "group_id": "11",
         "object_id": "0",
         "publisher_priority": "128",
-        "object_status": "5"
+        "object_status": "4"
       }
     },
     {
       "id": "datagram-status-with-extensions",
-      "description": "object datagram status (type 0x03) with 2 extensions and end-of-group status",
-      "hex": "030100008006022a0302cafe03",
+      "description": "object datagram status (type 0x05) with 2 extensions and end-of-group status",
+      "hex": "050100008006022a0302cafe03",
       "decoded": {
         "stream_type": "object_datagram_status",
-        "stream_type_id": "3",
+        "stream_type_id": "5",
         "track_alias": "1",
         "group_id": "0",
         "object_id": "0",

@@ -144,7 +144,7 @@
     },
     {
       "id": "subgroup-end-of-track-and-group",
-      "description": "subgroup stream terminated by end-of-track-and-group marker (status 0x4)",
+      "description": "subgroup stream terminated by an End of Track marker (status 0x4) at Group ID 0, Object ID 1, one greater than the largest object on the stream. Draft-11 Section 9.1.1.1 assigns 0x4 to End of Track and defines no separate End of Track and Group status",
       "hex": "080100800004deadbeef010004",
       "decoded": {
         "stream_type": "subgroup_header",
@@ -170,25 +170,20 @@
     },
     {
       "id": "subgroup-end-of-track",
-      "description": "subgroup stream terminated by end-of-track marker (status 0x5)",
-      "hex": "080100800004deadbeef010005",
+      "description": "subgroup stream carrying only an End of Track marker (status 0x4) at Group ID 11, Object ID 0 — the encoding draft-11 Section 9.1.1.1 describes as a Group ID one greater than the largest group produced with an Object ID of zero",
+      "hex": "08010b80000004",
       "decoded": {
         "stream_type": "subgroup_header",
         "stream_type_id": "8",
         "track_alias": "1",
-        "group_id": "0",
+        "group_id": "11",
         "subgroup_id": "0",
         "publisher_priority": "128",
         "objects": [
           {
             "object_id": "0",
-            "payload_length": "4",
-            "payload_hex": "deadbeef"
-          },
-          {
-            "object_id": "1",
             "payload_length": "0",
-            "object_status": "5",
+            "object_status": "4",
             "payload_hex": ""
           }
         ]

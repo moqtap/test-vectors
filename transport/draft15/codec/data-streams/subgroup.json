@@ -111,11 +111,11 @@
     },
     {
       "id": "subgroup-end-of-group",
-      "description": "subgroup stream (type 0x12: end-of-group flag set, priority present) with one 4-byte object",
-      "hex": "120105800004deadbeef",
+      "description": "subgroup stream (type 0x18: end-of-group marker set, Subgroup ID mode zero, priority present) with one 4-byte object. Draft-15 Section 10.4.2 Table 6 puts the end-of-group marker at 0x08 and uses 0x06 as a two-bit Subgroup ID mode, so 0x18 is the end-of-group form of 0x10; type 0x12 is mode 0b01, where the Subgroup ID is the first object's Object ID and is not transmitted",
+      "hex": "180105800004deadbeef",
       "decoded": {
         "stream_type": "subgroup",
-        "header_type": "0x12",
+        "header_type": "0x18",
         "track_alias": "1",
         "group_id": "5",
         "subgroup_id": "0",
@@ -263,7 +263,7 @@
     },
     {
       "id": "subgroup-extensions-status-object",
-      "description": "subgroup stream (type 0x11: extensions present) with one status-only object (End of Group) carrying a non-empty extensions blob",
+      "description": "subgroup stream (type 0x11: extensions present) with one status-only object (End of Group) carrying a non-empty extensions blob. Draft-15 Section 10.2.1.2 allows extension headers only on an object whose status is Normal and requires an endpoint receiving them on any other status to close the session with a PROTOCOL_VIOLATION. The frame is well formed, so this is a case a decoder is expected to parse and then report as a violation, not one it fails to read",
       "hex": "1101008000023c010003",
       "decoded": {
         "stream_type": "subgroup",

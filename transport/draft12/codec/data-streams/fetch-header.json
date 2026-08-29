@@ -56,7 +56,6 @@
     {
       "id": "fetch-zero-payload-status",
       "description": "fetch stream with one zero-payload object (status=3, end of group)",
-      "canonical": false,
       "hex": "050200000180000003",
       "decoded": {
         "stream_type": "fetch_header",
@@ -98,7 +97,7 @@
     },
     {
       "id": "fetch-end-of-track-and-group",
-      "description": "fetch stream with end-of-track-and-group marker (status 0x4)",
+      "description": "fetch stream with an End of Track marker (status 0x4) at Group ID 10, Object ID 0. Draft-12 Section 9.2.1.1 assigns 0x4 to End of Track and defines no separate End of Track and Group status",
       "hex": "05020a000080000004",
       "decoded": {
         "stream_type": "fetch_header",
@@ -119,8 +118,8 @@
     },
     {
       "id": "fetch-end-of-track",
-      "description": "fetch stream with end-of-track marker (status 0x5)",
-      "hex": "05020b000080000005",
+      "description": "fetch stream with an End of Track marker (status 0x4) at Group ID 11, Object ID 0 — the encoding draft-12 Section 9.2.1.1 describes as a Group ID one greater than the largest group produced with an Object ID of zero",
+      "hex": "05020b000080000004",
       "decoded": {
         "stream_type": "fetch_header",
         "request_id": "2",
@@ -132,7 +131,7 @@
             "publisher_priority": "128",
             "extension_headers_length": "0",
             "payload_length": "0",
-            "object_status": "5",
+            "object_status": "4",
             "payload_hex": ""
           }
         ]

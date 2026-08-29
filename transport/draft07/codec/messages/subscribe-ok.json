@@ -7,11 +7,11 @@
     {
       "id": "no-content",
       "description": "SUBSCRIBE_OK with no content",
-      "hex": "04050200000000",
+      "hex": "04050200010000",
       "decoded": {
         "subscribe_id": "2",
         "expires": "0",
-        "group_order": "0",
+        "group_order": "1",
         "content_exists": "0",
         "parameters": {}
       }

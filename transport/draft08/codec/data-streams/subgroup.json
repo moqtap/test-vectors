@@ -139,23 +139,16 @@
     },
     {
       "id": "subgroup-end-of-track",
-      "description": "subgroup stream terminated by end-of-track marker (status 0x5)",
+      "description": "subgroup stream carrying the end-of-track marker (status 0x5): a group beyond the last one produced, holding one object at object id 0",
       "decoded": {
         "stream_type": "stream_header_subgroup",
         "track_alias": "1",
-        "group_id": "0",
+        "group_id": "11",
         "subgroup_id": "0",
         "publisher_priority": "128",
         "objects": [
           {
             "object_id": "0",
-            "extension_count": "0",
-            "object_status": "0",
-            "payload_length": "4",
-            "payload_hex": "deadbeef"
-          },
-          {
-            "object_id": "1",
             "extension_count": "0",
             "object_status": "5",
             "payload_length": "0",
@@ -163,7 +156,7 @@
           }
         ]
       },
-      "hex": "0401000080000004deadbeef01000005"
+      "hex": "04010b008000000005"
     },
     {
       "id": "subgroup-with-extensions",

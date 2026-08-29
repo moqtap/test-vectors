@@ -7,12 +7,12 @@
     {
       "id": "no-content",
       "description": "minimal SUBSCRIBE_OK with no content",
-      "hex": "040006010000000000",
+      "hex": "040006010000010000",
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
         "expires": "0",
-        "group_order": "0",
+        "group_order": "1",
         "content_exists": "0",
         "parameters": {}
       }

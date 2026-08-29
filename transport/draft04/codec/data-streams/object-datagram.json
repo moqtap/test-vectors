@@ -21,13 +21,13 @@
     },
     {
       "id": "end-of-track",
-      "description": "OBJECT_DATAGRAM with EndOfTrackAndGroup status (4), no payload",
-      "hex": "010102000a0004",
+      "description": "OBJECT_DATAGRAM carrying an EndOfTrackAndGroup marker at Group ID 1, one greater than the largest group produced, with Object ID 0, as Section 6.11.1.1 requires",
+      "hex": "01010201000004",
       "decoded": {
         "subscribe_id": "1",
         "track_alias": "2",
-        "group_id": "0",
-        "object_id": "10",
+        "group_id": "1",
+        "object_id": "0",
         "object_send_order": "0",
         "object_status": "4",
         "payload_length": "0"
