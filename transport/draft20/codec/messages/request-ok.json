@@ -1,0 +1,129 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "request_ok",
+  "message_type_id": "0x07",
+  "spec_section": "10.5",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "REQUEST_OK with no parameters and empty Track Properties (used as a PUBLISH_OK alias and for other request responses)",
+      "hex": "07000100",
+      "decoded": {
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "REQUEST_OK with LARGEST_OBJECT parameter (group=10, object=3) — typically a REQUEST_UPDATE_OK",
+      "hex": "07000401090a03",
+      "decoded": {
+        "parameters": {
+          "largest_object": {
+            "group": "10",
+            "object": "3"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "REQUEST_OK with EXPIRES parameter (60000ms)",
+      "hex": "0700050108c0ea60",
+      "decoded": {
+        "parameters": {
+          "expires": "60000"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-expires-and-largest-object",
+      "description": "REQUEST_UPDATE_OK carrying EXPIRES (60000ms) and LARGEST_OBJECT (group=10, object=3); demonstrates type-delta ordering (0x08 then a delta of 1 to 0x09)",
+      "hex": "0700080208c0ea60010a03",
+      "decoded": {
+        "parameters": {
+          "expires": "60000",
+          "largest_object": {
+            "group": "10",
+            "object": "3"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "track-status-ok-with-properties",
+      "description": "TRACK_STATUS_OK (REQUEST_OK in response to TRACK_STATUS) with LARGEST_OBJECT param and track properties",
+      "hex": "07000901090f070293882e01",
+      "decoded": {
+        "parameters": {
+          "largest_object": {
+            "group": "15",
+            "object": "7"
+          }
+        },
+        "track_properties": {
+          "object_delivery_timeout": "5000",
+          "dynamic_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "with-params-noncanonical-2b-delta",
+      "description": "non-canonical REQUEST_OK — same parameters as with-expires-and-largest-object, but the LARGEST_OBJECT parameter type delta (value 1) is encoded as a 2-byte varint (8001) instead of the canonical 1-byte form (01); decoders MUST accept",
+      "hex": "0700090208c0ea6080010a03",
+      "canonical": false,
+      "decoded": {
+        "parameters": {
+          "expires": "60000",
+          "largest_object": {
+            "group": "10",
+            "object": "3"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-params-noncanonical-4b-delta",
+      "description": "non-canonical REQUEST_OK — same parameters as with-expires-and-largest-object, but the LARGEST_OBJECT parameter type delta (value 1) is encoded as a 4-byte varint (e0000001) instead of the canonical 1-byte form (01); decoders MUST accept",
+      "hex": "07000b0208c0ea60e00000010a03",
+      "canonical": false,
+      "decoded": {
+        "parameters": {
+          "expires": "60000",
+          "largest_object": {
+            "group": "10",
+            "object": "3"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-params-noncanonical-8b-delta",
+      "description": "non-canonical REQUEST_OK — same parameters as with-expires-and-largest-object, but the LARGEST_OBJECT parameter type delta (value 1) is encoded as a 8-byte varint (fe00000000000001) instead of the canonical 1-byte form (01); decoders MUST accept",
+      "hex": "07000f0208c0ea60fe000000000000010a03",
+      "canonical": false,
+      "decoded": {
+        "parameters": {
+          "expires": "60000",
+          "largest_object": {
+            "group": "10",
+            "object": "3"
+          }
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUEST_OK — missing parameter count",
+      "hex": "070001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

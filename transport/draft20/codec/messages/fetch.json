@@ -1,0 +1,382 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch",
+  "message_type_id": "0x16",
+  "spec_section": "10.13",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal FETCH with no parameters. Draft-20 deleted the Fetch Type field, the Standalone Fetch and Joining Fetch structures and the inline Start/End Location: Track Namespace and Track Name are now inline fields of FETCH itself and the range travels in the LOCATION_FILTER parameter. A FETCH with no LOCATION_FILTER covers {0,0} through Largest Object inclusive. The codepoint 0x16 did not change, so a draft-19 decoder reads the Number of Track Namespace Fields count as a Fetch Type and mis-parses in silence",
+      "hex": "16000e0201046c69766505766964656f00",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-namespace",
+      "description": "FETCH with multi-element namespace",
+      "hex": "16001b04020a636f6e666572656e636506726f6f6d343205617564696f00",
+      "decoded": {
+        "request_id": "4",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-filter-relative-next-group",
+      "description": "FETCH with a one-field LOCATION_FILTER (StartGroup=0): the relative form, starting at the Next Group. The relative one-field form is new capability with no draft-19 analogue beyond the deleted Relative Joining Fetch. Draft-20 deleted the Filter Type enum (draft-19's 0x1 Next Group Start / 0x2 Largest Object / 0x3 AbsoluteStart / 0x4 AbsoluteRange) and derives the filter's shape from how many vi64 fields the value holds (Section 5.1.2). The draft says \"Length (in bytes) determines how many optional vi64 fields are present\", which is not implementable as written because vi64s are 1-9 bytes and need not be minimal (Section 1.4.1); the round-trippable rule, and the one this corpus encodes, is to decode vi64 values until exactly Length bytes are consumed and then switch on the count.",
+      "hex": "1600110201046c69766505766964656f01210100",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "location_filter": {
+            "start_group": "0"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-relative-three-groups-back",
+      "description": "FETCH with a one-field LOCATION_FILTER (StartGroup=3), starting 2 groups before the current group. On a Fetch an omitted end means EndGroup and EndObject are Largest Object",
+      "hex": "1600110201046c69766505766964656f01210103",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "location_filter": {
+            "start_group": "3"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-next-object",
+      "description": "FETCH with a two-field LOCATION_FILTER whose StartGroup and StartObject are both 0, the Next Object special case",
+      "hex": "1600120201046c69766505766964656f0121020000",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "location_filter": {
+            "start_group": "0",
+            "start_object": "0"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-absolute-start",
+      "description": "FETCH with a two-field LOCATION_FILTER: absolute start {10,3}, end resolved to Largest Object",
+      "hex": "1600120201046c69766505766964656f0121020a03",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "location_filter": {
+            "start_group": "10",
+            "start_object": "3"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-end-group",
+      "description": "FETCH with a three-field LOCATION_FILTER: start {10,3}, EndGroupDelta 5 so the End Group is 15, EndObject omitted so all objects in group 15 are included. EndGroupDelta is delta encoded from StartGroup but both groups are absolute, not relative to Largest Object",
+      "hex": "1600130201046c69766505766964656f0121030a0305",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "location_filter": {
+            "start_group": "10",
+            "start_object": "3",
+            "end_group_delta": "5"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-full-range",
+      "description": "FETCH with a four-field LOCATION_FILTER: the inclusive range {10,3} through {15,7}. Draft-19 encoded a fetch end as the last Object plus 1, with an Object of 0 meaning the whole group; draft-20 dropped both conventions, so a ported encoder that keeps its +1 fetches one object too many",
+      "hex": "1600140201046c69766505766964656f0121040a030507",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "location_filter": {
+            "start_group": "10",
+            "start_object": "3",
+            "end_group_delta": "5",
+            "end_object": "7"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-noncanonical-field-count",
+      "description": "non-canonical FETCH — a two-field LOCATION_FILTER whose StartGroup (10) is encoded as a 2-byte varint (800a) and StartObject (3) as one byte, giving Length 3. Three bytes, two fields: this is why the field count has to come from parsing rather than from the byte length. Decode-only, because a sender always emits the minimal form",
+      "hex": "1600130201046c69766505766964656f012103800a03",
+      "canonical": false,
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "location_filter": {
+            "start_group": "10",
+            "start_object": "3"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "FETCH with SUBSCRIBER_PRIORITY parameter (16). Omitted, the publisher uses 128",
+      "hex": "1600100201046c69766505766964656f012010",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscriber_priority": "16"
+        }
+      }
+    },
+    {
+      "id": "with-group-order",
+      "description": "FETCH with GROUP_ORDER parameter (descending=2). Omitted from a FETCH, the receiver uses Ascending",
+      "hex": "1600100201046c69766505766964656f012202",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "group_order": "2"
+        }
+      }
+    },
+    {
+      "id": "with-fill-timeout",
+      "description": "FETCH with FILL_TIMEOUT parameter (5000ms): the total budget a relay spends waiting for upstream sources before reporting the remainder as Timed-Out gaps",
+      "hex": "1600110201046c69766505766964656f010a9388",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "fill_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-fill-timeout-zero",
+      "description": "FETCH with FILL_TIMEOUT=0 — the subscriber wants only immediately available Objects and the relay MUST report everything else with the End of Timed-Out Range marker (0x20C). Draft-19 classified these as Unknown gaps",
+      "hex": "1600100201046c69766505766964656f010a00",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "fill_timeout": "0"
+        }
+      }
+    },
+    {
+      "id": "with-include-properties-zero",
+      "description": "FETCH with INCLUDE_PROPERTIES (0x35) set to 0 — the FETCH_OK should carry an empty Track Properties field",
+      "hex": "1600100201046c69766505766964656f013500",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "include_properties": "0"
+        }
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "FETCH with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='fetch-token')",
+      "hex": "16001d0201046c69766505766964656f01030d030066657463682d746f6b656e",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "66657463682d746f6b656e"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-objectid-filter",
+      "description": "FETCH with OBJECTID_FILTER (0x26): SetID 0, Object ID range 2-5",
+      "hex": "1600130201046c69766505766964656f012603000203",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "objectid_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "2",
+                "end": "5"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "with-priority-filter",
+      "description": "FETCH with PRIORITY_FILTER (0x27): SetID 0, Publisher Priority range 0-63",
+      "hex": "1600130201046c69766505766964656f01270300003f",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "priority_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "0",
+                "end": "63"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "with-multiple-params",
+      "description": "FETCH with SUBSCRIBER_PRIORITY (16), a four-field LOCATION_FILTER covering {4,0} through {6,9} inclusive, and GROUP_ORDER (ascending=1); demonstrates type-delta ordering across 0x20, 0x21 and 0x22",
+      "hex": "1600180201046c69766505766964656f0320100104040002090101",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subscriber_priority": "16",
+          "location_filter": {
+            "start_group": "4",
+            "start_object": "0",
+            "end_group_delta": "2",
+            "end_object": "9"
+          },
+          "group_order": "1"
+        }
+      }
+    },
+    {
+      "id": "location-filter-five-fields",
+      "description": "FETCH whose LOCATION_FILTER value decodes to five vi64 values. Section 5.1.2 defines shapes for zero through four fields and nothing beyond; decoding a fifth is malformed. The draft does not name the error, and this corpus records PROTOCOL_VIOLATION",
+      "hex": "1600150201046c69766505766964656f0121050102030405",
+      "error": "invalid_parameter",
+      "error_detail": "a LOCATION_FILTER value may hold at most four vi64 fields",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "location-filter-varint-overruns-length",
+      "description": "FETCH whose LOCATION_FILTER declares Length 2 but whose first value byte (c0) begins a three-byte vi64, so the field would run past the parameter. The draft does not say what to do when a varint overruns Length; this corpus records PROTOCOL_VIOLATION. A decoder that switched on the byte length instead of parsing would never notice",
+      "hex": "1600120201046c69766505766964656f012102c040",
+      "error": "invalid_parameter",
+      "error_detail": "a LOCATION_FILTER field must not extend past the parameter's Length",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "location-filter-end-group-overflow",
+      "description": "FETCH whose LOCATION_FILTER has StartGroup = 2^64 - 1 and EndGroupDelta = 1. Section 5.1.2: \"If StartGroup + EndGroupDelta exceeds 2^64 - 1, the endpoint MUST close the session with a PROTOCOL_VIOLATION\"",
+      "hex": "16001b0201046c69766505766964656f01210bffffffffffffffffff0001",
+      "error": "invalid_parameter",
+      "error_detail": "StartGroup + EndGroupDelta exceeds 2^64 - 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fill-parameters-out-of-scope",
+      "description": "FETCH carrying FILL_PARAMETERS (0x23). Section 10.2.15 permits it in a SUBSCRIBE or a REQUEST_UPDATE for a subscription only: a fill fetch stream is something a subscription opens, and a FETCH already is one. Section 10.2.1 requires the receiver to close the session with a PROTOCOL_VIOLATION",
+      "hex": "1600110201046c69766505766964656f01230100",
+      "error": "parameter_out_of_scope",
+      "error_detail": "FILL_PARAMETERS may appear only in SUBSCRIBE or REQUEST_UPDATE for a subscription",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "include-properties-invalid-value",
+      "description": "FETCH with INCLUDE_PROPERTIES (0x35) carrying the value 255. Only 0 and 1 are allowed; anything else MUST close the session with PROTOCOL_VIOLATION (Section 10.2.21)",
+      "hex": "1600100201046c69766505766964656f0135ff",
+      "error": "invalid_parameter",
+      "error_detail": "INCLUDE_PROPERTIES accepts only 0 or 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH — missing track_namespace",
+      "hex": "1600110201046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

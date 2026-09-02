@@ -1,0 +1,197 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "request_update",
+  "message_type_id": "0x02",
+  "spec_section": "10.9",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal REQUEST_UPDATE with no parameters",
+      "hex": "0200020200",
+      "decoded": {
+        "request_id": "2",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-location-filter",
+      "description": "REQUEST_UPDATE narrowing a subscription with a two-field LOCATION_FILTER (StartGroup=5, StartObject=0), the absolute-start form. Draft-20 deleted the Filter Type enum (draft-19's 0x1 Next Group Start / 0x2 Largest Object / 0x3 AbsoluteStart / 0x4 AbsoluteRange) and derives the filter's shape from how many vi64 fields the value holds (Section 5.1.2). The draft says \"Length (in bytes) determines how many optional vi64 fields are present\", which is not implementable as written because vi64s are 1-9 bytes and need not be minimal (Section 1.4.1); the round-trippable rule, and the one this corpus encodes, is to decode vi64 values until exactly Length bytes are consumed and then switch on the count.",
+      "hex": "020006010121020500",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "location_filter": {
+            "start_group": "5",
+            "start_object": "0"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-location-filter-removal",
+      "description": "REQUEST_UPDATE removing an existing LOCATION_FILTER by encoding a zero-length value. Section 5.1.2: \"A length of 0 indicates no filter, for example to remove the filter in REQUEST_UPDATE\"",
+      "hex": "02000401012100",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "location_filter": {
+            "removed": true
+          }
+        }
+      }
+    },
+    {
+      "id": "with-fill-parameters-empty",
+      "description": "REQUEST_UPDATE with an empty FILL_PARAMETERS (0x23), which opens an additional fill fetch stream on the subscription keyed by this REQUEST_UPDATE's Request ID. Length 1, value 00 (Number of Parameters = 0). FILL_PARAMETERS is not sticky: it applies only to the message carrying it",
+      "hex": "0200050101230100",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "fill_parameters": {}
+        }
+      }
+    },
+    {
+      "id": "with-fill-parameters-location-filter",
+      "description": "REQUEST_UPDATE whose FILL_PARAMETERS carries a LOCATION_FILTER selecting the inclusive fill range {3,0} through all of group 5, plus a FILL_TIMEOUT of 0 (deliver only immediately available Objects; report the rest with the End of Timed-Out Range marker). The inner delta chain runs 0x0A then 0x17",
+      "hex": "02000c01012308020a001703030002",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "fill_parameters": {
+            "fill_timeout": "0",
+            "location_filter": {
+              "start_group": "3",
+              "start_object": "0",
+              "end_group_delta": "2"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "with-object-delivery-timeout",
+      "description": "REQUEST_UPDATE with OBJECT_DELIVERY_TIMEOUT parameter (5000ms)",
+      "hex": "0200050101029388",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "object_delivery_timeout": "5000"
+        }
+      }
+    },
+    {
+      "id": "with-subgroup-delivery-timeout",
+      "description": "REQUEST_UPDATE with SUBGROUP_DELIVERY_TIMEOUT parameter (8000ms)",
+      "hex": "0200050101069f40",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "subgroup_delivery_timeout": "8000"
+        }
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "REQUEST_UPDATE with FORWARD parameter (forward=1). On a REQUEST_UPDATE for a SUBSCRIBE_TRACKS this sets the Forwarding State of future matching subscriptions only",
+      "hex": "02000401011001",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "forward": "1"
+        }
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "REQUEST_UPDATE with SUBSCRIBER_PRIORITY parameter (16)",
+      "hex": "02000401012010",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "subscriber_priority": "16"
+        }
+      }
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "REQUEST_UPDATE with NEW_GROUP_REQUEST parameter (group_id=25)",
+      "hex": "02000401013219",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "new_group_request": "25"
+        }
+      }
+    },
+    {
+      "id": "with-track-namespace-prefix",
+      "description": "REQUEST_UPDATE with TRACK_NAMESPACE_PREFIX parameter to update a SUBSCRIBE_NAMESPACE/SUBSCRIBE_TRACKS prefix",
+      "hex": "02001007013402046c6976650673706f727473",
+      "decoded": {
+        "request_id": "7",
+        "parameters": {
+          "track_namespace_prefix": [
+            "live",
+            "sports"
+          ]
+        }
+      }
+    },
+    {
+      "id": "with-multiple-params",
+      "description": "REQUEST_UPDATE with OBJECT_DELIVERY_TIMEOUT (5000ms), SUBSCRIBER_PRIORITY (16), and a two-field LOCATION_FILTER (StartGroup=5, StartObject=0)",
+      "hex": "02000b01030293881e1001020500",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "object_delivery_timeout": "5000",
+          "subscriber_priority": "16",
+          "location_filter": {
+            "start_group": "5",
+            "start_object": "0"
+          }
+        }
+      }
+    },
+    {
+      "id": "with-objectid-filter",
+      "description": "REQUEST_UPDATE with OBJECTID_FILTER (0x26): SetID 0, Object ID range 0-9 — narrows an existing subscription",
+      "hex": "02000701012603000009",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "objectid_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "0",
+                "end": "9"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "with-filter-removal",
+      "description": "REQUEST_UPDATE removing an OBJECTID_FILTER (0x26) by encoding a zero-length value; in REQUEST_UPDATE a filter Length of 0 removes that filter and a non-zero one replaces it entirely",
+      "hex": "02000401012600",
+      "decoded": {
+        "request_id": "1",
+        "parameters": {
+          "objectid_filter": {
+            "removed": true
+          }
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUEST_UPDATE — missing parameters",
+      "hex": "02000202",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

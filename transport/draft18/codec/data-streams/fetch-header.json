@@ -28,7 +28,7 @@
     },
     {
       "id": "fetch-stream-two-objects",
-      "description": "fetch stream with two objects (Ascending group order); second uses pure delta encoding (flags=0x00) \u2014 Object ID is prior+1 within the same group",
+      "description": "fetch stream with two objects (Ascending group order); second uses pure delta encoding (flags=0x00) — Object ID is prior+1 within the same group",
       "hex": "05041c00008004deadbeef0002cafe",
       "decoded": {
         "stream_type": "fetch",
@@ -83,6 +83,70 @@
             "subgroup_id": "0",
             "object_id_delta": "0",
             "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-object-delta-same-group",
+      "description": "fetch stream where the second object carries an Object ID Delta but no Group ID Delta (flags 0x04). Section 11.4.4.1: \"When the Group ID Delta field is not present, the Object ID is the prior Object's ID plus the Object ID Delta if present\" — so this is prior + delta (0 + 4 = 4), not the delta itself, and not prior + delta + 1. The Group ID Delta present case one row above resolves Object ID differently, which is what makes this pair worth having: a decoder that reads Object ID Delta the same way in both branches passes one and fails the other",
+      "hex": "05041c03008001aa040401bb",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "3",
+            "group_id": "3",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x04",
+            "group_id": "3",
+            "subgroup_id": "0",
+            "object_id_delta": "4",
+            "object_id": "4",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-new-group-object-id-continues",
+      "description": "fetch stream where the second object starts a new group via Group ID Delta but carries no Object ID Delta (flags 0x08). Section 11.4.4.1: \"If Object ID Delta is not present, the Object ID is the prior Object's ID plus one, regardless of which group it belongs to.\" So the Object ID continues 7 → 8 across the group boundary rather than restarting at 0, which is the reading a decoder is most likely to get wrong. Ascending order, so the Group ID is prior + delta + 1 = 1",
+      "hex": "05041c00078001aa080001bb",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "0",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id_delta": "7",
+            "object_id": "7",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x08",
+            "group_id_delta": "0",
+            "group_id": "1",
+            "subgroup_id": "0",
+            "object_id": "8",
             "publisher_priority": "128",
             "payload_length": "1",
             "payload_hex": "bb"
@@ -194,7 +258,7 @@
     },
     {
       "id": "truncated",
-      "description": "truncated fetch header \u2014 missing request_id",
+      "description": "truncated fetch header — missing request_id",
       "hex": "05",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"

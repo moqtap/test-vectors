@@ -1,0 +1,117 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_ok",
+  "message_type_id": "0x07",
+  "spec_section": "10.5",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "PUBLISH_OK (REQUEST_OK alias, Type 0x07) with no parameters and empty Track Properties. A draft-20 subscriber that wants to change a subscription parameter sends a REQUEST_UPDATE after PUBLISH_OK",
+      "hex": "07000100",
+      "decoded": {
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "PUBLISH_OK with EXPIRES parameter (60000ms) — the one parameter whose draft-20 definition still names PUBLISH_OK (Section 10.2.16)",
+      "hex": "0700050108c0ea60",
+      "decoded": {
+        "parameters": {
+          "expires": "60000"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-expires-noncanonical-type-delta",
+      "description": "non-canonical PUBLISH_OK — the EXPIRES parameter type (0x08, the first parameter, so the delta is the absolute type) is encoded as a 2-byte varint (8008) instead of the canonical 1-byte form (08); decoders MUST accept",
+      "hex": "070006018008c0ea60",
+      "canonical": false,
+      "decoded": {
+        "parameters": {
+          "expires": "60000"
+        },
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "PUBLISH_OK carrying SUBSCRIBER_PRIORITY (0x20), which no draft-20 PUBLISH_OK may carry. In draft-19 this parameter listed PUBLISH_OK among the messages it may appear in. In draft-20 it does not: subscription parameters travel on PUBLISH (initial values) and REQUEST_UPDATE (changes) instead. Section 10.2.1 requires an endpoint that receives a parameter in a message its definition does not name to close the session with a PROTOCOL_VIOLATION. EXPIRES (0x08) is the only parameter draft-20 still names PUBLISH_OK for.",
+      "hex": "070003012040",
+      "error": "parameter_out_of_scope",
+      "error_detail": "SUBSCRIBER_PRIORITY (0x20) is not listed for PUBLISH_OK in draft-20",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-object-delivery-timeout",
+      "description": "PUBLISH_OK carrying OBJECT_DELIVERY_TIMEOUT (0x02), which no draft-20 PUBLISH_OK may carry. In draft-19 this parameter listed PUBLISH_OK among the messages it may appear in. In draft-20 it does not: subscription parameters travel on PUBLISH (initial values) and REQUEST_UPDATE (changes) instead. Section 10.2.1 requires an endpoint that receives a parameter in a message its definition does not name to close the session with a PROTOCOL_VIOLATION. EXPIRES (0x08) is the only parameter draft-20 still names PUBLISH_OK for.",
+      "hex": "07000401029388",
+      "error": "parameter_out_of_scope",
+      "error_detail": "OBJECT_DELIVERY_TIMEOUT (0x02) is not listed for PUBLISH_OK in draft-20",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-subgroup-delivery-timeout",
+      "description": "PUBLISH_OK carrying SUBGROUP_DELIVERY_TIMEOUT (0x06), which no draft-20 PUBLISH_OK may carry. In draft-19 this parameter listed PUBLISH_OK among the messages it may appear in. In draft-20 it does not: subscription parameters travel on PUBLISH (initial values) and REQUEST_UPDATE (changes) instead. Section 10.2.1 requires an endpoint that receives a parameter in a message its definition does not name to close the session with a PROTOCOL_VIOLATION. EXPIRES (0x08) is the only parameter draft-20 still names PUBLISH_OK for.",
+      "hex": "0700040106a710",
+      "error": "parameter_out_of_scope",
+      "error_detail": "SUBGROUP_DELIVERY_TIMEOUT (0x06) is not listed for PUBLISH_OK in draft-20",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-forward",
+      "description": "PUBLISH_OK carrying FORWARD (0x10), which no draft-20 PUBLISH_OK may carry. In draft-19 this parameter listed PUBLISH_OK among the messages it may appear in. In draft-20 it does not: subscription parameters travel on PUBLISH (initial values) and REQUEST_UPDATE (changes) instead. Section 10.2.1 requires an endpoint that receives a parameter in a message its definition does not name to close the session with a PROTOCOL_VIOLATION. EXPIRES (0x08) is the only parameter draft-20 still names PUBLISH_OK for.",
+      "hex": "070003011000",
+      "error": "parameter_out_of_scope",
+      "error_detail": "FORWARD (0x10) is not listed for PUBLISH_OK in draft-20",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-location-filter",
+      "description": "PUBLISH_OK carrying LOCATION_FILTER (0x21), which no draft-20 PUBLISH_OK may carry. In draft-19 this parameter listed PUBLISH_OK among the messages it may appear in. In draft-20 it does not: subscription parameters travel on PUBLISH (initial values) and REQUEST_UPDATE (changes) instead. Section 10.2.1 requires an endpoint that receives a parameter in a message its definition does not name to close the session with a PROTOCOL_VIOLATION. EXPIRES (0x08) is the only parameter draft-20 still names PUBLISH_OK for.",
+      "hex": "070006012103050014",
+      "error": "parameter_out_of_scope",
+      "error_detail": "LOCATION_FILTER (0x21) is not listed for PUBLISH_OK in draft-20",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "PUBLISH_OK carrying NEW_GROUP_REQUEST (0x32), which no draft-20 PUBLISH_OK may carry. In draft-19 this parameter listed PUBLISH_OK among the messages it may appear in. In draft-20 it does not: subscription parameters travel on PUBLISH (initial values) and REQUEST_UPDATE (changes) instead. Section 10.2.1 requires an endpoint that receives a parameter in a message its definition does not name to close the session with a PROTOCOL_VIOLATION. EXPIRES (0x08) is the only parameter draft-20 still names PUBLISH_OK for.",
+      "hex": "07000301320a",
+      "error": "parameter_out_of_scope",
+      "error_detail": "NEW_GROUP_REQUEST (0x32) is not listed for PUBLISH_OK in draft-20",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-objectid-filter",
+      "description": "PUBLISH_OK carrying OBJECTID_FILTER (0x26), which no draft-20 PUBLISH_OK may carry. In draft-19 this parameter listed PUBLISH_OK among the messages it may appear in. In draft-20 it does not: subscription parameters travel on PUBLISH (initial values) and REQUEST_UPDATE (changes) instead. Section 10.2.1 requires an endpoint that receives a parameter in a message its definition does not name to close the session with a PROTOCOL_VIOLATION. EXPIRES (0x08) is the only parameter draft-20 still names PUBLISH_OK for.",
+      "hex": "070006012603000009",
+      "error": "parameter_out_of_scope",
+      "error_detail": "OBJECTID_FILTER (0x26) is not listed for PUBLISH_OK in draft-20",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_OK — missing parameter count",
+      "hex": "070001",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

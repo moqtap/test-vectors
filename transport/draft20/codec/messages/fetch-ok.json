@@ -1,0 +1,88 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch_ok",
+  "message_type_id": "0x18",
+  "spec_section": "10.14",
+  "vectors": [
+    {
+      "id": "more-data",
+      "description": "FETCH_OK with end_of_track=0 and End Location {10,3}. Object 3 of group 10 is the last object covered by the response and is included in it. Draft-19 defined End Location as \"the last Object, plus 1; or 0 to indicate the entire Group\". Draft-20 deleted both conventions: the Location filter's range is inclusive (Section 5.1.2) and End Location is the last Object the response actually covers. A draft-19 vector carried forward unchanged would name a different object.",
+      "hex": "180004000a0300",
+      "decoded": {
+        "end_of_track": "0",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "end-of-track",
+      "description": "FETCH_OK with end_of_track=1: End Location {10,3} is the final Object in the Track",
+      "hex": "180004010a0300",
+      "decoded": {
+        "end_of_track": "1",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "end-location-object-zero",
+      "description": "FETCH_OK with End Location {4,0}. Under draft-20 this covers exactly object 0 of group 4. Under draft-19 the same bytes meant the whole of group 4, because an Object of 0 was the encoding for \"entire Group\". The bytes are identical and the meaning is not; there is no in-band signal that distinguishes them",
+      "hex": "18000400040000",
+      "decoded": {
+        "end_of_track": "0",
+        "end_group": "4",
+        "end_object": "0",
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "end-location-resolved-from-open-end",
+      "description": "FETCH_OK answering a FETCH whose LOCATION_FILTER omitted EndObject (so the filter meant all objects in group 7): the response reports the resolved absolute end, {7,41}. Section 10.14 says the OK reports \"the End Location from the FETCH request Location Filter parameter\" but does not say what to report when the request had no literal end, or had a relative start; this corpus reports the last Location actually covered",
+      "hex": "18000400072900",
+      "decoded": {
+        "end_of_track": "0",
+        "end_group": "7",
+        "end_object": "41",
+        "parameters": {},
+        "track_properties": {}
+      }
+    },
+    {
+      "id": "with-track-properties",
+      "description": "FETCH_OK with track properties: OBJECT_DELIVERY_TIMEOUT=5000ms, DYNAMIC_GROUPS=1",
+      "hex": "180009000a03000293882e01",
+      "decoded": {
+        "end_of_track": "0",
+        "end_group": "10",
+        "end_object": "3",
+        "parameters": {},
+        "track_properties": {
+          "object_delivery_timeout": "5000",
+          "dynamic_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "with-params-and-properties",
+      "description": "FETCH_OK carrying EXPIRES (0x8), which no FETCH_OK may carry. EXPIRES MAY appear in SUBSCRIBE_OK, PUBLISH, PUBLISH_OK, SUBSCRIBE_NAMESPACE_OK, SUBSCRIBE_TRACKS_OK, PUBLISH_NAMESPACE_OK or REQUEST_UPDATE_OK; a FETCH_OK is none of those. Each Message Parameter definition names the message types it may appear in, and a receiving endpoint MUST close the connection with a PROTOCOL_VIOLATION when one appears elsewhere",
+      "hex": "18000a000a0301081e04c07530",
+      "error": "parameter_out_of_scope",
+      "error_detail": "EXPIRES is not listed for FETCH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH_OK — missing end_of_track",
+      "hex": "18000502",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading end_of_track"
+    }
+  ]
+}

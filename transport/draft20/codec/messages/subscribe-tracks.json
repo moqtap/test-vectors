@@ -1,0 +1,155 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_tracks",
+  "message_type_id": "0x51",
+  "spec_section": "10.20",
+  "vectors": [
+    {
+      "id": "single-prefix",
+      "description": "SUBSCRIBE_TRACKS with single-element prefix (results in PUBLISH messages for matching tracks)",
+      "hex": "51000e01010a636f6e666572656e636500",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-prefix",
+      "description": "SUBSCRIBE_TRACKS with multi-element prefix",
+      "hex": "51000f0302046c6976650673706f72747300",
+      "decoded": {
+        "request_id": "3",
+        "namespace_prefix": [
+          "live",
+          "sports"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-forward-zero",
+      "description": "SUBSCRIBE_TRACKS with FORWARD parameter set to 0. In draft-20 the publisher must communicate the resulting initial Subscription Parameters explicitly in each PUBLISH; draft-19's special-case FORWARD and GROUP_ORDER echo rules are gone",
+      "hex": "51001001010a636f6e666572656e6365011000",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "forward": "0"
+        }
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "SUBSCRIBE_TRACKS with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='tracks-tok'). Section 10.2.2 forbids copying it into the resulting PUBLISH",
+      "hex": "51001c01010a636f6e666572656e636501030c0300747261636b732d746f6b",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "747261636b732d746f6b"
+          }
+        }
+      }
+    },
+    {
+      "id": "empty-prefix",
+      "description": "SUBSCRIBE_TRACKS with zero-element prefix (subscribes to all tracks)",
+      "hex": "510003070000",
+      "decoded": {
+        "request_id": "7",
+        "namespace_prefix": [],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-group-order",
+      "description": "SUBSCRIBE_TRACKS with GROUP_ORDER parameter (descending=2)",
+      "hex": "51001001010a636f6e666572656e6365012202",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "group_order": "2"
+        }
+      }
+    },
+    {
+      "id": "with-include-properties",
+      "description": "SUBSCRIBE_TRACKS with INCLUDE_PROPERTIES (0x35) set to 0 — the resulting PUBLISH messages should carry an empty Track Properties field",
+      "hex": "51001001010a636f6e666572656e6365013500",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "include_properties": "0"
+        }
+      }
+    },
+    {
+      "id": "with-track-property-filter",
+      "description": "SUBSCRIBE_TRACKS with TRACK_PROPERTY_FILTER (0x29): SetID 0, Track Property Type 0x0E, value range 1-1 — filters which PUBLISH messages are forwarded. 0x29 is the one range filter that may not appear inside FILL_PARAMETERS",
+      "hex": "51001401010a636f6e666572656e6365012904000e0100",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "track_property_filter": {
+            "set_id": "0",
+            "property_type": "14",
+            "ranges": [
+              {
+                "start": "1",
+                "end": "1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "with-objectid-filter",
+      "description": "SUBSCRIBE_TRACKS with OBJECTID_FILTER (0x26): SetID 0, Object ID range 0-4, used as an initial subscription filter for the resulting PUBLISH messages",
+      "hex": "51001301010a636f6e666572656e6365012603000004",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "objectid_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "0",
+                "end": "4"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_TRACKS — missing namespace_prefix",
+      "hex": "51000d0101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading namespace_prefix"
+    }
+  ]
+}

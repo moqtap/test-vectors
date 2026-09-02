@@ -1,0 +1,272 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "request_error",
+  "message_type_id": "0x05",
+  "spec_section": "10.6",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "REQUEST_ERROR with INTERNAL_ERROR (0x0), not retryable",
+      "hex": "05001100000e696e7465726e616c206572726f72",
+      "decoded": {
+        "error_code": "0",
+        "retry_interval": "0",
+        "reason_phrase": "internal error"
+      }
+    },
+    {
+      "id": "unauthorized-retryable",
+      "description": "REQUEST_ERROR with UNAUTHORIZED (0x1), retry immediately",
+      "hex": "05000f01010c756e617574686f72697a6564",
+      "decoded": {
+        "error_code": "1",
+        "retry_interval": "1",
+        "reason_phrase": "unauthorized"
+      }
+    },
+    {
+      "id": "does-not-exist",
+      "description": "REQUEST_ERROR with DOES_NOT_EXIST (0x10), not retryable",
+      "hex": "05001110000e646f6573206e6f74206578697374",
+      "decoded": {
+        "error_code": "16",
+        "retry_interval": "0",
+        "reason_phrase": "does not exist"
+      }
+    },
+    {
+      "id": "empty-reason",
+      "description": "REQUEST_ERROR with empty reason phrase, not retryable",
+      "hex": "050003000000",
+      "decoded": {
+        "error_code": "0",
+        "retry_interval": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "timeout",
+      "description": "REQUEST_ERROR with TIMEOUT (0x2), not retryable",
+      "hex": "05000a02000774696d656f7574",
+      "decoded": {
+        "error_code": "2",
+        "retry_interval": "0",
+        "reason_phrase": "timeout"
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "REQUEST_ERROR with NOT_SUPPORTED (0x3), not retryable",
+      "hex": "05001003000d6e6f7420737570706f72746564",
+      "decoded": {
+        "error_code": "3",
+        "retry_interval": "0",
+        "reason_phrase": "not supported"
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "REQUEST_ERROR with MALFORMED_AUTH_TOKEN (0x4), not retryable",
+      "hex": "0500170400146d616c666f726d6564206175746820746f6b656e",
+      "decoded": {
+        "error_code": "4",
+        "retry_interval": "0",
+        "reason_phrase": "malformed auth token"
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "REQUEST_ERROR with EXPIRED_AUTH_TOKEN (0x5), not retryable",
+      "hex": "05001505001265787069726564206175746820746f6b656e",
+      "decoded": {
+        "error_code": "5",
+        "retry_interval": "0",
+        "reason_phrase": "expired auth token"
+      }
+    },
+    {
+      "id": "going-away",
+      "description": "REQUEST_ERROR with GOING_AWAY (0x6), not retryable",
+      "hex": "05000d06000a676f696e672061776179",
+      "decoded": {
+        "error_code": "6",
+        "retry_interval": "0",
+        "reason_phrase": "going away"
+      }
+    },
+    {
+      "id": "excessive-load",
+      "description": "REQUEST_ERROR with EXCESSIVE_LOAD (0x9), not retryable",
+      "hex": "05001109000e657863657373697665206c6f6164",
+      "decoded": {
+        "error_code": "9",
+        "retry_interval": "0",
+        "reason_phrase": "excessive load"
+      }
+    },
+    {
+      "id": "invalid-range",
+      "description": "REQUEST_ERROR with INVALID_RANGE (0x11), not retryable",
+      "hex": "05001011000d696e76616c69642072616e6765",
+      "decoded": {
+        "error_code": "17",
+        "retry_interval": "0",
+        "reason_phrase": "invalid range"
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "REQUEST_ERROR with MALFORMED_TRACK (0x12), not retryable",
+      "hex": "05001212000f6d616c666f726d656420747261636b",
+      "decoded": {
+        "error_code": "18",
+        "retry_interval": "0",
+        "reason_phrase": "malformed track"
+      }
+    },
+    {
+      "id": "uninterested",
+      "description": "REQUEST_ERROR with UNINTERESTED (0x20), not retryable",
+      "hex": "05000f20000c756e696e7465726573746564",
+      "decoded": {
+        "error_code": "32",
+        "retry_interval": "0",
+        "reason_phrase": "uninterested"
+      }
+    },
+    {
+      "id": "prefix-overlap",
+      "description": "REQUEST_ERROR with PREFIX_OVERLAP (0x30), not retryable",
+      "hex": "05001130000e707265666978206f7665726c6170",
+      "decoded": {
+        "error_code": "48",
+        "retry_interval": "0",
+        "reason_phrase": "prefix overlap"
+      }
+    },
+    {
+      "id": "namespace-too-large",
+      "description": "REQUEST_ERROR with NAMESPACE_TOO_LARGE (0x31), not retryable",
+      "hex": "0500163100136e616d65737061636520746f6f206c61726765",
+      "decoded": {
+        "error_code": "49",
+        "retry_interval": "0",
+        "reason_phrase": "namespace too large"
+      }
+    },
+    {
+      "id": "unsupported-extension",
+      "description": "REQUEST_ERROR with UNSUPPORTED_EXTENSION (0x33) for unknown Mandatory Track Properties",
+      "hex": "050018330015756e737570706f7274656420657874656e73696f6e",
+      "decoded": {
+        "error_code": "51",
+        "retry_interval": "0",
+        "reason_phrase": "unsupported extension"
+      }
+    },
+    {
+      "id": "conflicting-filters",
+      "description": "REQUEST_ERROR with CONFLICTING_FILTERS (0x35); in response to SUBSCRIBE_TRACKS whose filter parameters conflict among too many subscribers to aggregate upstream",
+      "hex": "050016350013636f6e666c696374696e672066696c74657273",
+      "decoded": {
+        "error_code": "53",
+        "retry_interval": "0",
+        "reason_phrase": "conflicting filters"
+      }
+    },
+    {
+      "id": "invalid-filter",
+      "description": "REQUEST_ERROR with INVALID_FILTER (0x36); a Range Filter parameter is invalid or exceeds MAX_FILTER_RANGES",
+      "hex": "05001136000e696e76616c69642066696c746572",
+      "decoded": {
+        "error_code": "54",
+        "retry_interval": "0",
+        "reason_phrase": "invalid filter"
+      }
+    },
+    {
+      "id": "invalid-joining-request-id",
+      "description": "REQUEST_ERROR carrying error code 0x32, which draft-20 leaves unassigned. Draft-19 used it for INVALID_JOINING_REQUEST_ID, a diagnosis with no subject in draft-20: FETCH lost its Fetch Type field and both Joining Fetch variants with it (Section 10.13), so nothing references another request's ID. Draft-20 Section 14 requires the receiver to accept it: \"Receipt of an unknown error code in any error context (Session Termination, REQUEST_ERROR, PUBLISH_DONE, or Data Stream Reset) MUST be treated as equivalent to INTERNAL_ERROR for that context. An endpoint MUST NOT close the session because it received an unknown error code in a REQUEST_ERROR or PUBLISH_DONE.\" So the frame decodes; what a decoder must stop doing is mapping the code to a name. The same rule is in draft-19 verbatim, so this is not a revision change.",
+      "hex": "05001d32001a696e76616c6964206a6f696e696e672072657175657374206964",
+      "decoded": {
+        "error_code": "50",
+        "retry_interval": "0",
+        "reason_phrase": "invalid joining request id"
+      }
+    },
+    {
+      "id": "redirect-new-uri",
+      "description": "REQUEST_ERROR with REDIRECT (0x34) including Redirect structure pointing at moqt://relay.example.com/path and a new full track name",
+      "hex": "05003e3493880c676f20656c736577686572651d6d6f71743a2f2f72656c61792e6578616d706c652e636f6d2f7061746801046c697665096e65772d766964656f",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "5000",
+        "reason_phrase": "go elsewhere",
+        "redirect": {
+          "connect_uri": "moqt://relay.example.com/path",
+          "track_namespace": [
+            "live"
+          ],
+          "track_name": "new-video"
+        }
+      }
+    },
+    {
+      "id": "redirect-same-session",
+      "description": "REQUEST_ERROR with REDIRECT (0x34) and zero-length URI (reuse current session) plus a renamed track",
+      "hex": "0500163400000001046c6976650b7265706c6163656d656e74",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "redirect": {
+          "connect_uri": "",
+          "track_namespace": [
+            "live"
+          ],
+          "track_name": "replacement"
+        }
+      }
+    },
+    {
+      "id": "redirect-namespace-only",
+      "description": "REQUEST_ERROR with REDIRECT (0x34) for a namespace-scoped request: empty Track Name, only Track Namespace is meaningful",
+      "hex": "05003934010f747279206f746865722072656c6179186d6f71743a2f2f6f746865722e6578616d706c652e636f6d02046c6976650673706f72747300",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "1",
+        "reason_phrase": "try other relay",
+        "redirect": {
+          "connect_uri": "moqt://other.example.com",
+          "track_namespace": [
+            "live",
+            "sports"
+          ],
+          "track_name": ""
+        }
+      }
+    },
+    {
+      "id": "redirect-empty-target",
+      "description": "REQUEST_ERROR with REDIRECT (0x34) whose Redirect target is a zero-field Track Namespace and an empty Track Name. Draft-19 read that pair as \"the redirected request uses the same values as the original request\"; draft-20 deletes that sentence and calls the pair the Redirect target, so these are literal empty values. Do not carry the draft-19 special case forward",
+      "hex": "05001e340000186d6f71743a2f2f6f746865722e6578616d706c652e636f6d0000",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "redirect": {
+          "connect_uri": "moqt://other.example.com",
+          "track_namespace": [],
+          "track_name": ""
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUEST_ERROR — missing error_code",
+      "hex": "050002",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code"
+    }
+  ]
+}

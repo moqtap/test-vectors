@@ -1,0 +1,68 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_namespace",
+  "message_type_id": "0x50",
+  "spec_section": "10.19",
+  "vectors": [
+    {
+      "id": "single-prefix",
+      "description": "SUBSCRIBE_NAMESPACE with single-element prefix",
+      "hex": "50000e01010a636f6e666572656e636500",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "multi-prefix",
+      "description": "SUBSCRIBE_NAMESPACE with multi-element prefix",
+      "hex": "50000f0302046c6976650673706f72747300",
+      "decoded": {
+        "request_id": "3",
+        "namespace_prefix": [
+          "live",
+          "sports"
+        ],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "empty-prefix",
+      "description": "SUBSCRIBE_NAMESPACE with zero-element prefix (all namespaces)",
+      "hex": "500003050000",
+      "decoded": {
+        "request_id": "5",
+        "namespace_prefix": [],
+        "parameters": {}
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "SUBSCRIBE_NAMESPACE with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='ns-token')",
+      "hex": "50001a01010a636f6e666572656e636501030a03006e732d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "authorization_token": {
+            "alias_type": "3",
+            "token_type": "0",
+            "token_value": "6e732d746f6b656e"
+          }
+        }
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_NAMESPACE — missing namespace_prefix",
+      "hex": "50000d0101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading namespace_prefix"
+    }
+  ]
+}
