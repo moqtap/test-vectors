@@ -442,6 +442,118 @@
       }
     },
     {
+      "id": "with-subgroup-filter-set-id-1",
+      "description": "SUBSCRIBE with SUBGROUP_FILTER carrying SetID 1 rather than 0. Section 5.1.3: \"All filter parameters with the same SetID value are combined using logical \\\"AND\\\" operations, then all the resulting sets are combined using logical \\\"OR\\\" operations.\" The SetID is the first octet of every Range Filter value and it is not decoration, so a decoder that skipped it would read this filter's ranges out of the Property Type position on two of the five types. Identical to the with-subgroup-filter vector with the SetID octet changed, which is the whole of the difference on the wire.",
+      "hex": "0300130101046c69766505766964656f012503010202",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subgroup_filter": {
+            "set_id": "1",
+            "ranges": [
+              {
+                "start": "2",
+                "end": "4"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "with-two-subgroup-filters",
+      "description": "SUBSCRIBE carrying SUBGROUP_FILTER twice: Subgroup 1-3 in set 0, Subgroup 10-12 in set 1. Section 5.1.3: \"All other filter parameters MAY appear multiple times in a FETCH, SUBSCRIBE, SUBSCRIBE_TRACKS, or REQUEST_UPDATE\". One parameter carries one SetID, so two alternatives that each constrain the same field have no other encoding. Section 10.2 requires that \"Parameters MUST be serialized in ascending order by Type\", which makes the second instance a Type Delta of 0 — the byte after the first value. A decoder that reads a zero delta as a malformed repeat rather than as a second instance closes the session on this frame.",
+      "hex": "0300180101046c69766505766964656f0225030001020003010a02",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subgroup_filter": [
+            {
+              "set_id": "0",
+              "ranges": [
+                {
+                  "start": "1",
+                  "end": "3"
+                }
+              ]
+            },
+            {
+              "set_id": "1",
+              "ranges": [
+                {
+                  "start": "10",
+                  "end": "12"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "with-two-filters-one-set",
+      "description": "SUBSCRIBE carrying SUBGROUP_FILTER and PRIORITY_FILTER under the same SetID, which Section 5.1.3 combines with AND: an Object passes only if its Subgroup ID is 1 to 3 and its Publisher Priority is 0 to 127. The pair beside the with-two-subgroup-filters vector is what separates the two operators — same SetID is AND, different SetIDs are OR — and neither vector alone shows which one a SetID selects. Two different types, so the Type Delta is 2 rather than 0 and no repeat is involved.",
+      "hex": "0300180101046c69766505766964656f022503000102020300007f",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "subgroup_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "1",
+                "end": "3"
+              }
+            ]
+          },
+          "priority_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "0",
+                "end": "127"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "with-priority-filter-full-range",
+      "description": "SUBSCRIBE with PRIORITY_FILTER covering 0 to 255, the whole of the field. Section 10.2.12: \"If a decoded value exceeds 255, the endpoint MUST reject this with REQUEST_ERROR with error code INVALID_FILTER since Publisher Priority is an 8-bit field.\" 255 is the largest value that is not a rejection, and its End delta is the first in this file that does not fit a single-byte varint — 255 is written 80ff, so a decoder that read one byte per delta would resolve the range as 0-0 and then find a trailing octet it had no field for.",
+      "hex": "0300140101046c69766505766964656f012704000080ff",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": {
+          "priority_filter": {
+            "set_id": "0",
+            "ranges": [
+              {
+                "start": "0",
+                "end": "255"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
       "id": "unknown-extension-param",
       "description": "SUBSCRIBE with a Message Parameter type draft-19 does not define — must close the session. Section 10.2: \"All Message Parameters MUST be defined in the negotiated version of MOQT or negotiated via Setup Options. An endpoint that receives an unknown Message Parameter MUST close the session with PROTOCOL_VIOLATION. Because the receiver has to understand every Message Parameter, there is no need for a mechanism to skip unknown parameters. Because unknown parameters cannot be skipped, the block is bounded by a parameter count rather than a length.\" The rule arrived at draft-16; drafts 14 and 15 carry a vector of this name that decodes successfully, because their text says a receiver ignores an unrecognized parameter.",
       "hex": "0300140101046c69766505766964656f014104deadbeef",

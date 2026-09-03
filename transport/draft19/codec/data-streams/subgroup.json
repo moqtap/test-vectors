@@ -370,6 +370,20 @@
       "error_detail": "subgroup stream Type 0x16 sets SUBGROUP_ID_MODE to the reserved 0b11"
     },
     {
+      "id": "type-bit-4-clear",
+      "description": "subgroup stream header with Type 0x20, whose bit 4 is clear. Section 11.4.2: \"Type values that do not match the form 0b0XX1XXXX (i.e., Type values outside the ranges 0x10..0x1F, 0x30..0x3F, 0x50..0x5F, and 0x70..0x7F, or values where bit 4 is not set).\" Bit 4 is the one bit every SUBGROUP_HEADER Type sets, so a value without it names no stream this draft assigns, and Section 3.4 is the rule that answers it: \"An endpoint that receives an unknown stream type MUST close the session.\" Draft-20 states bit 4 as a condition on a flags field instead and answers the same byte with invalid_type. The bytes after the Type are those of the subgroup-single-object vector, which decodes.",
+      "hex": "200100800004deadbeef",
+      "error": "unknown_message",
+      "error_detail": "stream Type 0x20 has bit 4 clear and is assigned to nothing"
+    },
+    {
+      "id": "type-above-127",
+      "description": "subgroup stream header whose Type decodes to 144, encoded as the minimal two-byte varint 8090. Section 11.4.2: \"Type values that do not match the form 0b0XX1XXXX (i.e., Type values outside the ranges 0x10..0x1F, 0x30..0x3F, 0x50..0x5F, and 0x70..0x7F, or values where bit 4 is not set).\" Bit 4 is set and SUBGROUP_ID_MODE is 0b00, so the value clears every condition but the form's leading zero, and bit 7 is what puts it outside. Every Type the form admits is below 0x80 and occupies one byte; the width is refused before the value, because narrowing a two-byte field to its low octet would read this as 0x90 and a 0x8010 as an ordinary subgroup header. The bytes after the Type are those of the subgroup-single-object vector, which decodes.",
+      "hex": "80900100800004deadbeef",
+      "error": "unknown_message",
+      "error_detail": "stream Type 144 is outside the form the draft defines"
+    },
+    {
       "id": "subgroup-truncated",
       "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
       "hex": "100100",

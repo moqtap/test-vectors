@@ -325,6 +325,27 @@
       "error_detail": "subgroup stream Type 0x16 sets SUBGROUP_ID_MODE to the reserved 0b11"
     },
     {
+      "id": "type-bit-4-clear",
+      "description": "subgroup stream header with Type 0x20, whose bit 4 is clear. Section 10.4.2: \"Type values that do not match the form 0b00X1XXXX (i.e., Type values outside the ranges 0x10..0x1F and 0x30..0x3F, or values where bit 4 is not set).\" Bit 4 is the one bit every SUBGROUP_HEADER Type sets, so a value without it names no stream this draft assigns, and Section 3.4 is the rule that answers it: \"An endpoint that receives an unknown stream type MUST close the session.\" Draft-20 states bit 4 as a condition on a flags field instead and answers the same byte with invalid_type. The bytes after the Type are those of the subgroup-single-object vector, which decodes.",
+      "hex": "200100800004deadbeef",
+      "error": "unknown_message",
+      "error_detail": "stream Type 0x20 has bit 4 clear and is assigned to nothing"
+    },
+    {
+      "id": "type-above-127",
+      "description": "subgroup stream header whose Type decodes to 144, encoded as the minimal two-byte varint 8090. Section 10.4.2: \"Type values that do not match the form 0b00X1XXXX (i.e., Type values outside the ranges 0x10..0x1F and 0x30..0x3F, or values where bit 4 is not set).\" Bit 4 is set and SUBGROUP_ID_MODE is 0b00, so the value clears every condition but the form's leading zero, and bit 7 is what puts it outside. Every Type the form admits is below 0x80 and occupies one byte; the width is refused before the value, because narrowing a two-byte field to its low octet would read this as 0x90 and a 0x8010 as an ordinary subgroup header. The bytes after the Type are those of the subgroup-single-object vector, which decodes.",
+      "hex": "80900100800004deadbeef",
+      "error": "unknown_message",
+      "error_detail": "stream Type 144 is outside the form the draft defines"
+    },
+    {
+      "id": "type-first-object-bit",
+      "description": "subgroup stream header with Type 0x50, whose bit 6 is set. Section 10.4.2: \"Type values that do not match the form 0b00X1XXXX (i.e., Type values outside the ranges 0x10..0x1F and 0x30..0x3F, or values where bit 4 is not set).\" Draft-17 fixes bits 6 and 7 at zero, so 0x50 is outside the form and names no stream this draft assigns. Draft-18 widened the form to 0b0XX1XXXX and gave bit 6 to FIRST_OBJECT, and these exact bytes are its subgroup-first-object-bit vector, which decodes there and on every draft after it. The same nine bytes are a conforming stream on one draft and a session close on the one before it.",
+      "hex": "500100800004deadbeef",
+      "error": "unknown_message",
+      "error_detail": "stream Type 0x50 sets bit 6, which draft-17 leaves clear"
+    },
+    {
       "id": "subgroup-truncated",
       "description": "truncated subgroup header (type 0x10) — missing publisher_priority",
       "hex": "100100",

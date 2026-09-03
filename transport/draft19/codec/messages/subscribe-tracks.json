@@ -131,6 +131,41 @@
       }
     },
     {
+      "id": "with-two-track-property-filters",
+      "description": "SUBSCRIBE_TRACKS carrying TRACK_PROPERTY_FILTER twice: DEFAULT_PUBLISHER_PRIORITY (0x0E) equal to 1 in set 0, and DEFAULT_PUBLISHER_GROUP_ORDER (0x22) between 1 and 2 in set 1. Section 5.1.3 gives this type its own sentence: \"The Track Property filter parameter MAY appear multiple times in a SUBSCRIBE_TRACKS message or REQUEST_UPDATE for it.\" The two instances differ in SetID and in Property Type, so neither half of the (Parameter Type, SetID, Property Type) triple the same section forbids repeating is repeated here. Both Property Types are even, which is what makes them integer-valued and a range over them meaningful.",
+      "hex": "51001a01010a636f6e666572656e6365022904000e0100000401220101",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": {
+          "track_property_filter": [
+            {
+              "set_id": "0",
+              "property_type": "14",
+              "ranges": [
+                {
+                  "start": "1",
+                  "end": "1"
+                }
+              ]
+            },
+            {
+              "set_id": "1",
+              "property_type": "34",
+              "ranges": [
+                {
+                  "start": "1",
+                  "end": "2"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_TRACKS — missing namespace_prefix",
       "hex": "51000d0101",

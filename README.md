@@ -157,10 +157,10 @@ Coverage spans drafts 00 through 20. Drafts 00–06 use an earlier wire format (
 | MoQ Transport | draft-14 | 31 control messages | 3 stream types | 227 |
 | MoQ Transport | draft-15 | 24 control messages | 3 stream types | 176 |
 | MoQ Transport | draft-16 | 25 control messages | 3 stream types | 188 |
-| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 209 |
-| MoQ Transport | draft-18 | 20 control messages | 3 stream types | 239 |
-| MoQ Transport | draft-19 | 20 control messages | 3 stream types | 254 |
-| MoQ Transport | draft-20 | 21 control messages | 3 stream types | 318 |
+| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 218 |
+| MoQ Transport | draft-18 | 20 control messages | 3 stream types | 247 |
+| MoQ Transport | draft-19 | 20 control messages | 3 stream types | 267 |
+| MoQ Transport | draft-20 | 21 control messages | 3 stream types | 323 |
 
 ## Scope
 
