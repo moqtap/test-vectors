@@ -57,6 +57,37 @@
       "hex": "11000e01010a",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading namespace_prefix"
+    },
+    {
+      "id": "with-two-auth-tokens",
+      "description": "SUBSCRIBE_NAMESPACE carrying AUTHORIZATION_TOKEN twice, with different Token Values. The parameter's own definition is the carve-out: \"The AUTHORIZATION TOKEN parameter MAY be repeated within a message as long as the combination of Token Type and Token Value are unique after resolving any aliases.\" The second instance is written as the Parameter Type again, since this draft writes types absolutely rather than as deltas. Identical to the with-auth-token vector with the count raised and a second token appended, so the only new bytes are the repeat itself.",
+      "hex": "11001e01010a636f6e666572656e6365020306030170617373030603012d616c74",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "1",
+              "token_value": "70617373"
+            }
+          },
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "1",
+              "token_value": "2d616c74"
+            }
+          }
+        ]
+      }
     }
   ]
 }

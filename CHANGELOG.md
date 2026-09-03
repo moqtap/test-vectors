@@ -7,6 +7,28 @@ including every vector added, is in the git history.
 
 A version with no entry here broke nothing.
 
+## 0.15.0
+
+Nothing changed what it asserts; this is a version of its own because 0.14.0's
+shape change is what made the additions expressible.
+
+Ten vectors added, one per draft from 11 to 20: `with-two-auth-tokens`, a
+message carrying AUTHORIZATION_TOKEN twice with different Token Values. The
+parameter's own definition permits it — "The AUTHORIZATION TOKEN parameter MAY
+be repeated within a message as long as the combination of Token Type and Token
+Value are unique after resolving any aliases" — and until now **no vector in the
+corpus exercised a repeated parameter type of any kind other than the four Range
+Filter cases added in 0.13.x**. A consumer had nothing telling it how a repeat
+decodes, which is how two of them arrived at one slot per name.
+
+Drafts 07 through 10 have none, and that is a fact about them: their text has no
+carve-out, so every repeat is a duplicate and is refused.
+
+The two encodings are both covered, because they differ: drafts 11 through 15
+write Parameter Types absolutely, so a repeat is the type again, and drafts 16
+and later delta-encode them, so a repeat is a Type Delta of 0 — the only
+encoding a second instance has once the types are required to ascend.
+
 ## 0.14.0
 
 Every Key-Value-Pair block in a `decoded` message changed shape. A consumer

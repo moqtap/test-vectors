@@ -165,17 +165,17 @@ The two type columns count files — one per control message type, one per data 
 | MoQ Transport | draft-08 | 27 | 4 | 152 | 37 |
 | MoQ Transport | draft-09 | 27 | 4 | 154 | 38 |
 | MoQ Transport | draft-10 | 27 | 4 | 154 | 38 |
-| MoQ Transport | draft-11 | 27 | 3 | 158 | 35 |
-| MoQ Transport | draft-12 | 30 | 3 | 189 | 38 |
-| MoQ Transport | draft-13 | 31 | 3 | 212 | 39 |
-| MoQ Transport | draft-14 | 31 | 3 | 227 | 39 |
-| MoQ Transport | draft-15 | 24 | 3 | 176 | 30 |
-| MoQ Transport | draft-16 | 25 | 3 | 188 | 32 |
-| MoQ Transport | draft-17 | 19 | 3 | 218 | 41 |
-| MoQ Transport | draft-18 | 20 | 3 | 247 | 39 |
-| MoQ Transport | draft-19 | 20 | 3 | 267 | 39 |
-| MoQ Transport | draft-20 | 21 | 3 | 323 | 57 |
-| | **all** | | | **3430** | **699** |
+| MoQ Transport | draft-11 | 27 | 3 | 159 | 35 |
+| MoQ Transport | draft-12 | 30 | 3 | 190 | 38 |
+| MoQ Transport | draft-13 | 31 | 3 | 213 | 39 |
+| MoQ Transport | draft-14 | 31 | 3 | 228 | 39 |
+| MoQ Transport | draft-15 | 24 | 3 | 177 | 30 |
+| MoQ Transport | draft-16 | 25 | 3 | 189 | 32 |
+| MoQ Transport | draft-17 | 19 | 3 | 219 | 41 |
+| MoQ Transport | draft-18 | 20 | 3 | 248 | 39 |
+| MoQ Transport | draft-19 | 20 | 3 | 268 | 39 |
+| MoQ Transport | draft-20 | 21 | 3 | 324 | 57 |
+| | **all** | | | **3440** | **699** |
 
 ## Scope
 

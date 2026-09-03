@@ -388,6 +388,38 @@
       "hex": "03000d0101046c697665",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading track_name"
+    },
+    {
+      "id": "with-two-auth-tokens",
+      "description": "SUBSCRIBE carrying AUTHORIZATION_TOKEN twice, with different Token Values. The parameter's own definition is the carve-out: \"The AUTHORIZATION TOKEN parameter MAY be repeated within a message as long as the combination of Token Type and Token Value are unique after resolving any aliases.\" The second instance is written as a Type Delta of 0, which is the only encoding a second instance has once Section 10.2 requires ascending order. Identical to the with-auth-token-use-value vector with the count raised and a second token appended, so the only new bytes are the repeat itself.",
+      "hex": "0300340101046c69766505766964656f02031103006d792d6265617265722d746f6b656e001103006d792d62656172652d7365636f6e64",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "6d792d6265617265722d746f6b656e"
+            }
+          },
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "6d792d62656172652d7365636f6e64"
+            }
+          }
+        ]
+      }
     }
   ]
 }
