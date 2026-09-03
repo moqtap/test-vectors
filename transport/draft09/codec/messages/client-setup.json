@@ -12,7 +12,7 @@
         "supported_versions": [
           "4278190089"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -24,7 +24,7 @@
           "4278190088",
           "4278190089"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -35,10 +35,18 @@
         "supported_versions": [
           "4278190089"
         ],
-        "parameters": {
-          "path": "test",
-          "max_subscribe_id": "100"
-        }
+        "parameters": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "test"
+          },
+          {
+            "name": "max_subscribe_id",
+            "type": "0x2",
+            "value": "100"
+          }
+        ]
       }
     },
     {
@@ -50,7 +58,7 @@
         "supported_versions": [
           "4278190089"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {

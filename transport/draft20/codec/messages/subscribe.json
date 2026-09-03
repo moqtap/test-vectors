@@ -14,7 +14,7 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -28,7 +28,7 @@
           "room42"
         ],
         "track_name": "audio",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -41,11 +41,15 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "location_filter": {
-            "start_group": "0"
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "start_group": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -58,11 +62,15 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "location_filter": {
-            "start_group": "3"
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "start_group": "3"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -75,12 +83,16 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "location_filter": {
-            "start_group": "0",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "start_group": "0",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -93,12 +105,16 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "location_filter": {
-            "start_group": "10",
-            "start_object": "3"
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "start_group": "10",
+              "start_object": "3"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -111,13 +127,17 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "location_filter": {
-            "start_group": "10",
-            "start_object": "3",
-            "end_group_delta": "10"
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "end_group_delta": "10",
+              "start_group": "10",
+              "start_object": "3"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -130,14 +150,18 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "location_filter": {
-            "start_group": "10",
-            "start_object": "3",
-            "end_group_delta": "10",
-            "end_object": "7"
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "end_group_delta": "10",
+              "end_object": "7",
+              "start_group": "10",
+              "start_object": "3"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -151,12 +175,16 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "location_filter": {
-            "start_group": "10",
-            "start_object": "3"
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "start_group": "10",
+              "start_object": "3"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -169,9 +197,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "fill_parameters": {}
-        }
+        "parameters": [
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": []
+          }
+        ]
       }
     },
     {
@@ -184,14 +216,22 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "fill_parameters": {
-            "location_filter": {
-              "start_group": "100",
-              "start_object": "0"
-            }
+        "parameters": [
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": [
+              {
+                "name": "location_filter",
+                "type": "0x21",
+                "value": {
+                  "start_group": "100",
+                  "start_object": "0"
+                }
+              }
+            ]
           }
-        }
+        ]
       }
     },
     {
@@ -204,13 +244,29 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "fill_parameters": {
-            "subscriber_priority": "64",
-            "group_order": "1"
+        "parameters": [
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": [
+              {
+                "name": "subscriber_priority",
+                "type": "0x20",
+                "value": "64"
+              },
+              {
+                "name": "group_order",
+                "type": "0x22",
+                "value": "1"
+              }
+            ]
           },
-          "new_group_request": "25"
-        }
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "25"
+          }
+        ]
       }
     },
     {
@@ -223,9 +279,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "include_properties": "0"
-        }
+        "parameters": [
+          {
+            "name": "include_properties",
+            "type": "0x35",
+            "value": "0"
+          }
+        ]
       }
     },
     {
@@ -238,9 +298,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "include_properties": "1"
-        }
+        "parameters": [
+          {
+            "name": "include_properties",
+            "type": "0x35",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -253,9 +317,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "object_delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -268,9 +336,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "subgroup_delivery_timeout": "10000"
-        }
+        "parameters": [
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "10000"
+          }
+        ]
       }
     },
     {
@@ -283,9 +355,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "rendezvous_timeout": "3000"
-        }
+        "parameters": [
+          {
+            "name": "rendezvous_timeout",
+            "type": "0x4",
+            "value": "3000"
+          }
+        ]
       }
     },
     {
@@ -298,9 +374,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "forward": "1"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -313,9 +393,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "subscriber_priority": "32"
-        }
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "32"
+          }
+        ]
       }
     },
     {
@@ -328,9 +412,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "group_order": "2"
-        }
+        "parameters": [
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "2"
+          }
+        ]
       }
     },
     {
@@ -343,9 +431,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "new_group_request": "50"
-        }
+        "parameters": [
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "50"
+          }
+        ]
       }
     },
     {
@@ -358,10 +450,18 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "object_delivery_timeout": "3000",
-          "subgroup_delivery_timeout": "8000"
-        }
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "3000"
+          },
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "8000"
+          }
+        ]
       }
     },
     {
@@ -374,14 +474,18 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "1",
-            "token_alias": "1",
-            "token_type": "0",
-            "token_value": "7365637265742d746f6b656e"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "1",
+              "token_alias": "1",
+              "token_type": "0",
+              "token_value": "7365637265742d746f6b656e"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -394,12 +498,16 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "2",
-            "token_alias": "1"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "2",
+              "token_alias": "1"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -412,13 +520,17 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "6d792d6265617265722d746f6b656e"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "6d792d6265617265722d746f6b656e"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -431,11 +543,23 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "object_delivery_timeout": "5000",
-          "subscriber_priority": "32",
-          "group_order": "1"
-        }
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "32"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -448,17 +572,21 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "subgroup_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "2",
-                "end": "4"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "subgroup_filter",
+            "type": "0x25",
+            "value": {
+              "ranges": [
+                {
+                  "end": "4",
+                  "start": "2"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -471,17 +599,21 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "objectid_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "0",
-                "end": "9"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "objectid_filter",
+            "type": "0x26",
+            "value": {
+              "ranges": [
+                {
+                  "end": "9",
+                  "start": "0"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -494,21 +626,25 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "objectid_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "3",
-                "end": "5"
-              },
-              {
-                "start": "10",
-                "end": "15"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "objectid_filter",
+            "type": "0x26",
+            "value": {
+              "ranges": [
+                {
+                  "end": "5",
+                  "start": "3"
+                },
+                {
+                  "end": "15",
+                  "start": "10"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -521,17 +657,21 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "priority_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "0",
-                "end": "127"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "priority_filter",
+            "type": "0x27",
+            "value": {
+              "ranges": [
+                {
+                  "end": "127",
+                  "start": "0"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -544,16 +684,20 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "subgroup_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "5"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "subgroup_filter",
+            "type": "0x25",
+            "value": {
+              "ranges": [
+                {
+                  "start": "5"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -566,18 +710,22 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "object_property_filter": {
-            "set_id": "0",
-            "property_type": "12",
-            "ranges": [
-              {
-                "start": "1",
-                "end": "3"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "object_property_filter",
+            "type": "0x28",
+            "value": {
+              "property_type": "12",
+              "ranges": [
+                {
+                  "end": "3",
+                  "start": "1"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -610,17 +758,21 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "subgroup_filter": {
-            "set_id": "1",
-            "ranges": [
-              {
-                "start": "2",
-                "end": "4"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "subgroup_filter",
+            "type": "0x25",
+            "value": {
+              "ranges": [
+                {
+                  "end": "4",
+                  "start": "2"
+                }
+              ],
+              "set_id": "1"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -633,28 +785,34 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "subgroup_filter": [
-            {
-              "set_id": "0",
+        "parameters": [
+          {
+            "name": "subgroup_filter",
+            "type": "0x25",
+            "value": {
               "ranges": [
                 {
-                  "start": "1",
-                  "end": "3"
+                  "end": "3",
+                  "start": "1"
                 }
-              ]
-            },
-            {
-              "set_id": "1",
-              "ranges": [
-                {
-                  "start": "10",
-                  "end": "12"
-                }
-              ]
+              ],
+              "set_id": "0"
             }
-          ]
-        }
+          },
+          {
+            "name": "subgroup_filter",
+            "type": "0x25",
+            "value": {
+              "ranges": [
+                {
+                  "end": "12",
+                  "start": "10"
+                }
+              ],
+              "set_id": "1"
+            }
+          }
+        ]
       }
     },
     {
@@ -667,26 +825,34 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "subgroup_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "1",
-                "end": "3"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "subgroup_filter",
+            "type": "0x25",
+            "value": {
+              "ranges": [
+                {
+                  "end": "3",
+                  "start": "1"
+                }
+              ],
+              "set_id": "0"
+            }
           },
-          "priority_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "0",
-                "end": "127"
-              }
-            ]
+          {
+            "name": "priority_filter",
+            "type": "0x27",
+            "value": {
+              "ranges": [
+                {
+                  "end": "127",
+                  "start": "0"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -699,17 +865,21 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "priority_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "0",
-                "end": "255"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "priority_filter",
+            "type": "0x27",
+            "value": {
+              "ranges": [
+                {
+                  "end": "255",
+                  "start": "0"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {

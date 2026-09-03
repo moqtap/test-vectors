@@ -11,7 +11,7 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -21,12 +21,16 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "5",
-        "parameters": {
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -36,9 +40,13 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {
-          "expires": "30"
-        }
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "30"
+          }
+        ]
       }
     },
     {
@@ -48,9 +56,13 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -60,10 +72,14 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "5",
-        "parameters": {},
-        "track_extensions": {
-          "default_publisher_priority": "128"
-        }
+        "parameters": [],
+        "track_extensions": [
+          {
+            "name": "default_publisher_priority",
+            "type": "0xe",
+            "value": "128"
+          }
+        ]
       }
     },
     {
@@ -73,12 +89,20 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {
-          "expires": "10000"
-        },
-        "track_extensions": {
-          "max_cache_duration": "10000"
-        }
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "10000"
+          }
+        ],
+        "track_extensions": [
+          {
+            "name": "max_cache_duration",
+            "type": "0x4",
+            "value": "10000"
+          }
+        ]
       }
     },
     {

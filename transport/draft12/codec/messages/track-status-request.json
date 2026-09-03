@@ -14,7 +14,7 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -27,13 +27,17 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "746f6b656e313233"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "746f6b656e313233"
+            }
           }
-        }
+        ]
       }
     },
     {

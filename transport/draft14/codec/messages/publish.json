@@ -18,7 +18,7 @@
         "group_order": "1",
         "content_exists": "0",
         "forward": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -39,7 +39,7 @@
           "object": "5"
         },
         "forward": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -56,7 +56,7 @@
         "group_order": "2",
         "content_exists": "0",
         "forward": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -74,7 +74,7 @@
         "group_order": "1",
         "content_exists": "0",
         "forward": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -91,13 +91,17 @@
         "group_order": "1",
         "content_exists": "0",
         "forward": "1",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "1",
-            "token_value": "746f6b656e313233"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "1",
+              "token_value": "746f6b656e313233"
+            }
           }
-        }
+        ]
       }
     },
     {

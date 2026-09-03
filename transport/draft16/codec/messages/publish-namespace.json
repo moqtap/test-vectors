@@ -13,7 +13,7 @@
         "track_namespace": [
           "conference"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -26,7 +26,7 @@
           "live",
           "sports"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -38,9 +38,13 @@
         "track_namespace": [
           "conference"
         ],
-        "parameters": {
-          "forward": "1"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          }
+        ]
       }
     },
     {

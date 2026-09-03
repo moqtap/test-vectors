@@ -9,7 +9,7 @@
       "description": "minimal CLIENT_SETUP with no parameters (version negotiation via ALPN)",
       "hex": "20000100",
       "decoded": {
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -17,9 +17,13 @@
       "description": "CLIENT_SETUP with MAX_REQUEST_ID parameter set to 0",
       "hex": "200003010200",
       "decoded": {
-        "parameters": {
-          "max_request_id": "0"
-        }
+        "parameters": [
+          {
+            "name": "max_request_id",
+            "type": "0x2",
+            "value": "0"
+          }
+        ]
       }
     },
     {
@@ -27,9 +31,13 @@
       "description": "CLIENT_SETUP with PATH parameter",
       "hex": "2000070101042f6d6f71",
       "decoded": {
-        "parameters": {
-          "path": "/moq"
-        }
+        "parameters": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "/moq"
+          }
+        ]
       }
     },
     {
@@ -37,9 +45,13 @@
       "description": "CLIENT_SETUP with AUTHORITY parameter",
       "hex": "20000e01050b6578616d706c652e636f6d",
       "decoded": {
-        "parameters": {
-          "authority": "example.com"
-        }
+        "parameters": [
+          {
+            "name": "authority",
+            "type": "0x5",
+            "value": "example.com"
+          }
+        ]
       }
     },
     {
@@ -47,9 +59,13 @@
       "description": "CLIENT_SETUP with MOQT_IMPLEMENTATION parameter",
       "hex": "20000d01070a6d6f717461702f312e30",
       "decoded": {
-        "parameters": {
-          "moqt_implementation": "moqtap/1.0"
-        }
+        "parameters": [
+          {
+            "name": "moqt_implementation",
+            "type": "0x7",
+            "value": "moqtap/1.0"
+          }
+        ]
       }
     },
     {
@@ -57,9 +73,13 @@
       "description": "CLIENT_SETUP with MAX_AUTH_TOKEN_CACHE_SIZE parameter set to 1024",
       "hex": "20000401044400",
       "decoded": {
-        "parameters": {
-          "max_auth_token_cache_size": "1024"
-        }
+        "parameters": [
+          {
+            "name": "max_auth_token_cache_size",
+            "type": "0x4",
+            "value": "1024"
+          }
+        ]
       }
     },
     {
@@ -67,14 +87,18 @@
       "description": "CLIENT_SETUP with AUTHORIZATION_TOKEN — REGISTER alias_type (0x1)",
       "hex": "20000c010309010001736563726574",
       "decoded": {
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "1",
-            "token_alias": "0",
-            "token_type": "1",
-            "token_value": "736563726574"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "1",
+              "token_alias": "0",
+              "token_type": "1",
+              "token_value": "736563726574"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -82,13 +106,17 @@
       "description": "CLIENT_SETUP with AUTHORIZATION_TOKEN — USE_VALUE alias_type (0x3)",
       "hex": "2000080103050301746f6b",
       "decoded": {
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "1",
-            "token_value": "746f6b"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "1",
+              "token_value": "746f6b"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -97,7 +125,7 @@
       "hex": "2000024000",
       "canonical": false,
       "decoded": {
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -112,9 +140,13 @@
       "description": "CLIENT_SETUP with long PATH (payload > 64 bytes) to verify 16-bit length framing",
       "hex": "2000530101404f2f6d6f71742f746573742f706174682f746861742d69732d6c6f6e672d656e6f7567682d746f2d707573682d7061796c6f61642d6f7665722d73697874792d666f75722d62797465732d746f74616c",
       "decoded": {
-        "parameters": {
-          "path": "/moqt/test/path/that-is-long-enough-to-push-payload-over-sixty-four-bytes-total"
-        }
+        "parameters": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "/moqt/test/path/that-is-long-enough-to-push-payload-over-sixty-four-bytes-total"
+          }
+        ]
       }
     }
   ]

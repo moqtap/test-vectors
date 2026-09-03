@@ -15,7 +15,7 @@
           "conference"
         ],
         "subscribe_options": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -30,7 +30,7 @@
           "sports"
         ],
         "subscribe_options": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -44,7 +44,7 @@
           "conference"
         ],
         "subscribe_options": "2",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -58,13 +58,17 @@
           "conference"
         ],
         "subscribe_options": "0",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "6e732d746f6b656e"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "6e732d746f6b656e"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -78,9 +82,13 @@
           "conference"
         ],
         "subscribe_options": "0",
-        "parameters": {
-          "forward": "1"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          }
+        ]
       }
     },
     {

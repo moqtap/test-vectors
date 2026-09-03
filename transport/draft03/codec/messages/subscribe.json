@@ -27,7 +27,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -55,7 +55,7 @@
           "mode": "1",
           "value": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -81,9 +81,13 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {
-          "authorization_info": "mytoken"
-        }
+        "parameters": [
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "mytoken"
+          }
+        ]
       }
     },
     {
@@ -109,7 +113,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -135,7 +139,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -161,7 +165,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {

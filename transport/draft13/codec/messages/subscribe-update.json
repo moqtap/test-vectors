@@ -15,7 +15,7 @@
         "end_group": "20",
         "subscriber_priority": "255",
         "forward": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -29,7 +29,7 @@
         "end_group": "0",
         "subscriber_priority": "128",
         "forward": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -43,7 +43,7 @@
         "end_group": "20",
         "subscriber_priority": "128",
         "forward": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {

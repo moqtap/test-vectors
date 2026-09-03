@@ -10,7 +10,7 @@
       "hex": "1e00020100",
       "decoded": {
         "request_id": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -19,10 +19,18 @@
       "hex": "1e000703022040400201",
       "decoded": {
         "request_id": "3",
-        "parameters": {
-          "subscriber_priority": "64",
-          "group_order": "1"
-        }
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "64"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -31,13 +39,17 @@
       "hex": "1e000701012103030500",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "3",
-            "start_group": "5",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "3",
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -46,9 +58,13 @@
       "hex": "1e000401011000",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "forward": "0"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "0"
+          }
+        ]
       }
     },
     {
@@ -57,9 +73,13 @@
       "hex": "1e000401013205",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "new_group_request": "5"
-        }
+        "parameters": [
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "5"
+          }
+        ]
       }
     },
     {
@@ -68,9 +88,13 @@
       "hex": "1e00050101086710",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "expires": "10000"
-        }
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "10000"
+          }
+        ]
       }
     },
     {
@@ -79,9 +103,13 @@
       "hex": "1e00050101025388",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {

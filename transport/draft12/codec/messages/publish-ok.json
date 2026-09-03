@@ -13,7 +13,7 @@
         "subscriber_priority": "128",
         "group_order": "1",
         "filter_type": "2",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "1e0006010180010200"
     },
@@ -29,7 +29,7 @@
         "start_group": "5",
         "start_object": "0",
         "end_group": "20",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "1e0009020140020405001400"
     },
@@ -42,7 +42,7 @@
         "subscriber_priority": "128",
         "group_order": "1",
         "filter_type": "1",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "1e0006010180010100"
     },
@@ -57,7 +57,7 @@
         "filter_type": "3",
         "start_group": "10",
         "start_object": "3",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "1e000801018001030a0300"
     },
@@ -70,7 +70,7 @@
         "subscriber_priority": "128",
         "group_order": "1",
         "filter_type": "2",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "1e0006010080010200"
     },

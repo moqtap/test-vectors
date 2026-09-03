@@ -21,7 +21,7 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -42,7 +42,7 @@
         "start_object": "3",
         "end_group": "20",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -62,13 +62,17 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "1",
-            "token_value": "746f6b656e313233"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "1",
+              "token_value": "746f6b656e313233"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -82,7 +86,7 @@
         "fetch_type": "2",
         "joining_request_id": "1",
         "joining_start": "5",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -96,7 +100,7 @@
         "fetch_type": "3",
         "joining_request_id": "1",
         "joining_start": "50",
-        "parameters": {}
+        "parameters": []
       }
     },
     {

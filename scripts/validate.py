@@ -82,11 +82,82 @@ _LOCATION_FIELDS = {"start_group", "start_object", "end_group", "end_object"}
 # Drafts where Location fields are objects rather than plain int strings
 _LOCATION_OBJECT_DRAFTS = {"draft01", "draft02", "draft03"}
 
+# A control message's Key-Value-Pair blocks render as a list of entries in wire
+# order, so these keys hold a list and not a map. See `check_kvp_block`.
+#
+# The data plane's `extension_headers` and `object_properties` are Key-Value
+# lists too and are *not* here: they are hand-written, no decoder in any
+# consumer renders them, and converting them would be editing unverified data.
+# They keep the shape they have until something can regenerate them.
+_KVP_BLOCK_KEYS = {
+    "parameters",
+    "setup_parameters",
+    "options",
+    "track_properties",
+    "track_extensions",
+}
+_KVP_TYPE_PATTERN = re.compile(r"^0x[0-9a-f]+$")
+
+
+def _looks_like_kvp_block(value):
+    return (
+        isinstance(value, list)
+        and value
+        and all(
+            isinstance(e, dict)
+            and isinstance(e.get("type"), str)
+            and _KVP_TYPE_PATTERN.match(e["type"])
+            for e in value
+        )
+    )
+
+
+def check_kvp_block(entries, path, filename, draft_id=None):
+    """Check one parameter or setup-option block.
+
+    Every entry carries a `type`, may carry a `name`, and carries exactly one of
+    `value` and `raw_hex`. An entry's `value` is whatever that parameter type
+    defines, so the integer rule does not apply to the key itself — but it does
+    apply inside, which is why this recurses into the value.
+    """
+    if not isinstance(entries, list):
+        err(f"{filename}: {path} must be a list of entries, in wire order")
+        return
+    for i, entry in enumerate(entries):
+        at = f"{path}[{i}]"
+        if not isinstance(entry, dict):
+            err(f"{filename}: {at} must be an entry object")
+            continue
+        extra = set(entry) - {"type", "name", "value", "raw_hex"}
+        if extra:
+            err(f"{filename}: {at} has unknown keys {sorted(extra)}")
+        ptype = entry.get("type")
+        if not isinstance(ptype, str) or not _KVP_TYPE_PATTERN.match(ptype):
+            err(f"{filename}: {at}.type = {ptype!r} must be lowercase hex, like '0x21'")
+        if "name" in entry and not isinstance(entry["name"], str):
+            err(f"{filename}: {at}.name = {entry['name']!r} must be a string")
+        if ("value" in entry) == ("raw_hex" in entry):
+            err(f"{filename}: {at} must carry exactly one of `value` and `raw_hex`")
+        if "raw_hex" in entry:
+            raw = entry["raw_hex"]
+            if not isinstance(raw, str) or (raw and not HEX_PATTERN.match(raw)):
+                err(f"{filename}: {at}.raw_hex = {raw!r} must be lowercase hex")
+        if "value" in entry:
+            # A parameter whose value is itself a Key-Value-Pair block — a
+            # draft-20 FILL_PARAMETERS — is the same shape one level down.
+            if _looks_like_kvp_block(entry["value"]):
+                check_kvp_block(entry["value"], f"{at}.value", filename, draft_id)
+            else:
+                check_protocol_ints(entry["value"], f"{at}.value", filename, draft_id)
+
+
 def check_protocol_ints(obj, path, filename, draft_id=None):
     """Recursively check that protocol integer fields are strings."""
     if isinstance(obj, dict):
         for k, v in obj.items():
-            if k in PROTOCOL_INT_FIELDS:
+            if k in _KVP_BLOCK_KEYS:
+                check_kvp_block(v, f"{path}.{k}", filename, draft_id)
+            elif k in PROTOCOL_INT_FIELDS:
                 if isinstance(v, dict) and k in _LOCATION_FIELDS and draft_id in _LOCATION_OBJECT_DRAFTS:
                     check_protocol_ints(v, f"{path}.{k}", filename, draft_id)
                 elif not isinstance(v, str) or not INT_PATTERN.match(v):

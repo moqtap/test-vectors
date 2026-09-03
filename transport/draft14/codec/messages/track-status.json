@@ -18,7 +18,7 @@
         "group_order": "0",
         "forward": "0",
         "filter_type": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -36,7 +36,7 @@
         "group_order": "1",
         "forward": "0",
         "filter_type": "2",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -55,7 +55,7 @@
         "filter_type": "3",
         "start_group": "10",
         "start_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {

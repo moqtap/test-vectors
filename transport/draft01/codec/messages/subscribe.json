@@ -24,7 +24,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -47,7 +47,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -72,7 +72,7 @@
           "mode": "1",
           "value": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -95,7 +95,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -118,7 +118,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -141,9 +141,13 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {
-          "authorization_info": "mytoken"
-        }
+        "parameters": [
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "mytoken"
+          }
+        ]
       }
     },
     {
@@ -166,9 +170,13 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {
-          "group_sequence": "5"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "group_sequence",
+            "value": "5"
+          }
+        ]
       }
     },
     {
@@ -191,10 +199,18 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {
-          "group_sequence": "5",
-          "object_sequence": "3"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "group_sequence",
+            "value": "5"
+          },
+          {
+            "type": "0x1",
+            "name": "object_sequence",
+            "value": "3"
+          }
+        ]
       }
     },
     {

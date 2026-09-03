@@ -16,7 +16,7 @@
           "group": "5",
           "object": "10"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -31,7 +31,7 @@
           "group": "10",
           "object": "20"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -46,9 +46,13 @@
           "group": "5",
           "object": "10"
         },
-        "parameters": {
-          "max_cache_duration": "30000"
-        }
+        "parameters": [
+          {
+            "name": "max_cache_duration",
+            "type": "0x4",
+            "value": "30000"
+          }
+        ]
       }
     },
     {

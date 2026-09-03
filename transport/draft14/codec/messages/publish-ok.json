@@ -14,7 +14,7 @@
         "subscriber_priority": "128",
         "group_order": "1",
         "filter_type": "2",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -30,7 +30,7 @@
         "start_group": "5",
         "start_object": "0",
         "end_group": "20",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -45,7 +45,7 @@
         "filter_type": "3",
         "start_group": "10",
         "start_object": "3",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -58,7 +58,7 @@
         "subscriber_priority": "128",
         "group_order": "1",
         "filter_type": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {

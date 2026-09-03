@@ -11,7 +11,7 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -21,12 +21,16 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "5",
-        "parameters": {
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -36,9 +40,13 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {
-          "expires": "30"
-        }
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "30"
+          }
+        ]
       }
     },
     {
@@ -48,9 +56,13 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "5",
-        "parameters": {
-          "publisher_priority": "64"
-        }
+        "parameters": [
+          {
+            "name": "publisher_priority",
+            "type": "0xe",
+            "value": "64"
+          }
+        ]
       }
     },
     {
@@ -60,9 +72,13 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -72,9 +88,13 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {
-          "max_cache_duration": "10000"
-        }
+        "parameters": [
+          {
+            "name": "max_cache_duration",
+            "type": "0x4",
+            "value": "10000"
+          }
+        ]
       }
     },
     {
@@ -84,9 +104,13 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {
-          "dynamic_groups": "1"
-        }
+        "parameters": [
+          {
+            "name": "dynamic_groups",
+            "type": "0x30",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -96,9 +120,13 @@
       "decoded": {
         "request_id": "1",
         "track_alias": "0",
-        "parameters": {
-          "group_order": "2"
-        }
+        "parameters": [
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "2"
+          }
+        ]
       }
     },
     {

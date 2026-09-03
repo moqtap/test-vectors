@@ -13,7 +13,7 @@
         "track_namespace": [
           "conference"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -26,7 +26,7 @@
           "live",
           "sports"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -38,13 +38,17 @@
         "track_namespace": [
           "conference"
         ],
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "1",
-            "token_value": "746f6b656e313233"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "1",
+              "token_value": "746f6b656e313233"
+            }
           }
-        }
+        ]
       }
     },
     {

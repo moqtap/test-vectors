@@ -12,7 +12,7 @@
         "supported_versions": [
           "4278190094"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -24,7 +24,7 @@
           "4278190093",
           "4278190094"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -35,9 +35,13 @@
         "supported_versions": [
           "4278190094"
         ],
-        "parameters": {
-          "max_request_id": "0"
-        }
+        "parameters": [
+          {
+            "name": "max_request_id",
+            "type": "0x2",
+            "value": "0"
+          }
+        ]
       }
     },
     {
@@ -48,9 +52,13 @@
         "supported_versions": [
           "4278190094"
         ],
-        "parameters": {
-          "path": "/moq"
-        }
+        "parameters": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "/moq"
+          }
+        ]
       }
     },
     {
@@ -61,9 +69,13 @@
         "supported_versions": [
           "4278190094"
         ],
-        "parameters": {
-          "authority": "example.com"
-        }
+        "parameters": [
+          {
+            "name": "authority",
+            "type": "0x5",
+            "value": "example.com"
+          }
+        ]
       }
     },
     {
@@ -74,9 +86,13 @@
         "supported_versions": [
           "4278190094"
         ],
-        "parameters": {
-          "max_auth_token_cache_size": "4096"
-        }
+        "parameters": [
+          {
+            "name": "max_auth_token_cache_size",
+            "type": "0x4",
+            "value": "4096"
+          }
+        ]
       }
     },
     {
@@ -88,7 +104,7 @@
         "supported_versions": [
           "4278190094"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -113,9 +129,13 @@
         "supported_versions": [
           "4278190094"
         ],
-        "parameters": {
-          "path": "/moqt/test/path/that-is-long-enough-to-push-payload-over-sixty-four-bytes-total"
-        }
+        "parameters": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "/moqt/test/path/that-is-long-enough-to-push-payload-over-sixty-four-bytes-total"
+          }
+        ]
       }
     }
   ]

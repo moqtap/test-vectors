@@ -19,7 +19,7 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -38,7 +38,7 @@
         "start_object": "3",
         "end_group": "20",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -50,7 +50,7 @@
         "fetch_type": "2",
         "joining_request_id": "2",
         "joining_start": "3",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -62,7 +62,7 @@
         "fetch_type": "3",
         "joining_request_id": "2",
         "joining_start": "5",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -80,10 +80,18 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {
-          "subscriber_priority": "128",
-          "group_order": "1"
-        }
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "128"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          }
+        ]
       }
     },
     {

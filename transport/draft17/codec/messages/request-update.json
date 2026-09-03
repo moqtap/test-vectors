@@ -11,7 +11,7 @@
       "decoded": {
         "request_id": "2",
         "required_request_id_delta": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -21,13 +21,17 @@
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "3",
-            "start_group": "5",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "3",
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -37,9 +41,13 @@
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -49,9 +57,13 @@
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
-        "parameters": {
-          "forward": "1"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -61,9 +73,13 @@
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
-        "parameters": {
-          "subscriber_priority": "16"
-        }
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "16"
+          }
+        ]
       }
     },
     {
@@ -73,9 +89,13 @@
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
-        "parameters": {
-          "new_group_request": "25"
-        }
+        "parameters": [
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "25"
+          }
+        ]
       }
     },
     {
@@ -85,15 +105,27 @@
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
-        "parameters": {
-          "delivery_timeout": "5000",
-          "subscriber_priority": "16",
-          "subscription_filter": {
-            "filter_type": "3",
-            "start_group": "5",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "16"
+          },
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "3",
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {

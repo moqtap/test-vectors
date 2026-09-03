@@ -12,7 +12,7 @@
         "supported_versions": [
           "4278190093"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -24,7 +24,7 @@
           "4278190092",
           "4278190093"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -35,10 +35,18 @@
         "supported_versions": [
           "4278190093"
         ],
-        "parameters": {
-          "path": "test",
-          "max_request_id": "200"
-        }
+        "parameters": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "test"
+          },
+          {
+            "name": "max_request_id",
+            "type": "0x2",
+            "value": "200"
+          }
+        ]
       }
     },
     {
@@ -49,15 +57,23 @@
         "supported_versions": [
           "4278190093"
         ],
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "1",
-            "token_alias": "1",
-            "token_type": "0",
-            "token_value": "6d79746f6b656e"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "1",
+              "token_alias": "1",
+              "token_type": "0",
+              "token_value": "6d79746f6b656e"
+            }
           },
-          "max_auth_token_cache_size": "1024"
-        }
+          {
+            "name": "max_auth_token_cache_size",
+            "type": "0x4",
+            "value": "1024"
+          }
+        ]
       }
     },
     {
@@ -68,9 +84,13 @@
         "supported_versions": [
           "4278190093"
         ],
-        "parameters": {
-          "max_auth_token_cache_size": "1024"
-        }
+        "parameters": [
+          {
+            "name": "max_auth_token_cache_size",
+            "type": "0x4",
+            "value": "1024"
+          }
+        ]
       }
     },
     {
@@ -82,7 +102,7 @@
         "supported_versions": [
           "4278190093"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {

@@ -10,8 +10,8 @@
       "hex": "0400020000",
       "decoded": {
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {}
+        "parameters": [],
+        "track_properties": []
       }
     },
     {
@@ -20,13 +20,17 @@
       "hex": "0400050501090a03",
       "decoded": {
         "track_alias": "5",
-        "parameters": {
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        },
-        "track_properties": {}
+        ],
+        "track_properties": []
       }
     },
     {
@@ -35,10 +39,14 @@
       "hex": "0400040001081e",
       "decoded": {
         "track_alias": "0",
-        "parameters": {
-          "expires": "30"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "30"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -47,11 +55,19 @@
       "hex": "04000800000293880c8080",
       "decoded": {
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {
-          "object_delivery_timeout": "5000",
-          "default_publisher_priority": "128"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "default_publisher_priority",
+            "type": "0xe",
+            "value": "128"
+          }
+        ]
       }
     },
     {
@@ -60,10 +76,14 @@
       "hex": "040005000006a710",
       "decoded": {
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {
-          "subgroup_delivery_timeout": "10000"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "10000"
+          }
+        ]
       }
     },
     {
@@ -72,10 +92,14 @@
       "hex": "040006000004c0ea60",
       "decoded": {
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {
-          "max_cache_duration": "60000"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "max_cache_duration",
+            "type": "0x4",
+            "value": "60000"
+          }
+        ]
       }
     },
     {
@@ -84,10 +108,14 @@
       "hex": "04000400002202",
       "decoded": {
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {
-          "default_publisher_group_order": "2"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "default_publisher_group_order",
+            "type": "0x22",
+            "value": "2"
+          }
+        ]
       }
     },
     {
@@ -96,10 +124,14 @@
       "hex": "04000400003001",
       "decoded": {
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {
-          "dynamic_groups": "1"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "dynamic_groups",
+            "type": "0x30",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -108,10 +140,14 @@
       "hex": "04000600000b02022a",
       "decoded": {
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {
-          "immutable_properties": "022a"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "immutable_properties",
+            "raw_hex": "022a",
+            "type": "0xb"
+          }
+        ]
       }
     },
     {
@@ -120,13 +156,25 @@
       "hex": "0400090501081e0293880c40",
       "decoded": {
         "track_alias": "5",
-        "parameters": {
-          "expires": "30"
-        },
-        "track_properties": {
-          "object_delivery_timeout": "5000",
-          "default_publisher_priority": "64"
-        }
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "30"
+          }
+        ],
+        "track_properties": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "default_publisher_priority",
+            "type": "0xe",
+            "value": "64"
+          }
+        ]
       }
     },
     {

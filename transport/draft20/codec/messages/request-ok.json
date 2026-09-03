@@ -9,8 +9,8 @@
       "description": "REQUEST_OK with no parameters and empty Track Properties (used as a PUBLISH_OK alias and for other request responses)",
       "hex": "07000100",
       "decoded": {
-        "parameters": {},
-        "track_properties": {}
+        "parameters": [],
+        "track_properties": []
       }
     },
     {
@@ -18,13 +18,17 @@
       "description": "REQUEST_OK with LARGEST_OBJECT parameter (group=10, object=3) — typically a REQUEST_UPDATE_OK",
       "hex": "07000401090a03",
       "decoded": {
-        "parameters": {
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        },
-        "track_properties": {}
+        ],
+        "track_properties": []
       }
     },
     {
@@ -32,10 +36,14 @@
       "description": "REQUEST_OK with EXPIRES parameter (60000ms)",
       "hex": "0700050108c0ea60",
       "decoded": {
-        "parameters": {
-          "expires": "60000"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -43,14 +51,22 @@
       "description": "REQUEST_UPDATE_OK carrying EXPIRES (60000ms) and LARGEST_OBJECT (group=10, object=3); demonstrates type-delta ordering (0x08 then a delta of 1 to 0x09)",
       "hex": "0700080208c0ea60010a03",
       "decoded": {
-        "parameters": {
-          "expires": "60000",
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        },
-        "track_properties": {}
+        ],
+        "track_properties": []
       }
     },
     {
@@ -58,16 +74,28 @@
       "description": "TRACK_STATUS_OK (REQUEST_OK in response to TRACK_STATUS) with LARGEST_OBJECT param and track properties",
       "hex": "07000901090f070293882e01",
       "decoded": {
-        "parameters": {
-          "largest_object": {
-            "group": "15",
-            "object": "7"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "15",
+              "object": "7"
+            }
           }
-        },
-        "track_properties": {
-          "object_delivery_timeout": "5000",
-          "dynamic_groups": "1"
-        }
+        ],
+        "track_properties": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "dynamic_groups",
+            "type": "0x30",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -76,14 +104,22 @@
       "hex": "0700090208c0ea6080010a03",
       "canonical": false,
       "decoded": {
-        "parameters": {
-          "expires": "60000",
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        },
-        "track_properties": {}
+        ],
+        "track_properties": []
       }
     },
     {
@@ -92,14 +128,22 @@
       "hex": "07000b0208c0ea60e00000010a03",
       "canonical": false,
       "decoded": {
-        "parameters": {
-          "expires": "60000",
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        },
-        "track_properties": {}
+        ],
+        "track_properties": []
       }
     },
     {
@@ -108,14 +152,22 @@
       "hex": "07000f0208c0ea60fe000000000000010a03",
       "canonical": false,
       "decoded": {
-        "parameters": {
-          "expires": "60000",
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        },
-        "track_properties": {}
+        ],
+        "track_properties": []
       }
     },
     {

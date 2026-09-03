@@ -15,8 +15,8 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {}
+        "parameters": [],
+        "track_properties": []
       }
     },
     {
@@ -31,8 +31,8 @@
         ],
         "track_name": "audio",
         "track_alias": "1",
-        "parameters": {},
-        "track_properties": {}
+        "parameters": [],
+        "track_properties": []
       }
     },
     {
@@ -46,14 +46,18 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "7075622d746f6b656e"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "7075622d746f6b656e"
+            }
           }
-        },
-        "track_properties": {}
+        ],
+        "track_properties": []
       }
     },
     {
@@ -67,10 +71,14 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {
-          "expires": "60000"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -84,13 +92,17 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {
-          "largest_object": {
-            "group": "5",
-            "object": "10"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "5",
+              "object": "10"
+            }
           }
-        },
-        "track_properties": {}
+        ],
+        "track_properties": []
       }
     },
     {
@@ -104,10 +116,14 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {
-          "forward": "1"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -121,12 +137,24 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {
-          "object_delivery_timeout": "10000",
-          "max_cache_duration": "30000",
-          "default_publisher_priority": "64"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "10000"
+          },
+          {
+            "name": "max_cache_duration",
+            "type": "0x4",
+            "value": "30000"
+          },
+          {
+            "name": "default_publisher_priority",
+            "type": "0xe",
+            "value": "64"
+          }
+        ]
       }
     },
     {
@@ -140,10 +168,14 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {
-          "subgroup_delivery_timeout": "8000"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "8000"
+          }
+        ]
       }
     },
     {
@@ -157,10 +189,14 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {},
-        "track_properties": {
-          "immutable_properties": "022a"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "immutable_properties",
+            "raw_hex": "022a",
+            "type": "0xb"
+          }
+        ]
       }
     },
     {

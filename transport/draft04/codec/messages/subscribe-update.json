@@ -14,7 +14,7 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -27,7 +27,7 @@
         "start_object": "0",
         "end_group": "0",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -40,9 +40,13 @@
         "start_object": "0",
         "end_group": "5",
         "end_object": "0",
-        "parameters": {
-          "authorization_info": "newtoken"
-        }
+        "parameters": [
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "newtoken"
+          }
+        ]
       }
     },
     {

@@ -13,7 +13,7 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -26,7 +26,7 @@
           "live",
           "sports"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -38,9 +38,13 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {
-          "forward": "0"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "0"
+          }
+        ]
       }
     },
     {
@@ -52,13 +56,17 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "747261636b732d746f6b"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "747261636b732d746f6b"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -68,7 +76,7 @@
       "decoded": {
         "request_id": "7",
         "namespace_prefix": [],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -80,9 +88,13 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {
-          "group_order": "2"
-        }
+        "parameters": [
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "2"
+          }
+        ]
       }
     },
     {
@@ -94,9 +106,13 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {
-          "include_properties": "0"
-        }
+        "parameters": [
+          {
+            "name": "include_properties",
+            "type": "0x35",
+            "value": "0"
+          }
+        ]
       }
     },
     {
@@ -108,18 +124,22 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {
-          "track_property_filter": {
-            "set_id": "0",
-            "property_type": "14",
-            "ranges": [
-              {
-                "start": "1",
-                "end": "1"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "track_property_filter",
+            "type": "0x29",
+            "value": {
+              "property_type": "14",
+              "ranges": [
+                {
+                  "end": "1",
+                  "start": "1"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -131,17 +151,21 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {
-          "objectid_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "0",
-                "end": "4"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "objectid_filter",
+            "type": "0x26",
+            "value": {
+              "ranges": [
+                {
+                  "end": "4",
+                  "start": "0"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -153,30 +177,36 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {
-          "track_property_filter": [
-            {
-              "set_id": "0",
+        "parameters": [
+          {
+            "name": "track_property_filter",
+            "type": "0x29",
+            "value": {
               "property_type": "14",
               "ranges": [
                 {
-                  "start": "1",
-                  "end": "1"
+                  "end": "1",
+                  "start": "1"
                 }
-              ]
-            },
-            {
-              "set_id": "1",
+              ],
+              "set_id": "0"
+            }
+          },
+          {
+            "name": "track_property_filter",
+            "type": "0x29",
+            "value": {
               "property_type": "34",
               "ranges": [
                 {
-                  "start": "1",
-                  "end": "2"
+                  "end": "2",
+                  "start": "1"
                 }
-              ]
+              ],
+              "set_id": "1"
             }
-          ]
-        }
+          }
+        ]
       }
     },
     {

@@ -14,7 +14,7 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -27,10 +27,18 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "subscriber_priority": "128",
-          "group_order": "1"
-        }
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "128"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -43,9 +51,13 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -58,13 +70,17 @@
           "live"
         ],
         "track_name": "video",
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "3",
-            "start_group": "0",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "3",
+              "start_group": "0",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {

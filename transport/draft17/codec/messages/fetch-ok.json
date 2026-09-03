@@ -12,8 +12,8 @@
         "end_of_track": "0",
         "end_group": "10",
         "end_object": "3",
-        "parameters": {},
-        "track_properties": {}
+        "parameters": [],
+        "track_properties": []
       }
     },
     {
@@ -24,8 +24,8 @@
         "end_of_track": "1",
         "end_group": "10",
         "end_object": "3",
-        "parameters": {},
-        "track_properties": {}
+        "parameters": [],
+        "track_properties": []
       }
     },
     {
@@ -36,11 +36,19 @@
         "end_of_track": "0",
         "end_group": "10",
         "end_object": "3",
-        "parameters": {},
-        "track_properties": {
-          "delivery_timeout": "5000",
-          "dynamic_groups": "1"
-        }
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "dynamic_groups",
+            "type": "0x30",
+            "value": "1"
+          }
+        ]
       }
     },
     {

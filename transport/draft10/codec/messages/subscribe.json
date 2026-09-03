@@ -19,7 +19,7 @@
         "subscriber_priority": "128",
         "group_order": "0",
         "filter_type": "2",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -38,7 +38,7 @@
         "filter_type": "3",
         "start_group": "10",
         "start_object": "3",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -58,7 +58,7 @@
         "start_group": "10",
         "start_object": "3",
         "end_group": "20",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -75,9 +75,13 @@
         "subscriber_priority": "128",
         "group_order": "0",
         "filter_type": "2",
-        "parameters": {
-          "authorization_info": "token123"
-        }
+        "parameters": [
+          {
+            "name": "authorization_info",
+            "type": "0x2",
+            "value": "token123"
+          }
+        ]
       }
     },
     {
@@ -94,9 +98,13 @@
         "subscriber_priority": "128",
         "group_order": "0",
         "filter_type": "2",
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x3",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -113,9 +121,13 @@
         "subscriber_priority": "128",
         "group_order": "0",
         "filter_type": "2",
-        "parameters": {
-          "max_cache_duration": "10000"
-        }
+        "parameters": [
+          {
+            "name": "max_cache_duration",
+            "type": "0x4",
+            "value": "10000"
+          }
+        ]
       }
     },
     {

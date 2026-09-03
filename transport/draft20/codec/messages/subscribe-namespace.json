@@ -13,7 +13,7 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -26,7 +26,7 @@
           "live",
           "sports"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -36,7 +36,7 @@
       "decoded": {
         "request_id": "5",
         "namespace_prefix": [],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -48,13 +48,17 @@
         "namespace_prefix": [
           "conference"
         ],
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "6e732d746f6b656e"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "6e732d746f6b656e"
+            }
           }
-        }
+        ]
       }
     },
     {

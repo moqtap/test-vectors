@@ -20,7 +20,7 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -39,7 +39,7 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -59,7 +59,7 @@
         "start_object": "3",
         "end_group": "20",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {

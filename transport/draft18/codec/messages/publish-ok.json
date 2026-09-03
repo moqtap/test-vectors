@@ -9,8 +9,8 @@
       "description": "PUBLISH_OK (REQUEST_OK alias, Type 0x07) with no parameters and empty Track Properties",
       "hex": "07000100",
       "decoded": {
-        "parameters": {},
-        "track_properties": {}
+        "parameters": [],
+        "track_properties": []
       }
     },
     {
@@ -18,11 +18,19 @@
       "description": "PUBLISH_OK with SUBSCRIBER_PRIORITY (64) and GROUP_ORDER (ascending=1)",
       "hex": "0700050220400201",
       "decoded": {
-        "parameters": {
-          "subscriber_priority": "64",
-          "group_order": "1"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "64"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -30,10 +38,14 @@
       "description": "PUBLISH_OK with OBJECT_DELIVERY_TIMEOUT parameter (5000ms)",
       "hex": "07000401029388",
       "decoded": {
-        "parameters": {
-          "object_delivery_timeout": "5000"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -41,10 +53,14 @@
       "description": "PUBLISH_OK with SUBGROUP_DELIVERY_TIMEOUT parameter (10000ms, new in draft-18)",
       "hex": "0700040106a710",
       "decoded": {
-        "parameters": {
-          "subgroup_delivery_timeout": "10000"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "10000"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -52,10 +68,14 @@
       "description": "PUBLISH_OK with EXPIRES parameter (60000ms)",
       "hex": "0700050108c0ea60",
       "decoded": {
-        "parameters": {
-          "expires": "60000"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -63,10 +83,14 @@
       "description": "PUBLISH_OK with FORWARD parameter (forward=0, don't forward)",
       "hex": "070003011000",
       "decoded": {
-        "parameters": {
-          "forward": "0"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "0"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -74,15 +98,19 @@
       "description": "PUBLISH_OK with SUBSCRIPTION_FILTER parameter (AbsoluteRange, start=5:0, end=20)",
       "hex": "07000701210404050014",
       "decoded": {
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "4",
-            "start_group": "5",
-            "start_object": "0",
-            "end_group": "20"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "end_group": "20",
+              "filter_type": "4",
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        },
-        "track_properties": {}
+        ],
+        "track_properties": []
       }
     },
     {
@@ -90,12 +118,24 @@
       "description": "PUBLISH_OK with SUBSCRIBER_PRIORITY (64), GROUP_ORDER (ascending=1), and NEW_GROUP_REQUEST (10)",
       "hex": "0700070320400201100a",
       "decoded": {
-        "parameters": {
-          "subscriber_priority": "64",
-          "group_order": "1",
-          "new_group_request": "10"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "64"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          },
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "10"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -104,11 +144,19 @@
       "hex": "070006022040800201",
       "canonical": false,
       "decoded": {
-        "parameters": {
-          "subscriber_priority": "64",
-          "group_order": "1"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "64"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -117,11 +165,19 @@
       "hex": "070008022040e000000201",
       "canonical": false,
       "decoded": {
-        "parameters": {
-          "subscriber_priority": "64",
-          "group_order": "1"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "64"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -130,11 +186,19 @@
       "hex": "07000c022040fe0000000000000201",
       "canonical": false,
       "decoded": {
-        "parameters": {
-          "subscriber_priority": "64",
-          "group_order": "1"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "64"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -143,12 +207,24 @@
       "hex": "070008032040800201100a",
       "canonical": false,
       "decoded": {
-        "parameters": {
-          "subscriber_priority": "64",
-          "group_order": "1",
-          "new_group_request": "10"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "64"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          },
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "10"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -157,12 +233,24 @@
       "hex": "07000a032040e000000201100a",
       "canonical": false,
       "decoded": {
-        "parameters": {
-          "subscriber_priority": "64",
-          "group_order": "1",
-          "new_group_request": "10"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "64"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          },
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "10"
+          }
+        ],
+        "track_properties": []
       }
     },
     {

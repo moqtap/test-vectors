@@ -7,6 +7,55 @@ including every vector added, is in the git history.
 
 A version with no entry here broke nothing.
 
+## 0.14.0
+
+Every Key-Value-Pair block in a `decoded` message changed shape. A consumer
+reading `decoded.parameters` as a map keyed by parameter name will not find one.
+
+`parameters`, `setup_parameters`, `options`, `track_properties` and
+`track_extensions` are now an array of entries in wire order. Each entry carries
+a `type` (lowercase hex), an optional `name`, and exactly one of `value` or
+`raw_hex`:
+
+```json
+"parameters": [
+  { "type": "0x20", "name": "subscriber_priority", "value": "128" },
+  { "type": "0x25", "name": "subgroup_filter",
+    "value": { "set_id": "0", "ranges": [{ "start": "2", "end": "4" }] } }
+]
+```
+
+The map could not express three things the drafts require. A parameter type may
+repeat — AUTHORIZATION_TOKEN says so, and drafts 19 and 20 say it of the five
+Range Filters — and a map has one slot per name, so a SUBSCRIBE carrying two
+SUBGROUP_FILTERs under different SetIDs was recorded as the second one alone.
+Drafts 16 and later require parameters to ascend by Type and close the session
+over a pair that does not, and a map has no order for a vector to be wrong
+about. And a type the draft names nothing has no key to sit under, which is why
+unknown parameters lived in a second, differently-shaped `unknown` array beside
+the named ones on some drafts and were dropped outright on others.
+
+Three consequences beyond the shape:
+
+- The `unknown` array is gone. An unnamed type is an ordinary entry, told apart
+  by having no `name`.
+- An unknown *integer* parameter used to be written `{"id": ..., "length": N}`,
+  where `N` was the varint's value under a key naming something else. It is now
+  `value`.
+- Drafts 00 through 06 changed too. `moqtap-codec` does not implement them, so
+  their parameter types were recovered from the bytes and accepted only where
+  the parse was forced: it had to consume the block exactly, produce as many
+  entries as the vector already named, and every recovered value had to equal
+  the value already recorded under one of those names.
+
+The data plane's `extension_headers` and `object_properties` are Key-Value lists
+too and are unchanged. Nothing regenerates them, so converting them would mean
+editing by hand values that no consumer checks.
+
+`schema/codec-vector.schema.json` describes all of this for the first time —
+`decoded` previously had no stated shape at all, which is why each new case fell
+to whoever met it first.
+
 ## 0.12.0
 
 Six published vectors changed what they assert. Each was wrong about the draft

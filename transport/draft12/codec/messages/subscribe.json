@@ -18,7 +18,7 @@
         "group_order": "0",
         "forward": "1",
         "filter_type": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -36,7 +36,7 @@
         "group_order": "0",
         "forward": "1",
         "filter_type": "2",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -55,7 +55,7 @@
         "filter_type": "3",
         "start_group": "10",
         "start_object": "3",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -75,7 +75,7 @@
         "start_group": "10",
         "start_object": "3",
         "end_group": "20",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -92,13 +92,17 @@
         "group_order": "0",
         "forward": "1",
         "filter_type": "1",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "746f6b656e313233"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "746f6b656e313233"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -115,9 +119,13 @@
         "group_order": "0",
         "forward": "1",
         "filter_type": "1",
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -134,7 +142,7 @@
         "group_order": "0",
         "forward": "0",
         "filter_type": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {

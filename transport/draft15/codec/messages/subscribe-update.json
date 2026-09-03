@@ -11,7 +11,7 @@
       "decoded": {
         "request_id": "2",
         "subscription_request_id": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -21,13 +21,17 @@
       "decoded": {
         "request_id": "1",
         "subscription_request_id": "3",
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "3",
-            "start_group": "5",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "3",
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -37,9 +41,13 @@
       "decoded": {
         "request_id": "2",
         "subscription_request_id": "0",
-        "parameters": {
-          "new_group_request": "5"
-        }
+        "parameters": [
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "5"
+          }
+        ]
       }
     },
     {

@@ -10,7 +10,7 @@
       "hex": "0606046c69766500",
       "decoded": {
         "track_namespace": "live",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -19,9 +19,13 @@
       "hex": "060f046c6976650102076d79746f6b656e",
       "decoded": {
         "track_namespace": "live",
-        "parameters": {
-          "authorization_info": "mytoken"
-        }
+        "parameters": [
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "mytoken"
+          }
+        ]
       }
     },
     {
@@ -30,16 +34,17 @@
       "hex": "0615046c6976650202076d79746f6b656e40ff03aabbcc",
       "decoded": {
         "track_namespace": "live",
-        "parameters": {
-          "authorization_info": "mytoken",
-          "unknown": [
-            {
-              "id": "0xff",
-              "length": "3",
-              "raw_hex": "aabbcc"
-            }
-          ]
-        }
+        "parameters": [
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "mytoken"
+          },
+          {
+            "type": "0xff",
+            "raw_hex": "aabbcc"
+          }
+        ]
       }
     },
     {

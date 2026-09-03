@@ -10,7 +10,7 @@
       "hex": "404109c0000000ff00000a00",
       "decoded": {
         "selected_version": "4278190090",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -19,9 +19,13 @@
       "hex": "40410dc0000000ff00000a01020240c8",
       "decoded": {
         "selected_version": "4278190090",
-        "parameters": {
-          "max_subscribe_id": "200"
-        }
+        "parameters": [
+          {
+            "name": "max_subscribe_id",
+            "type": "0x2",
+            "value": "200"
+          }
+        ]
       }
     },
     {

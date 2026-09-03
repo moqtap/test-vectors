@@ -15,7 +15,7 @@
         "end_group": "10",
         "end_object": "0",
         "subscriber_priority": "128",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -29,9 +29,13 @@
         "end_group": "5",
         "end_object": "0",
         "subscriber_priority": "255",
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "type": "0x3",
+            "name": "delivery_timeout",
+            "value": "5000"
+          }
+        ]
       }
     },
     {

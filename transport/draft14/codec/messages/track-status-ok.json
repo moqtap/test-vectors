@@ -18,7 +18,7 @@
           "group": "10",
           "object": "5"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -31,7 +31,7 @@
         "expires": "0",
         "group_order": "1",
         "content_exists": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -48,7 +48,7 @@
           "group": "100",
           "object": "50"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {

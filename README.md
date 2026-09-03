@@ -58,29 +58,31 @@ Every vector file is a JSON object with a `vectors` array. Each vector has a uni
 {
   "message_type": "subscribe",
   "message_type_id": "0x03",
-  "spec_section": "9.7",
+  "spec_section": "10.7",
   "vectors": [
     {
-      "id": "filter-next-group-start",
-      "description": "minimal SUBSCRIBE with NextGroupStart filter, no parameters",
-      "hex": "0300120101046c69766505766964656f8000000100",
+      "id": "with-subgroup-filter",
+      "description": "SUBSCRIBE with one SUBGROUP_FILTER: SetID 0, Subgroup ID range 2-4",
+      "hex": "0300130101046c69766505766964656f012503000202",
       "decoded": {
         "request_id": "1",
         "track_namespace": ["live"],
         "track_name": "video",
-        "subscriber_priority": "128",
-        "group_order": "0",
-        "forward": "0",
-        "filter_type": "1",
-        "parameters": {}
+        "parameters": [
+          {
+            "type": "0x25",
+            "name": "subgroup_filter",
+            "value": { "set_id": "0", "ranges": [{ "start": "2", "end": "4" }] }
+          }
+        ]
       }
     },
     {
-      "id": "invalid-filter-type",
-      "description": "SUBSCRIBE with filter_type=0 — reserved/undefined value",
-      "hex": "0300120101046c69766505766964656f8000000000",
-      "error": "invalid_value",
-      "error_detail": "filter_type 0 is not a defined filter type"
+      "id": "unknown-extension-param",
+      "description": "SUBSCRIBE with a Message Parameter type draft-19 does not define",
+      "hex": "0300140101046c69766505766964656f014104deadbeef",
+      "error": "invalid_parameter",
+      "error_detail": "message parameter type 0x41 is not defined by draft-19"
     }
   ]
 }
@@ -95,8 +97,18 @@ The `error` category names the kind of complaint a decoder must make, and `profi
 **Integers as strings.** All protocol integer values — VarInts, fixed-width 8-bit fields, error codes, status codes — are JSON strings unconditionally. This avoids IEEE 754 precision loss for 64-bit values and eliminates type-checking ambiguity across languages. Same convention as Protocol Buffers' JSON mapping for `uint64`.
 
 ```json
-{ "request_id": "1", "subscriber_priority": "128", "forward": "0" }
+{
+  "request_id": "1",
+  "parameters": [
+    { "type": "0x20", "name": "subscriber_priority", "value": "128" },
+    { "type": "0x10", "name": "forward", "value": "0" }
+  ]
+}
 ```
+
+**Parameters are a list, not a map.** Every Key-Value-Pair block in a `decoded` message — `parameters`, `setup_parameters`, `options`, `track_properties`, `track_extensions` — is an array of entries in the order the wire carried them. Each entry has a `type` (lowercase hex), an optional `name` the draft gives that type, and exactly one of `value` (decoded) or `raw_hex` (not modelled here). A map keyed by name reads better and cannot express three things the drafts require: a parameter type that repeats, which AUTHORIZATION_TOKEN and the five Range Filters are allowed to do; the ascending order that drafts 16 and later close the session over; and a type the draft names nothing, which has no key to sit under. As a list, each of those is an ordinary entry and needs no special case.
+
+Two blocks on the *data* plane, `extension_headers` and `object_properties`, are Key-Value lists too and keep an older shape. Nothing regenerates them, so converting them would mean editing values by hand that no consumer checks.
 
 **Bidirectional by default.** Valid vectors test both `decode(hex) == decoded` and `encode(decoded) == hex`. Vectors marked `"canonical": false` are decode-only (valid but non-minimal encodings, e.g., a 2-byte VarInt encoding the value 0).
 
@@ -138,29 +150,32 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 
 Coverage spans drafts 00 through 20. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
 
-| Spec | Draft | Messages | Data streams | Total vectors |
-|------|-------|----------|-------------|---------------|
-| MoQ Transport | draft-00 | 11 control messages | — | 68 |
-| MoQ Transport | draft-01 | 16 control messages | — | 77 |
-| MoQ Transport | draft-02 | 14 control messages | 4 stream types | 85 |
-| MoQ Transport | draft-03 | 14 control messages | 4 stream types | 84 |
-| MoQ Transport | draft-04 | 17 control messages | 4 stream types | 104 |
-| MoQ Transport | draft-05 | 17 control messages | 4 stream types | 100 |
-| MoQ Transport | draft-06 | 22 control messages | 3 stream types | 117 |
-| MoQ Transport | draft-07 | 26 control messages | 3 stream types | 130 |
-| MoQ Transport | draft-08 | 27 control messages | 4 stream types | 152 |
-| MoQ Transport | draft-09 | 27 control messages | 4 stream types | 154 |
-| MoQ Transport | draft-10 | 27 control messages | 4 stream types | 154 |
-| MoQ Transport | draft-11 | 27 control messages | 3 stream types | 158 |
-| MoQ Transport | draft-12 | 30 control messages | 3 stream types | 189 |
-| MoQ Transport | draft-13 | 31 control messages | 3 stream types | 212 |
-| MoQ Transport | draft-14 | 31 control messages | 3 stream types | 227 |
-| MoQ Transport | draft-15 | 24 control messages | 3 stream types | 176 |
-| MoQ Transport | draft-16 | 25 control messages | 3 stream types | 188 |
-| MoQ Transport | draft-17 | 19 control messages | 3 stream types | 218 |
-| MoQ Transport | draft-18 | 20 control messages | 3 stream types | 247 |
-| MoQ Transport | draft-19 | 20 control messages | 3 stream types | 267 |
-| MoQ Transport | draft-20 | 21 control messages | 3 stream types | 323 |
+The two type columns count files — one per control message type, one per data stream or datagram type. A **negative** vector is one carrying an `error` category instead of a `decoded` block: bytes a conforming decoder must refuse, and the column worth watching, since a corpus of only valid frames tests half a codec.
+
+| Spec | Draft | Control messages | Data streams | Vectors | Of those, negative |
+|------|-------|-----------------|--------------|---------|--------------------|
+| MoQ Transport | draft-00 | 11 | — | 68 | 22 |
+| MoQ Transport | draft-01 | 16 | — | 77 | 22 |
+| MoQ Transport | draft-02 | 14 | 4 | 85 | 22 |
+| MoQ Transport | draft-03 | 14 | 4 | 84 | 21 |
+| MoQ Transport | draft-04 | 17 | 4 | 104 | 24 |
+| MoQ Transport | draft-05 | 17 | 4 | 100 | 24 |
+| MoQ Transport | draft-06 | 22 | 3 | 117 | 28 |
+| MoQ Transport | draft-07 | 26 | 3 | 130 | 34 |
+| MoQ Transport | draft-08 | 27 | 4 | 152 | 37 |
+| MoQ Transport | draft-09 | 27 | 4 | 154 | 38 |
+| MoQ Transport | draft-10 | 27 | 4 | 154 | 38 |
+| MoQ Transport | draft-11 | 27 | 3 | 158 | 35 |
+| MoQ Transport | draft-12 | 30 | 3 | 189 | 38 |
+| MoQ Transport | draft-13 | 31 | 3 | 212 | 39 |
+| MoQ Transport | draft-14 | 31 | 3 | 227 | 39 |
+| MoQ Transport | draft-15 | 24 | 3 | 176 | 30 |
+| MoQ Transport | draft-16 | 25 | 3 | 188 | 32 |
+| MoQ Transport | draft-17 | 19 | 3 | 218 | 41 |
+| MoQ Transport | draft-18 | 20 | 3 | 247 | 39 |
+| MoQ Transport | draft-19 | 20 | 3 | 267 | 39 |
+| MoQ Transport | draft-20 | 21 | 3 | 323 | 57 |
+| | **all** | | | **3430** | **699** |
 
 ## Scope
 

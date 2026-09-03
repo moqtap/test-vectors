@@ -9,7 +9,7 @@
       "description": "PUBLISH_STATE_NOTIFY with no parameters. The message has no Request ID field: it is identified by the subscription's bidirectional stream it arrives on, like SUBSCRIBE_OK, PUBLISH_DONE and FETCH_OK",
       "hex": "22000100",
       "decoded": {
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -17,12 +17,16 @@
       "description": "PUBLISH_STATE_NOTIFY carrying LARGEST_OBJECT (group=10, object=3). The publisher MUST include this parameter if known so the subscriber can locate the point in the Track at which the change took effect. LARGEST_OBJECT is Parameter Type 0x09 — odd, but a Location, i.e. two bare vi64s with no length prefix; the Key-Value-Pair odd/even rule does not apply to Message Parameters",
       "hex": "22000401090a03",
       "decoded": {
-        "parameters": {
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -30,9 +34,13 @@
       "description": "PUBLISH_STATE_NOTIFY reporting that the Forwarding State now in effect at the publisher is 0",
       "hex": "220003011000",
       "decoded": {
-        "parameters": {
-          "forward": "0"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "0"
+          }
+        ]
       }
     },
     {
@@ -40,13 +48,17 @@
       "description": "PUBLISH_STATE_NOTIFY reporting the Location Filter now in effect at the publisher: the inclusive range {12,0} through all of group 16",
       "hex": "2200060121030c0004",
       "decoded": {
-        "parameters": {
-          "location_filter": {
-            "start_group": "12",
-            "start_object": "0",
-            "end_group_delta": "4"
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "end_group_delta": "4",
+              "start_group": "12",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -54,13 +66,21 @@
       "description": "PUBLISH_STATE_NOTIFY carrying LARGEST_OBJECT (group=7, object=41) and FORWARD=1; demonstrates type-delta ordering (0x09 then a delta of 7 to 0x10)",
       "hex": "220006020907290701",
       "decoded": {
-        "parameters": {
-          "largest_object": {
-            "group": "7",
-            "object": "41"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "7",
+              "object": "41"
+            }
           },
-          "forward": "1"
-        }
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -68,18 +88,30 @@
       "description": "PUBLISH_STATE_NOTIFY carrying every parameter draft-20 permits in it: LARGEST_OBJECT (0x09), FORWARD (0x10) and LOCATION_FILTER (0x21)",
       "hex": "22000b03090729070111030c0004",
       "decoded": {
-        "parameters": {
-          "largest_object": {
-            "group": "7",
-            "object": "41"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "7",
+              "object": "41"
+            }
           },
-          "forward": "1",
-          "location_filter": {
-            "start_group": "12",
-            "start_object": "0",
-            "end_group_delta": "4"
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          },
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "end_group_delta": "4",
+              "start_group": "12",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {

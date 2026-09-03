@@ -10,7 +10,7 @@
       "hex": "0200020200",
       "decoded": {
         "request_id": "2",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -19,12 +19,16 @@
       "hex": "020006010121020500",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "location_filter": {
-            "start_group": "5",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -33,11 +37,15 @@
       "hex": "02000401012100",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "location_filter": {
-            "removed": true
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "removed": true
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -46,9 +54,13 @@
       "hex": "0200050101230100",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "fill_parameters": {}
-        }
+        "parameters": [
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": []
+          }
+        ]
       }
     },
     {
@@ -57,16 +69,28 @@
       "hex": "02000c01012308020a001703030002",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "fill_parameters": {
-            "fill_timeout": "0",
-            "location_filter": {
-              "start_group": "3",
-              "start_object": "0",
-              "end_group_delta": "2"
-            }
+        "parameters": [
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": [
+              {
+                "name": "fill_timeout",
+                "type": "0xa",
+                "value": "0"
+              },
+              {
+                "name": "location_filter",
+                "type": "0x21",
+                "value": {
+                  "end_group_delta": "2",
+                  "start_group": "3",
+                  "start_object": "0"
+                }
+              }
+            ]
           }
-        }
+        ]
       }
     },
     {
@@ -75,9 +99,13 @@
       "hex": "0200050101029388",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "object_delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -86,9 +114,13 @@
       "hex": "0200050101069f40",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "subgroup_delivery_timeout": "8000"
-        }
+        "parameters": [
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "8000"
+          }
+        ]
       }
     },
     {
@@ -97,9 +129,13 @@
       "hex": "02000401011001",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "forward": "1"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -108,9 +144,13 @@
       "hex": "02000401012010",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "subscriber_priority": "16"
-        }
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "16"
+          }
+        ]
       }
     },
     {
@@ -119,9 +159,13 @@
       "hex": "02000401013219",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "new_group_request": "25"
-        }
+        "parameters": [
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "25"
+          }
+        ]
       }
     },
     {
@@ -130,12 +174,16 @@
       "hex": "02001007013402046c6976650673706f727473",
       "decoded": {
         "request_id": "7",
-        "parameters": {
-          "track_namespace_prefix": [
-            "live",
-            "sports"
-          ]
-        }
+        "parameters": [
+          {
+            "name": "track_namespace_prefix",
+            "type": "0x34",
+            "value": [
+              "live",
+              "sports"
+            ]
+          }
+        ]
       }
     },
     {
@@ -144,14 +192,26 @@
       "hex": "02000b01030293881e1001020500",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "object_delivery_timeout": "5000",
-          "subscriber_priority": "16",
-          "location_filter": {
-            "start_group": "5",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "16"
+          },
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -160,17 +220,21 @@
       "hex": "02000701012603000009",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "objectid_filter": {
-            "set_id": "0",
-            "ranges": [
-              {
-                "start": "0",
-                "end": "9"
-              }
-            ]
+        "parameters": [
+          {
+            "name": "objectid_filter",
+            "type": "0x26",
+            "value": {
+              "ranges": [
+                {
+                  "end": "9",
+                  "start": "0"
+                }
+              ],
+              "set_id": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -179,11 +243,15 @@
       "hex": "02000401012600",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "objectid_filter": {
-            "removed": true
+        "parameters": [
+          {
+            "name": "objectid_filter",
+            "type": "0x26",
+            "value": {
+              "removed": true
+            }
           }
-        }
+        ]
       }
     },
     {

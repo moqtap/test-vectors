@@ -14,7 +14,7 @@
         "track_namespace": "live",
         "track_name": "video",
         "filter_type": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -27,7 +27,7 @@
         "track_namespace": "live",
         "track_name": "video",
         "filter_type": "2",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -42,7 +42,7 @@
         "filter_type": "3",
         "start_group": "5",
         "start_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -59,7 +59,7 @@
         "start_object": "0",
         "end_group": "5",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -76,7 +76,7 @@
         "start_object": "0",
         "end_group": "5",
         "end_object": "8",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -89,9 +89,13 @@
         "track_namespace": "live",
         "track_name": "video",
         "filter_type": "1",
-        "parameters": {
-          "authorization_info": "mytoken"
-        }
+        "parameters": [
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "mytoken"
+          }
+        ]
       }
     },
     {

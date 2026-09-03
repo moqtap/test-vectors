@@ -13,7 +13,7 @@
         "track_namespace": [
           "live"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -26,13 +26,17 @@
           "conference",
           "room42"
         ],
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "746f6b656e"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x1",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "746f6b656e"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -46,7 +50,7 @@
           "room42",
           "floor1"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {

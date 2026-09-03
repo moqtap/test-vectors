@@ -27,7 +27,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -55,7 +55,7 @@
           "mode": "1",
           "value": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -81,7 +81,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -107,7 +107,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -133,7 +133,7 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -159,9 +159,13 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {
-          "authorization_info": "mytoken"
-        }
+        "parameters": [
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "mytoken"
+          }
+        ]
       }
     },
     {
@@ -187,15 +191,12 @@
         "end_object": {
           "mode": "0"
         },
-        "parameters": {
-          "unknown": [
-            {
-              "id": "0xf0",
-              "length": "3",
-              "raw_hex": "aabbcc"
-            }
-          ]
-        }
+        "parameters": [
+          {
+            "type": "0xf0",
+            "raw_hex": "aabbcc"
+          }
+        ]
       }
     },
     {

@@ -12,9 +12,13 @@
         "supported_versions": [
           "4278190087"
         ],
-        "parameters": {
-          "role": "3"
-        }
+        "parameters": [
+          {
+            "name": "role",
+            "type": "0x0",
+            "value": "3"
+          }
+        ]
       }
     },
     {
@@ -26,9 +30,13 @@
           "4278190086",
           "4278190087"
         ],
-        "parameters": {
-          "role": "2"
-        }
+        "parameters": [
+          {
+            "name": "role",
+            "type": "0x0",
+            "value": "2"
+          }
+        ]
       }
     },
     {
@@ -39,11 +47,23 @@
         "supported_versions": [
           "4278190087"
         ],
-        "parameters": {
-          "role": "3",
-          "path": "test",
-          "max_subscribe_id": "100"
-        }
+        "parameters": [
+          {
+            "name": "role",
+            "type": "0x0",
+            "value": "3"
+          },
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "test"
+          },
+          {
+            "name": "max_subscribe_id",
+            "type": "0x2",
+            "value": "100"
+          }
+        ]
       }
     },
     {
@@ -55,9 +75,13 @@
         "supported_versions": [
           "4278190087"
         ],
-        "parameters": {
-          "role": "3"
-        }
+        "parameters": [
+          {
+            "name": "role",
+            "type": "0x0",
+            "value": "3"
+          }
+        ]
       }
     },
     {

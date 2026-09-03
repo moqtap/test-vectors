@@ -12,9 +12,13 @@
         "supported_versions": [
           "4278190082"
         ],
-        "parameters": {
-          "role": "3"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "role",
+            "value": "3"
+          }
+        ]
       }
     },
     {
@@ -25,10 +29,18 @@
         "supported_versions": [
           "4278190082"
         ],
-        "parameters": {
-          "role": "3",
-          "path": "/moq"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "role",
+            "value": "3"
+          },
+          {
+            "type": "0x1",
+            "name": "path",
+            "value": "/moq"
+          }
+        ]
       }
     },
     {
@@ -39,9 +51,13 @@
         "supported_versions": [
           "4278190082"
         ],
-        "parameters": {
-          "role": "1"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "role",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -52,9 +68,13 @@
         "supported_versions": [
           "4278190082"
         ],
-        "parameters": {
-          "role": "2"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "role",
+            "value": "2"
+          }
+        ]
       }
     },
     {
@@ -66,9 +86,13 @@
           "4278190081",
           "4278190082"
         ],
-        "parameters": {
-          "role": "3"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "role",
+            "value": "3"
+          }
+        ]
       }
     },
     {
@@ -79,16 +103,17 @@
         "supported_versions": [
           "4278190082"
         ],
-        "parameters": {
-          "role": "3",
-          "unknown": [
-            {
-              "id": "0xff",
-              "length": "2",
-              "raw_hex": "beef"
-            }
-          ]
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "role",
+            "value": "3"
+          },
+          {
+            "type": "0xff",
+            "raw_hex": "beef"
+          }
+        ]
       }
     },
     {

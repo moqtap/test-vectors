@@ -9,7 +9,7 @@
       "description": "minimal SERVER_SETUP with no parameters (version negotiation via ALPN)",
       "hex": "21000100",
       "decoded": {
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -17,9 +17,13 @@
       "description": "SERVER_SETUP with MAX_REQUEST_ID parameter set to 100",
       "hex": "21000401024064",
       "decoded": {
-        "parameters": {
-          "max_request_id": "100"
-        }
+        "parameters": [
+          {
+            "name": "max_request_id",
+            "type": "0x2",
+            "value": "100"
+          }
+        ]
       }
     },
     {
@@ -27,9 +31,13 @@
       "description": "SERVER_SETUP with MOQT_IMPLEMENTATION parameter",
       "hex": "21000d01070a6c69626d6f712f302e35",
       "decoded": {
-        "parameters": {
-          "moqt_implementation": "libmoq/0.5"
-        }
+        "parameters": [
+          {
+            "name": "moqt_implementation",
+            "type": "0x7",
+            "value": "libmoq/0.5"
+          }
+        ]
       }
     },
     {

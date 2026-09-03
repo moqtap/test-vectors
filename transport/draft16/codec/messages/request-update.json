@@ -11,7 +11,7 @@
       "decoded": {
         "request_id": "2",
         "existing_request_id": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -21,13 +21,17 @@
       "decoded": {
         "request_id": "1",
         "existing_request_id": "3",
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "3",
-            "start_group": "5",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "3",
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -37,14 +41,18 @@
       "decoded": {
         "request_id": "1",
         "existing_request_id": "3",
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "4",
-            "start_group": "5",
-            "start_object": "0",
-            "end_group": "10"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "end_group": "10",
+              "filter_type": "4",
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -54,11 +62,15 @@
       "decoded": {
         "request_id": "1",
         "existing_request_id": "3",
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "1"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "1"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -68,11 +80,15 @@
       "decoded": {
         "request_id": "1",
         "existing_request_id": "3",
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "2"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "2"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -82,9 +98,13 @@
       "decoded": {
         "request_id": "2",
         "existing_request_id": "1",
-        "parameters": {
-          "subscriber_priority": "128"
-        }
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "128"
+          }
+        ]
       }
     },
     {
@@ -94,9 +114,13 @@
       "decoded": {
         "request_id": "2",
         "existing_request_id": "1",
-        "parameters": {
-          "new_group_request": "5"
-        }
+        "parameters": [
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "5"
+          }
+        ]
       }
     },
     {

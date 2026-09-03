@@ -17,7 +17,7 @@
           "group": "10",
           "object": "5"
         },
-        "parameters": {}
+        "parameters": []
       },
       "hex": "0e000801000001010a0500"
     },
@@ -30,7 +30,7 @@
         "expires": "0",
         "group_order": "1",
         "content_exists": "0",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "0e0006020000010000"
     },
@@ -48,9 +48,13 @@
           "group": "10",
           "object": "5"
         },
-        "parameters": {
-          "max_cache_duration": "120000"
-        }
+        "parameters": [
+          {
+            "name": "max_cache_duration",
+            "type": "0x4",
+            "value": "120000"
+          }
+        ]
       }
     },
     {
@@ -67,9 +71,13 @@
           "group": "10",
           "object": "5"
         },
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {

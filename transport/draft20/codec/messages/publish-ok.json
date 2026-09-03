@@ -9,8 +9,8 @@
       "description": "PUBLISH_OK (REQUEST_OK alias, Type 0x07) with no parameters and empty Track Properties. A draft-20 subscriber that wants to change a subscription parameter sends a REQUEST_UPDATE after PUBLISH_OK",
       "hex": "07000100",
       "decoded": {
-        "parameters": {},
-        "track_properties": {}
+        "parameters": [],
+        "track_properties": []
       }
     },
     {
@@ -18,10 +18,14 @@
       "description": "PUBLISH_OK with EXPIRES parameter (60000ms) — the one parameter whose draft-20 definition still names PUBLISH_OK (Section 10.2.16)",
       "hex": "0700050108c0ea60",
       "decoded": {
-        "parameters": {
-          "expires": "60000"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ],
+        "track_properties": []
       }
     },
     {
@@ -30,10 +34,14 @@
       "hex": "070006018008c0ea60",
       "canonical": false,
       "decoded": {
-        "parameters": {
-          "expires": "60000"
-        },
-        "track_properties": {}
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ],
+        "track_properties": []
       }
     },
     {

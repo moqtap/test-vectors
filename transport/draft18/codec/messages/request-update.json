@@ -10,7 +10,7 @@
       "hex": "0200020200",
       "decoded": {
         "request_id": "2",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -19,13 +19,17 @@
       "hex": "02000701012103030500",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "subscription_filter": {
-            "filter_type": "3",
-            "start_group": "5",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "3",
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -34,9 +38,13 @@
       "hex": "0200050101029388",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "object_delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -45,9 +53,13 @@
       "hex": "0200050101069f40",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "subgroup_delivery_timeout": "8000"
-        }
+        "parameters": [
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "8000"
+          }
+        ]
       }
     },
     {
@@ -56,9 +68,13 @@
       "hex": "02000401011001",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "forward": "1"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -67,9 +83,13 @@
       "hex": "02000401012010",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "subscriber_priority": "16"
-        }
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "16"
+          }
+        ]
       }
     },
     {
@@ -78,9 +98,13 @@
       "hex": "02000401013219",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "new_group_request": "25"
-        }
+        "parameters": [
+          {
+            "name": "new_group_request",
+            "type": "0x32",
+            "value": "25"
+          }
+        ]
       }
     },
     {
@@ -89,12 +113,16 @@
       "hex": "02001007013402046c6976650673706f727473",
       "decoded": {
         "request_id": "7",
-        "parameters": {
-          "track_namespace_prefix": [
-            "live",
-            "sports"
-          ]
-        }
+        "parameters": [
+          {
+            "name": "track_namespace_prefix",
+            "type": "0x34",
+            "value": [
+              "live",
+              "sports"
+            ]
+          }
+        ]
       }
     },
     {
@@ -103,15 +131,27 @@
       "hex": "02000c01030293881e100103030500",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "object_delivery_timeout": "5000",
-          "subscriber_priority": "16",
-          "subscription_filter": {
-            "filter_type": "3",
-            "start_group": "5",
-            "start_object": "0"
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "16"
+          },
+          {
+            "name": "subscription_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "3",
+              "start_group": "5",
+              "start_object": "0"
+            }
           }
-        }
+        ]
       }
     },
     {

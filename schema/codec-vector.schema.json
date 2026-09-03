@@ -58,7 +58,24 @@
         },
         "decoded": {
           "type": "object",
-          "description": "Expected decoded representation as a plain JSON object."
+          "description": "Expected decoded representation as a plain JSON object. Keys are the field names the draft gives, in the order it defines them. A field the message did not carry is absent rather than zero. Every Key-Value-Pair block — `parameters`, `setup_parameters`, `options`, `track_properties`, `track_extensions` — is a list of entries; see `kvp_block`. The data plane's `extension_headers` and `object_properties` are Key-Value lists too and keep an older shape, because nothing regenerates them.",
+          "properties": {
+            "parameters": {
+              "$ref": "#/$defs/kvp_block"
+            },
+            "setup_parameters": {
+              "$ref": "#/$defs/kvp_block"
+            },
+            "options": {
+              "$ref": "#/$defs/kvp_block"
+            },
+            "track_properties": {
+              "$ref": "#/$defs/kvp_block"
+            },
+            "track_extensions": {
+              "$ref": "#/$defs/kvp_block"
+            }
+          }
         },
         "canonical": {
           "type": "boolean",
@@ -121,6 +138,62 @@
         }
       ],
       "additionalProperties": false
+    },
+    "kvp_entry": {
+      "type": "object",
+      "description": "One Key-Value-Pair, as it sat on the wire. A parameter block is an ordered list of (Type, Value) with the types ascending, and this corpus renders it as a list rather than as a map keyed by the draft's name for each type. A map loses three things a vector may need to state: a repeat, which two parameter definitions permit (AUTHORIZATION_TOKEN, and on drafts 19 and 20 the five Range Filters); the order, which drafts 16 and later answer a violation of with a session close; and a type the draft assigns no name, which has no key to sit under. As a list, each of those is an ordinary entry.",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]+$",
+          "description": "The Parameter Type, lowercase hex. Always present: it is what the wire carries, and it is enough to compare against without implementing this corpus's per-draft name table."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name the draft gives this type, in snake_case. Absent when the draft assigns the type nothing, which is how an entry says the type is unknown to that version."
+        },
+        "value": {
+          "description": "The decoded value, when this corpus models it: a decimal string for an integer, an object for a structure, a list of entries for a nested Key-Value-Pair block such as draft-20's FILL_PARAMETERS. Mutually exclusive with raw_hex."
+        },
+        "raw_hex": {
+          "type": "string",
+          "pattern": "^([0-9a-f]{2})*$",
+          "description": "The value's bytes, when this corpus does not model them. Mutually exclusive with value. An unnamed *integer* parameter still uses value rather than this, because a varint's value is its content and there are no bytes to show."
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "value"
+          ],
+          "not": {
+            "required": [
+              "raw_hex"
+            ]
+          }
+        },
+        {
+          "required": [
+            "raw_hex"
+          ],
+          "not": {
+            "required": [
+              "value"
+            ]
+          }
+        }
+      ]
+    },
+    "kvp_block": {
+      "type": "array",
+      "description": "A Key-Value-Pair block, in the order the wire carried it. Empty when the message carried no parameters.",
+      "items": {
+        "$ref": "#/$defs/kvp_entry"
+      }
     }
   }
 }

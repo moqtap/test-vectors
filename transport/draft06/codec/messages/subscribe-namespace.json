@@ -12,7 +12,7 @@
         "track_namespace_prefix": [
           "example.com"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -24,7 +24,7 @@
           "example.com",
           "meeting=123"
         ],
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -35,9 +35,13 @@
         "track_namespace_prefix": [
           "example.com"
         ],
-        "parameters": {
-          "authorization_info": "nstoken"
-        }
+        "parameters": [
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "nstoken"
+          }
+        ]
       }
     },
     {

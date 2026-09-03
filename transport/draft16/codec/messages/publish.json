@@ -15,7 +15,7 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -30,7 +30,7 @@
         ],
         "track_name": "audio",
         "track_alias": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -44,13 +44,17 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "1",
-            "token_value": "746f6b"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "1",
+              "token_value": "746f6b"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -64,9 +68,13 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {
-          "forward": "1"
-        }
+        "parameters": [
+          {
+            "name": "forward",
+            "type": "0x10",
+            "value": "1"
+          }
+        ]
       }
     },
     {
@@ -80,10 +88,14 @@
         ],
         "track_name": "video",
         "track_alias": "0",
-        "parameters": {},
-        "track_extensions": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [],
+        "track_extensions": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {

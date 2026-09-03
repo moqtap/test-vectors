@@ -14,7 +14,7 @@
         "expires": "0",
         "group_order": "1",
         "content_exists": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -31,7 +31,7 @@
           "group": "5",
           "object": "10"
         },
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -44,9 +44,13 @@
         "expires": "0",
         "group_order": "1",
         "content_exists": "0",
-        "parameters": {
-          "delivery_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -59,9 +63,13 @@
         "expires": "0",
         "group_order": "1",
         "content_exists": "0",
-        "parameters": {
-          "max_cache_duration": "10000"
-        }
+        "parameters": [
+          {
+            "name": "max_cache_duration",
+            "type": "0x4",
+            "value": "10000"
+          }
+        ]
       }
     },
     {

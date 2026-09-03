@@ -9,7 +9,7 @@
       "description": "REQUEST_OK with no parameters",
       "hex": "07000100",
       "decoded": {
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -17,12 +17,16 @@
       "description": "REQUEST_OK with LARGEST_OBJECT parameter (group=10, object=3)",
       "hex": "07000401090a03",
       "decoded": {
-        "parameters": {
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -30,9 +34,13 @@
       "description": "REQUEST_OK with EXPIRES parameter (60000ms)",
       "hex": "0700050108c0ea60",
       "decoded": {
-        "parameters": {
-          "expires": "60000"
-        }
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ]
       }
     },
     {

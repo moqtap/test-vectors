@@ -9,7 +9,7 @@
       "description": "minimal SETUP with no options",
       "hex": "af000000",
       "decoded": {
-        "options": {}
+        "options": []
       }
     },
     {
@@ -17,9 +17,13 @@
       "description": "SETUP with PATH option",
       "hex": "af00000601042f6d6f71",
       "decoded": {
-        "options": {
-          "path": "/moq"
-        }
+        "options": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "/moq"
+          }
+        ]
       }
     },
     {
@@ -27,9 +31,13 @@
       "description": "SETUP with MAX_AUTH_TOKEN_CACHE_SIZE option set to 1024",
       "hex": "af000003048400",
       "decoded": {
-        "options": {
-          "max_auth_token_cache_size": "1024"
-        }
+        "options": [
+          {
+            "name": "max_auth_token_cache_size",
+            "type": "0x4",
+            "value": "1024"
+          }
+        ]
       }
     },
     {
@@ -37,10 +45,18 @@
       "description": "SETUP with PATH and MOQT_IMPLEMENTATION options",
       "hex": "af00000f01042f6d6f710607746573742d7631",
       "decoded": {
-        "options": {
-          "path": "/moq",
-          "moqt_implementation": "test-v1"
-        }
+        "options": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "/moq"
+          },
+          {
+            "name": "moqt_implementation",
+            "type": "0x7",
+            "value": "test-v1"
+          }
+        ]
       }
     },
     {
@@ -48,9 +64,13 @@
       "description": "SETUP with AUTHORITY option (example.com:443)",
       "hex": "af000011050f6578616d706c652e636f6d3a343433",
       "decoded": {
-        "options": {
-          "authority": "example.com:443"
-        }
+        "options": [
+          {
+            "name": "authority",
+            "type": "0x5",
+            "value": "example.com:443"
+          }
+        ]
       }
     },
     {
@@ -58,14 +78,18 @@
       "description": "SETUP with AUTHORIZATION_TOKEN option (REGISTER alias=0, type=1, value='setup-bearer')",
       "hex": "af000011030f01000173657475702d626561726572",
       "decoded": {
-        "options": {
-          "authorization_token": {
-            "alias_type": "1",
-            "token_alias": "0",
-            "token_type": "1",
-            "token_value": "73657475702d626561726572"
+        "options": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "1",
+              "token_alias": "0",
+              "token_type": "1",
+              "token_value": "73657475702d626561726572"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -73,12 +97,16 @@
       "description": "SETUP with AUTHORIZATION_TOKEN option (DELETE alias=0)",
       "hex": "af00000403020000",
       "decoded": {
-        "options": {
-          "authorization_token": {
-            "alias_type": "0",
-            "token_alias": "0"
+        "options": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "0",
+              "token_alias": "0"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -86,16 +114,28 @@
       "description": "SETUP with PATH, AUTHORIZATION_TOKEN (REGISTER), and AUTHORITY options",
       "hex": "af00002601042f6d6f71020b0100016d792d746f6b656e021172656c61792e6578616d706c652e636f6d",
       "decoded": {
-        "options": {
-          "path": "/moq",
-          "authorization_token": {
-            "alias_type": "1",
-            "token_alias": "0",
-            "token_type": "1",
-            "token_value": "6d792d746f6b656e"
+        "options": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "/moq"
           },
-          "authority": "relay.example.com"
-        }
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "1",
+              "token_alias": "0",
+              "token_type": "1",
+              "token_value": "6d792d746f6b656e"
+            }
+          },
+          {
+            "name": "authority",
+            "type": "0x5",
+            "value": "relay.example.com"
+          }
+        ]
       }
     },
     {
@@ -104,9 +144,13 @@
       "hex": "af0000070180042f6d6f71",
       "canonical": false,
       "decoded": {
-        "options": {
-          "path": "/moq"
-        }
+        "options": [
+          {
+            "name": "path",
+            "type": "0x1",
+            "value": "/moq"
+          }
+        ]
       }
     },
     {
@@ -114,9 +158,13 @@
       "description": "SETUP with MAX_FILTER_RANGES option (Type 0x06) set to 4 — permits up to 4 total Ranges across a subscription's Range Filter parameters. The default of 0 forbids Range Filters entirely (Section 10.3.1.6)",
       "hex": "af0000020604",
       "decoded": {
-        "options": {
-          "max_filter_ranges": "4"
-        }
+        "options": [
+          {
+            "name": "max_filter_ranges",
+            "type": "0x6",
+            "value": "4"
+          }
+        ]
       }
     },
     {
@@ -124,9 +172,13 @@
       "description": "SETUP with MAX_REQUEST_UPDATES option (Type 0x08) set to 16 — max unacknowledged REQUEST_UPDATEs per request stream. PUBLISH_STATE_NOTIFY (0x22) is not counted against this limit (Section 10.10)",
       "hex": "af0000020810",
       "decoded": {
-        "options": {
-          "max_request_updates": "16"
-        }
+        "options": [
+          {
+            "name": "max_request_updates",
+            "type": "0x8",
+            "value": "16"
+          }
+        ]
       }
     },
     {
@@ -134,10 +186,18 @@
       "description": "SETUP with both MAX_FILTER_RANGES (0x06 = 8) and MAX_REQUEST_UPDATES (0x08 = 32) options; demonstrates delta-type ordering",
       "hex": "af00000406080220",
       "decoded": {
-        "options": {
-          "max_filter_ranges": "8",
-          "max_request_updates": "32"
-        }
+        "options": [
+          {
+            "name": "max_filter_ranges",
+            "type": "0x6",
+            "value": "8"
+          },
+          {
+            "name": "max_request_updates",
+            "type": "0x8",
+            "value": "32"
+          }
+        ]
       }
     },
     {

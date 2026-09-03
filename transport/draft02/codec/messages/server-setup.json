@@ -10,7 +10,7 @@
       "hex": "404109c0000000ff00000200",
       "decoded": {
         "selected_version": "4278190082",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -19,15 +19,12 @@
       "hex": "40410ec0000000ff0000020140ff02beef",
       "decoded": {
         "selected_version": "4278190082",
-        "parameters": {
-          "unknown": [
-            {
-              "id": "0xff",
-              "length": "2",
-              "raw_hex": "beef"
-            }
-          ]
-        }
+        "parameters": [
+          {
+            "type": "0xff",
+            "raw_hex": "beef"
+          }
+        ]
       }
     },
     {

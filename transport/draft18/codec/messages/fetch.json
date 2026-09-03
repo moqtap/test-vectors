@@ -19,7 +19,7 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -38,7 +38,7 @@
         "start_object": "3",
         "end_group": "20",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -50,7 +50,7 @@
         "fetch_type": "2",
         "joining_request_id": "2",
         "joining_start": "3",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -62,7 +62,7 @@
         "fetch_type": "3",
         "joining_request_id": "2",
         "joining_start": "10",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -80,13 +80,17 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "66657463682d746f6b656e"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "66657463682d746f6b656e"
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -104,9 +108,13 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {
-          "subscriber_priority": "16"
-        }
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "16"
+          }
+        ]
       }
     },
     {
@@ -124,9 +132,13 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {
-          "group_order": "2"
-        }
+        "parameters": [
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "2"
+          }
+        ]
       }
     },
     {
@@ -144,9 +156,13 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {
-          "fill_timeout": "5000"
-        }
+        "parameters": [
+          {
+            "name": "fill_timeout",
+            "type": "0xa",
+            "value": "5000"
+          }
+        ]
       }
     },
     {
@@ -164,9 +180,13 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {
-          "fill_timeout": "0"
-        }
+        "parameters": [
+          {
+            "name": "fill_timeout",
+            "type": "0xa",
+            "value": "0"
+          }
+        ]
       }
     },
     {

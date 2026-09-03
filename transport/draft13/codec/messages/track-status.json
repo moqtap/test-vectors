@@ -17,7 +17,7 @@
         "group_order": "0",
         "forward": "0",
         "filter_type": "1",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "0d00120101046c69766505766964656f8000000100"
     },
@@ -35,7 +35,7 @@
         "group_order": "0",
         "forward": "0",
         "filter_type": "2",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "0d001f02020a636f6e666572656e636506726f6f6d343205617564696f8000000200"
     },
@@ -53,9 +53,13 @@
         "group_order": "0",
         "forward": "0",
         "filter_type": "1",
-        "parameters": {
-          "delivery_timeout": "3000"
-        }
+        "parameters": [
+          {
+            "name": "delivery_timeout",
+            "type": "0x2",
+            "value": "3000"
+          }
+        ]
       }
     },
     {
@@ -72,13 +76,17 @@
         "group_order": "0",
         "forward": "0",
         "filter_type": "2",
-        "parameters": {
-          "authorization_token": {
-            "alias_type": "3",
-            "token_type": "0",
-            "token_value": "747261636b61757468"
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "747261636b61757468"
+            }
           }
-        }
+        ]
       }
     },
     {

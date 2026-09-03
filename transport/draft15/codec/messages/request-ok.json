@@ -10,7 +10,7 @@
       "hex": "0700020100",
       "decoded": {
         "request_id": "1",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -19,12 +19,16 @@
       "hex": "070006010109020a03",
       "decoded": {
         "request_id": "1",
-        "parameters": {
-          "largest_object": {
-            "group": "10",
-            "object": "3"
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
           }
-        }
+        ]
       }
     },
     {

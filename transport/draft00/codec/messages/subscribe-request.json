@@ -10,7 +10,7 @@
       "hex": "030b0a6c6976652f766964656f",
       "decoded": {
         "full_track_name": "live/video",
-        "parameters": {}
+        "parameters": []
       }
     },
     {
@@ -19,9 +19,13 @@
       "hex": "030e0a6c6976652f766964656f000105",
       "decoded": {
         "full_track_name": "live/video",
-        "parameters": {
-          "group_sequence": "5"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "group_sequence",
+            "value": "5"
+          }
+        ]
       }
     },
     {
@@ -30,10 +34,18 @@
       "hex": "03110a6c6976652f766964656f000105010103",
       "decoded": {
         "full_track_name": "live/video",
-        "parameters": {
-          "group_sequence": "5",
-          "object_sequence": "3"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "group_sequence",
+            "value": "5"
+          },
+          {
+            "type": "0x1",
+            "name": "object_sequence",
+            "value": "3"
+          }
+        ]
       }
     },
     {
@@ -42,9 +54,13 @@
       "hex": "03140a6c6976652f766964656f02076d79746f6b656e",
       "decoded": {
         "full_track_name": "live/video",
-        "parameters": {
-          "authorization_info": "mytoken"
-        }
+        "parameters": [
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "mytoken"
+          }
+        ]
       }
     },
     {
@@ -53,11 +69,23 @@
       "hex": "031a0a6c6976652f766964656f00010501010302076d79746f6b656e",
       "decoded": {
         "full_track_name": "live/video",
-        "parameters": {
-          "group_sequence": "5",
-          "object_sequence": "3",
-          "authorization_info": "mytoken"
-        }
+        "parameters": [
+          {
+            "type": "0x0",
+            "name": "group_sequence",
+            "value": "5"
+          },
+          {
+            "type": "0x1",
+            "name": "object_sequence",
+            "value": "3"
+          },
+          {
+            "type": "0x2",
+            "name": "authorization_info",
+            "value": "mytoken"
+          }
+        ]
       }
     },
     {

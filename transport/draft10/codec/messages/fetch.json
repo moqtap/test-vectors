@@ -20,7 +20,7 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "16150280010101046c69766505766964656f00000a0000"
     },
@@ -41,7 +41,7 @@
         "start_object": "3",
         "end_group": "20",
         "end_object": "0",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "162204000201020a636f6e666572656e636506726f6f6d343205617564696f0503140000"
     },
@@ -61,9 +61,13 @@
         "start_object": "0",
         "end_group": "10",
         "end_object": "0",
-        "parameters": {
-          "authorization_info": "token123"
-        }
+        "parameters": [
+          {
+            "name": "authorization_info",
+            "type": "0x2",
+            "value": "token123"
+          }
+        ]
       },
       "hex": "161f0280010101046c69766505766964656f00000a00010208746f6b656e313233"
     },
@@ -77,7 +81,7 @@
         "fetch_type": "2",
         "joining_subscribe_id": "2",
         "preceding_group_offset": "5",
-        "parameters": {}
+        "parameters": []
       },
       "hex": "160706800002020500"
     },
