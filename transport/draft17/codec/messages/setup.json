@@ -76,7 +76,7 @@
     {
       "id": "with-auth-token-register",
       "description": "SETUP with AUTHORIZATION_TOKEN option (REGISTER alias=0, type=1, value='setup-bearer')",
-      "hex": "af00001203100100010c73657475702d626561726572",
+      "hex": "af000011030f01000173657475702d626561726572",
       "decoded": {
         "options": [
           {
@@ -112,7 +112,7 @@
     {
       "id": "with-path-auth-authority",
       "description": "SETUP with PATH, AUTHORIZATION_TOKEN (REGISTER), and AUTHORITY options",
-      "hex": "af00002701042f6d6f71020c010001086d792d746f6b656e021172656c61792e6578616d706c652e636f6d",
+      "hex": "af00002601042f6d6f71020b0100016d792d746f6b656e021172656c61792e6578616d706c652e636f6d",
       "decoded": {
         "options": [
           {

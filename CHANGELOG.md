@@ -7,6 +7,51 @@ including every vector added, is in the git history.
 
 A version with no entry here broke nothing.
 
+## 0.16.0
+
+Ten draft-17 vectors changed what they assert, so whatever this becomes is a
+minor bump and not a patch. They were wrong, and a consumer that agreed with
+them was wrong in the same direction.
+
+Every AUTHORIZATION_TOKEN vector on draft-17 encoded the Token Value behind a
+varint length of its own, which draft-17 does not define. The Token structure
+is `Token { Alias Type (vi64), [Token Alias (vi64)], [Token Type (vi64)],
+[Token Value (..)] }` — Figure 5, §9.3.2 — and `(..)` is the rest of the value,
+not a length followed by that many bytes. The length that is genuinely there is
+the Key-Value-Pair's own, which is what "The AUTHORIZATION TOKEN parameter
+(Parameter Type 0x03) uses Length-prefixed encoding" is describing.
+
+What made this survive is that the sentence reads like it means an inner
+length, and that the vectors were self-consistent: the spurious byte was
+counted in the KVP length and again in the message length, so framing
+validation passed and nothing downstream disagreed. It is only wrong against
+the draft.
+
+Draft-18 is the proof rather than the analogy. Its Figure 5 is byte-for-byte
+draft-17's, the "uses Length-prefixed encoding" sentence appears verbatim in
+both (§9.3.2 and §10.2.2), and draft-18's vectors already encode no inner
+length. Two drafts saying the same thing cannot encode it two ways.
+
+The ten, all under `transport/draft17/codec/messages/`:
+
+| file | vector id |
+| --- | --- |
+| `fetch.json` | `standalone-with-auth-token` |
+| `publish-namespace.json` | `with-auth-token` |
+| `publish.json` | `with-auth-token` |
+| `setup.json` | `with-auth-token-register`, `with-path-auth-authority` |
+| `subscribe-namespace.json` | `with-auth-token` |
+| `subscribe.json` | `with-auth-token-register`, `with-auth-token-use-value`, `with-two-auth-tokens` |
+| `track-status.json` | `with-auth-token` |
+
+The two in `setup.json` are Setup Options rather than Message Parameters, a
+separate namespace — they are here because §9.4.1.4 makes the AUTHORIZATION
+TOKEN Setup Option "functionally equivalent to the AUTHORIZATION TOKEN message
+parameter", same structure and so the same defect.
+
+Only draft-17 is affected. Drafts 11 through 16 and 18 through 20 were checked
+and encode no inner length.
+
 ## 0.15.0
 
 Nothing changed what it asserts; this is a version of its own because 0.14.0's

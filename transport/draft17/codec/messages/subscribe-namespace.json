@@ -50,7 +50,7 @@
     {
       "id": "with-auth-token",
       "description": "SUBSCRIBE_NAMESPACE with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='ns-token')",
-      "hex": "11001d0100010a636f6e666572656e63650001030b0300086e732d746f6b656e",
+      "hex": "11001c0100010a636f6e666572656e63650001030a03006e732d746f6b656e",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",

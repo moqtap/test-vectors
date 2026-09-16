@@ -40,7 +40,7 @@
     {
       "id": "with-auth-token",
       "description": "PUBLISH with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='pub-token')",
-      "hex": "1d001e010001046c69766505766964656f0001030c0300097075622d746f6b656e",
+      "hex": "1d001d010001046c69766505766964656f0001030b03007075622d746f6b656e",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",

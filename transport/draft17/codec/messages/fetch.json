@@ -72,7 +72,7 @@
     {
       "id": "standalone-with-auth-token",
       "description": "standalone FETCH with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='fetch-token')",
-      "hex": "16002402000101046c69766505766964656f00000a0001030e03000b66657463682d746f6b656e",
+      "hex": "16002302000101046c69766505766964656f00000a0001030d030066657463682d746f6b656e",
       "decoded": {
         "request_id": "2",
         "required_request_id_delta": "0",

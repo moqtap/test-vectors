@@ -119,7 +119,7 @@
     {
       "id": "with-auth-token-register",
       "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (REGISTER alias=1, type=0, value='secret-token')",
-      "hex": "030021010001046c69766505766964656f0103100101000c7365637265742d746f6b656e",
+      "hex": "030020010001046c69766505766964656f01030f0101007365637265742d746f6b656e",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
@@ -167,7 +167,7 @@
     {
       "id": "with-auth-token-use-value",
       "description": "SUBSCRIBE with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='my-bearer-token')",
-      "hex": "030023010001046c69766505766964656f01031203000f6d792d6265617265722d746f6b656e",
+      "hex": "030022010001046c69766505766964656f01031103006d792d6265617265722d746f6b656e",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
@@ -379,7 +379,7 @@
     {
       "id": "with-two-auth-tokens",
       "description": "SUBSCRIBE carrying AUTHORIZATION_TOKEN twice, with different Token Values. The parameter's own definition is the carve-out: \"The AUTHORIZATION TOKEN parameter MAY be repeated within a message as long as the combination of Token Type and Token Value are unique after resolving any aliases.\" The second instance is written as a Type Delta of 0, which is the only encoding a second instance has once Section 10.2 requires ascending order. Identical to the with-auth-token-use-value vector with the count raised and a second token appended, so the only new bytes are the repeat itself.",
-      "hex": "030037010001046c69766505766964656f02031203000f6d792d6265617265722d746f6b656e001203000f6d792d62656172652d7365636f6e64",
+      "hex": "030035010001046c69766505766964656f02031103006d792d6265617265722d746f6b656e001103006d792d62656172652d7365636f6e64",
       "decoded": {
         "request_id": "1",
         "required_request_id_delta": "0",
