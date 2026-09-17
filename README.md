@@ -37,8 +37,9 @@ transport/
   draft18/                  MoQ Transport draft-18
   draft19/                  MoQ Transport draft-19
   draft20/                  MoQ Transport draft-20
+  draft21/                  MoQ Transport draft-21
     codec/
-      varint.json           VarInt encoding (§1.4.1 from draft-17, RFC 9000 §16 before it)
+      varint.json           VarInt encoding (§8.1 in draft-21, §1.4.1 in drafts 17–20, RFC 9000 §16 before)
       messages/*.json       One file per control message type
       data-streams/*.json   Subgroup, datagram, fetch header vectors
     meta.json               Version metadata
@@ -148,7 +149,9 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 
 ## Specs covered
 
-Coverage spans drafts 00 through 20. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
+Coverage spans drafts 00 through 21. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
+
+Draft-21 restructured draft-20 and changed nothing else: every code point, every table row and every wire diagram is identical, so its vectors carry byte-for-byte the same `hex` and `decoded` as draft-20's. What moved is where the draft says things — 200 numbered sections became 214, and only 11 keep both their title and their number — so the two directories differ in the sections their prose cites and in nothing a decoder can observe. A codec that passes draft-20 passes draft-21, and a consumer can use that: running both is a check on the consumer's own draft plumbing, since any disagreement between them is its bug rather than the protocol's.
 
 The two type columns count files — one per control message type, one per data stream or datagram type. A **negative** vector is one carrying an `error` category instead of a `decoded` block: bytes a conforming decoder must refuse, and the column worth watching, since a corpus of only valid frames tests half a codec.
 
@@ -175,7 +178,8 @@ The two type columns count files — one per control message type, one per data 
 | MoQ Transport | draft-18 | 20 | 3 | 248 | 39 |
 | MoQ Transport | draft-19 | 20 | 3 | 268 | 39 |
 | MoQ Transport | draft-20 | 21 | 3 | 324 | 57 |
-| | **all** | | | **3440** | **699** |
+| MoQ Transport | draft-21 | 21 | 3 | 324 | 57 |
+| | **all** | | | **3764** | **756** |
 
 ## Scope
 
