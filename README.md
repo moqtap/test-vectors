@@ -38,8 +38,9 @@ transport/
   draft19/                  MoQ Transport draft-19
   draft20/                  MoQ Transport draft-20
   draft21/                  MoQ Transport draft-21
+  draft22/                  MoQ Transport draft-22
     codec/
-      varint.json           VarInt encoding (§8.1 in draft-21, §1.4.1 in drafts 17–20, RFC 9000 §16 before)
+      varint.json           VarInt encoding (§8.1 in drafts 21–22, §1.4.1 in drafts 17–20, RFC 9000 §16 before)
       messages/*.json       One file per control message type
       data-streams/*.json   Subgroup, datagram, fetch header vectors
     meta.json               Version metadata
@@ -149,9 +150,11 @@ import vectors from '@moqtap/test-vectors/transport/draft14/codec/messages/subsc
 
 ## Specs covered
 
-Coverage spans drafts 00 through 21. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
+Coverage spans drafts 00 through 22. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
 
 Draft-21 restructured draft-20 and changed nothing else: every code point, every table row and every wire diagram is identical, so its vectors carry byte-for-byte the same `hex` and `decoded` as draft-20's. What moved is where the draft says things — 200 numbered sections became 214, and only 11 keep both their title and their number — so the two directories differ in the sections their prose cites and in nothing a decoder can observe. A codec that passes draft-20 passes draft-21, and a consumer can use that: running both is a check on the consumer's own draft plumbing, since any disagreement between them is its bug rather than the protocol's.
+
+Draft-22 is not wire-identical to draft-21. It changes one thing on the wire: LOCATION_FILTER (0x21) now begins with a Location Filter Type where draft-21 had a byte Length. The type alone says which fields follow (0x00 none, 0x01 relative start, 0x02 absolute start, 0x03 absolute start to the end of a group, 0x04 absolute range, 0x05 Next Object), and any other type is a protocol violation. Every other vector carries draft-21's `hex` and `decoded` unchanged, and every LOCATION_FILTER value gains a `filter_type`. One meaning moves with it: `21 02 00 00` is now the absolute start {0,0}, not the Next Object, which is `21 05`. With fields below 128 a type equals the old Length byte for byte, so the vectors that tell a draft-22 decoder from a draft-21 one are those with a type 0x05, a multi-byte or non-minimal field, or a type 0x06 and above.
 
 The two type columns count files — one per control message type, one per data stream or datagram type. A **negative** vector is one carrying an `error` category instead of a `decoded` block: bytes a conforming decoder must refuse, and the column worth watching, since a corpus of only valid frames tests half a codec.
 
@@ -179,7 +182,8 @@ The two type columns count files — one per control message type, one per data 
 | MoQ Transport | draft-19 | 20 | 3 | 268 | 39 |
 | MoQ Transport | draft-20 | 21 | 3 | 324 | 57 |
 | MoQ Transport | draft-21 | 21 | 3 | 324 | 57 |
-| | **all** | | | **3764** | **756** |
+| MoQ Transport | draft-22 | 21 | 3 | 335 | 59 |
+| | **all** | | | **4099** | **815** |
 
 ## Scope
 

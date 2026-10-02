@@ -114,6 +114,11 @@
           "id": "draft21",
           "spec": "draft-ietf-moq-transport-21",
           "path": "transport/draft21/"
+        },
+        {
+          "id": "draft22",
+          "spec": "draft-ietf-moq-transport-22",
+          "path": "transport/draft22/"
         }
       ]
     }
