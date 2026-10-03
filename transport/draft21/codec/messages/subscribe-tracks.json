@@ -210,6 +210,130 @@
       }
     },
     {
+      "id": "with-location-filter",
+      "description": "SUBSCRIBE_TRACKS carrying a two-field LOCATION_FILTER whose StartGroup and StartObject are both 0, the Next Object, so each resulting subscription joins its Track at the Next Object. Section 9.18.1: \"Any Parameter that can be specified on a Subscription (ie: in SUBSCRIBE) is valid in SUBSCRIBE_TRACKS, unless otherwise specified.\" The same section then tells the subscriber it \"can specify a Location Filter and optionally include FILL_PARAMETERS\" to join the Tracks the resulting PUBLISHes start. The LOCATION_FILTER definition (Section 9.20.10) names FETCH, SUBSCRIBE, PUBLISH, REQUEST_UPDATE and PUBLISH_STATE_NOTIFY, the FILL_PARAMETERS definition (Section 9.20.16) names SUBSCRIBE and REQUEST_UPDATE, and Section 9.20.1 makes a parameter in any other message a PROTOCOL_VIOLATION. The two readings disagree from draft-20 on, and only about LOCATION_FILTER and FILL_PARAMETERS: for every other SUBSCRIBE parameter the definition is the \"otherwise specified\". This corpus admits those two on SUBSCRIBE_TRACKS, because Section 9.18.1 instructs the subscriber to send them, and refuses every other parameter the definitions leave out, so this frame decodes rather than closing the session",
+      "hex": "51001201010a636f6e666572656e63650121020000",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "start_group": "0",
+              "start_object": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-location-filter-and-fill-parameters",
+      "description": "SUBSCRIBE_TRACKS carrying a two-field LOCATION_FILTER whose StartGroup and StartObject are both 0, the Next Object, followed by an empty FILL_PARAMETERS (0x23, Type Delta 0x02 from 0x21), the pair Section 9.18.1 names for joining the Tracks the resulting PUBLISHes start (Section 3.5). The empty FILL_PARAMETERS is Length 1 carrying its Number of Parameters, 00. Both parameters are admitted on SUBSCRIBE_TRACKS for the reason with-location-filter gives; a decoder that admits LOCATION_FILTER here and not FILL_PARAMETERS refuses this frame",
+      "hex": "51001501010a636f6e666572656e63650221020000020100",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "start_group": "0",
+              "start_object": "0"
+            }
+          },
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-fill-parameters",
+      "description": "SUBSCRIBE_TRACKS carrying FILL_PARAMETERS (0x23) alone, its value a two-field LOCATION_FILTER selecting the fill range {100,0} onward for each resulting subscription. The FILL_PARAMETERS definition (Section 9.20.16) names SUBSCRIBE and REQUEST_UPDATE only; Section 9.18.1 names it for SUBSCRIBE_TRACKS, and this corpus admits it there for the reason with-location-filter gives. With no LOCATION_FILTER before it, the outer Type Delta is the absolute type 0x23",
+      "hex": "51001501010a636f6e666572656e63650123050121026400",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": [
+              {
+                "name": "location_filter",
+                "type": "0x21",
+                "value": {
+                  "start_group": "100",
+                  "start_object": "0"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "object-delivery-timeout-out-of-scope",
+      "description": "SUBSCRIBE_TRACKS carrying OBJECT_DELIVERY_TIMEOUT (0x02), 5000 ms. Its definition (Section 9.20.5): \"The OBJECT_DELIVERY_TIMEOUT parameter (Parameter Type 0x02) is a varint. It MAY appear in a SUBSCRIBE, PUBLISH, or REQUEST_UPDATE message.\" Section 9.20.1 requires the receiver to close the session with a PROTOCOL_VIOLATION when a parameter appears in a message its definition does not name. Section 9.18.1's \"Any Parameter that can be specified on a Subscription (ie: in SUBSCRIBE) is valid in SUBSCRIBE_TRACKS, unless otherwise specified\" does not admit it, because the definition is that otherwise-specified. Only LOCATION_FILTER and FILL_PARAMETERS, which Section 9.18.1 names for SUBSCRIBE_TRACKS explicitly, are admitted past their definitions",
+      "hex": "51001101010a636f6e666572656e636501029388",
+      "error": "parameter_out_of_scope",
+      "error_detail": "OBJECT_DELIVERY_TIMEOUT may appear in SUBSCRIBE, PUBLISH or REQUEST_UPDATE; SUBSCRIBE_TRACKS is none of those",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "rendezvous-timeout-out-of-scope",
+      "description": "SUBSCRIBE_TRACKS carrying RENDEZVOUS_TIMEOUT (0x04), 3000 ms. Its definition (Section 9.20.7): \"The RENDEZVOUS_TIMEOUT parameter (Parameter Type 0x04) MAY appear in a SUBSCRIBE message.\" Section 9.20.1 requires the receiver to close the session with a PROTOCOL_VIOLATION when a parameter appears in a message its definition does not name. Section 9.18.1's \"Any Parameter that can be specified on a Subscription (ie: in SUBSCRIBE) is valid in SUBSCRIBE_TRACKS, unless otherwise specified\" does not admit it, because the definition is that otherwise-specified. Only LOCATION_FILTER and FILL_PARAMETERS, which Section 9.18.1 names for SUBSCRIBE_TRACKS explicitly, are admitted past their definitions",
+      "hex": "51001101010a636f6e666572656e636501048bb8",
+      "error": "parameter_out_of_scope",
+      "error_detail": "RENDEZVOUS_TIMEOUT may appear in SUBSCRIBE only",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subgroup-delivery-timeout-out-of-scope",
+      "description": "SUBSCRIBE_TRACKS carrying SUBGROUP_DELIVERY_TIMEOUT (0x06), 5000 ms. Its definition (Section 9.20.4): \"The SUBGROUP_DELIVERY_TIMEOUT parameter (Parameter Type 0x06) is a varint. It MAY appear in a SUBSCRIBE, PUBLISH, or REQUEST_UPDATE message.\" Section 9.20.1 requires the receiver to close the session with a PROTOCOL_VIOLATION when a parameter appears in a message its definition does not name. Section 9.18.1's \"Any Parameter that can be specified on a Subscription (ie: in SUBSCRIBE) is valid in SUBSCRIBE_TRACKS, unless otherwise specified\" does not admit it, because the definition is that otherwise-specified. Only LOCATION_FILTER and FILL_PARAMETERS, which Section 9.18.1 names for SUBSCRIBE_TRACKS explicitly, are admitted past their definitions",
+      "hex": "51001101010a636f6e666572656e636501069388",
+      "error": "parameter_out_of_scope",
+      "error_detail": "SUBGROUP_DELIVERY_TIMEOUT may appear in SUBSCRIBE, PUBLISH or REQUEST_UPDATE; SUBSCRIBE_TRACKS is none of those",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subscriber-priority-out-of-scope",
+      "description": "SUBSCRIBE_TRACKS carrying SUBSCRIBER_PRIORITY (0x20), 32. Its definition (Section 9.20.8): \"The SUBSCRIBER_PRIORITY parameter (Parameter Type 0x20) is a uint8. It MAY appear in a SUBSCRIBE, PUBLISH, FETCH, or REQUEST_UPDATE (for a subscription or FETCH).\" Section 9.20.1 requires the receiver to close the session with a PROTOCOL_VIOLATION when a parameter appears in a message its definition does not name. Section 9.18.1's \"Any Parameter that can be specified on a Subscription (ie: in SUBSCRIBE) is valid in SUBSCRIBE_TRACKS, unless otherwise specified\" does not admit it, because the definition is that otherwise-specified. Only LOCATION_FILTER and FILL_PARAMETERS, which Section 9.18.1 names for SUBSCRIBE_TRACKS explicitly, are admitted past their definitions",
+      "hex": "51001001010a636f6e666572656e6365012020",
+      "error": "parameter_out_of_scope",
+      "error_detail": "SUBSCRIBER_PRIORITY may appear in SUBSCRIBE, PUBLISH, FETCH or REQUEST_UPDATE; SUBSCRIBE_TRACKS is none of those",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "new-group-request-out-of-scope",
+      "description": "SUBSCRIBE_TRACKS carrying NEW_GROUP_REQUEST (0x32), 25. Its definition (Section 9.20.20): \"The NEW_GROUP_REQUEST parameter (Parameter Type 0x32) is a varint. It MAY appear in SUBSCRIBE or REQUEST_UPDATE for a subscription.\" Section 9.20.1 requires the receiver to close the session with a PROTOCOL_VIOLATION when a parameter appears in a message its definition does not name. Section 9.18.1's \"Any Parameter that can be specified on a Subscription (ie: in SUBSCRIBE) is valid in SUBSCRIBE_TRACKS, unless otherwise specified\" does not admit it, because the definition is that otherwise-specified. Only LOCATION_FILTER and FILL_PARAMETERS, which Section 9.18.1 names for SUBSCRIBE_TRACKS explicitly, are admitted past their definitions",
+      "hex": "51001001010a636f6e666572656e6365013219",
+      "error": "parameter_out_of_scope",
+      "error_detail": "NEW_GROUP_REQUEST may appear in SUBSCRIBE or REQUEST_UPDATE for a subscription only",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
       "id": "truncated",
       "description": "truncated SUBSCRIBE_TRACKS — missing namespace_prefix",
       "hex": "51000d0101",

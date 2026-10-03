@@ -236,7 +236,7 @@
     },
     {
       "id": "with-initial-subscription-parameters",
-      "description": "PUBLISH resulting from a SUBSCRIBE_TRACKS, echoing the subscriber's initial Subscription Parameters explicitly. Draft-19 said such parameters were \"not explicitly communicated\" apart from FORWARD and GROUP_ORDER; draft-21 Section 9.18.1 requires the publisher to communicate all of them, and the subscriber applies each parameter's own default for any it omits",
+      "description": "PUBLISH resulting from a SUBSCRIBE_TRACKS, stating the new subscription's initial Subscription Parameters explicitly. Draft-19 said such parameters were \"not explicitly communicated\" apart from FORWARD and GROUP_ORDER; draft-21 Section 9.18.1 requires the publisher to communicate them, and the subscriber applies each parameter's own default for any it omits. GROUP_ORDER is one a SUBSCRIBE_TRACKS can carry and the publisher echoes. SUBSCRIBER_PRIORITY is not: its definition (Section 9.20.8) names SUBSCRIBE, PUBLISH, FETCH and REQUEST_UPDATE, so a SUBSCRIBE_TRACKS carrying it is refused (subscribe-tracks.json subscriber-priority-out-of-scope), and the value here is one the publisher states on its own in a message that may carry it",
       "hex": "1d00130101046c69766505766964656f000220200201",
       "decoded": {
         "request_id": "1",
