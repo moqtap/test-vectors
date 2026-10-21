@@ -175,15 +175,15 @@ The two type columns count files — one per control message type, one per data 
 | MoQ Transport | draft-12 | 30 | 3 | 190 | 38 |
 | MoQ Transport | draft-13 | 31 | 3 | 213 | 39 |
 | MoQ Transport | draft-14 | 31 | 3 | 228 | 39 |
-| MoQ Transport | draft-15 | 24 | 3 | 177 | 30 |
+| MoQ Transport | draft-15 | 24 | 3 | 186 | 30 |
 | MoQ Transport | draft-16 | 25 | 3 | 189 | 32 |
 | MoQ Transport | draft-17 | 19 | 3 | 219 | 41 |
 | MoQ Transport | draft-18 | 20 | 3 | 248 | 39 |
 | MoQ Transport | draft-19 | 20 | 3 | 268 | 39 |
-| MoQ Transport | draft-20 | 21 | 3 | 324 | 57 |
-| MoQ Transport | draft-21 | 21 | 3 | 324 | 57 |
-| MoQ Transport | draft-22 | 21 | 3 | 335 | 59 |
-| | **all** | | | **4099** | **815** |
+| MoQ Transport | draft-20 | 21 | 3 | 332 | 62 |
+| MoQ Transport | draft-21 | 21 | 3 | 332 | 62 |
+| MoQ Transport | draft-22 | 21 | 3 | 342 | 64 |
+| | **all** | | | **4131** | **830** |
 
 ## Scope
 

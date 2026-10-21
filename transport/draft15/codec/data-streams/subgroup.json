@@ -131,6 +131,194 @@
       }
     },
     {
+      "id": "subgroup-id-first-object",
+      "description": "subgroup stream (type 0x12: Subgroup ID is the first Object ID, no extensions, no end-of-group, priority present) with one object whose Object ID is 5. Draft-15 Section 10.4.2 Table 6 gives this type no Subgroup ID field and a Subgroup ID Value of First Object ID: the Subgroup ID is the Object ID of the first object transmitted, which the first Object ID Delta carries",
+      "hex": "120103800504deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x12",
+        "track_alias": "1",
+        "group_id": "3",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-id-first-object-two-objects",
+      "description": "subgroup stream (type 0x12: Subgroup ID is the first Object ID, no extensions, no end-of-group, priority present) with two objects, Object IDs 300 and 301; the Subgroup ID is the first one's, not the last one's. Draft-15 Section 10.4.2 Table 6 gives this type no Subgroup ID field and a Subgroup ID Value of First Object ID: the Subgroup ID is the Object ID of the first object transmitted, which the first Object ID Delta carries",
+      "hex": "12010380412c04deadbeef0002cafe",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x12",
+        "track_alias": "1",
+        "group_id": "3",
+        "subgroup_id": "300",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "300",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "object_id": "301",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-id-first-object-extensions",
+      "description": "subgroup stream (type 0x13: Subgroup ID is the first Object ID, extensions present, no end-of-group, priority present) with one object whose Object ID is 5, carrying a Prior Group ID Gap extension. Draft-15 Section 10.4.2 Table 6 gives this type no Subgroup ID field and a Subgroup ID Value of First Object ID: the Subgroup ID is the Object ID of the first object transmitted, which the first Object ID Delta carries",
+      "hex": "1301038005023c0104deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x13",
+        "track_alias": "1",
+        "group_id": "3",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "objects": [
+          {
+            "object_id": "5",
+            "extension_headers": {
+              "prior_group_id_gap": "1"
+            },
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-id-first-object-end-of-group",
+      "description": "subgroup stream (type 0x1a: Subgroup ID is the first Object ID, no extensions, end-of-group, priority present) with one object whose Object ID is 5. Draft-15 Section 10.4.2 Table 6 gives this type no Subgroup ID field and a Subgroup ID Value of First Object ID: the Subgroup ID is the Object ID of the first object transmitted, which the first Object ID Delta carries",
+      "hex": "1a0103800504deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x1a",
+        "track_alias": "1",
+        "group_id": "3",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "end_of_group": true,
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-id-first-object-extensions-end-of-group",
+      "description": "subgroup stream (type 0x1b: Subgroup ID is the first Object ID, extensions present, end-of-group, priority present) with one object whose Object ID is 5 and an empty extensions blob. Draft-15 Section 10.4.2 Table 6 gives this type no Subgroup ID field and a Subgroup ID Value of First Object ID: the Subgroup ID is the Object ID of the first object transmitted, which the first Object ID Delta carries",
+      "hex": "1b010380050004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x1b",
+        "track_alias": "1",
+        "group_id": "3",
+        "subgroup_id": "5",
+        "publisher_priority": "128",
+        "end_of_group": true,
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-id-first-object-no-priority",
+      "description": "subgroup stream (type 0x32: Subgroup ID is the first Object ID, no extensions, no end-of-group, NO priority) with one object whose Object ID is 5. Draft-15 Section 10.4.2 Table 6 gives this type no Subgroup ID field and a Subgroup ID Value of First Object ID: the Subgroup ID is the Object ID of the first object transmitted, which the first Object ID Delta carries",
+      "hex": "3201030504deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x32",
+        "track_alias": "1",
+        "group_id": "3",
+        "subgroup_id": "5",
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-id-first-object-extensions-no-priority",
+      "description": "subgroup stream (type 0x33: Subgroup ID is the first Object ID, extensions present, no end-of-group, NO priority) with one object whose Object ID is 5 and an empty extensions blob. Draft-15 Section 10.4.2 Table 6 gives this type no Subgroup ID field and a Subgroup ID Value of First Object ID: the Subgroup ID is the Object ID of the first object transmitted, which the first Object ID Delta carries",
+      "hex": "330103050004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x33",
+        "track_alias": "1",
+        "group_id": "3",
+        "subgroup_id": "5",
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-id-first-object-end-of-group-no-priority",
+      "description": "subgroup stream (type 0x3a: Subgroup ID is the first Object ID, no extensions, end-of-group, NO priority) with one object whose Object ID is 5. Draft-15 Section 10.4.2 Table 6 gives this type no Subgroup ID field and a Subgroup ID Value of First Object ID: the Subgroup ID is the Object ID of the first object transmitted, which the first Object ID Delta carries",
+      "hex": "3a01030504deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x3a",
+        "track_alias": "1",
+        "group_id": "3",
+        "subgroup_id": "5",
+        "end_of_group": true,
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subgroup-id-first-object-extensions-end-of-group-no-priority",
+      "description": "subgroup stream (type 0x3b: Subgroup ID is the first Object ID, extensions present, end-of-group, NO priority) with one object whose Object ID is 5 and an empty extensions blob. Draft-15 Section 10.4.2 Table 6 gives this type no Subgroup ID field and a Subgroup ID Value of First Object ID: the Subgroup ID is the Object ID of the first object transmitted, which the first Object ID Delta carries",
+      "hex": "3b0103050004deadbeef",
+      "decoded": {
+        "stream_type": "subgroup",
+        "header_type": "0x3b",
+        "track_alias": "1",
+        "group_id": "3",
+        "subgroup_id": "5",
+        "end_of_group": true,
+        "objects": [
+          {
+            "object_id": "5",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
       "id": "subgroup-nonempty-extensions",
       "description": "subgroup stream (type 0x11: extensions present) with one object having Prior Group ID Gap extension",
       "hex": "1101008000023c0104deadbeef",
