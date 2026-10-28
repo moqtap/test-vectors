@@ -12,8 +12,16 @@ Checks:
 7. meta.json entries are consistent with manifest.json
 8. Vector fields, error categories and conformance profiles are ones the
    schema names
+9. Catalog vectors: every payload is exact text or hex; payloads that must
+   parse do, an invalid_json payload does not; a single independent object
+   resolves to itself parsed
+10. Every JSON file under a version directory sits in a category its meta.json
+    lists, and every listed category exists
 
-The last one overlaps validate-schema.mjs, which does it properly through ajv.
+Every spec in manifest.json is walked, not only transport; a directory the walk
+skipped would be a directory nothing checked.
+
+The eighth overlaps validate-schema.mjs, which does it properly through ajv.
 It is repeated here because this script has no dependencies and that one needs
 npm install, so this is the check that runs by default — and a category
 misspelled by a letter is invisible to a consumer, which compares the vector's
@@ -192,6 +200,23 @@ def _load_vector_schema():
 
 VECTOR_FIELDS, ERROR_CATEGORIES, PROFILES = _load_vector_schema()
 
+
+def _load_catalog_schema():
+    path = os.path.join(REPO_ROOT, "schema", "catalog-vector.schema.json")
+    with open(path) as f:
+        schema = json.load(f)
+    vector = schema["$defs"]["vector"]
+    return (
+        set(schema["properties"]),
+        set(vector["properties"]),
+        set(vector["properties"]["error"]["enum"]),
+        set(vector["properties"]["profiles"]["items"]["enum"]),
+    )
+
+
+(CATALOG_FILE_FIELDS, CATALOG_VECTOR_FIELDS, CATALOG_ERROR_CATEGORIES,
+ CATALOG_PROFILES) = _load_catalog_schema()
+
 ID_PATTERN = re.compile(r"^[a-z0-9-]+$")
 
 def validate_vector_ids(filepath, vectors):
@@ -258,6 +283,140 @@ def validate_codec_vectors(filepath, data, draft_id=None):
         # Check protocol integers in decoded
         if has_decoded:
             check_protocol_ints(v["decoded"], f"[{i}].decoded", filepath, draft_id)
+
+def _reject_constant(name):
+    raise ValueError(f"{name} is not JSON")
+
+
+def _parse_payload(payload):
+    """The payload as a JSON value, or raise.
+
+    `hex` is decoded as strict UTF-8 first: JSON text between systems is
+    UTF-8 (RFC 8259 §8.1), so bytes that are not UTF-8 are not a catalog.
+    Python's parser also accepts NaN and Infinity, which JSON does not.
+    """
+    if "hex" in payload:
+        raw = bytes.fromhex(payload["hex"]).decode("utf-8")
+    else:
+        raw = payload["text"]
+    return json.loads(raw, parse_constant=_reject_constant)
+
+
+def _check_payload(filepath, at, payload):
+    """A payload is exactly one of `text` and `hex`; False when it is not."""
+    if not isinstance(payload, dict) or len(payload) != 1 or not (
+        "text" in payload or "hex" in payload
+    ):
+        err(f"{filepath}: {at} must be {{text}} or {{hex}}, and exactly one")
+        return False
+    if "text" in payload and not isinstance(payload["text"], str):
+        err(f"{filepath}: {at}.text must be a string, the exact payload")
+        return False
+    if "hex" in payload and not (
+        isinstance(payload["hex"], str) and HEX_PATTERN.match(payload["hex"])
+    ):
+        err(f"{filepath}: {at}.hex is not lowercase hex")
+        return False
+    return True
+
+
+def validate_catalog_vectors(filepath, data):
+    """Validate a catalog vector file.
+
+    Beyond the shape, this checks what the shape cannot: that the payloads a
+    vector expects to parse do parse, that an invalid_json payload does not,
+    and that a lone independent object resolves to exactly itself — which is
+    the claim that `input` holds the payload and not a rewrite of it.
+    """
+    extra = set(data) - CATALOG_FILE_FIELDS
+    if extra:
+        err(f"{filepath}: carries {sorted(extra)}, which the catalog schema does not declare")
+    stem = os.path.splitext(os.path.basename(filepath))[0]
+    if data.get("topic") != stem:
+        err(f"{filepath}: topic {data.get('topic')!r} is not the file name {stem!r}")
+    if "vectors" not in data:
+        err(f"{filepath}: missing 'vectors' array")
+        return
+
+    validate_vector_ids(filepath, data["vectors"])
+
+    for i, v in enumerate(data["vectors"]):
+        desc = v.get("id", f"vector {i}")
+        where = f"[{i}] '{desc}'"
+
+        extra = set(v) - CATALOG_VECTOR_FIELDS
+        if extra:
+            err(f"{filepath}: {where} carries {sorted(extra)}, which the schema does not declare")
+        if not isinstance(v.get("description"), str) or not v.get("description"):
+            err(f"{filepath}: {where} needs a description citing the draft")
+
+        has_resolved = "resolved" in v
+        has_error = "error" in v
+        if has_resolved == has_error:
+            err(f"{filepath}: {where} must carry exactly one of resolved and error")
+            continue
+        if has_error and v["error"] not in CATALOG_ERROR_CATEGORIES:
+            err(f"{filepath}: {where} claims error category {v['error']!r}, which the schema does not name")
+        if has_resolved and ("error_detail" in v or "error_at" in v):
+            err(f"{filepath}: {where} resolves and still says where it fails")
+
+        payloads = [v.get("input")]
+        if "steps" in v:
+            if not isinstance(v["steps"], list) or not v["steps"]:
+                err(f"{filepath}: {where} steps must be a non-empty list")
+                continue
+            payloads += v["steps"]
+        names = ["input"] + [f"steps[{n}]" for n in range(len(payloads) - 1)]
+        if not all(_check_payload(filepath, f"{where}.{n}", p) for n, p in zip(names, payloads)):
+            continue
+
+        error_at = v.get("error_at", 0)
+        if has_error:
+            if "steps" in v and "error_at" not in v:
+                err(f"{filepath}: {where} has steps and an error but no error_at")
+            if not isinstance(error_at, int) or not 0 <= error_at < len(payloads):
+                err(f"{filepath}: {where} error_at {error_at!r} names no payload")
+                continue
+            if error_at < len(payloads) - 1:
+                err(f"{filepath}: {where} carries steps after the one that fails, which nothing reads")
+
+        # Every payload a reader gets to must be JSON, except the one an
+        # invalid_json vector says is not.
+        last = error_at if has_error else len(payloads) - 1
+        parsed = []
+        for n in range(last + 1):
+            try:
+                parsed.append(_parse_payload(payloads[n]))
+                if has_error and n == error_at and v["error"] == "invalid_json":
+                    err(f"{filepath}: {where} says {names[n]} is not JSON, and it parses")
+            except (ValueError, UnicodeDecodeError) as e:
+                if not (has_error and n == error_at and v["error"] == "invalid_json"):
+                    err(f"{filepath}: {where} {names[n]} does not parse: {e}")
+
+        if has_resolved:
+            if not isinstance(v["resolved"], dict):
+                err(f"{filepath}: {where} resolved must be a JSON object, the catalog")
+            elif "steps" not in v and parsed and parsed[0] != v["resolved"]:
+                err(f"{filepath}: {where} resolves a single object to something other than its parse")
+
+        profiles = v.get("profiles")
+        if profiles is not None:
+            if not isinstance(profiles, list) or not profiles:
+                err(f"{filepath}: {where} profiles must be a non-empty list")
+            else:
+                if len(set(profiles)) != len(profiles):
+                    err(f"{filepath}: {where} names a profile twice")
+                for name in profiles:
+                    if name not in CATALOG_PROFILES:
+                        err(f"{filepath}: {where} names profile {name!r}, which the schema does not admit")
+            if has_resolved and not v.get("tolerant"):
+                err(f"{filepath}: {where} restricts a resolution to some consumers without marking it tolerant")
+        if "tolerant" in v:
+            if v["tolerant"] is not True:
+                err(f"{filepath}: {where} tolerant is true or absent")
+            if not has_resolved or profiles != ["reader"]:
+                err(f"{filepath}: {where} is tolerant, so it resolves and binds the reader profile alone")
+
 
 def _dvi_quic(data, off):
     """Decode a QUIC varint at offset. Returns (value, bytes_consumed) or (None, 0)."""
@@ -385,41 +544,84 @@ def validate_manifest_consistency():
             if meta.get("spec") != version.get("spec"):
                 err(f"{meta_path}: spec '{meta.get('spec')}' != manifest spec '{version.get('spec')}'")
 
+            # `requires` names a version this corpus carries, or it is a
+            # dangling pointer a consumer would follow into nothing.
+            req = meta.get("requires")
+            if req is not None:
+                specs = manifest.get("specs", {})
+                ids = {v["id"] for v in specs.get(req.get("spec"), {}).get("versions", [])}
+                if req.get("id") not in ids:
+                    err(f"{meta_path}: requires {req!r}, which manifest.json does not list")
+
+            # Categories are the directories, and the directories are the
+            # categories: a JSON file in one meta.json does not list is a
+            # file neither validator reads.
+            vdir = os.path.join(REPO_ROOT, vpath)
+            listed = set(meta.get("categories", []))
+            present = {
+                e for e in os.listdir(vdir) if os.path.isdir(os.path.join(vdir, e))
+            }
+            for missing in sorted(listed - present):
+                err(f"{meta_path}: lists category '{missing}', which has no directory")
+            for unlisted in sorted(present - listed):
+                err(f"{meta_path}: {vpath}{unlisted}/ is not a category it lists")
+            for e in os.listdir(vdir):
+                if os.path.isfile(os.path.join(vdir, e)) and e != "meta.json":
+                    err(f"{vpath}{e}: sits outside every category directory")
+
+
+def manifest_versions():
+    """(spec key, version id, path) for every version manifest.json lists."""
+    with open(os.path.join(REPO_ROOT, "manifest.json"), encoding="utf-8") as f:
+        manifest = json.load(f)
+    for spec_name, spec in manifest.get("specs", {}).items():
+        for version in spec.get("versions", []):
+            yield spec_name, version["id"], version["path"]
+
+
+def load(filepath):
+    relpath = os.path.relpath(filepath, REPO_ROOT)
+    try:
+        with open(filepath, encoding="utf-8") as f:
+            return relpath, json.load(f)
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        err(f"{relpath}: JSON parse error: {e}")
+        return relpath, None
+
 # ---- Main ----
 
 print("Validating test vectors...")
 print()
 
-# 1. Parse and validate all JSON vector files
+# 1. Parse and validate all JSON vector files, spec by spec
 print("Checking vector files and message framing...")
-for filepath in glob.glob(os.path.join(REPO_ROOT, "transport/**/codec/**/*.json"), recursive=True):
-    relpath = os.path.relpath(filepath, REPO_ROOT)
-    try:
-        with open(filepath) as f:
-            data = json.load(f)
-    except json.JSONDecodeError as e:
-        err(f"{relpath}: JSON parse error: {e}")
-        continue
+for spec_name, draft_id, vpath in manifest_versions():
+    base = os.path.join(REPO_ROOT, vpath)
 
-    draft_id = _extract_draft_id(relpath)
-    validate_codec_vectors(relpath, data, draft_id)
+    for filepath in sorted(glob.glob(os.path.join(base, "codec", "**", "*.json"), recursive=True)):
+        relpath, data = load(filepath)
+        if data is None:
+            continue
+        validate_codec_vectors(relpath, data, draft_id)
 
-    # Check message framing (only for control messages, not data streams or varint)
-    if os.sep + "messages" + os.sep in filepath or "/messages/" in filepath:
-        if draft_id:
+        # Message framing is a transport property: only control messages,
+        # not data streams or varint.
+        if spec_name == "transport" and (
+            os.sep + "messages" + os.sep in filepath or "/messages/" in filepath
+        ):
             validate_message_framing(relpath, data, draft_id)
+
+    for filepath in sorted(glob.glob(os.path.join(base, "catalog", "**", "*.json"), recursive=True)):
+        relpath, data = load(filepath)
+        if data is not None:
+            validate_catalog_vectors(relpath, data)
 
 # 2. Validate meta.json files
 print("Checking meta.json files...")
-for filepath in glob.glob(os.path.join(REPO_ROOT, "transport/*/meta.json"), recursive=True):
-    if ".git" in filepath:
-        continue
-    relpath = os.path.relpath(filepath, REPO_ROOT)
-    try:
-        with open(filepath) as f:
-            json.load(f)
-    except json.JSONDecodeError as e:
-        err(f"{relpath}: JSON parse error: {e}")
+for spec_name, draft_id, vpath in manifest_versions():
+    filepath = os.path.join(REPO_ROOT, vpath, "meta.json")
+    if os.path.exists(filepath):
+        load(filepath)
 
 # 3. Check manifest consistency
 print("Checking manifest consistency...")

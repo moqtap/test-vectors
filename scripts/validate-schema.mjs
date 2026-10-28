@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
@@ -7,27 +7,23 @@ import addFormats from "ajv-formats";
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 addFormats(ajv);
 
-const codecSchema = JSON.parse(
-  readFileSync("schema/codec-vector.schema.json", "utf8"),
-);
-const metaSchema = JSON.parse(
-  readFileSync("schema/meta.schema.json", "utf8"),
-);
-const manifestSchema = JSON.parse(
-  readFileSync("schema/manifest.schema.json", "utf8"),
-);
+const readJson = (path) => JSON.parse(readFileSync(path, "utf8"));
 
-const validateCodec = ajv.compile(codecSchema);
-const validateMeta = ajv.compile(metaSchema);
-const validateManifest = ajv.compile(manifestSchema);
+const validateCodec = ajv.compile(readJson("schema/codec-vector.schema.json"));
+const validateCatalog = ajv.compile(
+  readJson("schema/catalog-vector.schema.json"),
+);
+const validateMeta = ajv.compile(readJson("schema/meta.schema.json"));
+const validateManifest = ajv.compile(readJson("schema/manifest.schema.json"));
 
-function walk(dir, pattern) {
+function walk(dir) {
   const results = [];
+  if (!existsSync(dir)) return results;
   for (const entry of readdirSync(dir)) {
     const full = join(dir, entry);
     if (statSync(full).isDirectory()) {
-      results.push(...walk(full, pattern));
-    } else if (full.endsWith(".json") && pattern(full)) {
+      results.push(...walk(full));
+    } else if (full.endsWith(".json")) {
       results.push(full);
     }
   }
@@ -37,49 +33,34 @@ function walk(dir, pattern) {
 let failed = 0;
 let passed = 0;
 
-// Validate codec vectors
-const codecFiles = walk("transport", (f) => f.includes("codec"));
-for (const file of codecFiles) {
-  const data = JSON.parse(readFileSync(file, "utf8"));
-  const valid = validateCodec(data);
+function check(validate, file, data) {
   const rel = relative(".", file);
-  if (valid) {
+  if (validate(data)) {
     passed++;
   } else {
     failed++;
     console.error(`FAIL: ${rel}`);
-    for (const err of validateCodec.errors) {
+    for (const err of validate.errors) {
       console.error(`  ${err.instancePath} ${err.message}`);
     }
   }
 }
 
-// Validate meta.json files
-const metaFiles = walk("transport", (f) => f.endsWith("meta.json"));
-for (const file of metaFiles) {
-  const data = JSON.parse(readFileSync(file, "utf8"));
-  const valid = validateMeta(data);
-  const rel = relative(".", file);
-  if (valid) {
-    passed++;
-  } else {
-    failed++;
-    console.error(`FAIL: ${rel}`);
-    for (const err of validateMeta.errors) {
-      console.error(`  ${err.instancePath} ${err.message}`);
-    }
-  }
-}
+// Validate manifest.json, then every version it lists: a spec directory the
+// manifest names is a spec directory this walks, whichever spec it is.
+const manifest = readJson("manifest.json");
+check(validateManifest, "manifest.json", manifest);
 
-// Validate manifest.json
-const manifestData = JSON.parse(readFileSync("manifest.json", "utf8"));
-if (validateManifest(manifestData)) {
-  passed++;
-} else {
-  failed++;
-  console.error("FAIL: manifest.json");
-  for (const err of validateManifest.errors) {
-    console.error(`  ${err.instancePath} ${err.message}`);
+const byCategory = { codec: validateCodec, catalog: validateCatalog };
+for (const spec of Object.values(manifest.specs)) {
+  for (const version of spec.versions) {
+    const meta = join(version.path, "meta.json");
+    check(validateMeta, meta, readJson(meta));
+    for (const [category, validate] of Object.entries(byCategory)) {
+      for (const file of walk(join(version.path, category))) {
+        check(validate, file, readJson(file));
+      }
+    }
   }
 }
 

@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "init-data",
+  "spec_section": "3.1",
+  "vectors": [
+    {
+      "id": "init-data",
+      "description": "initData on a cmaf track (3.1: 'inserting that payload as the value of the Initialization data \"initData\" field in the catalog entry for that Track'); its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded: valid Base64 and a stand-in for a CMAF header, since a catalog reader checks the encoding and not the boxes.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}]}"
+      },
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initData": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30
+          }
+        ]
+      }
+    },
+    {
+      "id": "cmaf-without-init-data",
+      "description": "A cmaf track without initData: 3.1 'The header for a given MOQT Track MUST be packaged [...] as the value of the Initialization data \"initData\" field'.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].initData",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "cmsf-01-init-shape",
+      "description": "CMSF-01's shape - root initDataList and track initRef - in a CMSF-00 catalog. CMSF-00 defines neither field, so a parser ignores them (MSF: 'A parser MUST ignore fields it does not understand'), and the track is left without the initData 3.1 requires.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"initRef\": \"init-video\"}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].initData",
+      "profiles": [
+        "validator"
+      ]
+    }
+  ]
+}

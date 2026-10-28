@@ -1,0 +1,120 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "init-data",
+  "spec_section": "5.1.7",
+  "vectors": [
+    {
+      "id": "init-ref",
+      "description": "A track whose initRef (5.2.13) points at an initDataList entry (5.1.7) of type inline; its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded: valid Base64 and a stand-in for a CMAF header, since a catalog reader checks the encoding and not the boxes. initDataList follows tracks, as 5.1.7 requires.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"initRef\": \"init-video\"}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "resolved": {
+        "version": "draft-01",
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "bitrate": 1500000,
+            "initRef": "init-video"
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "init-video",
+            "type": "inline",
+            "data": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shared-init-ref",
+      "description": "Two tracks pointing at one initDataList entry; 5.2.13 makes initRef a pointer, and nothing restricts a pointer to one track.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"initRef\": \"init-video\"}, {\"name\": \"video-2\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"initRef\": \"init-video\"}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "resolved": {
+        "version": "draft-01",
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "bitrate": 1500000,
+            "initRef": "init-video"
+          },
+          {
+            "name": "video-2",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "bitrate": 1500000,
+            "initRef": "init-video"
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "init-video",
+            "type": "inline",
+            "data": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282"
+          }
+        ]
+      }
+    },
+    {
+      "id": "init-ref-dangling",
+      "description": "initRef naming an id no initDataList entry has. 5.2.13 defines initRef as 'A string pointing at the id field of an entry in the Initialization Data List'; the draft does not say what a receiver does when it points at nothing, so this binds only a validator.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"initRef\": \"init-missing\"}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "unknown_reference",
+      "error_detail": "tracks[0].initRef",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "init-id-duplicate",
+      "description": "Two initDataList entries with one id: 5.1.7 'a string defining a reference to this initialization data which is unique within the scope of the catalog'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"initRef\": \"init-video\"}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}, {\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "duplicate_id",
+      "error_detail": "initDataList[1].id",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "init-type-unknown",
+      "description": "An initDataList entry of type \"url\": 5.1.7 'This version of the specification defines a single allowed type' - inline.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"initRef\": \"init-video\"}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"url\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "initDataList[0].type",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "init-list-before-tracks",
+      "description": "initDataList written before tracks: 5.1.7 'MUST be located after the tracks array in the root of the JSON catalog'. This is why inputs are text: a parsed object may not keep member order.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"initRef\": \"init-video\"}]}"
+      },
+      "error": "misplaced_field",
+      "error_detail": "initDataList",
+      "profiles": [
+        "validator"
+      ]
+    }
+  ]
+}

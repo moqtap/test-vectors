@@ -1,0 +1,162 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "invalid",
+  "spec_section": "5.1",
+  "vectors": [
+    {
+      "id": "not-json",
+      "description": "A trailing comma: not JSON text (RFC 8259), so not a catalog (5.1).",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [],}"
+      },
+      "error": "invalid_json"
+    },
+    {
+      "id": "invalid-utf8",
+      "description": "A label holding the byte 0xff, which is not UTF-8. RFC 8259 8.1 requires UTF-8 for JSON text exchanged between systems.",
+      "input": {
+        "hex": "7b2276657273696f6e223a20312c2022747261636b73223a205b7b226e616d65223a2022766964656f222c20227061636b6167696e67223a20226c6f63222c202269734c697665223a20747275652c20226c6162656c223a2022ff227d5d7d"
+      },
+      "error": "invalid_json"
+    },
+    {
+      "id": "version-string",
+      "description": "version as the string \"1\". 5.1.1 gives it JSON Type: Number; MSF-01 is the draft that made it a string.",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "version must be a Number in MSF-00"
+    },
+    {
+      "id": "version-unsupported",
+      "description": "version 2. This document describes version 1 (Section 1), and 'A subscriber MUST NOT attempt to parse a catalog version which it does not understand' (5.1.1).",
+      "input": {
+        "text": "{\"version\": 2, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true}]}"
+      },
+      "error": "unsupported_version"
+    },
+    {
+      "id": "missing-version",
+      "description": "No version: 5.1.1 is Required: Yes.",
+      "input": {
+        "text": "{\"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "version"
+    },
+    {
+      "id": "missing-tracks",
+      "description": "No tracks and no deltaUpdate: 5.1.8 is Required: Yes for a catalog that is not a delta.",
+      "input": {
+        "text": "{\"version\": 1}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks"
+    },
+    {
+      "id": "track-missing-name",
+      "description": "A track without name: 5.1.11 is Required: Yes.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"packaging\": \"loc\", \"isLive\": true}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].name"
+    },
+    {
+      "id": "track-missing-packaging",
+      "description": "A track without packaging: 5.1.12 is Required: Yes.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"isLive\": true}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].packaging",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "duplicate-track",
+      "description": "Two tracks named 'video', neither with a namespace, so both in the catalog track's: 5.1.11 'Within the catalog, track names MUST be unique per namespace.'",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true}, {\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"label\": \"again\"}]}"
+      },
+      "error": "duplicate_track",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "example-5-3-8-strict",
+      "description": "Section 5.3.8 verbatim, held to the field table: the two timeline tracks lack isLive (5.1.15, Required: Yes). They also carry the mime type as 'mimetype' where Table 1 names the field 'mimeType', so 7.2 and 8.2's application/json requirement is unmet under the table's spelling - the draft's own example and its own table disagree, and this vector reports only the isLive omission, on which they do not. independent.json `example-5-3-8-tolerant` is the reader's side.",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"tracks\": [\n    {\n      \"name\": \"history\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"mediatimeline\",\n      \"mimetype\": \"application/json\",\n      \"depends\": [\"1080p-video\",\"audio\"]\n    },\n    {\n      \"name\": \"identified-objects\",\n      \"namespace\": \"another-provider/time-synchronized-data\",\n      \"packaging\": \"eventtimeline\",\n      \"eventType\": \"com.ai-extraction/appID/v3\",\n      \"mimetype\": \"application/json\",\n      \"depends\": [\"1080p-video\"]\n    },\n    {\n      \"name\": \"1080p-video\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"role\": \"video\",\n      \"renderGroup\": 1,\n      \"codec\":\"av01.0.08M.10.0.110.09\",\n      \"width\":1920,\n      \"height\":1080,\n      \"framerate\":30,\n      \"bitrate\":1500000\n    },\n    {\n      \"name\": \"audio\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"role\": \"audio\",\n      \"renderGroup\": 1,\n      \"codec\":\"opus\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":32000\n    }\n   ]\n}\n"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].isLive",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "eventtimeline-missing-eventtype",
+      "description": "packaging eventtimeline without eventType: 5.1.13 'This field is required if the [packaging] value is \"eventtimeline\"'.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true}, {\"name\": \"events\", \"packaging\": \"eventtimeline\", \"isLive\": true, \"mimeType\": \"application/json\", \"depends\": [\"video\"]}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[1].eventType",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "eventtype-on-loc",
+      "description": "eventType on a loc track: 5.1.13 'This field MUST NOT be used if the packaging value is not \"eventtimeline\"'.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"eventType\": \"com.example.events\"}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].eventType",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "target-latency-not-live",
+      "description": "targetLatency on a track with isLive false: 5.1.16 'This field MUST NOT be included if isLive is FALSE.' MSF-01 relaxed this to 'MUST be ignored'.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": false, \"trackDuration\": 60000, \"targetLatency\": 2000}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].targetLatency",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "track-duration-while-live",
+      "description": "trackDuration on a live track: 5.1.37 'This field MUST NOT be included if the isLive field value is true.'",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"trackDuration\": 60000}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].trackDuration",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "parent-name-outside-clone",
+      "description": "parentName on a track in tracks: 5.1.36 'This field MUST only be included inside a Clone tracks object.'",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"parentName\": \"camera\"}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].parentName",
+      "profiles": [
+        "validator"
+      ]
+    }
+  ]
+}

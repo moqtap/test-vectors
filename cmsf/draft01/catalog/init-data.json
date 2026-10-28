@@ -1,0 +1,98 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "init-data",
+  "spec_section": "3.1",
+  "vectors": [
+    {
+      "id": "shared-header",
+      "description": "Two tracks using one header: 3.1 'That \"id\" value is then inserted as the value of an \"initRef\" property in all tracks which use that header'.",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}, {\"name\": \"video-2\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 3000000, \"framerate\": 30}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "resolved": {
+        "version": "1",
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initRef": "init-video",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30
+          },
+          {
+            "name": "video-2",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initRef": "init-video",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 3000000,
+            "framerate": 30
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "init-video",
+            "type": "inline",
+            "data": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282"
+          }
+        ]
+      }
+    },
+    {
+      "id": "init-ref-dangling",
+      "description": "initRef naming an id no initDataList entry has. MSF-01 5.2.13 defines initRef as pointing at an entry, and CMSF-01 3.1 puts every cmaf header behind one; neither says what a receiver does when the pointer misses, so this binds only a validator.",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-missing\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "unknown_reference",
+      "error_detail": "tracks[0].initRef",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "init-id-duplicate",
+      "description": "Two initDataList entries sharing an id: 3.1 'an \"id\" which is unique across the initDataList items'.",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}, {\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "duplicate_id",
+      "error_detail": "initDataList[1].id",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "init-list-before-tracks",
+      "description": "initDataList written before tracks: MSF-01 5.1.7 'MUST be located after the tracks array'.",
+      "input": {
+        "text": "{\"version\": \"1\", \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}]}"
+      },
+      "error": "misplaced_field",
+      "error_detail": "initDataList",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "cmsf-00-init-shape",
+      "description": "CMSF-00's track initData in a CMSF-01 catalog, with no initRef and no initDataList. 3.1 requires the header as an initDataList entry referenced by initRef; initData is not a field MSF-01 or CMSF-01 defines.",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].initRef",
+      "profiles": [
+        "validator"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schema/meta.schema.json",
+  "id": "draft00",
+  "spec": "draft-ietf-moq-cmsf-00",
+  "spec_url": "https://www.ietf.org/archive/id/draft-ietf-moq-cmsf-00.txt",
+  "categories": [
+    "catalog"
+  ],
+  "description": "CMSF-00 extends [MSF], which its references cite as draft-ietf-moq-warp-01 (WARP Streaming Format, 22 July 2025) - a draft that predates MSF-00 and that this corpus does not carry, so no `requires` is named. Its catalog example writes version as a Number and puts each track's header in initData; these vectors cover only what CMSF-00 itself defines."
+}

@@ -1,0 +1,257 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "cmaf",
+  "spec_section": "3.5",
+  "vectors": [
+    {
+      "id": "cmaf-track",
+      "description": "One CMAF track: packaging \"cmaf\" (3.5.1), its header as an inline initDataList entry and the track's initRef naming it (3.1); its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded: valid Base64 and a stand-in for a CMAF header, since a catalog reader checks the encoding and not the boxes. version \"1\" as the CMSF-01 examples write it; MSF-01 5.1.1's 'draft-XX' convention would make it \"draft-01\".",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "resolved": {
+        "version": "1",
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initRef": "init-video",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "init-video",
+            "type": "inline",
+            "data": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282"
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-5-1-tolerant",
+      "description": "Section 5.1 verbatim. Every initDataList data ends in '...', the draft's elision, so none is Base64. TOLERANT: a reader that does not decode init data while reading the catalog keeps the document as written; the draft says nothing about when that happens. `example-5-1-strict` is the validator's side.",
+      "input": {
+        "text": "{\n  \"version\": \"1\",\n  \"generatedAt\": 1746104606044,\n  \"tracks\":[\n    {\n      \"name\": \"hd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"initRef\": \"init-hd\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.640028\",\n      \"width\":1920,\n      \"height\":1080,\n      \"bitrate\":5000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"md\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"initRef\": \"init-md\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.64001e\",\n      \"width\":720,\n      \"height\":640,\n      \"bitrate\":3000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"sd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"initRef\": \"init-sd\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.64000d\",\n      \"width\":192,\n      \"height\":144,\n      \"bitrate\":500000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"audio\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"initRef\": \"init-audio\",\n      \"role\": \"audio\",\n      \"codec\":\"mp4a.40.5\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":67071\n    }\n   ],\n  \"initDataList\": [\n    {\n      \"id\": \"init-hd\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ...\"\n    },\n    {\n      \"id\": \"init-md\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ...\"\n    },\n    {\n      \"id\": \"init-sd\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ...\"\n    },\n    {\n      \"id\": \"init-audio\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ...\"\n    }\n  ]\n}\n"
+      },
+      "resolved": {
+        "version": "1",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "hd",
+            "renderGroup": 1,
+            "packaging": "cmaf",
+            "isLive": true,
+            "targetLatency": 2000,
+            "initRef": "init-hd",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30,
+            "altGroup": 1
+          },
+          {
+            "name": "md",
+            "renderGroup": 1,
+            "packaging": "cmaf",
+            "isLive": true,
+            "targetLatency": 2000,
+            "initRef": "init-md",
+            "role": "video",
+            "codec": "avc1.64001e",
+            "width": 720,
+            "height": 640,
+            "bitrate": 3000000,
+            "framerate": 30,
+            "altGroup": 1
+          },
+          {
+            "name": "sd",
+            "renderGroup": 1,
+            "packaging": "cmaf",
+            "isLive": true,
+            "targetLatency": 2000,
+            "initRef": "init-sd",
+            "role": "video",
+            "codec": "avc1.64000d",
+            "width": 192,
+            "height": 144,
+            "bitrate": 500000,
+            "framerate": 30,
+            "altGroup": 1
+          },
+          {
+            "name": "audio",
+            "renderGroup": 1,
+            "packaging": "cmaf",
+            "isLive": true,
+            "targetLatency": 2000,
+            "initRef": "init-audio",
+            "role": "audio",
+            "codec": "mp4a.40.5",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 67071
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "init-hd",
+            "type": "inline",
+            "data": "AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ..."
+          },
+          {
+            "id": "init-md",
+            "type": "inline",
+            "data": "AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ..."
+          },
+          {
+            "id": "init-sd",
+            "type": "inline",
+            "data": "AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ..."
+          },
+          {
+            "id": "init-audio",
+            "type": "inline",
+            "data": "AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ..."
+          }
+        ]
+      },
+      "profiles": [
+        "reader"
+      ],
+      "tolerant": true
+    },
+    {
+      "id": "example-5-1-strict",
+      "description": "Section 5.1 verbatim, held to 3.1 and MSF-01 5.1.7 (data is 'Base64 encoded initialization data'): '.' is in no Base64 alphabet.",
+      "input": {
+        "text": "{\n  \"version\": \"1\",\n  \"generatedAt\": 1746104606044,\n  \"tracks\":[\n    {\n      \"name\": \"hd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"initRef\": \"init-hd\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.640028\",\n      \"width\":1920,\n      \"height\":1080,\n      \"bitrate\":5000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"md\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"initRef\": \"init-md\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.64001e\",\n      \"width\":720,\n      \"height\":640,\n      \"bitrate\":3000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"sd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"initRef\": \"init-sd\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.64000d\",\n      \"width\":192,\n      \"height\":144,\n      \"bitrate\":500000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"audio\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"initRef\": \"init-audio\",\n      \"role\": \"audio\",\n      \"codec\":\"mp4a.40.5\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":67071\n    }\n   ],\n  \"initDataList\": [\n    {\n      \"id\": \"init-hd\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ...\"\n    },\n    {\n      \"id\": \"init-md\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ...\"\n    },\n    {\n      \"id\": \"init-sd\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ...\"\n    },\n    {\n      \"id\": \"init-audio\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQ...\"\n    }\n  ]\n}\n"
+      },
+      "error": "invalid_value",
+      "error_detail": "initDataList[0].data",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "packaging-uppercase",
+      "description": "packaging \"CMAF\": 3.5.1 'MUST declare a \"packaging\" type value of \"cmaf\"'.",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"CMAF\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "tracks[0].packaging",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "max-sap-starting-types",
+      "description": "maxGrpSapStartingType 2 and maxObjSapStartingType 3 (3.5.2).",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"maxGrpSapStartingType\": 2, \"maxObjSapStartingType\": 3}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "resolved": {
+        "version": "1",
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initRef": "init-video",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30,
+            "maxGrpSapStartingType": 2,
+            "maxObjSapStartingType": 3
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "init-video",
+            "type": "inline",
+            "data": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282"
+          }
+        ]
+      }
+    },
+    {
+      "id": "max-group-sap-type-3",
+      "description": "maxGrpSapStartingType 3, which declares Groups 3.4 forbids ('MUST begin with an Object containing a stream access point (SAP) type 1 or 2'). The expectation joins 3.4 and 3.5.2.1; neither alone names this value.",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"maxGrpSapStartingType\": 3}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "tracks[0].maxGrpSapStartingType",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "sap-timeline-track",
+      "description": "A SAP Type timeline track: packaging 'eventtimeline' and eventType 'org.ietf.moq.cmsf.sap' (3.6.1), with the depends, mimeType 'application/json' and isLive MSF-01 8.2 and 5.2.7 ask of every event timeline track.",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}, {\"name\": \"sap\", \"packaging\": \"eventtimeline\", \"eventType\": \"org.ietf.moq.cmsf.sap\", \"isLive\": true, \"mimeType\": \"application/json\", \"depends\": [\"video\"]}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "resolved": {
+        "version": "1",
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initRef": "init-video",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30
+          },
+          {
+            "name": "sap",
+            "packaging": "eventtimeline",
+            "eventType": "org.ietf.moq.cmsf.sap",
+            "isLive": true,
+            "mimeType": "application/json",
+            "depends": [
+              "video"
+            ]
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "init-video",
+            "type": "inline",
+            "data": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sap-event-type-on-cmaf",
+      "description": "eventType 'org.ietf.moq.cmsf.sap' on a cmaf track. MSF-01 5.2.5: eventType 'MUST NOT be used if the packaging value is not \"eventtimeline\"', a rule CMSF inherits from MSF. CMSF-01 3.6.1 asks the SAP-type timeline track to carry this event type with packaging \"eventtimeline\"; it says nothing of other packagings.",
+      "input": {
+        "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"eventType\": \"org.ietf.moq.cmsf.sap\"}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].eventType",
+      "profiles": [
+        "validator"
+      ]
+    }
+  ]
+}

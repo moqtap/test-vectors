@@ -121,6 +121,38 @@
           "path": "transport/draft22/"
         }
       ]
+    },
+    "msf": {
+      "name": "MOQT Streaming Format",
+      "ietf_base": "draft-ietf-moq-msf",
+      "versions": [
+        {
+          "id": "draft00",
+          "spec": "draft-ietf-moq-msf-00",
+          "path": "msf/draft00/"
+        },
+        {
+          "id": "draft01",
+          "spec": "draft-ietf-moq-msf-01",
+          "path": "msf/draft01/"
+        }
+      ]
+    },
+    "cmsf": {
+      "name": "CMAF MOQT Streaming Format",
+      "ietf_base": "draft-ietf-moq-cmsf",
+      "versions": [
+        {
+          "id": "draft00",
+          "spec": "draft-ietf-moq-cmsf-00",
+          "path": "cmsf/draft00/"
+        },
+        {
+          "id": "draft01",
+          "spec": "draft-ietf-moq-cmsf-01",
+          "path": "cmsf/draft01/"
+        }
+      ]
     }
   }
 }

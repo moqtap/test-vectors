@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/moqtap/test-vectors/schema/catalog-vector.schema.json",
+  "title": "MSF / CMSF Catalog Test Vector File",
+  "description": "A collection of catalog test vectors: the exact payload of one catalog object, optionally followed by later catalog objects, paired with the catalog a conforming reader ends up with or the complaint it must make. Expectations are stated at the level of the specification - the JSON document the draft describes - and never in any implementation's internal model.",
+  "type": "object",
+  "required": ["topic", "vectors"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "What the file exercises, and its file name without the extension (e.g. 'independent', 'delta', 'init-data')."
+    },
+    "spec_section": {
+      "type": "string",
+      "description": "The section of the draft most of the file's vectors cite (e.g. '5.3'). Each vector's description cites its own."
+    },
+    "vectors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/vector"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "payload": {
+      "type": "object",
+      "description": "One catalog object's payload, exactly as it travels: `text` for a payload that is valid UTF-8, `hex` for one that is not or whose bytes matter. Never a parsed object: member order is part of what a vector can assert (MSF-01 5.1.7 requires initDataList after tracks; MSF-00 5.2 applies a delta's operations 'in the order they are declared in the document', although its 5.1 calls field order 'not important'), and a parser is free not to keep it. Compressed payloads are not represented; MSF-01 signals compression in an MSF_COMPRESSION property outside the payload (12.1), and these vectors start where decompression ends.",
+      "oneOf": [
+        {
+          "required": ["text"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The payload as text. Its UTF-8 encoding is the bytes."
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": ["hex"],
+          "properties": {
+            "hex": {
+              "type": "string",
+              "pattern": "^([0-9a-f]{2})+$",
+              "description": "The payload bytes, lowercase hex, no 0x prefix, no separators."
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "vector": {
+      "type": "object",
+      "required": ["id", "description", "input"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique identifier within the file. Kebab-case."
+        },
+        "description": {
+          "type": "string",
+          "description": "What the case tests, and the sentence of the draft that decides it. A vector the draft does not decide says so here and is marked `tolerant`."
+        },
+        "input": {
+          "$ref": "#/$defs/payload",
+          "description": "The first catalog object a reader sees."
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/payload"
+          },
+          "description": "Later catalog objects on the same track, in the order they are applied. A delta update applies to the catalog the objects before it produced; an independent catalog replaces it. Group and Object IDs are not modelled: a step is simply the next object."
+        },
+        "resolved": {
+          "type": "object",
+          "description": "The catalog after the input and every step, as a plain JSON document: what an independent catalog would say if the publisher sent one now. For a single independent object this is that object parsed, unknown fields included - 'A parser MUST ignore fields it does not understand', and ignoring a field is not deleting it. After a delta it is the target document the draft's delta rules produce: added and cloned tracks present, removed ones gone, a clone holding its parent's attributes with its own overrides and without parentName or parentNamespace (which the drafts allow only inside a clone operation). Nothing is filled in that the document does not say: a track without a namespace stays without one, since the namespace it inherits is the catalog track's and is not part of the payload. Comparison is of JSON values: object members are unordered, and the drafts give the order of tracks no meaning, so a consumer compares tracks as a set keyed by namespace and name. Vectors list them in the base order with additions appended. Where a delta carries root fields beside its operations (generatedAt in every draft example), the drafts do not say whether they replace the target's, and vectors keep such values equal to the target's so as to assert neither."
+        },
+        "error": {
+          "type": "string",
+          "enum": [
+            "invalid_json",
+            "unsupported_version",
+            "missing_field",
+            "invalid_value",
+            "forbidden_field",
+            "misplaced_field",
+            "delta_not_allowed_field",
+            "delta_without_base",
+            "unknown_track",
+            "duplicate_track",
+            "unknown_reference",
+            "duplicate_id",
+            "illegal_update"
+          ],
+          "description": "Error category for invalid vectors. Names the kind of complaint a conforming consumer must make, not the error a particular parser raises. invalid_json: The payload is not JSON text (RFC 8259), including bytes that are not UTF-8. unsupported_version: The version is one the reader does not understand, which 'A subscriber MUST NOT attempt to parse'. missing_field: A field the draft requires - always, or under a condition the document meets - is absent. invalid_value: A field holds a value of the wrong JSON type or outside the values or format the draft allows. forbidden_field: A field is present where the draft says it MUST NOT be, outside the delta root (see delta_not_allowed_field). misplaced_field: A field is present but not where the draft requires it in the document's text, such as MSF-01's initDataList before tracks. delta_not_allowed_field: A delta update carries tracks or version, which every draft forbids in a delta. delta_without_base: A delta update is the first catalog object, with no independent catalog for it to apply to. unknown_track: A remove or clone names a track, or a parent, the catalog has not declared. duplicate_track: Two tracks share a namespace and name, whether declared together, added over an existing one, or produced by a clone. unknown_reference: A reference to another part of the catalog - initRef, contentProtectionRefIDs - names nothing there. duplicate_id: An identifier the draft requires to be unique - an initDataList id, a contentProtections refID - is not. illegal_update: A later catalog changes something the draft says cannot change once published, such as removing isComplete or turning isLive back to true."
+        },
+        "error_detail": {
+          "type": "string",
+          "description": "Optional human-readable detail: usually the JSON path of the offending field."
+        },
+        "error_at": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Which object the error belongs to: 0 is `input`, n is `steps[n-1]`. Present whenever a vector with steps carries an error; absent means 0."
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["validator", "reader"]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Which consumers this vector's expectation binds, in the same sense as the codec vectors' profiles. Omitted means both. 'validator' is a consumer that checks a catalog against every rule the draft states, including the rules it states only for the producer of the catalog ('A catalog MUST provide all mandatory fields', 'MUST NOT be included if'). 'reader' is a subscriber that parses catalogs and applies deltas, bound by the rules the draft states for a parser or a subscriber and by what it needs to resolve the document. The drafts rarely say what a subscriber does with a catalog its producer got wrong, so most producer-side rules bind a validator only. A consumer runs the vectors naming its profile and should count what it leaves out rather than passing over it quietly."
+        },
+        "tolerant": {
+          "type": "boolean",
+          "const": true,
+          "description": "Marks a vector whose expectation the draft does not state: the draft is silent, and the vector records what a tolerant reader must do to keep going. Only on a `resolved` vector, and only with profiles [\"reader\"]. Usually paired with a vector over the same input that binds a validator to the rule the input breaks. A consumer that refuses the input instead is not wrong by the draft; it is stricter than these vectors."
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["resolved"],
+          "not": {
+            "anyOf": [
+              { "required": ["error"] },
+              { "required": ["error_detail"] },
+              { "required": ["error_at"] }
+            ]
+          }
+        },
+        {
+          "required": ["error"],
+          "not": {
+            "anyOf": [
+              { "required": ["resolved"] },
+              { "required": ["tolerant"] }
+            ]
+          }
+        }
+      ],
+      "allOf": [
+        {
+          "if": { "required": ["steps", "error"] },
+          "then": { "required": ["error_at"] }
+        },
+        {
+          "if": { "required": ["tolerant"] },
+          "then": {
+            "required": ["profiles"],
+            "properties": {
+              "profiles": { "const": ["reader"] }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["resolved", "profiles"]
+          },
+          "then": { "required": ["tolerant"] }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

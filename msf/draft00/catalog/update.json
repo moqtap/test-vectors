@@ -1,0 +1,105 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "update",
+  "spec_section": "9.2",
+  "vectors": [
+    {
+      "id": "live-to-vod",
+      "description": "Section 9.2's conversion to VOD: an independent catalog that, for each track, sets isLive false and adds trackDuration (and drops targetLatency, which 5.1.16 forbids with isLive false). The draft contradicts itself here: 5.2 says a namespace|name tuple's attributes 'MUST NOT be modified after being declared', and 9.2 modifies them under the same names. This vector follows 9.2, the more specific rule, which names exactly this update; 5.2's rule sits among the delta rules.",
+      "input": {
+        "text": "{\"version\": 1, \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"codec\": \"av01\", \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"codec\": \"opus\", \"bitrate\": 32000}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": false, \"trackDuration\": 3600000, \"codec\": \"av01\", \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": false, \"trackDuration\": 3600000, \"codec\": \"opus\", \"bitrate\": 32000}]}"
+        }
+      ],
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": false,
+            "trackDuration": 3600000,
+            "codec": "av01",
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "packaging": "loc",
+            "isLive": false,
+            "trackDuration": 3600000,
+            "codec": "opus",
+            "bitrate": 32000
+          }
+        ]
+      }
+    },
+    {
+      "id": "terminate",
+      "description": "Section 9.2's permanent termination: an independent update with isComplete true and an empty tracks field (the 5.3.9 example).",
+      "input": {
+        "text": "{\"version\": 1, \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"codec\": \"av01\", \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"codec\": \"opus\", \"bitrate\": 32000}]}"
+      },
+      "steps": [
+        {
+          "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"isComplete\": true,\n  \"tracks\": []\n}\n"
+        }
+      ],
+      "resolved": {
+        "version": 1,
+        "generatedAt": 1746104606044,
+        "isComplete": true,
+        "tracks": []
+      }
+    },
+    {
+      "id": "is-complete-removed",
+      "description": "An independent catalog without isComplete after one that had it: 5.1.7 'This field MUST NOT be removed from a catalog once it has been added.'",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"isComplete\": true,\n  \"tracks\": []\n}\n"
+      },
+      "steps": [
+        {
+          "text": "{\"version\": 1, \"tracks\": []}"
+        }
+      ],
+      "error": "illegal_update",
+      "error_detail": "isComplete",
+      "error_at": 1,
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "independent-replaces",
+      "description": "An independent catalog after a delta replaces everything before it: it is 'independent of other catalog objects' (5), so the track the delta added does not survive.",
+      "input": {
+        "text": "{\"version\": 1, \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"codec\": \"av01\", \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"codec\": \"opus\", \"bitrate\": 32000}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"deltaUpdate\": true, \"generatedAt\": 1746104606044, \"addTracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true}]}"
+        },
+        {
+          "text": "{\"version\": 1, \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"codec\": \"av01\", \"bitrate\": 1500000}]}"
+        }
+      ],
+      "resolved": {
+        "version": 1,
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "targetLatency": 2000,
+            "codec": "av01",
+            "bitrate": 1500000
+          }
+        ]
+      }
+    }
+  ]
+}

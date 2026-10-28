@@ -1,0 +1,222 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "cmaf",
+  "spec_section": "3.5",
+  "vectors": [
+    {
+      "id": "cmaf-track",
+      "description": "One CMAF track: packaging \"cmaf\" (3.5.1) and its header in initData (3.1); its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded: valid Base64 and a stand-in for a CMAF header, since a catalog reader checks the encoding and not the boxes. The other fields follow the 4.1 example's tracks. version 1: CMSF-00 'describes version 1' (Section 1) and its example writes a Number.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}]}"
+      },
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initData": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-4-1-tolerant",
+      "description": "Section 4.1 verbatim. Every initData holds '...', the draft's elision of a real header, and so is not Base64 (3.1 requires the header Base64-encoded). TOLERANT: a reader that does not decode initData while reading the catalog keeps the document as written; the draft says nothing about when a reader decodes it. `example-4-1-strict` is the validator's side.",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"tracks\":[\n    {\n      \"name\": \"hd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"initData\": \"AAAAIGZ0eXBpc281AAA...AAAAAAAAAAAAA\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.640028\",\n      \"width\":1920,\n      \"height\":1080,\n      \"bitrate\":5000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"md\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"initData\": \"AAAAHGZ0eXBpc281AAA...AAAAAAAAAAAAAA\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.64001e\",\n      \"width\":720,\n      \"height\":640,\n      \"bitrate\":3000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"sd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"initData\": \"AAAAHGZ0eXBpc281AAA...AAAAAAAAAAAAAA\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.64000d\",\n      \"width\":192,\n      \"height\":144,\n      \"bitrate\":500000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"audio\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"initData\": \"AAAAHGZ0eXBpc281AAA...AAAAAAAAAAAAAA\",\n      \"role\": \"audio\",\n      \"codec\":\"mp4a.40.5\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":67071\n    }\n   ]\n}\n"
+      },
+      "resolved": {
+        "version": 1,
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "hd",
+            "renderGroup": 1,
+            "packaging": "cmaf",
+            "isLive": true,
+            "initData": "AAAAIGZ0eXBpc281AAA...AAAAAAAAAAAAA",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30,
+            "altGroup": 1
+          },
+          {
+            "name": "md",
+            "renderGroup": 1,
+            "packaging": "cmaf",
+            "isLive": true,
+            "initData": "AAAAHGZ0eXBpc281AAA...AAAAAAAAAAAAAA",
+            "role": "video",
+            "codec": "avc1.64001e",
+            "width": 720,
+            "height": 640,
+            "bitrate": 3000000,
+            "framerate": 30,
+            "altGroup": 1
+          },
+          {
+            "name": "sd",
+            "renderGroup": 1,
+            "packaging": "cmaf",
+            "isLive": true,
+            "initData": "AAAAHGZ0eXBpc281AAA...AAAAAAAAAAAAAA",
+            "role": "video",
+            "codec": "avc1.64000d",
+            "width": 192,
+            "height": 144,
+            "bitrate": 500000,
+            "framerate": 30,
+            "altGroup": 1
+          },
+          {
+            "name": "audio",
+            "renderGroup": 1,
+            "packaging": "cmaf",
+            "isLive": true,
+            "initData": "AAAAHGZ0eXBpc281AAA...AAAAAAAAAAAAAA",
+            "role": "audio",
+            "codec": "mp4a.40.5",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 67071
+          }
+        ]
+      },
+      "profiles": [
+        "reader"
+      ],
+      "tolerant": true
+    },
+    {
+      "id": "example-4-1-strict",
+      "description": "Section 4.1 verbatim, held to 3.1: its initData values contain '.', which no Base64 alphabet has.",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"tracks\":[\n    {\n      \"name\": \"hd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"initData\": \"AAAAIGZ0eXBpc281AAA...AAAAAAAAAAAAA\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.640028\",\n      \"width\":1920,\n      \"height\":1080,\n      \"bitrate\":5000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"md\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"initData\": \"AAAAHGZ0eXBpc281AAA...AAAAAAAAAAAAAA\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.64001e\",\n      \"width\":720,\n      \"height\":640,\n      \"bitrate\":3000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"sd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"initData\": \"AAAAHGZ0eXBpc281AAA...AAAAAAAAAAAAAA\",\n      \"role\": \"video\",\n      \"codec\":\"avc1.64000d\",\n      \"width\":192,\n      \"height\":144,\n      \"bitrate\":500000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"audio\",\n      \"renderGroup\": 1,\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"initData\": \"AAAAHGZ0eXBpc281AAA...AAAAAAAAAAAAAA\",\n      \"role\": \"audio\",\n      \"codec\":\"mp4a.40.5\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":67071\n    }\n   ]\n}\n"
+      },
+      "error": "invalid_value",
+      "error_detail": "tracks[0].initData",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "packaging-uppercase",
+      "description": "packaging \"CMAF\" - the Name column of Table 1, not its Value. 3.5.1: 'MUST declare a \"packaging\" type value of \"cmaf\"'.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"CMAF\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "tracks[0].packaging",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "max-sap-starting-types",
+      "description": "maxGrpSapStartingType 2 and maxObjSapStartingType 3 (3.5.2.1, 3.5.2.2, both Numbers): Groups start with SAP 1 or 2 (3.4), Objects within them may start with SAP 3 (3.6.1).",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"maxGrpSapStartingType\": 2, \"maxObjSapStartingType\": 3}]}"
+      },
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initData": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30,
+            "maxGrpSapStartingType": 2,
+            "maxObjSapStartingType": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "max-sap-type-as-string",
+      "description": "maxGrpSapStartingType as the string \"2\": 3.5.2.1 gives it JSON Type: Number.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"maxGrpSapStartingType\": \"2\"}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "tracks[0].maxGrpSapStartingType",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "max-group-sap-type-3",
+      "description": "maxGrpSapStartingType 3. 3.4 says each Group 'MUST begin with an Object containing a stream access point (SAP type 1 or 2)', so a maximum Group starting type of 3 declares Groups the draft forbids. The expectation joins two sentences (3.4 and 3.5.2.1); neither alone names this value.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"maxGrpSapStartingType\": 3}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "tracks[0].maxGrpSapStartingType",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "sap-timeline-track",
+      "description": "A SAP Type timeline track: packaging 'eventtimeline' and eventType 'org.ietf.moq.cmsf.sap' (3.6.1). Those two are all CMSF-00 requires; isLive, mimeType and depends follow MSF's event timeline shape, and the event timeline rules of the MSF draft CMSF-00 extends (draft-ietf-moq-warp-01) are not in this corpus, so this vector asserts only that such a track reads.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}, {\"name\": \"sap\", \"packaging\": \"eventtimeline\", \"eventType\": \"org.ietf.moq.cmsf.sap\", \"isLive\": true, \"mimeType\": \"application/json\", \"depends\": [\"video\"]}]}"
+      },
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initData": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30
+          },
+          {
+            "name": "sap",
+            "packaging": "eventtimeline",
+            "eventType": "org.ietf.moq.cmsf.sap",
+            "isLive": true,
+            "mimeType": "application/json",
+            "depends": [
+              "video"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "sap-event-type-on-cmaf",
+      "description": "eventType 'org.ietf.moq.cmsf.sap' on a cmaf media track. The rule broken is the one CMSF inherits from MSF-00 5.1.13: eventType 'MUST NOT be used if the packaging value is not \"eventtimeline\"'. CMSF-00 3.6.1 governs the SAP-type timeline track, and 3.5.1 requires packaging \"cmaf\" for a track carrying CMAF media, so the packaging is not what is wrong.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"eventType\": \"org.ietf.moq.cmsf.sap\"}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].eventType",
+      "profiles": [
+        "validator"
+      ]
+    }
+  ]
+}

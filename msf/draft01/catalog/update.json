@@ -1,0 +1,110 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "update",
+  "spec_section": "11.3",
+  "vectors": [
+    {
+      "id": "live-to-vod",
+      "description": "Section 11.3's conversion to VOD: an independent catalog setting isLive false and adding trackDuration on each track. 5.3 says a namespace|name tuple's attributes 'MUST NOT be modified after being declared', and 11.3 modifies them under the same names; this vector follows 11.3, which names exactly this update, while 5.3's rule sits among the delta rules.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"targetLatency\": 2000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": false, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"trackDuration\": 3600000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": false, \"trackDuration\": 3600000, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}]}"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": false,
+            "role": "video",
+            "codec": "av01",
+            "bitrate": 1500000,
+            "trackDuration": 3600000
+          },
+          {
+            "name": "audio",
+            "packaging": "loc",
+            "isLive": false,
+            "trackDuration": 3600000,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          }
+        ]
+      }
+    },
+    {
+      "id": "is-live-returns",
+      "description": "isLive true after isLive false for the same track: 5.2.7 'A True value MUST never follow a False value.'",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": false, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"trackDuration\": 3600000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": false, \"trackDuration\": 3600000, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": false, \"trackDuration\": 3600000, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}]}"
+        }
+      ],
+      "error": "illegal_update",
+      "error_detail": "tracks[0].isLive",
+      "error_at": 1,
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "is-complete-removed",
+      "description": "An independent catalog without isComplete after one that had it: 5.1.3 'This field MUST NOT be removed from a catalog once it has been added.'",
+      "input": {
+        "text": "{\n  \"version\": \"1\",\n  \"generatedAt\": 1746104606044,\n  \"isComplete\": true,\n  \"tracks\": []\n}\n"
+      },
+      "steps": [
+        {
+          "text": "{\"version\": \"1\", \"tracks\": []}"
+        }
+      ],
+      "error": "illegal_update",
+      "error_detail": "isComplete",
+      "error_at": 1,
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "independent-replaces",
+      "description": "An independent catalog after a delta replaces everything before it: it 'MUST provide a complete catalog that does not require any prior catalog object' (5).",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"targetLatency\": 2000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"add\", \"tracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}]}"
+        },
+        {
+          "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"targetLatency\": 2000}]}"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "bitrate": 1500000,
+            "targetLatency": 2000
+          }
+        ]
+      }
+    }
+  ]
+}

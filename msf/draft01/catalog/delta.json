@@ -1,0 +1,671 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "delta",
+  "spec_section": "5.3",
+  "vectors": [
+    {
+      "id": "add-track",
+      "description": "One add operation (5.1.6). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"add\", \"tracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}]}"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          },
+          {
+            "name": "video-1080",
+            "namespace": "example.com/custom",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000,
+            "renderGroup": 1
+          },
+          {
+            "name": "slides",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "bitrate": 750000
+          }
+        ]
+      }
+    },
+    {
+      "id": "remove-track",
+      "description": "One remove operation naming the track by name alone (5.1.6: MUST include name, MAY include namespace). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"remove\", \"tracks\": [{\"name\": \"audio\"}]}]}"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 1500000
+          },
+          {
+            "name": "video-1080",
+            "namespace": "example.com/custom",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000,
+            "renderGroup": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "remove-track-with-namespace",
+      "description": "A remove naming the namespace the track declared. The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"remove\", \"tracks\": [{\"name\": \"video-1080\", \"namespace\": \"example.com/custom\"}]}]}"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          }
+        ]
+      }
+    },
+    {
+      "id": "clone-track",
+      "description": "A clone with no parentNamespace: 5.2.34 'the namespace of the catalog is assumed', which is the namespace 'video' inherits too. The clone takes every parent attribute except the name, overridden where it redefines one (5.1.6); parentName stays out of the resolved track (5.2.33). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"clone\", \"tracks\": [{\"parentName\": \"video\", \"name\": \"video-720\", \"width\": 1280, \"height\": 720, \"bitrate\": 600000}]}]}"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          },
+          {
+            "name": "video-1080",
+            "namespace": "example.com/custom",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000,
+            "renderGroup": 1
+          },
+          {
+            "name": "video-720",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "width": 1280,
+            "height": 720,
+            "bitrate": 600000
+          }
+        ]
+      }
+    },
+    {
+      "id": "clone-with-parent-namespace",
+      "description": "A clone naming its parent's namespace. The clone inherits that namespace with the other attributes (5.1.6 'inherits all attributes from the parent except the Track Name'); parentName and parentNamespace stay out of the resolved track (5.2.33, 5.2.34). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"clone\", \"tracks\": [{\"parentName\": \"video-1080\", \"parentNamespace\": \"example.com/custom\", \"name\": \"video-540\", \"width\": 960, \"height\": 540, \"bitrate\": 400000}]}]}"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          },
+          {
+            "name": "video-1080",
+            "namespace": "example.com/custom",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000,
+            "renderGroup": 1
+          },
+          {
+            "name": "video-540",
+            "namespace": "example.com/custom",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 960,
+            "height": 540,
+            "framerate": 30,
+            "bitrate": 400000,
+            "renderGroup": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "add-then-remove-in-one-delta",
+      "description": "add then remove of the same track inside one deltaUpdate array. 'Operations are applied sequentially in the order they appear in the deltaUpdate array' (5.3), so the remove finds the track the add declared. The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"add\", \"tracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}, {\"op\": \"remove\", \"tracks\": [{\"name\": \"slides\"}]}]}"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          },
+          {
+            "name": "video-1080",
+            "namespace": "example.com/custom",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000,
+            "renderGroup": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "add-clone-remove-chain",
+      "description": "Three deltas: add 'slides', clone it as 'slides-low', remove 'slides'; each applies to the result of the last (5.3). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"add\", \"tracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}]}"
+        },
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"clone\", \"tracks\": [{\"parentName\": \"slides\", \"name\": \"slides-low\", \"bitrate\": 250000}]}]}"
+        },
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"remove\", \"tracks\": [{\"name\": \"slides\"}]}]}"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          },
+          {
+            "name": "video-1080",
+            "namespace": "example.com/custom",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000,
+            "renderGroup": 1
+          },
+          {
+            "name": "slides-low",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01",
+            "bitrate": 250000
+          }
+        ]
+      }
+    },
+    {
+      "id": "examples-5-6-4-and-5-6-5-tolerant",
+      "description": "Sections 5.6.4 and 5.6.5 verbatim, applied in turn to a base that declares 'video' (in the catalog track's namespace) and 'video-1080' in example.com/custom (the base is this corpus's). The added 'slides' has no packaging (5.2.4, Required: Yes). TOLERANT: the draft is silent on what a reader does with such a track; a tolerant reader applies the delta as written. `example-5-6-4-strict` is the validator's side.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\n  \"generatedAt\": 1746104606044,\n  \"deltaUpdate\": [\n    {\n      \"op\": \"add\",\n      \"tracks\": [\n        {\n          \"name\": \"slides\",\n          \"isLive\": true,\n          \"role\": \"video\",\n          \"codec\": \"av01.0.08M.10.0.110.09\",\n          \"width\": 1920,\n          \"height\": 1080,\n          \"framerate\": 15,\n          \"bitrate\": 750000,\n          \"renderGroup\": 1\n        }\n      ]\n    },\n    {\n      \"op\": \"clone\",\n      \"tracks\": [\n        {\n          \"parentName\": \"video-1080\",\n          \"parentNamespace\": \"example.com/custom\",\n          \"name\": \"video-720\",\n          \"width\": 1280,\n          \"height\": 720,\n          \"bitrate\": 600000\n        }\n      ]\n    }\n  ]\n}\n"
+        },
+        {
+          "text": "{\n  \"generatedAt\": 1746104606044,\n  \"deltaUpdate\": [\n    {\n      \"op\": \"remove\",\n      \"tracks\": [{\"name\": \"video\"}, {\"name\": \"slides\"}]\n    }\n  ]\n}\n"
+        }
+      ],
+      "resolved": {
+        "version": "draft-01",
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "audio",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          },
+          {
+            "name": "video-1080",
+            "namespace": "example.com/custom",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000,
+            "renderGroup": 1
+          },
+          {
+            "name": "video-720",
+            "namespace": "example.com/custom",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1280,
+            "height": 720,
+            "framerate": 30,
+            "bitrate": 600000,
+            "renderGroup": 1
+          }
+        ]
+      },
+      "profiles": [
+        "reader"
+      ],
+      "tolerant": true
+    },
+    {
+      "id": "example-5-6-4-strict",
+      "description": "Section 5.6.4 verbatim on the base of `examples-5-6-4-and-5-6-5-tolerant`, held to the field table: the added 'slides' lacks packaging (5.2.4, Required: Yes).",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\n  \"generatedAt\": 1746104606044,\n  \"deltaUpdate\": [\n    {\n      \"op\": \"add\",\n      \"tracks\": [\n        {\n          \"name\": \"slides\",\n          \"isLive\": true,\n          \"role\": \"video\",\n          \"codec\": \"av01.0.08M.10.0.110.09\",\n          \"width\": 1920,\n          \"height\": 1080,\n          \"framerate\": 15,\n          \"bitrate\": 750000,\n          \"renderGroup\": 1\n        }\n      ]\n    },\n    {\n      \"op\": \"clone\",\n      \"tracks\": [\n        {\n          \"parentName\": \"video-1080\",\n          \"parentNamespace\": \"example.com/custom\",\n          \"name\": \"video-720\",\n          \"width\": 1280,\n          \"height\": 720,\n          \"bitrate\": 600000\n        }\n      ]\n    }\n  ]\n}\n"
+        }
+      ],
+      "error": "missing_field",
+      "error_detail": "deltaUpdate[0].tracks[0].packaging",
+      "error_at": 1,
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "delta-carries-tracks",
+      "description": "A delta with tracks: 5.3 'It MUST NOT contain an instance of a Tracks field'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"add\", \"tracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}], \"tracks\": []}"
+        }
+      ],
+      "error": "delta_not_allowed_field",
+      "error_detail": "tracks",
+      "error_at": 1
+    },
+    {
+      "id": "delta-carries-version",
+      "description": "A delta with version: 5.3 'It MUST NOT contain [...] an MSF version field'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"add\", \"tracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}], \"version\": \"draft-01\"}"
+        }
+      ],
+      "error": "delta_not_allowed_field",
+      "error_detail": "version",
+      "error_at": 1
+    },
+    {
+      "id": "delta-empty",
+      "description": "An empty deltaUpdate array: 5.3 'MUST include the Delta Update field with at least one operation'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": []}"
+        }
+      ],
+      "error": "invalid_value",
+      "error_detail": "deltaUpdate holds no operation",
+      "error_at": 1
+    },
+    {
+      "id": "delta-boolean-shape",
+      "description": "MSF-00's delta shape (deltaUpdate true, addTracks). 5.1.6 gives deltaUpdate JSON Type: Array in MSF-01.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"deltaUpdate\": true, \"addTracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}"
+        }
+      ],
+      "error": "invalid_value",
+      "error_detail": "deltaUpdate must be an Array in MSF-01",
+      "error_at": 1
+    },
+    {
+      "id": "unknown-operation",
+      "description": "An op of \"update\": 5.1.6 defines add, remove and clone.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"update\", \"tracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}]}"
+        }
+      ],
+      "error": "invalid_value",
+      "error_detail": "deltaUpdate[0].op",
+      "error_at": 1
+    },
+    {
+      "id": "operation-without-tracks",
+      "description": "An operation with no tracks: 5.1.6 'Each operation object MUST contain an \"op\" field [...] and a \"tracks\" field'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"add\"}]}"
+        }
+      ],
+      "error": "missing_field",
+      "error_detail": "deltaUpdate[0].tracks",
+      "error_at": 1
+    },
+    {
+      "id": "clone-without-parent-name",
+      "description": "A clone entry without parentName: 5.1.6 'Each track object MUST include a Parent Name field'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"clone\", \"tracks\": [{\"name\": \"video-720\"}]}]}"
+        }
+      ],
+      "error": "missing_field",
+      "error_detail": "deltaUpdate[0].tracks[0].parentName",
+      "error_at": 1
+    },
+    {
+      "id": "remove-absent-track",
+      "description": "Removing a track never declared: 5.1.6 '\"remove\" - Remove tracks that have been previously declared'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"remove\", \"tracks\": [{\"name\": \"slides\"}]}]}"
+        }
+      ],
+      "error": "unknown_track",
+      "error_detail": "slides",
+      "error_at": 1
+    },
+    {
+      "id": "remove-in-other-namespace",
+      "description": "Removing 'video-1080' with no namespace: the remove means the catalog's namespace, and 'video-1080' was declared only in example.com/custom.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"remove\", \"tracks\": [{\"name\": \"video-1080\"}]}]}"
+        }
+      ],
+      "error": "unknown_track",
+      "error_detail": "video-1080 in the catalog's namespace",
+      "error_at": 1
+    },
+    {
+      "id": "clone-absent-parent",
+      "description": "Cloning from a parent never declared: 5.1.6 '\"clone\" - Clone new tracks from previously declared tracks'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"clone\", \"tracks\": [{\"parentName\": \"slides\", \"name\": \"slides-low\"}]}]}"
+        }
+      ],
+      "error": "unknown_track",
+      "error_detail": "slides",
+      "error_at": 1
+    },
+    {
+      "id": "add-existing-track",
+      "description": "Adding a track already declared: 5.1.6 '\"add\" - Add new tracks that have not previously been declared'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"add\", \"tracks\": [{\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}]}"
+        }
+      ],
+      "error": "duplicate_track",
+      "error_detail": "audio",
+      "error_at": 1
+    },
+    {
+      "id": "clone-to-existing-name",
+      "description": "A clone named like a declared track: 5.1.6 'except the Track Name which MUST be new'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"clone\", \"tracks\": [{\"parentName\": \"video\", \"name\": \"audio\"}]}]}"
+        }
+      ],
+      "error": "duplicate_track",
+      "error_detail": "audio",
+      "error_at": 1
+    },
+    {
+      "id": "remove-entry-extra-field",
+      "description": "A remove entry carrying packaging: 5.1.6 'MUST NOT hold any other fields'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
+      },
+      "steps": [
+        {
+          "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"remove\", \"tracks\": [{\"name\": \"audio\", \"packaging\": \"loc\"}]}]}"
+        }
+      ],
+      "error": "forbidden_field",
+      "error_detail": "deltaUpdate[0].tracks[0].packaging",
+      "error_at": 1,
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "delta-first",
+      "description": "A delta as the first catalog object. 'The first catalog object published within a new group MUST be independent and MUST provide a complete catalog' (5), and with no prior catalog there is nothing to apply it to.",
+      "input": {
+        "text": "{\"generatedAt\": 1746104606044, \"deltaUpdate\": [{\"op\": \"add\", \"tracks\": [{\"name\": \"slides\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 750000}]}]}"
+      },
+      "error": "delta_without_base"
+    }
+  ]
+}

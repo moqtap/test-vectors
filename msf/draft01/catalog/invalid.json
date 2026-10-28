@@ -1,0 +1,165 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "invalid",
+  "spec_section": "5.1",
+  "vectors": [
+    {
+      "id": "not-json",
+      "description": "A trailing comma: not JSON text (RFC 8259).",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [],}"
+      },
+      "error": "invalid_json"
+    },
+    {
+      "id": "invalid-utf8",
+      "description": "A label holding the byte 0xff, which is not UTF-8 (RFC 8259 8.1).",
+      "input": {
+        "hex": "7b2276657273696f6e223a202264726166742d3031222c2022747261636b73223a205b7b226e616d65223a2022766964656f222c20227061636b6167696e67223a20226c6f63222c202269734c697665223a20747275652c20226c6162656c223a2022ff227d5d7d"
+      },
+      "error": "invalid_json"
+    },
+    {
+      "id": "version-number",
+      "description": "version as the Number 1, MSF-00's form. 5.1.1 gives it JSON Type: String in MSF-01.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "version must be a String in MSF-01"
+    },
+    {
+      "id": "version-unsupported",
+      "description": "version \"draft-99\": by 5.1.1's convention a later release than this one, which 'A subscriber MUST NOT attempt to parse'.",
+      "input": {
+        "text": "{\"version\": \"draft-99\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000}]}"
+      },
+      "error": "unsupported_version"
+    },
+    {
+      "id": "missing-version",
+      "description": "No version: 5.1.1 is Required: Yes.",
+      "input": {
+        "text": "{\"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "version"
+    },
+    {
+      "id": "track-missing-name",
+      "description": "A track without name: 5.2.3 is Required: Yes.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"packaging\": \"loc\", \"isLive\": true}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].name"
+    },
+    {
+      "id": "track-missing-is-live",
+      "description": "A track without isLive: 5.2.7 is Required: Yes.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].isLive",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "video-missing-codec",
+      "description": "A video track without codec: 5.2.18 'This property MUST be specified for tracks which have an inherent codec associated with them (e.g., audio and video tracks).'",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"bitrate\": 1500000}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].codec",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "duplicate-track",
+      "description": "Two tracks named 'video' in the same (inherited) namespace: 5.2.3 'track names MUST be unique per namespace'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000}, {\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"label\": \"again\"}]}"
+      },
+      "error": "duplicate_track",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "target-latency-and-buffers",
+      "description": "targetLatency and buffers on one track: each 'MUST NOT be present if the [other] property is present within a track definition' (5.2.8, 5.2.9).",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"targetLatency\": 2000, \"buffers\": {\"target\": 2000}}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].buffers",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "track-duration-while-live",
+      "description": "trackDuration on a live track: 5.2.35 'MUST NOT be included if the isLive field value is true.'",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"trackDuration\": 60000}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].trackDuration",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "eventtype-on-loc",
+      "description": "eventType on a loc track: 5.2.5 'MUST NOT be used if the packaging value is not \"eventtimeline\"'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"eventType\": \"com.example.events\"}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].eventType",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "eventtimeline-missing-eventtype",
+      "description": "packaging eventtimeline without eventType: 5.2.5 'required if the [packaging] value is \"eventtimeline\"', and 8.2 lists it.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000}, {\"name\": \"events\", \"packaging\": \"eventtimeline\", \"isLive\": true, \"mimeType\": \"application/json\", \"depends\": [\"video\"]}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[1].eventType",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "parent-name-outside-clone",
+      "description": "parentName on a track in tracks: 5.2.33 'MUST only be included inside a clone operation in a delta update'.",
+      "input": {
+        "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"parentName\": \"camera\"}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].parentName",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "example-5-6-9-strict",
+      "description": "Section 5.6.9 verbatim, held to the field table: the timeline tracks lack isLive (5.2.7, Required: Yes). Their 'mimetype' also leaves 7.2 and 8.2's application/json requirement unmet under Table 3's spelling 'mimeType'; the draft disagrees with itself there, so this vector reports only the isLive omission.",
+      "input": {
+        "text": "{\n  \"version\": \"1\",\n  \"generatedAt\": 1746104606044,\n  \"tracks\": [\n    {\n      \"name\": \"history\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"mediatimeline\",\n      \"mimetype\": \"application/json\",\n      \"depends\": [\"1080p-video\",\"audio\"]\n    },\n    {\n      \"name\": \"identified-objects\",\n      \"namespace\": \"another-provider/time-synchronized-data\",\n      \"packaging\": \"eventtimeline\",\n      \"eventType\": \"com.ai-extraction/appID/v3\",\n      \"mimetype\": \"application/json\",\n      \"depends\": [\"1080p-video\"]\n    },\n    {\n      \"name\": \"1080p-video\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"role\": \"video\",\n      \"renderGroup\": 1,\n      \"codec\":\"av01.0.08M.10.0.110.09\",\n      \"width\":1920,\n      \"height\":1080,\n      \"framerate\":30,\n      \"bitrate\":1500000\n    },\n    {\n      \"name\": \"audio\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"role\": \"audio\",\n      \"renderGroup\": 1,\n      \"codec\":\"opus\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":32000\n    }\n   ]\n}\n"
+      },
+      "error": "missing_field",
+      "error_detail": "tracks[0].isLive",
+      "profiles": [
+        "validator"
+      ]
+    }
+  ]
+}

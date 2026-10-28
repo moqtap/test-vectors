@@ -1,0 +1,459 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "independent",
+  "spec_section": "5.1",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "The smallest catalog MSF-00 admits: the two root fields marked Required: Yes (version 5.1.1, a Number; tracks 5.1.8) and the three track fields marked Required: Yes (name 5.1.11, packaging 5.1.12, isLive 5.1.15). Version 1 is the one this document describes (Section 1). No namespace, so the track inherits the catalog track's (5.1.10).",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true}]}"
+      },
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-5-3-1",
+      "description": "Section 5.3.1 verbatim: time-aligned audio and video, single quality, each track with an explicit namespace.",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"tracks\": [\n    {\n      \"name\": \"1080p-video\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"role\": \"video\",\n      \"renderGroup\": 1,\n      \"codec\":\"av01.0.08M.10.0.110.09\",\n      \"width\":1920,\n      \"height\":1080,\n      \"framerate\":30,\n      \"bitrate\":1500000\n    },\n    {\n      \"name\": \"audio\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"role\": \"audio\",\n      \"renderGroup\": 1,\n      \"codec\":\"opus\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":32000\n    }\n   ]\n}\n"
+      },
+      "resolved": {
+        "version": 1,
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "1080p-video",
+            "namespace": "conference.example.com/conference123/alice",
+            "packaging": "loc",
+            "isLive": true,
+            "targetLatency": 2000,
+            "role": "video",
+            "renderGroup": 1,
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "namespace": "conference.example.com/conference123/alice",
+            "packaging": "loc",
+            "isLive": true,
+            "targetLatency": 2000,
+            "role": "audio",
+            "renderGroup": 1,
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-5-3-2",
+      "description": "Section 5.3.2 verbatim: simulcast, three video tracks in altGroup 1 plus audio, no namespaces - each track inherits the catalog track's namespace.",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"tracks\":[\n    {\n      \"name\": \"hd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 1500,\n      \"role\": \"video\",\n      \"codec\":\"av01\",\n      \"width\":1920,\n      \"height\":1080,\n      \"bitrate\":5000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"md\",\n      \"renderGroup\": 1,\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 1500,\n      \"role\": \"video\",\n      \"codec\":\"av01\",\n      \"width\":720,\n      \"height\":640,\n      \"bitrate\":3000000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"sd\",\n      \"renderGroup\": 1,\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 1500,\n      \"role\": \"video\",\n      \"codec\":\"av01\",\n      \"width\":192,\n      \"height\":144,\n      \"bitrate\":500000,\n      \"framerate\":30,\n      \"altGroup\":1\n    },\n    {\n      \"name\": \"audio\",\n      \"renderGroup\": 1,\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 1500,\n      \"role\": \"audio\",\n      \"codec\":\"opus\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":32000\n    }\n   ]\n}\n"
+      },
+      "resolved": {
+        "version": 1,
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "hd",
+            "renderGroup": 1,
+            "packaging": "loc",
+            "isLive": true,
+            "targetLatency": 1500,
+            "role": "video",
+            "codec": "av01",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30,
+            "altGroup": 1
+          },
+          {
+            "name": "md",
+            "renderGroup": 1,
+            "packaging": "loc",
+            "isLive": true,
+            "targetLatency": 1500,
+            "role": "video",
+            "codec": "av01",
+            "width": 720,
+            "height": 640,
+            "bitrate": 3000000,
+            "framerate": 30,
+            "altGroup": 1
+          },
+          {
+            "name": "sd",
+            "renderGroup": 1,
+            "packaging": "loc",
+            "isLive": true,
+            "targetLatency": 1500,
+            "role": "video",
+            "codec": "av01",
+            "width": 192,
+            "height": 144,
+            "bitrate": 500000,
+            "framerate": 30,
+            "altGroup": 1
+          },
+          {
+            "name": "audio",
+            "renderGroup": 1,
+            "packaging": "loc",
+            "isLive": true,
+            "targetLatency": 1500,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-5-3-3",
+      "description": "Section 5.3.3 verbatim: SVC layers related by depends (5.1.21). The blank line between two track objects is in the draft and is insignificant whitespace.",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"tracks\":[\n    {\n      \"name\": \"480p15\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"renderGroup\": 1,\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"role\": \"video\",\n      \"codec\":\"av01.0.01M.10.0.110.09\",\n      \"width\":640,\n      \"height\":480,\n      \"bitrate\":3000000,\n      \"framerate\":15\n    },\n    {\n      \"name\": \"480p30\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"renderGroup\": 1,\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"role\": \"video\",\n      \"codec\":\"av01.0.04M.10.0.110.09\",\n      \"width\":640,\n      \"height\":480,\n      \"bitrate\":3000000,\n      \"framerate\":30,\n      \"depends\": [\"480p15\"]\n    },\n    {\n      \"name\": \"1080p15\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"renderGroup\": 1,\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"role\": \"video\",\n      \"codec\":\"av01.0.05M.10.0.110.09\",\n      \"width\":1920,\n      \"height\":1080,\n      \"bitrate\":3000000,\n      \"framerate\":15,\n      \"depends\":[\"480p15\"]\n    },\n\n    {\n      \"name\": \"1080p30\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"renderGroup\": 1,\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"role\": \"video\",\n      \"codec\":\"av01.0.08M.10.0.110.09\",\n      \"width\":1920,\n      \"height\":1080,\n      \"bitrate\":5000000,\n      \"framerate\":30,\n      \"depends\": [\"480p30\", \"1080p15\"]\n    },\n    {\n      \"name\": \"audio\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"renderGroup\": 1,\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"role\": \"audio\",\n      \"codec\":\"opus\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":32000\n    }\n   ]\n}\n"
+      },
+      "resolved": {
+        "version": 1,
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "480p15",
+            "namespace": "conference.example.com/conference123/alice",
+            "renderGroup": 1,
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.01M.10.0.110.09",
+            "width": 640,
+            "height": 480,
+            "bitrate": 3000000,
+            "framerate": 15
+          },
+          {
+            "name": "480p30",
+            "namespace": "conference.example.com/conference123/alice",
+            "renderGroup": 1,
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.04M.10.0.110.09",
+            "width": 640,
+            "height": 480,
+            "bitrate": 3000000,
+            "framerate": 30,
+            "depends": [
+              "480p15"
+            ]
+          },
+          {
+            "name": "1080p15",
+            "namespace": "conference.example.com/conference123/alice",
+            "renderGroup": 1,
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.05M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 3000000,
+            "framerate": 15,
+            "depends": [
+              "480p15"
+            ]
+          },
+          {
+            "name": "1080p30",
+            "namespace": "conference.example.com/conference123/alice",
+            "renderGroup": 1,
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30,
+            "depends": [
+              "480p30",
+              "1080p15"
+            ]
+          },
+          {
+            "name": "audio",
+            "namespace": "conference.example.com/conference123/alice",
+            "renderGroup": 1,
+            "packaging": "loc",
+            "isLive": true,
+            "role": "audio",
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-5-3-6",
+      "description": "Section 5.3.6 verbatim: custom track fields (com.example-*). 'A parser MUST ignore fields it does not understand' (5.1); ignoring a field is not deleting it, so the resolved catalog still holds them.",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"tracks\": [\n    {\n      \"name\": \"1080p-video\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"role\": \"video\",\n      \"renderGroup\": 1,\n      \"codec\":\"av01.0.08M.10.0.110.09\",\n      \"width\":1920,\n      \"height\":1080,\n      \"framerate\":30,\n      \"bitrate\":1500000,\n      \"com.example-billing-code\": 3201,\n      \"com.example-tier\": \"premium\",\n      \"com.example-debug\": \"h349835bfkjfg82394d945034jsdfn349fns\"\n    },\n    {\n      \"name\": \"audio\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"role\": \"audio\",\n      \"renderGroup\": 1,\n      \"codec\":\"opus\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":32000\n    }\n   ]\n}\n"
+      },
+      "resolved": {
+        "version": 1,
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "1080p-video",
+            "namespace": "conference.example.com/conference123/alice",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "video",
+            "renderGroup": 1,
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000,
+            "com.example-billing-code": 3201,
+            "com.example-tier": "premium",
+            "com.example-debug": "h349835bfkjfg82394d945034jsdfn349fns"
+          },
+          {
+            "name": "audio",
+            "namespace": "conference.example.com/conference123/alice",
+            "packaging": "loc",
+            "isLive": true,
+            "role": "audio",
+            "renderGroup": 1,
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-5-3-7",
+      "description": "Section 5.3.7 verbatim: VOD, isLive false with trackDuration (5.1.37) and no generatedAt (5.1.6 SHOULD NOT with isLive false).",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"tracks\": [\n    {\n      \"name\": \"video\",\n      \"namespace\": \"movies.example.com/assets/boy-meets-girl-season3/episode5\",\n      \"packaging\": \"loc\",\n      \"isLive\": false,\n      \"trackDuration\": 8072340,\n      \"renderGroup\": 1,\n      \"codec\":\"av01.0.08M.10.0.110.09\",\n      \"width\":1920,\n      \"height\":1080,\n      \"framerate\":30,\n      \"bitrate\":1500000\n    },\n    {\n      \"name\": \"audio\",\n      \"namespace\": \"movies.example.com/assets/boy-meets-girl-season3/episode5\",\n      \"packaging\": \"loc\",\n      \"isLive\": false,\n      \"trackDuration\": 8072340,\n      \"renderGroup\": 1,\n      \"codec\":\"opus\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":32000\n    }\n   ]\n}\n"
+      },
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "namespace": "movies.example.com/assets/boy-meets-girl-season3/episode5",
+            "packaging": "loc",
+            "isLive": false,
+            "trackDuration": 8072340,
+            "renderGroup": 1,
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "namespace": "movies.example.com/assets/boy-meets-girl-season3/episode5",
+            "packaging": "loc",
+            "isLive": false,
+            "trackDuration": 8072340,
+            "renderGroup": 1,
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-5-3-9",
+      "description": "Section 5.3.9 verbatim: a terminated broadcast - isComplete true (5.1.7) and an empty tracks array, as 9.2 prescribes.",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"isComplete\": true,\n  \"tracks\": []\n}\n"
+      },
+      "resolved": {
+        "version": 1,
+        "generatedAt": 1746104606044,
+        "isComplete": true,
+        "tracks": []
+      }
+    },
+    {
+      "id": "example-5-3-8-tolerant",
+      "description": "Section 5.3.8 verbatim. Its two timeline tracks omit isLive, which 5.1.15 marks Required: Yes, and spell the mime type field 'mimetype' where Table 1 names it 'mimeType' (5.1.25's heading is 'Mimetype'). TOLERANT: the draft is silent on what a reader does with a track missing a required field; a tolerant reader keeps the document as written and ignores 'mimetype' as a field it does not understand (5.1). invalid.json `example-5-3-8-strict` is the validator's side.",
+      "input": {
+        "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"tracks\": [\n    {\n      \"name\": \"history\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"mediatimeline\",\n      \"mimetype\": \"application/json\",\n      \"depends\": [\"1080p-video\",\"audio\"]\n    },\n    {\n      \"name\": \"identified-objects\",\n      \"namespace\": \"another-provider/time-synchronized-data\",\n      \"packaging\": \"eventtimeline\",\n      \"eventType\": \"com.ai-extraction/appID/v3\",\n      \"mimetype\": \"application/json\",\n      \"depends\": [\"1080p-video\"]\n    },\n    {\n      \"name\": \"1080p-video\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"role\": \"video\",\n      \"renderGroup\": 1,\n      \"codec\":\"av01.0.08M.10.0.110.09\",\n      \"width\":1920,\n      \"height\":1080,\n      \"framerate\":30,\n      \"bitrate\":1500000\n    },\n    {\n      \"name\": \"audio\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"targetLatency\": 2000,\n      \"role\": \"audio\",\n      \"renderGroup\": 1,\n      \"codec\":\"opus\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":32000\n    }\n   ]\n}\n"
+      },
+      "resolved": {
+        "version": 1,
+        "generatedAt": 1746104606044,
+        "tracks": [
+          {
+            "name": "history",
+            "namespace": "conference.example.com/conference123/alice",
+            "packaging": "mediatimeline",
+            "mimetype": "application/json",
+            "depends": [
+              "1080p-video",
+              "audio"
+            ]
+          },
+          {
+            "name": "identified-objects",
+            "namespace": "another-provider/time-synchronized-data",
+            "packaging": "eventtimeline",
+            "eventType": "com.ai-extraction/appID/v3",
+            "mimetype": "application/json",
+            "depends": [
+              "1080p-video"
+            ]
+          },
+          {
+            "name": "1080p-video",
+            "namespace": "conference.example.com/conference123/alice",
+            "packaging": "loc",
+            "isLive": true,
+            "targetLatency": 2000,
+            "role": "video",
+            "renderGroup": 1,
+            "codec": "av01.0.08M.10.0.110.09",
+            "width": 1920,
+            "height": 1080,
+            "framerate": 30,
+            "bitrate": 1500000
+          },
+          {
+            "name": "audio",
+            "namespace": "conference.example.com/conference123/alice",
+            "packaging": "loc",
+            "isLive": true,
+            "targetLatency": 2000,
+            "role": "audio",
+            "renderGroup": 1,
+            "codec": "opus",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 32000
+          }
+        ]
+      },
+      "profiles": [
+        "reader"
+      ],
+      "tolerant": true
+    },
+    {
+      "id": "mimetype-as-table-1-names-it",
+      "description": "A media timeline track with every field 7.2 asks for: packaging mediatimeline, depends, and the mime type 'application/json' under the field name Table 1 defines, 'mimeType'. The draft is inconsistent here - its only example of the field (5.3.8) writes 'mimetype' - and this vector follows the table, which is the one place a JSON name is defined.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true}, {\"name\": \"history\", \"packaging\": \"mediatimeline\", \"isLive\": true, \"mimeType\": \"application/json\", \"depends\": [\"video\"]}]}"
+      },
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true
+          },
+          {
+            "name": "history",
+            "packaging": "mediatimeline",
+            "isLive": true,
+            "mimeType": "application/json",
+            "depends": [
+              "video"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "same-name-other-namespace",
+      "description": "Two tracks named 'video' in different namespaces. 5.1.11 requires names to be unique per namespace, not across the catalog.",
+      "input": {
+        "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"namespace\": \"example.com/a\"}, {\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"namespace\": \"example.com/b\"}]}"
+      },
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "namespace": "example.com/a"
+          },
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "namespace": "example.com/b"
+          }
+        ]
+      }
+    },
+    {
+      "id": "delta-update-false",
+      "description": "deltaUpdate false on an independent catalog. 5.1.2 says the field SHOULD NOT be added when false - a recommendation, so the catalog is valid and independent.",
+      "input": {
+        "text": "{\"version\": 1, \"deltaUpdate\": false, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true}]}"
+      },
+      "resolved": {
+        "version": 1,
+        "deltaUpdate": false,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "utf8-label",
+      "description": "A label outside ASCII, as raw UTF-8 bytes (5.1.17: 'the [JSON] spec requires UTF-8 support by decoders').",
+      "input": {
+        "hex": "7b2276657273696f6e223a20312c2022747261636b73223a205b7b226e616d65223a2022766964656f222c20227061636b6167696e67223a20226c6f63222c202269734c697665223a20747275652c20226c6162656c223a2022c39c6265726b6f70666b616d657261227d5d7d"
+      },
+      "resolved": {
+        "version": 1,
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "loc",
+            "isLive": true,
+            "label": "Überkopfkamera"
+          }
+        ]
+      }
+    }
+  ]
+}

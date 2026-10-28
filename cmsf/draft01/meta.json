@@ -1,0 +1,14 @@
+{
+  "$schema": "../../schema/meta.schema.json",
+  "id": "draft01",
+  "spec": "draft-ietf-moq-cmsf-01",
+  "spec_url": "https://www.ietf.org/archive/id/draft-ietf-moq-cmsf-01.txt",
+  "categories": [
+    "catalog"
+  ],
+  "requires": {
+    "spec": "msf",
+    "id": "draft01"
+  },
+  "description": "CMSF-01 extends [MSF], which its references cite as draft-ietf-moq-msf-01. Its catalogs are MSF-01 catalogs with packaging cmaf, the initDataList/initRef header shape and contentProtections."
+}

@@ -1,0 +1,312 @@
+{
+  "$schema": "../../../schema/catalog-vector.schema.json",
+  "topic": "content-protection",
+  "spec_section": "4",
+  "vectors": [
+    {
+      "id": "clearkey",
+      "description": "One ClearKey entry at the root (4.1.1) and a track referencing it by refID (4.1.2). systemID is the one 4.3 requires for ClearKey, laURL is present as 4.3 recommends, and the optional pssh is omitted. The track's initRef names an entry for which its data is an ftyp followed by moov/trak/mdia/minf/stbl/stsd/encv carrying sinf with frma (avc1), schm (cbcs) and schi/tenc (version 1, pattern 1:9, default_KID 01234567-89ab-cdef-0123-456789abcdef, 16-byte constant IV) - the boxes CMSF-01 4.2 names, nested where Common Encryption puts them, and nothing a decoder would need besides.",
+      "input": {
+        "text": "{\"version\": \"1\", \"contentProtections\": [{\"refID\": \"ck\", \"defaultKID\": [\"01234567-89ab-cdef-0123-456789abcdef\"], \"scheme\": \"cbcs\", \"drmSystem\": {\"systemID\": \"1077efec-c0b2-4d02-ace3-3c1e52e2fb4b\", \"laURL\": {\"url\": \"https://clearkey.example.com/license\"}}}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"contentProtectionRefIDs\": [\"ck\"]}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282AAAA721vb3YAAADndHJhawAAAN9tZGlhAAAA121pbmYAAADPc3RibAAAAMdzdHNkAAAAAAAAAAEAAAC3ZW5jdgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAeABDgASAAAAEgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABj//wAAAGFzaW5mAAAADGZybWFhdmMxAAAAFHNjaG0AAAAAY2JjcwABAAAAAAA5c2NoaQAAADF0ZW5jAQAAAAAZAQABI0VniavN7wEjRWeJq83vEAABAgMEBQYHCAkKCwwNDg8=\"}]}"
+      },
+      "resolved": {
+        "version": "1",
+        "contentProtections": [
+          {
+            "refID": "ck",
+            "defaultKID": [
+              "01234567-89ab-cdef-0123-456789abcdef"
+            ],
+            "scheme": "cbcs",
+            "drmSystem": {
+              "systemID": "1077efec-c0b2-4d02-ace3-3c1e52e2fb4b",
+              "laURL": {
+                "url": "https://clearkey.example.com/license"
+              }
+            }
+          }
+        ],
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "initRef": "init-video",
+            "role": "video",
+            "codec": "avc1.640028",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 5000000,
+            "framerate": 30,
+            "contentProtectionRefIDs": [
+              "ck"
+            ]
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "init-video",
+            "type": "inline",
+            "data": "AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282AAAA721vb3YAAADndHJhawAAAN9tZGlhAAAA121pbmYAAADPc3RibAAAAMdzdHNkAAAAAAAAAAEAAAC3ZW5jdgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAeABDgASAAAAEgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABj//wAAAGFzaW5mAAAADGZybWFhdmMxAAAAFHNjaG0AAAAAY2JjcwABAAAAAAA5c2NoaQAAADF0ZW5jAQAAAAAZAQABI0VniavN7wEjRWeJq83vEAABAgMEBQYHCAkKCwwNDg8="
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-5-2-tolerant",
+      "description": "Section 5.2 verbatim: Widevine, PlayReady and FairPlay entries, a protected video and a clear audio track. Its pssh and initDataList data end in '...', the draft's elision, and are not Base64. TOLERANT: the draft does not say when a reader decodes them; one that does not do so while reading the catalog keeps the document as written. `example-5-2-strict` is the validator's side.",
+      "input": {
+        "text": "{\n  \"version\": \"1\",\n  \"generatedAt\": 1746104606044,\n  \"contentProtections\": [\n    {\n      \"refID\": \"1\",\n      \"defaultKID\": [\n        \"01234567-89ab-cdef-0123-456789abcdef\"\n      ],\n      \"scheme\": \"cbcs\",\n      \"drmSystem\": {\n        \"systemID\": \"edef8ba9-79d6-4ace-a3c8-27dcd51d21ed\",\n        \"laURL\": {\n          \"url\": \"https://widevine-license.example.com/proxy\"\n        },\n        \"pssh\": \"AAAAP3Bzc2gAAAAA7e+LqXnWSs6jy...\"\n      }\n    },\n    {\n      \"refID\": \"2\",\n      \"defaultKID\": [\n        \"01234567-89ab-cdef-0123-456789abcdef\"\n      ],\n      \"scheme\": \"cbcs\",\n      \"drmSystem\": {\n        \"systemID\": \"9a04f079-9840-4286-ab92-e65be0885f95\",\n        \"laURL\": {\n          \"url\": \"https://playready-license.example.com/auth\"\n        },\n        \"pssh\": \"AAACvnBzc2gAAAAAmgTweZhAQoar...\"\n      }\n    },\n    {\n      \"refID\": \"3\",\n      \"defaultKID\": [\n        \"01234567-89ab-cdef-0123-456789abcdef\"\n      ],\n      \"scheme\": \"cbcs\",\n      \"drmSystem\": {\n        \"systemID\": \"94ce86fb-07ff-4f43-adb8-93d2fa968ca2\",\n        \"laURL\": {\n          \"url\": \"https://fps-license.example.com/api/licenses\"\n        },\n        \"certURL\": {\n          \"url\": \"https://fps-license.example.com/cert\"\n        }\n      }\n    }\n  ],\n  \"tracks\": [\n    {\n      \"name\": \"video_protected\",\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"buffers\": {\"target\":1500},\n      \"role\": \"video\",\n      \"renderGroup\": 1,\n      \"altGroup\": 1,\n      \"initRef\": \"1\",\n      \"codec\": \"avc3.4D401F\",\n      \"framerate\": 25,\n      \"bitrate\": 581905,\n      \"width\": 1280,\n      \"height\": 720,\n      \"contentProtectionRefIDs\": [\"1\", \"2\", \"3\"]\n    },\n    {\n      \"name\": \"audio\",\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"buffers\": {\"target\":1500},\n      \"role\": \"audio\",\n      \"renderGroup\": 1,\n      \"initRef\": \"2\",\n      \"codec\": \"mp4a.40.5\",\n      \"samplerate\": 48000,\n      \"channelConfig\": \"2\",\n      \"bitrate\": 67071\n    }\n  ],\n  \"initDataList\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQAA...\"\n    },\n    {\n      \"id\": \"2\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQAA...\"\n    }\n  ]\n}\n"
+      },
+      "resolved": {
+        "version": "1",
+        "generatedAt": 1746104606044,
+        "contentProtections": [
+          {
+            "refID": "1",
+            "defaultKID": [
+              "01234567-89ab-cdef-0123-456789abcdef"
+            ],
+            "scheme": "cbcs",
+            "drmSystem": {
+              "systemID": "edef8ba9-79d6-4ace-a3c8-27dcd51d21ed",
+              "laURL": {
+                "url": "https://widevine-license.example.com/proxy"
+              },
+              "pssh": "AAAAP3Bzc2gAAAAA7e+LqXnWSs6jy..."
+            }
+          },
+          {
+            "refID": "2",
+            "defaultKID": [
+              "01234567-89ab-cdef-0123-456789abcdef"
+            ],
+            "scheme": "cbcs",
+            "drmSystem": {
+              "systemID": "9a04f079-9840-4286-ab92-e65be0885f95",
+              "laURL": {
+                "url": "https://playready-license.example.com/auth"
+              },
+              "pssh": "AAACvnBzc2gAAAAAmgTweZhAQoar..."
+            }
+          },
+          {
+            "refID": "3",
+            "defaultKID": [
+              "01234567-89ab-cdef-0123-456789abcdef"
+            ],
+            "scheme": "cbcs",
+            "drmSystem": {
+              "systemID": "94ce86fb-07ff-4f43-adb8-93d2fa968ca2",
+              "laURL": {
+                "url": "https://fps-license.example.com/api/licenses"
+              },
+              "certURL": {
+                "url": "https://fps-license.example.com/cert"
+              }
+            }
+          }
+        ],
+        "tracks": [
+          {
+            "name": "video_protected",
+            "packaging": "cmaf",
+            "isLive": true,
+            "buffers": {
+              "target": 1500
+            },
+            "role": "video",
+            "renderGroup": 1,
+            "altGroup": 1,
+            "initRef": "1",
+            "codec": "avc3.4D401F",
+            "framerate": 25,
+            "bitrate": 581905,
+            "width": 1280,
+            "height": 720,
+            "contentProtectionRefIDs": [
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          {
+            "name": "audio",
+            "packaging": "cmaf",
+            "isLive": true,
+            "buffers": {
+              "target": 1500
+            },
+            "role": "audio",
+            "renderGroup": 1,
+            "initRef": "2",
+            "codec": "mp4a.40.5",
+            "samplerate": 48000,
+            "channelConfig": "2",
+            "bitrate": 67071
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "1",
+            "type": "inline",
+            "data": "AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQAA..."
+          },
+          {
+            "id": "2",
+            "type": "inline",
+            "data": "AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQAA..."
+          }
+        ]
+      },
+      "profiles": [
+        "reader"
+      ],
+      "tolerant": true
+    },
+    {
+      "id": "example-5-2-strict",
+      "description": "Section 5.2 verbatim, held to 4.1.1.4.5 (pssh is 'A Base64-encoded [BASE64] Protection System Specific Header'): '.' is in no Base64 alphabet.",
+      "input": {
+        "text": "{\n  \"version\": \"1\",\n  \"generatedAt\": 1746104606044,\n  \"contentProtections\": [\n    {\n      \"refID\": \"1\",\n      \"defaultKID\": [\n        \"01234567-89ab-cdef-0123-456789abcdef\"\n      ],\n      \"scheme\": \"cbcs\",\n      \"drmSystem\": {\n        \"systemID\": \"edef8ba9-79d6-4ace-a3c8-27dcd51d21ed\",\n        \"laURL\": {\n          \"url\": \"https://widevine-license.example.com/proxy\"\n        },\n        \"pssh\": \"AAAAP3Bzc2gAAAAA7e+LqXnWSs6jy...\"\n      }\n    },\n    {\n      \"refID\": \"2\",\n      \"defaultKID\": [\n        \"01234567-89ab-cdef-0123-456789abcdef\"\n      ],\n      \"scheme\": \"cbcs\",\n      \"drmSystem\": {\n        \"systemID\": \"9a04f079-9840-4286-ab92-e65be0885f95\",\n        \"laURL\": {\n          \"url\": \"https://playready-license.example.com/auth\"\n        },\n        \"pssh\": \"AAACvnBzc2gAAAAAmgTweZhAQoar...\"\n      }\n    },\n    {\n      \"refID\": \"3\",\n      \"defaultKID\": [\n        \"01234567-89ab-cdef-0123-456789abcdef\"\n      ],\n      \"scheme\": \"cbcs\",\n      \"drmSystem\": {\n        \"systemID\": \"94ce86fb-07ff-4f43-adb8-93d2fa968ca2\",\n        \"laURL\": {\n          \"url\": \"https://fps-license.example.com/api/licenses\"\n        },\n        \"certURL\": {\n          \"url\": \"https://fps-license.example.com/cert\"\n        }\n      }\n    }\n  ],\n  \"tracks\": [\n    {\n      \"name\": \"video_protected\",\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"buffers\": {\"target\":1500},\n      \"role\": \"video\",\n      \"renderGroup\": 1,\n      \"altGroup\": 1,\n      \"initRef\": \"1\",\n      \"codec\": \"avc3.4D401F\",\n      \"framerate\": 25,\n      \"bitrate\": 581905,\n      \"width\": 1280,\n      \"height\": 720,\n      \"contentProtectionRefIDs\": [\"1\", \"2\", \"3\"]\n    },\n    {\n      \"name\": \"audio\",\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"buffers\": {\"target\":1500},\n      \"role\": \"audio\",\n      \"renderGroup\": 1,\n      \"initRef\": \"2\",\n      \"codec\": \"mp4a.40.5\",\n      \"samplerate\": 48000,\n      \"channelConfig\": \"2\",\n      \"bitrate\": 67071\n    }\n  ],\n  \"initDataList\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQAA...\"\n    },\n    {\n      \"id\": \"2\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQAA...\"\n    }\n  ]\n}\n"
+      },
+      "error": "invalid_value",
+      "error_detail": "contentProtections[0].drmSystem.pssh",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "example-5-3-tolerant",
+      "description": "Section 5.3 verbatim: ClearKey with laURL type EME-1.0. Its pssh and data are elided with '...' as in 5.2. TOLERANT, as `example-5-2-tolerant`.",
+      "input": {
+        "text": "{\n  \"version\": \"1\",\n  \"generatedAt\": 1746104606044,\n  \"contentProtections\": [\n    {\n      \"refID\": \"1\",\n      \"defaultKID\": [\n        \"01234567-89ab-cdef-0123-456789abcdef\"\n      ],\n      \"scheme\": \"cenc\",\n      \"drmSystem\": {\n        \"systemID\": \"1077efec-c0b2-4d02-ace3-3c1e52e2fb4b\",\n        \"laURL\": {\n          \"url\": \"https://clearkey-server.example.com/clearkey\",\n          \"type\": \"EME-1.0\"\n        },\n        \"pssh\": \"AAAANHBzc2gBAAAAEHfv7MCyTQKs4...\"\n      }\n    }\n  ],\n  \"tracks\": [\n    {\n      \"name\": \"video\",\n      \"packaging\": \"cmaf\",\n      \"isLive\": true,\n      \"buffers\": {\"target\":1500},\n      \"role\": \"video\",\n      \"renderGroup\": 1,\n      \"initRef\": \"init-video\",\n      \"codec\": \"avc1.640028\",\n      \"framerate\": 30,\n      \"bitrate\": 5000000,\n      \"width\": 1920,\n      \"height\": 1080,\n      \"contentProtectionRefIDs\": [\"1\"]\n    }\n  ],\n  \"initDataList\": [\n    {\n      \"id\": \"init-video\",\n      \"type\": \"inline\",\n      \"data\": \"AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQAA...\"\n    }\n  ]\n}\n"
+      },
+      "resolved": {
+        "version": "1",
+        "generatedAt": 1746104606044,
+        "contentProtections": [
+          {
+            "refID": "1",
+            "defaultKID": [
+              "01234567-89ab-cdef-0123-456789abcdef"
+            ],
+            "scheme": "cenc",
+            "drmSystem": {
+              "systemID": "1077efec-c0b2-4d02-ace3-3c1e52e2fb4b",
+              "laURL": {
+                "url": "https://clearkey-server.example.com/clearkey",
+                "type": "EME-1.0"
+              },
+              "pssh": "AAAANHBzc2gBAAAAEHfv7MCyTQKs4..."
+            }
+          }
+        ],
+        "tracks": [
+          {
+            "name": "video",
+            "packaging": "cmaf",
+            "isLive": true,
+            "buffers": {
+              "target": 1500
+            },
+            "role": "video",
+            "renderGroup": 1,
+            "initRef": "init-video",
+            "codec": "avc1.640028",
+            "framerate": 30,
+            "bitrate": 5000000,
+            "width": 1920,
+            "height": 1080,
+            "contentProtectionRefIDs": [
+              "1"
+            ]
+          }
+        ],
+        "initDataList": [
+          {
+            "id": "init-video",
+            "type": "inline",
+            "data": "AAAAHGZ0eXBjbWYyAAAAAGNtZjJpc282bXA0MQAA..."
+          }
+        ]
+      },
+      "profiles": [
+        "reader"
+      ],
+      "tolerant": true
+    },
+    {
+      "id": "ref-id-dangling",
+      "description": "contentProtectionRefIDs naming a refID no contentProtections entry has. 4.1.2 defines the field as 'identifying which content protection entries from the root-level contentProtections array apply'; the draft does not say what a receiver does when one identifies nothing, so this binds only a validator.",
+      "input": {
+        "text": "{\"version\": \"1\", \"contentProtections\": [{\"refID\": \"ck\", \"defaultKID\": [\"01234567-89ab-cdef-0123-456789abcdef\"], \"scheme\": \"cbcs\", \"drmSystem\": {\"systemID\": \"1077efec-c0b2-4d02-ace3-3c1e52e2fb4b\", \"laURL\": {\"url\": \"https://clearkey.example.com/license\"}}}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"contentProtectionRefIDs\": [\"ck\", \"widevine\"]}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282AAAA721vb3YAAADndHJhawAAAN9tZGlhAAAA121pbmYAAADPc3RibAAAAMdzdHNkAAAAAAAAAAEAAAC3ZW5jdgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAeABDgASAAAAEgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABj//wAAAGFzaW5mAAAADGZybWFhdmMxAAAAFHNjaG0AAAAAY2JjcwABAAAAAAA5c2NoaQAAADF0ZW5jAQAAAAAZAQABI0VniavN7wEjRWeJq83vEAABAgMEBQYHCAkKCwwNDg8=\"}]}"
+      },
+      "error": "unknown_reference",
+      "error_detail": "tracks[0].contentProtectionRefIDs[1]",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "ref-id-duplicate",
+      "description": "Two entries with refID \"ck\": 4.1.1.1 'A unique identifier for this content protection entry'.",
+      "input": {
+        "text": "{\"version\": \"1\", \"contentProtections\": [{\"refID\": \"ck\", \"defaultKID\": [\"01234567-89ab-cdef-0123-456789abcdef\"], \"scheme\": \"cbcs\", \"drmSystem\": {\"systemID\": \"1077efec-c0b2-4d02-ace3-3c1e52e2fb4b\", \"laURL\": {\"url\": \"https://clearkey.example.com/license\"}}}, {\"refID\": \"ck\", \"defaultKID\": [\"01234567-89ab-cdef-0123-456789abcdef\"], \"scheme\": \"cenc\", \"drmSystem\": {\"systemID\": \"1077efec-c0b2-4d02-ace3-3c1e52e2fb4b\", \"laURL\": {\"url\": \"https://clearkey.example.com/license\"}}}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"contentProtectionRefIDs\": [\"ck\"]}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282AAAA721vb3YAAADndHJhawAAAN9tZGlhAAAA121pbmYAAADPc3RibAAAAMdzdHNkAAAAAAAAAAEAAAC3ZW5jdgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAeABDgASAAAAEgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABj//wAAAGFzaW5mAAAADGZybWFhdmMxAAAAFHNjaG0AAAAAY2JjcwABAAAAAAA5c2NoaQAAADF0ZW5jAQAAAAAZAQABI0VniavN7wEjRWeJq83vEAABAgMEBQYHCAkKCwwNDg8=\"}]}"
+      },
+      "error": "duplicate_id",
+      "error_detail": "contentProtections[1].refID",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "scheme-unknown",
+      "description": "scheme \"cens\": 4.1.1.3 allows 'cenc' and 'cbcs'.",
+      "input": {
+        "text": "{\"version\": \"1\", \"contentProtections\": [{\"refID\": \"ck\", \"defaultKID\": [\"01234567-89ab-cdef-0123-456789abcdef\"], \"scheme\": \"cens\", \"drmSystem\": {\"systemID\": \"1077efec-c0b2-4d02-ace3-3c1e52e2fb4b\", \"laURL\": {\"url\": \"https://clearkey.example.com/license\"}}}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"contentProtectionRefIDs\": [\"ck\"]}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282AAAA721vb3YAAADndHJhawAAAN9tZGlhAAAA121pbmYAAADPc3RibAAAAMdzdHNkAAAAAAAAAAEAAAC3ZW5jdgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAeABDgASAAAAEgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABj//wAAAGFzaW5mAAAADGZybWFhdmMxAAAAFHNjaG0AAAAAY2JjcwABAAAAAAA5c2NoaQAAADF0ZW5jAQAAAAAZAQABI0VniavN7wEjRWeJq83vEAABAgMEBQYHCAkKCwwNDg8=\"}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "contentProtections[0].scheme",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "default-kid-not-uuid",
+      "description": "A defaultKID without hyphens: 4.1.1.2 'expressed as UUID strings in the format \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"'.",
+      "input": {
+        "text": "{\"version\": \"1\", \"contentProtections\": [{\"refID\": \"ck\", \"defaultKID\": [\"0123456789abcdef0123456789abcdef\"], \"scheme\": \"cbcs\", \"drmSystem\": {\"systemID\": \"1077efec-c0b2-4d02-ace3-3c1e52e2fb4b\", \"laURL\": {\"url\": \"https://clearkey.example.com/license\"}}}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"contentProtectionRefIDs\": [\"ck\"]}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282AAAA721vb3YAAADndHJhawAAAN9tZGlhAAAA121pbmYAAADPc3RibAAAAMdzdHNkAAAAAAAAAAEAAAC3ZW5jdgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAeABDgASAAAAEgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABj//wAAAGFzaW5mAAAADGZybWFhdmMxAAAAFHNjaG0AAAAAY2JjcwABAAAAAAA5c2NoaQAAADF0ZW5jAQAAAAAZAQABI0VniavN7wEjRWeJq83vEAABAgMEBQYHCAkKCwwNDg8=\"}]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "contentProtections[0].defaultKID[0]",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "missing-drm-system",
+      "description": "An entry without drmSystem: 4.1.1.4 Required: Required.",
+      "input": {
+        "text": "{\"version\": \"1\", \"contentProtections\": [{\"refID\": \"ck\", \"defaultKID\": [\"01234567-89ab-cdef-0123-456789abcdef\"], \"scheme\": \"cbcs\"}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"contentProtectionRefIDs\": [\"ck\"]}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282AAAA721vb3YAAADndHJhawAAAN9tZGlhAAAA121pbmYAAADPc3RibAAAAMdzdHNkAAAAAAAAAAEAAAC3ZW5jdgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAeABDgASAAAAEgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABj//wAAAGFzaW5mAAAADGZybWFhdmMxAAAAFHNjaG0AAAAAY2JjcwABAAAAAAA5c2NoaQAAADF0ZW5jAQAAAAAZAQABI0VniavN7wEjRWeJq83vEAABAgMEBQYHCAkKCwwNDg8=\"}]}"
+      },
+      "error": "missing_field",
+      "error_detail": "contentProtections[0].drmSystem",
+      "profiles": [
+        "validator"
+      ]
+    },
+    {
+      "id": "protection-at-track-level",
+      "description": "A track carrying its own contentProtections array: 4.1.1 'Content protection information MUST NOT be duplicated at the track level; all tracks reference the root-level entries.'",
+      "input": {
+        "text": "{\"version\": \"1\", \"contentProtections\": [{\"refID\": \"ck\", \"defaultKID\": [\"01234567-89ab-cdef-0123-456789abcdef\"], \"scheme\": \"cbcs\", \"drmSystem\": {\"systemID\": \"1077efec-c0b2-4d02-ace3-3c1e52e2fb4b\", \"laURL\": {\"url\": \"https://clearkey.example.com/license\"}}}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"contentProtectionRefIDs\": [\"ck\"], \"contentProtections\": [{\"refID\": \"ck\", \"defaultKID\": [\"01234567-89ab-cdef-0123-456789abcdef\"], \"scheme\": \"cbcs\", \"drmSystem\": {\"systemID\": \"1077efec-c0b2-4d02-ace3-3c1e52e2fb4b\", \"laURL\": {\"url\": \"https://clearkey.example.com/license\"}}}]}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282AAAA721vb3YAAADndHJhawAAAN9tZGlhAAAA121pbmYAAADPc3RibAAAAMdzdHNkAAAAAAAAAAEAAAC3ZW5jdgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAeABDgASAAAAEgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABj//wAAAGFzaW5mAAAADGZybWFhdmMxAAAAFHNjaG0AAAAAY2JjcwABAAAAAAA5c2NoaQAAADF0ZW5jAQAAAAAZAQABI0VniavN7wEjRWeJq83vEAABAgMEBQYHCAkKCwwNDg8=\"}]}"
+      },
+      "error": "forbidden_field",
+      "error_detail": "tracks[0].contentProtections",
+      "profiles": [
+        "validator"
+      ]
+    }
+  ]
+}
