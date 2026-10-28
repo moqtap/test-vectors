@@ -424,7 +424,8 @@
             "extension_headers_length": "2",
             "extension_headers": [
               {
-                "type": "60",
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
                 "value": "2"
               }
             ],
@@ -452,7 +453,8 @@
             "extension_headers_length": "2",
             "extension_headers": [
               {
-                "type": "60",
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
                 "value": "1"
               }
             ],
@@ -465,7 +467,8 @@
             "extension_headers_length": "2",
             "extension_headers": [
               {
-                "type": "60",
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
                 "value": "2"
               }
             ],

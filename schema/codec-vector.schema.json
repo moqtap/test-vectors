@@ -58,7 +58,7 @@
         },
         "decoded": {
           "type": "object",
-          "description": "Expected decoded representation as a plain JSON object. Keys are the field names the draft gives, in the order it defines them. A field the message did not carry is absent rather than zero. Every Key-Value-Pair block — `parameters`, `setup_parameters`, `options`, `track_properties`, `track_extensions` — is a list of entries; see `kvp_block`. The data plane's `extension_headers` and `object_properties` are Key-Value lists too and keep an older shape, because nothing regenerates them.",
+          "description": "Expected decoded representation as a plain JSON object. Keys are the field names the draft gives, in the order it defines them. A field the message did not carry is absent rather than zero. Every Key-Value-Pair block — `parameters`, `setup_parameters`, `options`, `track_properties`, `track_extensions`, and on the data plane `extension_headers` and `object_properties` — is a list of entries; see `kvp_block`.",
           "properties": {
             "parameters": {
               "$ref": "#/$defs/kvp_block"
@@ -73,6 +73,12 @@
               "$ref": "#/$defs/kvp_block"
             },
             "track_extensions": {
+              "$ref": "#/$defs/kvp_block"
+            },
+            "extension_headers": {
+              "$ref": "#/$defs/kvp_block"
+            },
+            "object_properties": {
               "$ref": "#/$defs/kvp_block"
             }
           }

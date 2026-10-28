@@ -189,9 +189,13 @@
         "objects": [
           {
             "object_id": "5",
-            "extension_headers": {
-              "prior_group_id_gap": "1"
-            },
+            "extension_headers": [
+              {
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
+                "value": "1"
+              }
+            ],
             "payload_length": "4",
             "payload_hex": "deadbeef"
           }
@@ -332,9 +336,13 @@
         "objects": [
           {
             "object_id": "0",
-            "extension_headers": {
-              "prior_group_id_gap": "1"
-            },
+            "extension_headers": [
+              {
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
+                "value": "1"
+              }
+            ],
             "payload_length": "4",
             "payload_hex": "deadbeef"
           }
@@ -432,17 +440,25 @@
         "objects": [
           {
             "object_id": "0",
-            "extension_headers": {
-              "prior_group_id_gap": "2"
-            },
+            "extension_headers": [
+              {
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
+                "value": "2"
+              }
+            ],
             "payload_length": "4",
             "payload_hex": "deadbeef"
           },
           {
             "object_id": "1",
-            "extension_headers": {
-              "prior_group_id_gap": "3"
-            },
+            "extension_headers": [
+              {
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
+                "value": "3"
+              }
+            ],
             "payload_length": "2",
             "payload_hex": "cafe"
           }
@@ -463,9 +479,13 @@
         "objects": [
           {
             "object_id": "0",
-            "extension_headers": {
-              "prior_group_id_gap": "1"
-            },
+            "extension_headers": [
+              {
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
+                "value": "1"
+              }
+            ],
             "payload_length": "0",
             "status": "3",
             "payload_hex": ""

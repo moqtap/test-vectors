@@ -72,9 +72,13 @@
         "group_id": "2",
         "object_id": "0",
         "publisher_priority": "128",
-        "extension_headers": {
-          "delivery_timeout": "5000"
-        },
+        "extension_headers": [
+          {
+            "type": "0x2",
+            "name": "delivery_timeout",
+            "value": "5000"
+          }
+        ],
         "payload_hex": "deadbeef"
       }
     },

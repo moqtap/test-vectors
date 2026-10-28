@@ -82,19 +82,19 @@ _LOCATION_FIELDS = {"start_group", "start_object", "end_group", "end_object"}
 # Drafts where Location fields are objects rather than plain int strings
 _LOCATION_OBJECT_DRAFTS = {"draft01", "draft02", "draft03"}
 
-# A control message's Key-Value-Pair blocks render as a list of entries in wire
-# order, so these keys hold a list and not a map. See `check_kvp_block`.
-#
-# The data plane's `extension_headers` and `object_properties` are Key-Value
-# lists too and are *not* here: they are hand-written, no decoder in any
-# consumer renders them, and converting them would be editing unverified data.
-# They keep the shape they have until something can regenerate them.
+# Every Key-Value-Pair block renders as a list of entries in wire order, so
+# these keys hold a list and not a map. See `check_kvp_block`. The data plane's
+# two — `extension_headers` and `object_properties` — were regenerated from the
+# vector bytes by @moqtap/codec's `decodeObjectProperties` and checked against
+# the values they held before.
 _KVP_BLOCK_KEYS = {
     "parameters",
     "setup_parameters",
     "options",
     "track_properties",
     "track_extensions",
+    "extension_headers",
+    "object_properties",
 }
 _KVP_TYPE_PATTERN = re.compile(r"^0x[0-9a-f]+$")
 

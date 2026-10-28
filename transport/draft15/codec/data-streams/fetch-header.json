@@ -67,7 +67,7 @@
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
-            "extension_headers": {},
+            "extension_headers": [],
             "payload_length": "4",
             "payload_hex": "deadbeef"
           }

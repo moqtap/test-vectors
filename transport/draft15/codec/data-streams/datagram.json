@@ -72,7 +72,12 @@
         "group_id": "2",
         "object_id": "0",
         "publisher_priority": "128",
-        "extension_headers": [{ "type": "16", "value": "42" }],
+        "extension_headers": [
+          {
+            "type": "0x10",
+            "value": "42"
+          }
+        ],
         "payload_hex": "deadbeef"
       }
     },

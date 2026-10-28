@@ -99,9 +99,13 @@
         "group_id": "0",
         "object_id": "0",
         "publisher_priority": "128",
-        "object_properties": {
-          "prior_group_id_gap": "2"
-        },
+        "object_properties": [
+          {
+            "type": "0x3c",
+            "name": "prior_group_id_gap",
+            "value": "2"
+          }
+        ],
         "payload_hex": "cafe"
       }
     },

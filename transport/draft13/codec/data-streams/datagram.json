@@ -46,7 +46,7 @@
         "extension_headers_length": "2",
         "extension_headers": [
           {
-            "type": "16",
+            "type": "0x10",
             "value": "42"
           }
         ],
@@ -83,7 +83,7 @@
         "extension_headers_length": "2",
         "extension_headers": [
           {
-            "type": "16",
+            "type": "0x10",
             "value": "42"
           }
         ],
@@ -118,7 +118,7 @@
         "extension_headers_length": "2",
         "extension_headers": [
           {
-            "type": "16",
+            "type": "0x10",
             "value": "42"
           }
         ],
