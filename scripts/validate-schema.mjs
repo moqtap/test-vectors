@@ -46,8 +46,7 @@ function check(validate, file, data) {
   }
 }
 
-// Validate manifest.json, then every version it lists: a spec directory the
-// manifest names is a spec directory this walks, whichever spec it is.
+// Validate manifest.json, then every version it lists.
 const manifest = readJson("manifest.json");
 check(validateManifest, "manifest.json", manifest);
 

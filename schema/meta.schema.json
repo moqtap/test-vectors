@@ -26,9 +26,9 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["codec", "catalog", "properties", "timeline"]
+        "enum": ["codec", "catalog"]
       },
-      "description": "Which subdirectories exist. codec: wire encoding of transport messages (codec-vector.schema.json). catalog: MSF and CMSF catalog objects and their deltas (catalog-vector.schema.json). properties and timeline are reserved for property values and timeline track payloads and name no directory yet."
+      "description": "Which subdirectories exist. codec: wire encoding of transport messages (codec-vector.schema.json). catalog: MSF and CMSF catalog objects and their deltas (catalog-vector.schema.json)."
     },
     "requires": {
       "type": "object",
@@ -44,7 +44,7 @@
         }
       },
       "additionalProperties": false,
-      "description": "The version of another spec in this corpus that this one extends, as the draft's own references name it - CMSF-01 extends MSF-01. Absent when the draft extends nothing, or extends a document this corpus does not carry; `description` then says which."
+      "description": "The spec version this one extends, as its references name it (CMSF-01 extends MSF-01). Absent when that version is not included; `description` then names it."
     },
     "description": {
       "type": "string",

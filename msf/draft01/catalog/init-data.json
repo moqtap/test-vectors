@@ -5,7 +5,7 @@
   "vectors": [
     {
       "id": "init-ref",
-      "description": "A track whose initRef (5.2.13) points at an initDataList entry (5.1.7) of type inline; its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded: valid Base64 and a stand-in for a CMAF header, since a catalog reader checks the encoding and not the boxes. initDataList follows tracks, as 5.1.7 requires.",
+      "description": "A track whose initRef (5.2.13) points at an initDataList entry (5.1.7) of type inline; its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded. initDataList follows tracks, as 5.1.7 requires.",
       "input": {
         "text": "{\"version\": \"draft-01\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"initRef\": \"init-video\"}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
       },
@@ -106,7 +106,7 @@
     },
     {
       "id": "init-list-before-tracks",
-      "description": "initDataList written before tracks: 5.1.7 'MUST be located after the tracks array in the root of the JSON catalog'. This is why inputs are text: a parsed object may not keep member order.",
+      "description": "initDataList written before tracks: 5.1.7 'MUST be located after the tracks array in the root of the JSON catalog'.",
       "input": {
         "text": "{\"version\": \"draft-01\", \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}], \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"bitrate\": 1500000, \"initRef\": \"init-video\"}]}"
       },

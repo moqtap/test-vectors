@@ -5,7 +5,7 @@
   "vectors": [
     {
       "id": "add-track",
-      "description": "One add operation (5.1.6). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "description": "One add operation (5.1.6).",
       "input": {
         "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
       },
@@ -64,7 +64,7 @@
     },
     {
       "id": "remove-track",
-      "description": "One remove operation naming the track by name alone (5.1.6: MUST include name, MAY include namespace). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "description": "One remove operation naming the track by name alone (5.1.6: MUST include name, MAY include namespace).",
       "input": {
         "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
       },
@@ -105,7 +105,7 @@
     },
     {
       "id": "remove-track-with-namespace",
-      "description": "A remove naming the namespace the track declared. The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "description": "A remove naming the namespace the track declared.",
       "input": {
         "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
       },
@@ -143,7 +143,7 @@
     },
     {
       "id": "clone-track",
-      "description": "A clone with no parentNamespace: 5.2.34 'the namespace of the catalog is assumed', which is the namespace 'video' inherits too. The clone takes every parent attribute except the name, overridden where it redefines one (5.1.6); parentName stays out of the resolved track (5.2.33). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "description": "A clone with no parentNamespace: 5.2.34 'the namespace of the catalog is assumed', which is the namespace 'video' inherits too. The clone takes every parent attribute except the name, overridden where it redefines one (5.1.6); parentName stays out of the resolved track (5.2.33).",
       "input": {
         "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
       },
@@ -204,7 +204,7 @@
     },
     {
       "id": "clone-with-parent-namespace",
-      "description": "A clone naming its parent's namespace. The clone inherits that namespace with the other attributes (5.1.6 'inherits all attributes from the parent except the Track Name'); parentName and parentNamespace stay out of the resolved track (5.2.33, 5.2.34). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "description": "A clone naming its parent's namespace. The clone inherits that namespace with the other attributes (5.1.6 'inherits all attributes from the parent except the Track Name'); parentName and parentNamespace stay out of the resolved track (5.2.33, 5.2.34).",
       "input": {
         "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
       },
@@ -268,7 +268,7 @@
     },
     {
       "id": "add-then-remove-in-one-delta",
-      "description": "add then remove of the same track inside one deltaUpdate array. 'Operations are applied sequentially in the order they appear in the deltaUpdate array' (5.3), so the remove finds the track the add declared. The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "description": "add then remove of the same track inside one deltaUpdate array. 'Operations are applied sequentially in the order they appear in the deltaUpdate array' (5.3), so the remove finds the track the add declared.",
       "input": {
         "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
       },
@@ -319,7 +319,7 @@
     },
     {
       "id": "add-clone-remove-chain",
-      "description": "Three deltas: add 'slides', clone it as 'slides-low', remove 'slides'; each applies to the result of the last (5.3). The base and every delta carry the same generatedAt, because the draft does not say whether a delta's root fields replace the target's.",
+      "description": "Three deltas: add 'slides', clone it as 'slides-low', remove 'slides'; each applies to the result of the last (5.3).",
       "input": {
         "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
       },
@@ -384,7 +384,7 @@
     },
     {
       "id": "examples-5-6-4-and-5-6-5-tolerant",
-      "description": "Sections 5.6.4 and 5.6.5 verbatim, applied in turn to a base that declares 'video' (in the catalog track's namespace) and 'video-1080' in example.com/custom (the base is this corpus's). The added 'slides' has no packaging (5.2.4, Required: Yes). TOLERANT: the draft is silent on what a reader does with such a track; a tolerant reader applies the delta as written. `example-5-6-4-strict` is the validator's side.",
+      "description": "Sections 5.6.4 and 5.6.5 verbatim, applied in turn to a base that declares 'video' (in the catalog track's namespace) and 'video-1080' in example.com/custom. The added 'slides' has no packaging (5.2.4, Required: Yes). TOLERANT: the draft is silent on what a reader does with such a track; a tolerant reader applies the delta as written. `example-5-6-4-strict` is the validator's side.",
       "input": {
         "text": "{\"version\": \"draft-01\", \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01\", \"width\": 1920, \"height\": 1080, \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"audio\", \"codec\": \"opus\", \"samplerate\": 48000, \"channelConfig\": \"2\", \"bitrate\": 32000}, {\"name\": \"video-1080\", \"namespace\": \"example.com/custom\", \"packaging\": \"loc\", \"isLive\": true, \"role\": \"video\", \"codec\": \"av01.0.08M.10.0.110.09\", \"width\": 1920, \"height\": 1080, \"framerate\": 30, \"bitrate\": 1500000, \"renderGroup\": 1}]}"
       },

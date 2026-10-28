@@ -216,7 +216,7 @@
     },
     {
       "id": "example-5-3-6",
-      "description": "Section 5.3.6 verbatim: custom track fields (com.example-*). 'A parser MUST ignore fields it does not understand' (5.1); ignoring a field is not deleting it, so the resolved catalog still holds them.",
+      "description": "Section 5.3.6 verbatim: custom track fields (com.example-*). 'A parser MUST ignore fields it does not understand' (5.1), so the resolved catalog still holds them.",
       "input": {
         "text": "{\n  \"version\": 1,\n  \"generatedAt\": 1746104606044,\n  \"tracks\": [\n    {\n      \"name\": \"1080p-video\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"role\": \"video\",\n      \"renderGroup\": 1,\n      \"codec\":\"av01.0.08M.10.0.110.09\",\n      \"width\":1920,\n      \"height\":1080,\n      \"framerate\":30,\n      \"bitrate\":1500000,\n      \"com.example-billing-code\": 3201,\n      \"com.example-tier\": \"premium\",\n      \"com.example-debug\": \"h349835bfkjfg82394d945034jsdfn349fns\"\n    },\n    {\n      \"name\": \"audio\",\n      \"namespace\": \"conference.example.com/conference123/alice\",\n      \"packaging\": \"loc\",\n      \"isLive\": true,\n      \"role\": \"audio\",\n      \"renderGroup\": 1,\n      \"codec\":\"opus\",\n      \"samplerate\":48000,\n      \"channelConfig\":\"2\",\n      \"bitrate\":32000\n    }\n   ]\n}\n"
       },
@@ -371,7 +371,7 @@
     },
     {
       "id": "mimetype-as-table-1-names-it",
-      "description": "A media timeline track with every field 7.2 asks for: packaging mediatimeline, depends, and the mime type 'application/json' under the field name Table 1 defines, 'mimeType'. The draft is inconsistent here - its only example of the field (5.3.8) writes 'mimetype' - and this vector follows the table, which is the one place a JSON name is defined.",
+      "description": "A media timeline track with every field 7.2 asks for: packaging mediatimeline, depends, and the mime type 'application/json' under the field name Table 1 defines, 'mimeType'. The draft's only example of the field (5.3.8) writes 'mimetype'; this vector follows the table.",
       "input": {
         "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true}, {\"name\": \"history\", \"packaging\": \"mediatimeline\", \"isLive\": true, \"mimeType\": \"application/json\", \"depends\": [\"video\"]}]}"
       },

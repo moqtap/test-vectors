@@ -5,7 +5,7 @@
   "vectors": [
     {
       "id": "cmaf-track",
-      "description": "One CMAF track: packaging \"cmaf\" (3.5.1) and its header in initData (3.1); its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded: valid Base64 and a stand-in for a CMAF header, since a catalog reader checks the encoding and not the boxes. The other fields follow the 4.1 example's tracks. version 1: CMSF-00 'describes version 1' (Section 1) and its example writes a Number.",
+      "description": "One CMAF track: packaging \"cmaf\" (3.5.1) and its header in initData (3.1); its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded. The other fields follow the 4.1 example's tracks. version 1: CMSF-00 'describes version 1' (Section 1) and its example writes a Number.",
       "input": {
         "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}]}"
       },
@@ -162,7 +162,7 @@
     },
     {
       "id": "max-group-sap-type-3",
-      "description": "maxGrpSapStartingType 3. 3.4 says each Group 'MUST begin with an Object containing a stream access point (SAP type 1 or 2)', so a maximum Group starting type of 3 declares Groups the draft forbids. The expectation joins two sentences (3.4 and 3.5.2.1); neither alone names this value.",
+      "description": "maxGrpSapStartingType 3. 3.4 says each Group 'MUST begin with an Object containing a stream access point (SAP type 1 or 2)', so a maximum Group starting type of 3 declares Groups the draft forbids. The expectation joins 3.4 and 3.5.2.1.",
       "input": {
         "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"maxGrpSapStartingType\": 3}]}"
       },
@@ -174,7 +174,7 @@
     },
     {
       "id": "sap-timeline-track",
-      "description": "A SAP Type timeline track: packaging 'eventtimeline' and eventType 'org.ietf.moq.cmsf.sap' (3.6.1). Those two are all CMSF-00 requires; isLive, mimeType and depends follow MSF's event timeline shape, and the event timeline rules of the MSF draft CMSF-00 extends (draft-ietf-moq-warp-01) are not in this corpus, so this vector asserts only that such a track reads.",
+      "description": "A SAP Type timeline track: packaging 'eventtimeline' and eventType 'org.ietf.moq.cmsf.sap' (3.6.1). Those two are all CMSF-00 requires; isLive, mimeType and depends follow MSF's event timeline shape, and the vector asserts only that the track reads.",
       "input": {
         "text": "{\"version\": 1, \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initData\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}, {\"name\": \"sap\", \"packaging\": \"eventtimeline\", \"eventType\": \"org.ietf.moq.cmsf.sap\", \"isLive\": true, \"mimeType\": \"application/json\", \"depends\": [\"video\"]}]}"
       },

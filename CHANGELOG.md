@@ -9,21 +9,10 @@ A version with no entry here broke nothing.
 
 ## 0.19.0
 
-The data plane's two Key-Value blocks now have the same shape as every other:
-a list of `{type, name?, value | raw_hex}` entries in wire order.
-`object_properties` (drafts 17–22) was a map keyed by name and
-`extension_headers` (drafts 13–16) a list with decimal types; both now render
-as `kvp_block`, and both validators check them as one. Every vector that
-carries either block changed what it asserts.
-
-A map could not hold what the new vectors state: an odd-typed property, whose
-value is bytes; a type that repeats; a type the draft names nothing; and
-Immutable Properties, whose value is a nested block. Drafts 17–22 gain one
-vector for each, and `subgroup-properties-overrun`, a block that frames but
-does not parse, bound to the endpoint profile.
-
-The values were regenerated from the vector bytes by `@moqtap/codec` 0.14.0's
-`decodeObjectProperties`, and all 76 agreed with what the old shape said.
+`object_properties` (drafts 17–22, previously a map keyed by name) and
+`extension_headers` (drafts 13–16, previously decimal types) are `kvp_block`
+lists of `{type, name?, value | raw_hex}` entries in wire order. An odd-typed
+property's bytes are `raw_hex`; Immutable Properties hold a nested list.
 
 ## 0.16.0
 

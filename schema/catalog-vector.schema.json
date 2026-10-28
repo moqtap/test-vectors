@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/moqtap/test-vectors/schema/catalog-vector.schema.json",
   "title": "MSF / CMSF Catalog Test Vector File",
-  "description": "A collection of catalog test vectors: the exact payload of one catalog object, optionally followed by later catalog objects, paired with the catalog a conforming reader ends up with or the complaint it must make. Expectations are stated at the level of the specification - the JSON document the draft describes - and never in any implementation's internal model.",
+  "description": "A collection of catalog test vectors: the exact payload of one catalog object, optionally followed by later catalog objects, paired with the catalog a conforming reader ends up with or the complaint it must make. Expectations are the JSON document the draft describes.",
   "type": "object",
   "required": ["topic", "vectors"],
   "properties": {
@@ -29,7 +29,7 @@
   "$defs": {
     "payload": {
       "type": "object",
-      "description": "One catalog object's payload, exactly as it travels: `text` for a payload that is valid UTF-8, `hex` for one that is not or whose bytes matter. Never a parsed object: member order is part of what a vector can assert (MSF-01 5.1.7 requires initDataList after tracks; MSF-00 5.2 applies a delta's operations 'in the order they are declared in the document', although its 5.1 calls field order 'not important'), and a parser is free not to keep it. Compressed payloads are not represented; MSF-01 signals compression in an MSF_COMPRESSION property outside the payload (12.1), and these vectors start where decompression ends.",
+      "description": "One catalog object's payload, exactly as it travels: `text` for a payload that is valid UTF-8, `hex` for one that is not or whose bytes matter. Never a parsed object: member order is asserted (MSF-01 5.1.7; MSF-00 5.1, 5.2). Payloads are uncompressed; MSF-01 signals compression in an MSF_COMPRESSION property outside the payload (12.1).",
       "oneOf": [
         {
           "required": ["text"],
@@ -81,7 +81,7 @@
         },
         "resolved": {
           "type": "object",
-          "description": "The catalog after the input and every step, as a plain JSON document: what an independent catalog would say if the publisher sent one now. For a single independent object this is that object parsed, unknown fields included - 'A parser MUST ignore fields it does not understand', and ignoring a field is not deleting it. After a delta it is the target document the draft's delta rules produce: added and cloned tracks present, removed ones gone, a clone holding its parent's attributes with its own overrides and without parentName or parentNamespace (which the drafts allow only inside a clone operation). Nothing is filled in that the document does not say: a track without a namespace stays without one, since the namespace it inherits is the catalog track's and is not part of the payload. Comparison is of JSON values: object members are unordered, and the drafts give the order of tracks no meaning, so a consumer compares tracks as a set keyed by namespace and name. Vectors list them in the base order with additions appended. Where a delta carries root fields beside its operations (generatedAt in every draft example), the drafts do not say whether they replace the target's, and vectors keep such values equal to the target's so as to assert neither."
+          "description": "The catalog after the input and every step, as a plain JSON document: what an independent catalog would say if the publisher sent one now. For a single independent object this is that object parsed, unknown fields included ('A parser MUST ignore fields it does not understand'). After a delta it is the document the draft's delta rules produce: added and cloned tracks present, removed ones gone, a clone holding its parent's attributes with its own overrides and without parentName or parentNamespace (which the drafts allow only inside a clone operation). Nothing is filled in that the document does not say: a track without a namespace stays without one. Comparison is of JSON values: object members are unordered, and tracks compare as a set keyed by namespace and name. Root fields a delta carries beside its operations (generatedAt) equal the target's."
         },
         "error": {
           "type": "string",
@@ -119,12 +119,12 @@
           },
           "minItems": 1,
           "uniqueItems": true,
-          "description": "Which consumers this vector's expectation binds, in the same sense as the codec vectors' profiles. Omitted means both. 'validator' is a consumer that checks a catalog against every rule the draft states, including the rules it states only for the producer of the catalog ('A catalog MUST provide all mandatory fields', 'MUST NOT be included if'). 'reader' is a subscriber that parses catalogs and applies deltas, bound by the rules the draft states for a parser or a subscriber and by what it needs to resolve the document. The drafts rarely say what a subscriber does with a catalog its producer got wrong, so most producer-side rules bind a validator only. A consumer runs the vectors naming its profile and should count what it leaves out rather than passing over it quietly."
+          "description": "Which consumers this vector's expectation binds, in the same sense as the codec vectors' profiles. Omitted means both. 'validator' is a consumer that checks a catalog against every rule the draft states, including the rules it states only for the producer of the catalog ('A catalog MUST provide all mandatory fields', 'MUST NOT be included if'). 'reader' is a subscriber that parses catalogs and applies deltas, bound by the rules the draft states for a parser or a subscriber and by what it needs to resolve the document. A consumer runs the vectors naming its profile and reports how many it skips."
         },
         "tolerant": {
           "type": "boolean",
           "const": true,
-          "description": "Marks a vector whose expectation the draft does not state: the draft is silent, and the vector records what a tolerant reader must do to keep going. Only on a `resolved` vector, and only with profiles [\"reader\"]. Usually paired with a vector over the same input that binds a validator to the rule the input breaks. A consumer that refuses the input instead is not wrong by the draft; it is stricter than these vectors."
+          "description": "Marks a vector whose expectation the draft does not state: the draft is silent, and the vector records what a tolerant reader must do to keep going. Only on a `resolved` vector, and only with profiles [\"reader\"]."
         }
       },
       "oneOf": [

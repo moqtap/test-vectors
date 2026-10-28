@@ -5,7 +5,7 @@
   "vectors": [
     {
       "id": "cmaf-track",
-      "description": "One CMAF track: packaging \"cmaf\" (3.5.1), its header as an inline initDataList entry and the track's initRef naming it (3.1); its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded: valid Base64 and a stand-in for a CMAF header, since a catalog reader checks the encoding and not the boxes. version \"1\" as the CMSF-01 examples write it; MSF-01 5.1.1's 'draft-XX' convention would make it \"draft-01\".",
+      "description": "One CMAF track: packaging \"cmaf\" (3.5.1), its header as an inline initDataList entry and the track's initRef naming it (3.1); its data is a 24-byte ftyp box (major brand cmf2, compatible cmf2 and iso6) Base64-encoded. version \"1\" as the CMSF-01 examples write it; MSF-01 5.1.1's 'draft-XX' convention would make it \"draft-01\".",
       "input": {
         "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
       },
@@ -190,7 +190,7 @@
     },
     {
       "id": "max-group-sap-type-3",
-      "description": "maxGrpSapStartingType 3, which declares Groups 3.4 forbids ('MUST begin with an Object containing a stream access point (SAP) type 1 or 2'). The expectation joins 3.4 and 3.5.2.1; neither alone names this value.",
+      "description": "maxGrpSapStartingType 3, which declares Groups 3.4 forbids ('MUST begin with an Object containing a stream access point (SAP) type 1 or 2'). The expectation joins 3.4 and 3.5.2.1.",
       "input": {
         "text": "{\"version\": \"1\", \"tracks\": [{\"name\": \"video\", \"packaging\": \"cmaf\", \"isLive\": true, \"initRef\": \"init-video\", \"role\": \"video\", \"codec\": \"avc1.640028\", \"width\": 1920, \"height\": 1080, \"bitrate\": 5000000, \"framerate\": 30, \"maxGrpSapStartingType\": 3}], \"initDataList\": [{\"id\": \"init-video\", \"type\": \"inline\", \"data\": \"AAAAGGZ0eXBjbWYyAAAAAGNtZjJpc282\"}]}"
       },

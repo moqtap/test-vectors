@@ -18,15 +18,9 @@ Checks:
 10. Every JSON file under a version directory sits in a category its meta.json
     lists, and every listed category exists
 
-Every spec in manifest.json is walked, not only transport; a directory the walk
-skipped would be a directory nothing checked.
+Every spec in manifest.json is walked.
 
-The eighth overlaps validate-schema.mjs, which does it properly through ajv.
-It is repeated here because this script has no dependencies and that one needs
-npm install, so this is the check that runs by default — and a category
-misspelled by a letter is invisible to a consumer, which compares the vector's
-category against its own answer and reports a decoder refusing the bytes for a
-reason that does not exist.
+Check 8 repeats part of validate-schema.mjs so that it runs without npm install.
 """
 
 import json
@@ -91,10 +85,7 @@ _LOCATION_FIELDS = {"start_group", "start_object", "end_group", "end_object"}
 _LOCATION_OBJECT_DRAFTS = {"draft01", "draft02", "draft03"}
 
 # Every Key-Value-Pair block renders as a list of entries in wire order, so
-# these keys hold a list and not a map. See `check_kvp_block`. The data plane's
-# two — `extension_headers` and `object_properties` — were regenerated from the
-# vector bytes by @moqtap/codec's `decodeObjectProperties` and checked against
-# the values they held before.
+# these keys hold a list and not a map. See `check_kvp_block`.
 _KVP_BLOCK_KEYS = {
     "parameters",
     "setup_parameters",
@@ -291,9 +282,7 @@ def _reject_constant(name):
 def _parse_payload(payload):
     """The payload as a JSON value, or raise.
 
-    `hex` is decoded as strict UTF-8 first: JSON text between systems is
-    UTF-8 (RFC 8259 §8.1), so bytes that are not UTF-8 are not a catalog.
-    Python's parser also accepts NaN and Infinity, which JSON does not.
+    `hex` must be UTF-8 (RFC 8259 §8.1). NaN and Infinity are rejected.
     """
     if "hex" in payload:
         raw = bytes.fromhex(payload["hex"]).decode("utf-8")
@@ -321,12 +310,8 @@ def _check_payload(filepath, at, payload):
 
 
 def validate_catalog_vectors(filepath, data):
-    """Validate a catalog vector file.
-
-    Beyond the shape, this checks what the shape cannot: that the payloads a
-    vector expects to parse do parse, that an invalid_json payload does not,
-    and that a lone independent object resolves to exactly itself — which is
-    the claim that `input` holds the payload and not a rewrite of it.
+    """Validate a catalog vector file: its shape, that payloads parse (an
+    invalid_json one does not), and that a lone object resolves to itself.
     """
     extra = set(data) - CATALOG_FILE_FIELDS
     if extra:
@@ -378,7 +363,7 @@ def validate_catalog_vectors(filepath, data):
                 err(f"{filepath}: {where} error_at {error_at!r} names no payload")
                 continue
             if error_at < len(payloads) - 1:
-                err(f"{filepath}: {where} carries steps after the one that fails, which nothing reads")
+                err(f"{filepath}: {where} has steps after error_at")
 
         # Every payload a reader gets to must be JSON, except the one an
         # invalid_json vector says is not.
@@ -544,8 +529,6 @@ def validate_manifest_consistency():
             if meta.get("spec") != version.get("spec"):
                 err(f"{meta_path}: spec '{meta.get('spec')}' != manifest spec '{version.get('spec')}'")
 
-            # `requires` names a version this corpus carries, or it is a
-            # dangling pointer a consumer would follow into nothing.
             req = meta.get("requires")
             if req is not None:
                 specs = manifest.get("specs", {})
@@ -553,9 +536,7 @@ def validate_manifest_consistency():
                 if req.get("id") not in ids:
                     err(f"{meta_path}: requires {req!r}, which manifest.json does not list")
 
-            # Categories are the directories, and the directories are the
-            # categories: a JSON file in one meta.json does not list is a
-            # file neither validator reads.
+            # Categories and directories must match one to one.
             vdir = os.path.join(REPO_ROOT, vpath)
             listed = set(meta.get("categories", []))
             present = {
@@ -604,8 +585,7 @@ for spec_name, draft_id, vpath in manifest_versions():
             continue
         validate_codec_vectors(relpath, data, draft_id)
 
-        # Message framing is a transport property: only control messages,
-        # not data streams or varint.
+        # Message framing: transport control messages only.
         if spec_name == "transport" and (
             os.sep + "messages" + os.sep in filepath or "/messages/" in filepath
         ):

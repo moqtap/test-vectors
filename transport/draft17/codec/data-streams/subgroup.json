@@ -374,7 +374,7 @@
     },
     {
       "id": "subgroup-properties-odd-type",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) with one object carrying an odd-typed property 0x0D (two bytes, cafe) and PRIOR_GROUP_ID_GAP=2. An odd Type is followed by a Length and that many bytes; the transport assigns 0x0D nothing, so the entry has no name and its value is the bytes. 0x3C is written as the delta 0x2F from 0x0D. A decoder that skips odd types loses the first property and cannot write it back",
+      "description": "subgroup stream (type 0x11: PROPERTIES set) with one object carrying an odd-typed property 0x0D (two bytes, cafe) and PRIOR_GROUP_ID_GAP=2 (Section 10.2.1.2). An odd Type is followed by a Length and that many bytes (Section 1.4.3); the transport assigns 0x0D nothing, so the entry has no name and its value is the bytes. 0x3C is written as the delta 0x2F from 0x0D",
       "hex": "1101008000060d02cafe2f0204deadbeef",
       "decoded": {
         "stream_type": "subgroup",
@@ -406,7 +406,7 @@
     },
     {
       "id": "subgroup-properties-unknown-even-type",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) with one object carrying an even-typed property 0x10 = 5, a Type the transport assigns nothing. An even Type is followed by a single varint value. Endpoints ignore a Type they do not understand, but the bytes stay on the Object and a relay forwards them, so a decoder must keep the entry",
+      "description": "subgroup stream (type 0x11: PROPERTIES set) with one object carrying an even-typed property 0x10 = 5, a Type the transport assigns nothing. An even Type is followed by a single varint value (Section 1.4.3). The entry is kept, without a name",
       "hex": "110100800002100504deadbeef",
       "decoded": {
         "stream_type": "subgroup",
@@ -433,7 +433,7 @@
     },
     {
       "id": "subgroup-properties-repeated-type",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) with one object carrying the odd Type 0x0D twice, first with the byte aa and then with bb. The second is written as a Type delta of 0. The Key-Value-Pair structure permits a repeated Type, so both entries are kept in wire order; a map keyed by Type keeps only one",
+      "description": "subgroup stream (type 0x11: PROPERTIES set) with one object carrying the odd Type 0x0D twice, first with the byte aa and then with bb. The second is written as a Type delta of 0. The Key-Value-Pair structure (Section 1.4.3) permits a repeated Type, so both entries are kept in wire order",
       "hex": "1101008000060d01aa0001bb04deadbeef",
       "decoded": {
         "stream_type": "subgroup",
@@ -464,7 +464,7 @@
     },
     {
       "id": "subgroup-properties-immutable",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) with one object whose only property is Immutable Properties (0x0B) holding PRIOR_GROUP_ID_GAP=2. Its value is a Key-Value-Pair sequence of its own, whose first Type is a delta from 0 rather than from 0x0B. Processors search the mutable list and the contents of Immutable Properties alike, so the contents are rendered as a nested list",
+      "description": "subgroup stream (type 0x11: PROPERTIES set) with one object whose only property is Immutable Properties (0x0B, Section 11.6) holding PRIOR_GROUP_ID_GAP=2. Its value is a Key-Value-Pair sequence of its own, whose first Type is a delta from 0 rather than from 0x0B. The contents render as a nested list",
       "hex": "1101008000040b023c0204deadbeef",
       "decoded": {
         "stream_type": "subgroup",
@@ -498,7 +498,7 @@
     },
     {
       "id": "subgroup-properties-overrun",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) whose object declares a 3-byte property block, inside which the odd Type 0x0D claims 5 bytes of value with only 1 left. The block's Length still says where the Object Payload Length begins, so the stream itself frames correctly and a relay can forward it untouched; the property it carries cannot be parsed, which makes the Track malformed for a receiving endpoint. Bound to the endpoint profile",
+      "description": "subgroup stream (type 0x11: PROPERTIES set) whose object declares a 3-byte property block (Section 10.2.1.2), inside which the odd Type 0x0D claims 5 bytes of value with only 1 left. The stream frames; the property does not parse, so the Track is malformed for an endpoint (Sections 11.6, 2.4.2)",
       "hex": "1101008000030d05ca04deadbeef",
       "error": "invalid_value",
       "error_detail": "property 0x0D claims 5 bytes but the property block has 1 left",

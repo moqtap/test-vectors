@@ -5,7 +5,7 @@
   "vectors": [
     {
       "id": "live-to-vod",
-      "description": "Section 9.2's conversion to VOD: an independent catalog that, for each track, sets isLive false and adds trackDuration (and drops targetLatency, which 5.1.16 forbids with isLive false). The draft contradicts itself here: 5.2 says a namespace|name tuple's attributes 'MUST NOT be modified after being declared', and 9.2 modifies them under the same names. This vector follows 9.2, the more specific rule, which names exactly this update; 5.2's rule sits among the delta rules.",
+      "description": "Section 9.2's conversion to VOD: an independent catalog that, for each track, sets isLive false and adds trackDuration (and drops targetLatency, which 5.1.16 forbids with isLive false). 5.2 says a namespace|name tuple's attributes 'MUST NOT be modified after being declared', and 9.2 modifies them under the same names; this vector follows 9.2, which names this update.",
       "input": {
         "text": "{\"version\": 1, \"generatedAt\": 1746104606044, \"tracks\": [{\"name\": \"video\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"codec\": \"av01\", \"bitrate\": 1500000}, {\"name\": \"audio\", \"packaging\": \"loc\", \"isLive\": true, \"targetLatency\": 2000, \"codec\": \"opus\", \"bitrate\": 32000}]}"
       },
