@@ -4,11 +4,13 @@
   "spec": "draft-ietf-moq-cmsf-01",
   "spec_url": "https://www.ietf.org/archive/id/draft-ietf-moq-cmsf-01.txt",
   "categories": [
-    "catalog"
+    "catalog",
+    "objects",
+    "timeline"
   ],
   "requires": {
     "spec": "msf",
     "id": "draft01"
   },
-  "description": "CMSF-01 extends [MSF], which its references cite as draft-ietf-moq-msf-01. Its catalogs are MSF-01 catalogs with packaging cmaf, the initDataList/initRef header shape and contentProtections."
+  "description": "CMSF-01 extends [MSF], which its references cite as draft-ietf-moq-msf-01. Its catalogs are MSF-01 catalogs with packaging cmaf, the initDataList/initRef header shape and contentProtections. Object vectors read a cmaf Object against its header; timeline vectors cover the SAP Type timeline, an MSF-01 event timeline."
 }

@@ -26,9 +26,9 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["codec", "catalog"]
+        "enum": ["codec", "catalog", "properties", "objects", "timeline"]
       },
-      "description": "Which subdirectories exist. codec: wire encoding of transport messages (codec-vector.schema.json). catalog: MSF and CMSF catalog objects and their deltas (catalog-vector.schema.json)."
+      "description": "Which subdirectories exist. codec: wire encoding of transport messages (codec-vector.schema.json). catalog: MSF and CMSF catalog objects and their deltas (catalog-vector.schema.json). properties: LOC property values (property-vector.schema.json). objects: CMSF Object payloads read against their CMAF header (object-vector.schema.json). timeline: media and event timeline payloads, and MSF-01 media timeline templates (timeline-vector.schema.json)."
     },
     "requires": {
       "type": "object",

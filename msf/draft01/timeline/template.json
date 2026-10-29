@@ -1,0 +1,229 @@
+{
+  "$schema": "../../../schema/timeline-vector.schema.json",
+  "topic": "template",
+  "format": "template",
+  "spec_section": "7.4.1",
+  "vectors": [
+    {
+      "id": "example",
+      "description": "Section 7.4.1 verbatim, the value the Section 5.6.10 example gives both its tracks. 7.4.1: 'mediaTime[n] = startMediaTime + (n * deltaMediaTime)', with location[n] and wallclock[n] alike. Its first five entries are the records of the 7.1.1 example.",
+      "input": {
+        "text": "[0, 2002, [0, 0], [1, 0], 1759924158381, 2002]"
+      },
+      "entries": "5",
+      "decoded": {
+        "template": {
+          "start_media_time_ms": "0",
+          "delta_media_time_ms": "2002",
+          "start_group_id": "0",
+          "start_object_id": "0",
+          "delta_group_id": "1",
+          "delta_object_id": "0",
+          "start_wallclock_ms": "1759924158381",
+          "delta_wallclock_ms": "2002"
+        },
+        "records": [
+          {
+            "media_time_ms": "0",
+            "group_id": "0",
+            "object_id": "0",
+            "wallclock_ms": "1759924158381"
+          },
+          {
+            "media_time_ms": "2002",
+            "group_id": "1",
+            "object_id": "0",
+            "wallclock_ms": "1759924160383"
+          },
+          {
+            "media_time_ms": "4004",
+            "group_id": "2",
+            "object_id": "0",
+            "wallclock_ms": "1759924162385"
+          },
+          {
+            "media_time_ms": "6006",
+            "group_id": "3",
+            "object_id": "0",
+            "wallclock_ms": "1759924164387"
+          },
+          {
+            "media_time_ms": "8008",
+            "group_id": "4",
+            "object_id": "0",
+            "wallclock_ms": "1759924166389"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wallclock-zero",
+      "description": "startWallclock and deltaWallclock 0. 7.4.1: 'For VOD assets, or if the wallclock time is not known, the value SHOULD be 0.' 7.4.1: 'mediaTime[n] = startMediaTime + (n * deltaMediaTime)', with location[n] and wallclock[n] alike.",
+      "input": {
+        "text": "[0, 2000, [0, 0], [1, 0], 0, 0]"
+      },
+      "entries": "3",
+      "decoded": {
+        "template": {
+          "start_media_time_ms": "0",
+          "delta_media_time_ms": "2000",
+          "start_group_id": "0",
+          "start_object_id": "0",
+          "delta_group_id": "1",
+          "delta_object_id": "0",
+          "start_wallclock_ms": "0",
+          "delta_wallclock_ms": "0"
+        },
+        "records": [
+          {
+            "media_time_ms": "0",
+            "group_id": "0",
+            "object_id": "0",
+            "wallclock_ms": "0"
+          },
+          {
+            "media_time_ms": "2000",
+            "group_id": "1",
+            "object_id": "0",
+            "wallclock_ms": "0"
+          },
+          {
+            "media_time_ms": "4000",
+            "group_id": "2",
+            "object_id": "0",
+            "wallclock_ms": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "object-delta",
+      "description": "Entries one Object apart within Group 5, from media time 1000. 7.4.1: 'mediaTime[n] = startMediaTime + (n * deltaMediaTime)', with location[n] and wallclock[n] alike.",
+      "input": {
+        "text": "[1000, 33, [5, 0], [0, 1], 1759924158381, 33]"
+      },
+      "entries": "3",
+      "decoded": {
+        "template": {
+          "start_media_time_ms": "1000",
+          "delta_media_time_ms": "33",
+          "start_group_id": "5",
+          "start_object_id": "0",
+          "delta_group_id": "0",
+          "delta_object_id": "1",
+          "start_wallclock_ms": "1759924158381",
+          "delta_wallclock_ms": "33"
+        },
+        "records": [
+          {
+            "media_time_ms": "1000",
+            "group_id": "5",
+            "object_id": "0",
+            "wallclock_ms": "1759924158381"
+          },
+          {
+            "media_time_ms": "1033",
+            "group_id": "5",
+            "object_id": "1",
+            "wallclock_ms": "1759924158414"
+          },
+          {
+            "media_time_ms": "1066",
+            "group_id": "5",
+            "object_id": "2",
+            "wallclock_ms": "1759924158447"
+          }
+        ]
+      }
+    },
+    {
+      "id": "not-json",
+      "description": "A template missing its closing bracket.",
+      "input": {
+        "text": "[0, 2002, [0, 0], [1, 0], 1759924158381, 2002"
+      },
+      "error": "invalid_json"
+    },
+    {
+      "id": "not-an-array",
+      "description": "The six values as a JSON Object. 7.4.1: 'The template is a JSON Array containing six mandatory values in the following fixed order'.",
+      "input": {
+        "text": "{\"startMediaTime\": 0, \"deltaMediaTime\": 2002, \"startLocation\": [0, 0], \"deltaLocation\": [1, 0], \"startWallclock\": 1759924158381, \"deltaWallclock\": 2002}"
+      },
+      "error": "invalid_value",
+      "error_detail": "template"
+    },
+    {
+      "id": "five-values",
+      "description": "A template without deltaWallclock. 7.4.1: 'All six values are mandatory and MUST appear in the specified order.'",
+      "input": {
+        "text": "[0, 2002, [0, 0], [1, 0], 1759924158381]"
+      },
+      "error": "missing_field",
+      "error_detail": "template[5]"
+    },
+    {
+      "id": "delta-media-time-location",
+      "description": "deltaMediaTime written as a Location. 7.4.1: deltaMediaTime is 'expressed as a JSON Number in milliseconds'.",
+      "input": {
+        "text": "[0, [0, 0], [0, 0], [1, 0], 1759924158381, 2002]"
+      },
+      "error": "invalid_value",
+      "error_detail": "template[1]"
+    },
+    {
+      "id": "start-media-time-fraction",
+      "description": "A startMediaTime of 33.3. 7.4.1 defines it 'as defined for media timeline entries in Section 7.1.1', which takes 'the floor in integral milliseconds'.",
+      "input": {
+        "text": "[33.3, 2002, [0, 0], [1, 0], 1759924158381, 2002]"
+      },
+      "error": "invalid_value",
+      "error_detail": "template[0]"
+    },
+    {
+      "id": "delta-media-time-string",
+      "description": "deltaMediaTime as the string \"2002\". 7.4.1: 'expressed as a JSON Number in milliseconds'.",
+      "input": {
+        "text": "[0, \"2002\", [0, 0], [1, 0], 1759924158381, 2002]"
+      },
+      "error": "invalid_value",
+      "error_detail": "template[1]"
+    },
+    {
+      "id": "start-location-fraction",
+      "description": "A startLocation whose Object ID is 0.5. 7.4.1 defines it 'as defined for media timeline entries in Section 7.1.1': a Group ID and an Object ID, integers in MOQT.",
+      "input": {
+        "text": "[0, 2002, [0, 0.5], [1, 0], 1759924158381, 2002]"
+      },
+      "error": "invalid_value",
+      "error_detail": "template[2][1]"
+    },
+    {
+      "id": "start-location-negative",
+      "description": "A startLocation whose Group ID is -1. 7.4.1 defines it 'as defined for media timeline entries in Section 7.1.1': a Group ID and an Object ID, unsigned integers in MOQT.",
+      "input": {
+        "text": "[0, 2002, [-1, 0], [1, 0], 1759924158381, 2002]"
+      },
+      "error": "invalid_value",
+      "error_detail": "template[2][0]"
+    },
+    {
+      "id": "delta-location-one-item",
+      "description": "A deltaLocation with one item. 7.4.1: 'expressed as a JSON Array of two Numbers where the first number is the Group ID delta and the second number is the Object ID delta.'",
+      "input": {
+        "text": "[0, 2002, [0, 0], [1], 1759924158381, 2002]"
+      },
+      "error": "invalid_value",
+      "error_detail": "template[3]"
+    },
+    {
+      "id": "start-wallclock-string",
+      "description": "startWallclock as a string. 7.4.1 defines it 'as defined for media timeline entries in Section 7.1.1', 'expressed as a JSON Number'.",
+      "input": {
+        "text": "[0, 2002, [0, 0], [1, 0], \"1759924158381\", 2002]"
+      },
+      "error": "invalid_value",
+      "error_detail": "template[4]"
+    }
+  ]
+}

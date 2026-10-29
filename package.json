@@ -1,6 +1,6 @@
 {
   "name": "@moqtap/test-vectors",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "description": "MoQT protocol test vectors — language-agnostic JSON",
   "type": "module",
   "exports": {
@@ -8,7 +8,9 @@
     "./schema/*": "./schema/*",
     "./transport/*": "./transport/*",
     "./msf/*": "./msf/*",
-    "./cmsf/*": "./cmsf/*"
+    "./cmsf/*": "./cmsf/*",
+    "./loc/*": "./loc/*",
+    "./mzanaty-loc/*": "./mzanaty-loc/*"
   },
   "files": [
     "manifest.json",
@@ -16,6 +18,8 @@
     "transport/",
     "msf/",
     "cmsf/",
+    "loc/",
+    "mzanaty-loc/",
     "LICENSE",
     "README.md",
     "CHANGELOG.md"

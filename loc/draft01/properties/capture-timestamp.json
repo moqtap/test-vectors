@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "capture-timestamp",
+  "spec_section": "2.3.1.1",
+  "vectors": [
+    {
+      "id": "wall-clock",
+      "description": "Capture Timestamp in microseconds since the Unix epoch: 1746104606044000 (LOC-01 2.3.1.1).",
+      "property_type": "0x02",
+      "value": "1746104606044000",
+      "decoded": {
+        "name": "Capture Timestamp",
+        "timestamp": "1746104606044000"
+      }
+    },
+    {
+      "id": "zero",
+      "description": "Capture Timestamp at the Unix epoch: 0 (LOC-01 2.3.1.1).",
+      "property_type": "0x02",
+      "value": "0",
+      "decoded": {
+        "name": "Capture Timestamp",
+        "timestamp": "0"
+      }
+    },
+    {
+      "id": "max",
+      "description": "Capture Timestamp at the largest value an 8-byte RFC 9000 varint holds, within the 1-8 bytes stated: 4611686018427387903 (LOC-01 2.3.1.1).",
+      "property_type": "0x02",
+      "value": "4611686018427387903",
+      "decoded": {
+        "name": "Capture Timestamp",
+        "timestamp": "4611686018427387903"
+      }
+    }
+  ]
+}

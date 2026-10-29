@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "conflicts",
+  "spec_section": "2.3.1.1",
+  "vectors": [
+    {
+      "id": "type-0x06-timestamp-sized",
+      "description": "LOC-02 gives 0x06 two meanings: Timestamp (2.3.1.1 and Table 1 in 6.1) and Audio Level (2.3.3.1), so the value is not interpreted, even though 1746104606044000 is a wall-clock Timestamp in size.",
+      "property_type": "0x06",
+      "value": "1746104606044000",
+      "decoded": {
+        "ambiguous": [
+          "Timestamp",
+          "Audio Level"
+        ]
+      }
+    },
+    {
+      "id": "type-0x06-audio-level-sized",
+      "description": "LOC-02 gives 0x06 two meanings: Timestamp (2.3.1.1 and Table 1 in 6.1) and Audio Level (2.3.3.1), so the value is not interpreted, even though 127 fits the Audio Level octet.",
+      "property_type": "0x06",
+      "value": "127",
+      "decoded": {
+        "ambiguous": [
+          "Timestamp",
+          "Audio Level"
+        ]
+      }
+    },
+    {
+      "id": "type-0x06-beyond-audio-level",
+      "description": "LOC-02 gives 0x06 two meanings: Timestamp (2.3.1.1 and Table 1 in 6.1) and Audio Level (2.3.3.1), so the value is not interpreted, even though 2^40 is outside what Audio Level's 1-2 bytes can hold.",
+      "property_type": "0x06",
+      "value": "1099511627776",
+      "decoded": {
+        "ambiguous": [
+          "Timestamp",
+          "Audio Level"
+        ]
+      }
+    }
+  ]
+}

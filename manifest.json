@@ -153,6 +153,48 @@
           "path": "cmsf/draft01/"
         }
       ]
+    },
+    "loc": {
+      "name": "Low Overhead Media Container",
+      "ietf_base": "draft-ietf-moq-loc",
+      "versions": [
+        {
+          "id": "draft00",
+          "spec": "draft-ietf-moq-loc-00",
+          "path": "loc/draft00/"
+        },
+        {
+          "id": "draft01",
+          "spec": "draft-ietf-moq-loc-01",
+          "path": "loc/draft01/"
+        },
+        {
+          "id": "draft02",
+          "spec": "draft-ietf-moq-loc-02",
+          "path": "loc/draft02/"
+        },
+        {
+          "id": "draft03",
+          "spec": "draft-ietf-moq-loc-03",
+          "path": "loc/draft03/"
+        },
+        {
+          "id": "draft04",
+          "spec": "draft-ietf-moq-loc-04",
+          "path": "loc/draft04/"
+        }
+      ]
+    },
+    "mzanaty-loc": {
+      "name": "Low Overhead Media Container (draft-mzanaty)",
+      "ietf_base": "draft-mzanaty-moq-loc",
+      "versions": [
+        {
+          "id": "draft05",
+          "spec": "draft-mzanaty-moq-loc-05",
+          "path": "mzanaty-loc/draft05/"
+        }
+      ]
     }
   }
 }

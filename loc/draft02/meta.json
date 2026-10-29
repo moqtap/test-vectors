@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schema/meta.schema.json",
+  "id": "draft02",
+  "spec": "draft-ietf-moq-loc-02",
+  "spec_url": "https://www.ietf.org/archive/id/draft-ietf-moq-loc-02.txt",
+  "categories": [
+    "properties"
+  ],
+  "description": "Its [MoQTransport] is draft-ietf-moq-transport-17, whose varint is the vi64 of its Section 1.4.1. Type 0x06 is both Timestamp (2.3.1.1, Table 1) and Audio Level (2.3.3.1), so neither has a vector that decodes; conflicts.json holds 0x06."
+}

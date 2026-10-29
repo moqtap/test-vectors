@@ -1,0 +1,220 @@
+{
+  "$schema": "../../../schema/timeline-vector.schema.json",
+  "topic": "event",
+  "format": "eventtimeline",
+  "spec_section": "8.1",
+  "vectors": [
+    {
+      "id": "example-wallclock",
+      "description": "Section 8.4.1 verbatim: records indexed by wallclock time 't'.",
+      "input": {
+        "text": "[\n    {\n        \"t\": 1756885678361,\n        \"data\": {\n            \"status\": \"in_progress\",\n            \"period\": 1,\n            \"clock\": \"12:00\",\n            \"homeScore\": 0,\n            \"awayScore\": 0,\n            \"lastPlay\": \"Game Start\"\n        }\n    },\n    {\n        \"t\": 1756885981542,\n        \"data\": {\n            \"status\": \"in_progress\",\n            \"period\": 1,\n            \"clock\": \"09:25\",\n            \"homeScore\": 2,\n            \"awayScore\": 0,\n            \"lastPlay\": \"Team A: #23 makes 2-pt jump shot\"\n        }\n    }\n]\n"
+      },
+      "decoded": {
+        "records": [
+          {
+            "index": "t",
+            "wallclock_ms": "1756885678361",
+            "data": {
+              "status": "in_progress",
+              "period": 1,
+              "clock": "12:00",
+              "homeScore": 0,
+              "awayScore": 0,
+              "lastPlay": "Game Start"
+            }
+          },
+          {
+            "index": "t",
+            "wallclock_ms": "1756885981542",
+            "data": {
+              "status": "in_progress",
+              "period": 1,
+              "clock": "09:25",
+              "homeScore": 2,
+              "awayScore": 0,
+              "lastPlay": "Team A: #23 makes 2-pt jump shot"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "example-location",
+      "description": "Section 8.4.2 verbatim: records indexed by Location 'l', each data a JSON Array. 8.1 calls data 'A 'data' Object, whose structure is defined by the Section 5.2.5 value'; the draft's own example gives Arrays.",
+      "input": {
+        "text": "[\n    {\n        \"l\": [0,0],\n        \"data\": [47.1812,8.4592]\n    },\n    {\n        \"l\": [1,0],\n        \"data\": [47.1662,8.5155]\n    }\n]\n"
+      },
+      "decoded": {
+        "records": [
+          {
+            "index": "l",
+            "group_id": "0",
+            "object_id": "0",
+            "data": [
+              47.1812,
+              8.4592
+            ]
+          },
+          {
+            "index": "l",
+            "group_id": "1",
+            "object_id": "0",
+            "data": [
+              47.1662,
+              8.5155
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "media-pts",
+      "description": "A record indexed by media PTS 'm'. 8.1: 'An index reference, which MUST be either 't' for wallclock time, 'l' for Location or 'm' for Media PTS.'",
+      "input": {
+        "text": "[{\"m\": 2002, \"data\": {\"speaker\": \"alice\"}}]"
+      },
+      "decoded": {
+        "records": [
+          {
+            "index": "m",
+            "media_time_ms": "2002",
+            "data": {
+              "speaker": "alice"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "empty",
+      "description": "An event timeline with no records.",
+      "input": {
+        "text": "[]"
+      },
+      "decoded": {
+        "records": []
+      }
+    },
+    {
+      "id": "mixed-index",
+      "description": "One record indexed by 't' and one by 'l'. 8.1: 'Event timelines SHOULD use the same index reference type for each record.' Both records are read.",
+      "input": {
+        "text": "[{\"t\": 1756885678361, \"data\": {}}, {\"l\": [1, 0], \"data\": {}}]"
+      },
+      "decoded": {
+        "records": [
+          {
+            "index": "t",
+            "wallclock_ms": "1756885678361",
+            "data": {}
+          },
+          {
+            "index": "l",
+            "group_id": "1",
+            "object_id": "0",
+            "data": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "not-json",
+      "description": "A payload missing its closing bracket.",
+      "input": {
+        "text": "[{\"t\": 1756885678361, \"data\": {}}"
+      },
+      "error": "invalid_json"
+    },
+    {
+      "id": "not-an-array",
+      "description": "One record that is not inside an array. 8.1: 'The document contains an array of records.'",
+      "input": {
+        "text": "{\"t\": 1756885678361, \"data\": {}}"
+      },
+      "error": "invalid_value",
+      "error_detail": "records"
+    },
+    {
+      "id": "record-not-object",
+      "description": "A record written as an array. 8.1: 'Each record consists of a JSON Object'.",
+      "input": {
+        "text": "[[1756885678361, {}]]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0]"
+    },
+    {
+      "id": "no-index",
+      "description": "A record with data and no index reference. 8: 'each event record MUST contain a reference to one of Media PTS, wallclock time or MOQT Location.'",
+      "input": {
+        "text": "[{\"data\": {}}]"
+      },
+      "error": "invalid_index",
+      "error_detail": "records[0]"
+    },
+    {
+      "id": "two-indexes",
+      "description": "A record with both 't' and 'l'. 8.1: 'Only one of these index values may be used within each record.'",
+      "input": {
+        "text": "[{\"t\": 1756885678361, \"l\": [0, 0], \"data\": {}}]"
+      },
+      "error": "invalid_index",
+      "error_detail": "records[0]"
+    },
+    {
+      "id": "missing-data",
+      "description": "A record without data. 8.1 lists the index reference and data as 'the following required fields'.",
+      "input": {
+        "text": "[{\"t\": 1756885678361}]"
+      },
+      "error": "missing_field",
+      "error_detail": "records[0].data"
+    },
+    {
+      "id": "wallclock-string",
+      "description": "A wallclock time written as a string. 8.1: 'Wallclock time and media PTS values are JSON Number'.",
+      "input": {
+        "text": "[{\"t\": \"1756885678361\", \"data\": {}}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].t"
+    },
+    {
+      "id": "media-pts-fraction",
+      "description": "A media PTS of 33.3. 8.1 defines media PTS as 7.1 does; 7.1.1 takes the floor in integral milliseconds.",
+      "input": {
+        "text": "[{\"m\": 33.3, \"data\": {}}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].m"
+    },
+    {
+      "id": "location-one-item",
+      "description": "A Location with one item. 8.1: 'Location value is an Array of Numbers, where the first item represents the MOQT GroupID and the second item the MOQT Object ID.'",
+      "input": {
+        "text": "[{\"l\": [0], \"data\": {}}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].l"
+    },
+    {
+      "id": "location-fraction",
+      "description": "A Location whose Object ID is 1.5. 8.1 makes the second item 'the MOQT Object ID', an integer in MOQT.",
+      "input": {
+        "text": "[{\"l\": [0, 1.5], \"data\": {}}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].l[1]"
+    },
+    {
+      "id": "location-negative",
+      "description": "A Location whose Group ID is -1. 8.1 makes the first item 'the MOQT GroupID', an unsigned integer in MOQT.",
+      "input": {
+        "text": "[{\"l\": [-1, 0], \"data\": {}}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].l[0]"
+    }
+  ]
+}

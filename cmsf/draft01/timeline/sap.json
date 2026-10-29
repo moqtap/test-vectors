@@ -1,0 +1,286 @@
+{
+  "$schema": "../../../schema/timeline-vector.schema.json",
+  "topic": "sap",
+  "format": "eventtimeline",
+  "event_type": "org.ietf.moq.cmsf.sap",
+  "spec_section": "3.6.1",
+  "vectors": [
+    {
+      "id": "example-3-6-2",
+      "description": "Section 3.6.2 verbatim: SAP type 2 at the start of each 4 s Group and SAP type 3 at Object 60. The vector asserts the records only; the draft states neither the frames per Object nor where the skipped RASL pictures sit, so the times cannot be checked against the prose.",
+      "input": {
+        "text": "[\n    {\n        \"l\": [0,0],\n        \"data\": [2,0]\n    },\n    {\n        \"l\": [0,60],\n        \"data\": [3,2100]\n    },\n    {\n        \"l\": [1,0],\n        \"data\": [2,4000]\n    },\n    {\n        \"l\": [1,60],\n        \"data\": [3,6100]\n    }\n]\n"
+      },
+      "decoded": {
+        "records": [
+          {
+            "group_id": "0",
+            "object_id": "0",
+            "sap_type": "2",
+            "ept_ms": "0"
+          },
+          {
+            "group_id": "0",
+            "object_id": "60",
+            "sap_type": "3",
+            "ept_ms": "2100"
+          },
+          {
+            "group_id": "1",
+            "object_id": "0",
+            "sap_type": "2",
+            "ept_ms": "4000"
+          },
+          {
+            "group_id": "1",
+            "object_id": "60",
+            "sap_type": "3",
+            "ept_ms": "6100"
+          }
+        ]
+      }
+    },
+    {
+      "id": "one-record",
+      "description": "One record: Group 0, Object 0, SAP type 1, earliest presentation time 0 ms.",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": [1, 0]}]"
+      },
+      "decoded": {
+        "records": [
+          {
+            "group_id": "0",
+            "object_id": "0",
+            "sap_type": "1",
+            "ept_ms": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "empty",
+      "description": "A timeline with no records.",
+      "input": {
+        "text": "[]"
+      },
+      "decoded": {
+        "records": []
+      }
+    },
+    {
+      "id": "no-sap-later-object",
+      "description": "SAP type 0 for Object 1: 3.6.1 'The value 0 indicates that the Object does not start with an ISOBMFF stream access point.'",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": [2, 0]}, {\"l\": [0, 1], \"data\": [0, 33]}]"
+      },
+      "decoded": {
+        "records": [
+          {
+            "group_id": "0",
+            "object_id": "0",
+            "sap_type": "2",
+            "ept_ms": "0"
+          },
+          {
+            "group_id": "0",
+            "object_id": "1",
+            "sap_type": "0",
+            "ept_ms": "33"
+          }
+        ]
+      }
+    },
+    {
+      "id": "negative-ept",
+      "description": "An earliest presentation time of -33. 3.6.1 'The data field is a JSON Array containing two integers.' The draft bounds the first integer and not the second.",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": [2, -33]}]"
+      },
+      "decoded": {
+        "records": [
+          {
+            "group_id": "0",
+            "object_id": "0",
+            "sap_type": "2",
+            "ept_ms": "-33"
+          }
+        ]
+      }
+    },
+    {
+      "id": "same-location-twice",
+      "description": "Two records for Location [0,0] that disagree on the SAP type. No draft says which applies; a reader keeps both, in payload order, and reports the disagreement.",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": [2, 0]}, {\"l\": [0, 0], \"data\": [1, 0]}]"
+      },
+      "decoded": {
+        "records": [
+          {
+            "group_id": "0",
+            "object_id": "0",
+            "sap_type": "2",
+            "ept_ms": "0"
+          },
+          {
+            "group_id": "0",
+            "object_id": "0",
+            "sap_type": "1",
+            "ept_ms": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "first-object-sap-0",
+      "description": "SAP type 0 for Object 0. 3.6.1 'When the Object is the first Object in the Group, the value MUST be equal to 1 or 2.' MSF-01 6.2: 'Object ID MUST be zero for the first Object within a Group'.",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": [0, 0]}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].data[0]"
+    },
+    {
+      "id": "first-object-sap-3",
+      "description": "SAP type 3 for Object 0 of Group 2. 3.6.1 'When the Object is the first Object in the Group, the value MUST be equal to 1 or 2.' MSF-01 6.2 makes Object 0 the first.",
+      "input": {
+        "text": "[{\"l\": [2, 0], \"data\": [3, 8000]}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].data[0]"
+    },
+    {
+      "id": "sap-type-4",
+      "description": "SAP type 4. 3.6.1 'The first integer defines SAP type with an allowed value of 0,1,2 or 3.'",
+      "input": {
+        "text": "[{\"l\": [0, 1], \"data\": [4, 33]}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].data[0]"
+    },
+    {
+      "id": "sap-type-negative",
+      "description": "SAP type -1. 3.6.1 'The first integer defines SAP type with an allowed value of 0,1,2 or 3.'",
+      "input": {
+        "text": "[{\"l\": [0, 1], \"data\": [-1, 33]}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].data[0]"
+    },
+    {
+      "id": "sap-type-string",
+      "description": "SAP type as the string \"2\". 3.6.1 'The data field is a JSON Array containing two integers.'",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": [\"2\", 0]}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].data[0]"
+    },
+    {
+      "id": "ept-fraction",
+      "description": "An earliest presentation time of 33.3. 3.6.1 'The data field is a JSON Array containing two integers.' 3.6.1 gives it 'rounded to the nearest millisecond'.",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": [2, 33.3]}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].data[1]"
+    },
+    {
+      "id": "data-three-items",
+      "description": "data with three integers. 3.6.1 'The data field is a JSON Array containing two integers.'",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": [2, 0, 0]}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].data"
+    },
+    {
+      "id": "data-object",
+      "description": "data as a JSON Object. 3.6.1 'The data field is a JSON Array containing two integers.' MSF-01 8.1 speaks of 'A 'data' Object' whose structure the eventType defines; for this eventType CMSF defines it as an Array.",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": {\"sapType\": 2, \"ept\": 0}}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].data"
+    },
+    {
+      "id": "missing-data",
+      "description": "A record without data. 3.6.1 defines the record by its index reference and its data field. MSF-01 8.1 lists both as 'required fields'.",
+      "input": {
+        "text": "[{\"l\": [0, 0]}]"
+      },
+      "error": "missing_field",
+      "error_detail": "records[0].data"
+    },
+    {
+      "id": "index-wallclock",
+      "description": "A record indexed by wallclock time 't'. 3.6.1 'The index reference MUST be 'l' for Location'.",
+      "input": {
+        "text": "[{\"t\": 1746104606044, \"data\": [2, 0]}]"
+      },
+      "error": "invalid_index",
+      "error_detail": "records[0]"
+    },
+    {
+      "id": "index-media-pts",
+      "description": "A record indexed by media PTS 'm'. 3.6.1 'The index reference MUST be 'l' for Location'.",
+      "input": {
+        "text": "[{\"m\": 0, \"data\": [2, 0]}]"
+      },
+      "error": "invalid_index",
+      "error_detail": "records[0]"
+    },
+    {
+      "id": "index-location-and-wallclock",
+      "description": "A record with both 'l' and 't'. 3.6.1 'The index reference MUST be 'l' for Location'. MSF-01 8.1: 'Only one of these index values may be used within each record.'",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"t\": 1746104606044, \"data\": [2, 0]}]"
+      },
+      "error": "invalid_index",
+      "error_detail": "records[0]"
+    },
+    {
+      "id": "not-json",
+      "description": "A payload missing its closing bracket.",
+      "input": {
+        "text": "[{\"l\": [0, 0], \"data\": [2, 0]}"
+      },
+      "error": "invalid_json"
+    },
+    {
+      "id": "not-an-array",
+      "description": "One record that is not inside an array. MSF-01 8.1: 'The document contains an array of records.'",
+      "input": {
+        "text": "{\"l\": [0, 0], \"data\": [2, 0]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "records"
+    },
+    {
+      "id": "record-not-object",
+      "description": "A record written as an array. MSF-01 8.1: 'Each record consists of a JSON Object'.",
+      "input": {
+        "text": "[[[0, 0], [2, 0]]]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0]"
+    },
+    {
+      "id": "location-one-item",
+      "description": "A Location with one item. MSF-01 8.1: 'Location value is an Array of Numbers, where the first item represents the MOQT GroupID and the second item the MOQT Object ID.'",
+      "input": {
+        "text": "[{\"l\": [0], \"data\": [2, 0]}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].l"
+    },
+    {
+      "id": "location-fraction",
+      "description": "A Location whose Object ID is 1.5. MSF-01 8.1 makes the second item 'the MOQT Object ID', an integer in MOQT.",
+      "input": {
+        "text": "[{\"l\": [0, 1.5], \"data\": [2, 0]}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0].l[1]"
+    }
+  ]
+}

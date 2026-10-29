@@ -1,0 +1,175 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "video-frame-marking",
+  "spec_section": "2.3.2.2",
+  "vectors": [
+    {
+      "id": "one-octet-range",
+      "description": "Video Frame Marking: 160 fits the 1-octet form (S=1, I=1, TID 0), the 2-octet form with a zero first octet (LID 160) and the 3-octet form with two zero leading octets (TL0PICIDX 160) of RFC 9626 3.1. LOC-01 2.3.2.2 carries the bits in the least significant bits of a varint and not which form was sent, so all three are candidates.",
+      "property_type": "0x04",
+      "value": "160",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "candidates": [
+          {
+            "octets": "1",
+            "S": true,
+            "E": false,
+            "I": true,
+            "D": false,
+            "B": false,
+            "TID": "0"
+          },
+          {
+            "octets": "2",
+            "S": false,
+            "E": false,
+            "I": false,
+            "D": false,
+            "B": false,
+            "TID": "0",
+            "LID": "160"
+          },
+          {
+            "octets": "3",
+            "S": false,
+            "E": false,
+            "I": false,
+            "D": false,
+            "B": false,
+            "TID": "0",
+            "LID": "0",
+            "TL0PICIDX": "160"
+          }
+        ]
+      }
+    },
+    {
+      "id": "zero",
+      "description": "Video Frame Marking: 0 fits the 1-octet form (no flags set, TID 0), the 2-octet form with a zero first octet (LID 0) and the 3-octet form with two zero leading octets (TL0PICIDX 0) of RFC 9626 3.1. LOC-01 2.3.2.2 carries the bits in the least significant bits of a varint and not which form was sent, so all three are candidates.",
+      "property_type": "0x04",
+      "value": "0",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "candidates": [
+          {
+            "octets": "1",
+            "S": false,
+            "E": false,
+            "I": false,
+            "D": false,
+            "B": false,
+            "TID": "0"
+          },
+          {
+            "octets": "2",
+            "S": false,
+            "E": false,
+            "I": false,
+            "D": false,
+            "B": false,
+            "TID": "0",
+            "LID": "0"
+          },
+          {
+            "octets": "3",
+            "S": false,
+            "E": false,
+            "I": false,
+            "D": false,
+            "B": false,
+            "TID": "0",
+            "LID": "0",
+            "TL0PICIDX": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "two-octet-range",
+      "description": "Video Frame Marking: 41221 fits the 2-octet form (S=1, I=1, TID 1, LID 5) and the 3-octet form with a zero first octet (no flags set, TID 0, LID 161, TL0PICIDX 5) of RFC 9626 3.1. LOC-01 2.3.2.2 carries the bits in the least significant bits of a varint and not which form was sent, so both are candidates.",
+      "property_type": "0x04",
+      "value": "41221",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "candidates": [
+          {
+            "octets": "2",
+            "S": true,
+            "E": false,
+            "I": true,
+            "D": false,
+            "B": false,
+            "TID": "1",
+            "LID": "5"
+          },
+          {
+            "octets": "3",
+            "S": false,
+            "E": false,
+            "I": false,
+            "D": false,
+            "B": false,
+            "TID": "0",
+            "LID": "161",
+            "TL0PICIDX": "5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "three-octet",
+      "description": "Video Frame Marking: only the 3-octet form of RFC 9626 3.1 holds 14680106, read with the first octet most significant: S=1, E=1, I=1, TID 0, LID 0, TL0PICIDX 42 (LOC-01 2.3.2.2).",
+      "property_type": "0x04",
+      "value": "14680106",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "octets": "3",
+        "S": true,
+        "E": true,
+        "I": true,
+        "D": false,
+        "B": false,
+        "TID": "0",
+        "LID": "0",
+        "TL0PICIDX": "42"
+      }
+    },
+    {
+      "id": "three-octet-layered",
+      "description": "Video Frame Marking: only the 3-octet form of RFC 9626 3.1 holds 9044479, read with the first octet most significant: S=1, B=1, TID 2, LID 1, TL0PICIDX 255 (LOC-01 2.3.2.2).",
+      "property_type": "0x04",
+      "value": "9044479",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "octets": "3",
+        "S": true,
+        "E": false,
+        "I": false,
+        "D": false,
+        "B": true,
+        "TID": "2",
+        "LID": "1",
+        "TL0PICIDX": "255"
+      }
+    },
+    {
+      "id": "beyond-three-octets",
+      "description": "Video Frame Marking: 16777216 is within the 1-4 bytes LOC-01 2.3.2.2 allows, but no RFC 9626 3.1 form holds more than 3 octets, so the value is left uninterpreted.",
+      "property_type": "0x04",
+      "value": "16777216",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "uninterpreted": true
+      }
+    },
+    {
+      "id": "beyond-four-bytes",
+      "description": "Video Frame Marking: 1073741824 needs more than 4 bytes as an RFC 9000 varint, beyond the 1-4 bytes LOC-01 2.3.2.2 states.",
+      "property_type": "0x04",
+      "value": "1073741824",
+      "error": "out_of_range",
+      "error_detail": "Video Frame Marking: Length: Varies (1-4 bytes)"
+    }
+  ]
+}

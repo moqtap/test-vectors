@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "video-config",
+  "spec_section": "2.3.2.1",
+  "vectors": [
+    {
+      "id": "extradata",
+      "description": "Video Config: 43 bytes of codec configuration, carried unchanged; LOC-03 2.3.2.1 gives the length as Varies and names no structure.",
+      "property_type": "0x0d",
+      "value_hex": "0164001fffe100196764001facd9405005bb011000000300100000030320f183196001000668ebe3cb22c0",
+      "decoded": {
+        "name": "Video Config",
+        "length": "43"
+      }
+    },
+    {
+      "id": "empty",
+      "description": "Video Config: 0 bytes of codec configuration, carried unchanged; LOC-03 2.3.2.1 gives the length as Varies and names no structure.",
+      "property_type": "0x0d",
+      "value_hex": "",
+      "decoded": {
+        "name": "Video Config",
+        "length": "0"
+      }
+    }
+  ]
+}

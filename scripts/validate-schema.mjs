@@ -13,6 +13,15 @@ const validateCodec = ajv.compile(readJson("schema/codec-vector.schema.json"));
 const validateCatalog = ajv.compile(
   readJson("schema/catalog-vector.schema.json"),
 );
+const validateProperty = ajv.compile(
+  readJson("schema/property-vector.schema.json"),
+);
+const validateObject = ajv.compile(
+  readJson("schema/object-vector.schema.json"),
+);
+const validateTimeline = ajv.compile(
+  readJson("schema/timeline-vector.schema.json"),
+);
 const validateMeta = ajv.compile(readJson("schema/meta.schema.json"));
 const validateManifest = ajv.compile(readJson("schema/manifest.schema.json"));
 
@@ -50,7 +59,13 @@ function check(validate, file, data) {
 const manifest = readJson("manifest.json");
 check(validateManifest, "manifest.json", manifest);
 
-const byCategory = { codec: validateCodec, catalog: validateCatalog };
+const byCategory = {
+  codec: validateCodec,
+  catalog: validateCatalog,
+  properties: validateProperty,
+  objects: validateObject,
+  timeline: validateTimeline,
+};
 for (const spec of Object.values(manifest.specs)) {
   for (const version of spec.versions) {
     const meta = join(version.path, "meta.json");

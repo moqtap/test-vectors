@@ -1,0 +1,67 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "timestamp",
+  "spec_section": "2.3.1.1",
+  "vectors": [
+    {
+      "id": "wall-clock",
+      "description": "Timestamp in microseconds since the Unix epoch, the unit when no Timescale is present: 1746104606044000 (LOC-03 6.1, Table 1). LOC-03 also gives Timestamp the type 0x0A in 2.3.1.1.",
+      "property_type": "0x06",
+      "value": "1746104606044000",
+      "decoded": {
+        "name": "Timestamp",
+        "timestamp": "1746104606044000"
+      }
+    },
+    {
+      "id": "media-time",
+      "description": "Timestamp in media time, 90 s at a Timescale of 90000: 8100000 (LOC-03 6.1, Table 1). LOC-03 also gives Timestamp the type 0x0A in 2.3.1.1.",
+      "property_type": "0x06",
+      "value": "8100000",
+      "decoded": {
+        "name": "Timestamp",
+        "timestamp": "8100000"
+      }
+    },
+    {
+      "id": "zero",
+      "description": "Timestamp at zero: 0 (LOC-03 6.1, Table 1). LOC-03 also gives Timestamp the type 0x0A in 2.3.1.1.",
+      "property_type": "0x06",
+      "value": "0",
+      "decoded": {
+        "name": "Timestamp",
+        "timestamp": "0"
+      }
+    },
+    {
+      "id": "max",
+      "description": "Timestamp at the largest vi64, within the 1-9 bytes stated: 18446744073709551615 (LOC-03 6.1, Table 1). LOC-03 also gives Timestamp the type 0x0A in 2.3.1.1.",
+      "property_type": "0x06",
+      "value": "18446744073709551615",
+      "decoded": {
+        "name": "Timestamp",
+        "timestamp": "18446744073709551615"
+      }
+    },
+    {
+      "id": "type-0x0a-wall-clock",
+      "description": "Timestamp under 0x0A in microseconds since the Unix epoch: 1746104606044000 (LOC-03 2.3.1.1).",
+      "property_type": "0x0a",
+      "value": "1746104606044000",
+      "decoded": {
+        "name": "Timestamp",
+        "timestamp": "1746104606044000"
+      }
+    },
+    {
+      "id": "type-0x0a-zero",
+      "description": "Timestamp under 0x0A at zero: 0 (LOC-03 2.3.1.1).",
+      "property_type": "0x0a",
+      "value": "0",
+      "decoded": {
+        "name": "Timestamp",
+        "timestamp": "0"
+      }
+    }
+  ]
+}

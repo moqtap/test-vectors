@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/moqtap/test-vectors/schema/property-vector.schema.json",
+  "title": "LOC Property Test Vector File",
+  "description": "A collection of LOC property vectors: one property type and its value, as a transport Key-Value-Pair delivers them, paired with what the value means under one LOC draft or the complaint it must draw. Vectors are independent of transport framing: an even type's value is the integer the varint carried, an odd type's value is its bytes.",
+  "type": "object",
+  "required": ["topic", "vectors"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "What the file exercises, and its file name without the extension: a property ('timestamp', 'video-frame-marking') or 'conflicts' for types the draft gives more than one meaning."
+    },
+    "spec_section": {
+      "type": "string",
+      "description": "The section of the draft most of the file's vectors cite. Each vector's description cites its own."
+    },
+    "vectors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/vector"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "digits": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "fields": {
+      "type": "object",
+      "description": "Semantic fields of one reading of a value. Integers are strings of decimal digits.",
+      "properties": {
+        "timestamp": {
+          "$ref": "#/$defs/digits",
+          "description": "Timestamp or Capture Timestamp, in the units the draft gives it."
+        },
+        "timescale": {
+          "$ref": "#/$defs/digits",
+          "description": "Timestamp units per second."
+        },
+        "length": {
+          "$ref": "#/$defs/digits",
+          "description": "Video Config or Audio Config: the number of bytes. The drafts give these bytes no structure of their own; they are the codec's configuration, passed on as they are."
+        },
+        "octets": {
+          "$ref": "#/$defs/digits",
+          "description": "Video Frame Marking: which RFC 9626 3.1 form the reading is, 1, 2 or 3 octets. A 1-octet reading covers the short form of 3.2 as well, which is the same octet with B and TID zero."
+        },
+        "S": { "type": "boolean", "description": "Start of Frame (RFC 9626 3.1)." },
+        "E": { "type": "boolean", "description": "End of Frame." },
+        "I": { "type": "boolean", "description": "Independent Frame." },
+        "D": { "type": "boolean", "description": "Discardable Frame." },
+        "B": { "type": "boolean", "description": "Base Layer Sync." },
+        "TID": { "$ref": "#/$defs/digits", "description": "Temporal-layer ID, 3 bits." },
+        "LID": { "$ref": "#/$defs/digits", "description": "Layer ID, 8 bits; present in the 2- and 3-octet forms." },
+        "TL0PICIDX": { "$ref": "#/$defs/digits", "description": "Temporal Layer 0 Picture Index, 8 bits; present in the 3-octet form." },
+        "voice_activity": {
+          "type": "boolean",
+          "description": "Audio Level: the V bit of RFC 6464 Section 3."
+        },
+        "level": {
+          "$ref": "#/$defs/digits",
+          "description": "Audio Level: 0 to 127, meaning 0 to -127 dBov (RFC 6464 Section 3)."
+        }
+      }
+    },
+    "decoded": {
+      "type": "object",
+      "description": "What the value means. Exactly one of four shapes. A reading: `name` and the semantic fields. Candidates: `name` and `candidates`, two or more complete readings, when the draft leaves the form of the value open; a decoder reports them all and picks none. Uninterpreted: `name` and `uninterpreted: true`, when the draft admits the value but defines no reading for it; a decoder shows it raw. Ambiguous: `ambiguous` alone, listing the meanings the draft gives the property type; a decoder shows the value raw with those names.",
+      "oneOf": [
+        {
+          "required": ["name"],
+          "allOf": [{ "$ref": "#/$defs/fields" }],
+          "properties": {
+            "name": { "type": "string" },
+            "timestamp": true, "timescale": true, "length": true, "octets": true,
+            "S": true, "E": true, "I": true, "D": true, "B": true,
+            "TID": true, "LID": true, "TL0PICIDX": true,
+            "voice_activity": true, "level": true
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": ["name", "candidates"],
+          "properties": {
+            "name": { "type": "string" },
+            "candidates": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "allOf": [{ "$ref": "#/$defs/fields" }],
+                "minProperties": 1,
+                "properties": {
+                  "timestamp": true, "timescale": true, "length": true, "octets": true,
+                  "S": true, "E": true, "I": true, "D": true, "B": true,
+                  "TID": true, "LID": true, "TL0PICIDX": true,
+                  "voice_activity": true, "level": true
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": ["name", "uninterpreted"],
+          "properties": {
+            "name": { "type": "string" },
+            "uninterpreted": { "const": true }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": ["ambiguous"],
+          "properties": {
+            "ambiguous": {
+              "type": "array",
+              "minItems": 2,
+              "uniqueItems": true,
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "vector": {
+      "type": "object",
+      "required": ["id", "description", "property_type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique identifier within the file. Kebab-case."
+        },
+        "description": {
+          "type": "string",
+          "description": "What the vector asserts, and the section of the draft (and of RFC 9626 or RFC 6464) that decides it."
+        },
+        "property_type": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]+$",
+          "description": "The property type, lowercase hex."
+        },
+        "value": {
+          "$ref": "#/$defs/digits",
+          "description": "Even types: the integer the varint carried, in decimal."
+        },
+        "value_hex": {
+          "type": "string",
+          "pattern": "^([0-9a-f]{2})*$",
+          "description": "Odd types: the value bytes, lowercase hex, possibly empty."
+        },
+        "decoded": {
+          "$ref": "#/$defs/decoded"
+        },
+        "error": {
+          "type": "string",
+          "enum": ["invalid_length", "out_of_range"],
+          "description": "Error category for invalid vectors. invalid_length: an odd type's value has a length outside the range the draft states. out_of_range: an even type's value is outside the values the draft states, or needs more bytes than the draft allows it."
+        },
+        "error_detail": {
+          "type": "string",
+          "description": "Optional human-readable detail: usually the line of the draft the value breaks."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "property_type": { "pattern": "[02468ace]$" } } },
+          "then": { "required": ["value"], "not": { "required": ["value_hex"] } },
+          "else": { "required": ["value_hex"], "not": { "required": ["value"] } }
+        }
+      ],
+      "oneOf": [
+        {
+          "required": ["decoded"],
+          "not": {
+            "anyOf": [{ "required": ["error"] }, { "required": ["error_detail"] }]
+          }
+        },
+        {
+          "required": ["error"],
+          "not": { "required": ["decoded"] }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

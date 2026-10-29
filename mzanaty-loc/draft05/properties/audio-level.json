@@ -1,0 +1,17 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "audio-level",
+  "spec_section": "2.3.3.1",
+  "vectors": [
+    {
+      "id": "varint",
+      "description": "draft-mzanaty-moq-loc-05 2.3 declares an even type's value as Length bytes, but its [MoQTransport], draft-ietf-moq-transport-10 9.1.1.2, frames an even type's value as one varint. Audio Level (2.3.3.1) declares 1 byte, the level in 7 bits; the varint 127 cannot be that, so the value is left uninterpreted.",
+      "property_type": "0x06",
+      "value": "127",
+      "decoded": {
+        "name": "Audio Level",
+        "uninterpreted": true
+      }
+    }
+  ]
+}

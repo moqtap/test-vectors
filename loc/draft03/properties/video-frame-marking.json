@@ -1,0 +1,134 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "video-frame-marking",
+  "spec_section": "2.3.2.2",
+  "vectors": [
+    {
+      "id": "one-octet-keyframe",
+      "description": "Video Frame Marking: 1 byte is the 1-octet form of RFC 9626 3.1: S=1, E=1, I=1, TID 0 (LOC-03 2.3.2.2). One octet is S E I D B TID; the short form of RFC 9626 3.2 is the same octet with B and TID zero.",
+      "property_type": "0x09",
+      "value_hex": "e0",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "octets": "1",
+        "S": true,
+        "E": true,
+        "I": true,
+        "D": false,
+        "B": false,
+        "TID": "0"
+      }
+    },
+    {
+      "id": "one-octet-discardable",
+      "description": "Video Frame Marking: 1 byte is the 1-octet form of RFC 9626 3.1: E=1, D=1, TID 0 (LOC-03 2.3.2.2). One octet is S E I D B TID; the short form of RFC 9626 3.2 is the same octet with B and TID zero.",
+      "property_type": "0x09",
+      "value_hex": "50",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "octets": "1",
+        "S": false,
+        "E": true,
+        "I": false,
+        "D": true,
+        "B": false,
+        "TID": "0"
+      }
+    },
+    {
+      "id": "one-octet-temporal-layer",
+      "description": "Video Frame Marking: 1 byte is the 1-octet form of RFC 9626 3.1: S=1, B=1, TID 3 (LOC-03 2.3.2.2). One octet is S E I D B TID; the short form of RFC 9626 3.2 is the same octet with B and TID zero.",
+      "property_type": "0x09",
+      "value_hex": "8b",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "octets": "1",
+        "S": true,
+        "E": false,
+        "I": false,
+        "D": false,
+        "B": true,
+        "TID": "3"
+      }
+    },
+    {
+      "id": "two-octet",
+      "description": "Video Frame Marking: 2 bytes are the 2-octet form of RFC 9626 3.1: S=1, I=1, TID 1, LID 5 (LOC-03 2.3.2.2).",
+      "property_type": "0x09",
+      "value_hex": "a105",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "octets": "2",
+        "S": true,
+        "E": false,
+        "I": true,
+        "D": false,
+        "B": false,
+        "TID": "1",
+        "LID": "5"
+      }
+    },
+    {
+      "id": "three-octet",
+      "description": "Video Frame Marking: 3 bytes are the 3-octet form of RFC 9626 3.1: S=1, E=1, I=1, TID 0, LID 0, TL0PICIDX 42 (LOC-03 2.3.2.2).",
+      "property_type": "0x09",
+      "value_hex": "e0002a",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "octets": "3",
+        "S": true,
+        "E": true,
+        "I": true,
+        "D": false,
+        "B": false,
+        "TID": "0",
+        "LID": "0",
+        "TL0PICIDX": "42"
+      }
+    },
+    {
+      "id": "three-octet-layered",
+      "description": "Video Frame Marking: 3 bytes are the 3-octet form of RFC 9626 3.1: S=1, B=1, TID 2, LID 1, TL0PICIDX 255 (LOC-03 2.3.2.2).",
+      "property_type": "0x09",
+      "value_hex": "8a01ff",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "octets": "3",
+        "S": true,
+        "E": false,
+        "I": false,
+        "D": false,
+        "B": true,
+        "TID": "2",
+        "LID": "1",
+        "TL0PICIDX": "255"
+      }
+    },
+    {
+      "id": "four-bytes",
+      "description": "Video Frame Marking: LOC-03 2.3.2.2 admits 4 bytes, but RFC 9626 3.1 defines 1-, 2- and 3-octet forms only, so the value is left uninterpreted.",
+      "property_type": "0x09",
+      "value_hex": "e0002a00",
+      "decoded": {
+        "name": "Video Frame Marking",
+        "uninterpreted": true
+      }
+    },
+    {
+      "id": "empty",
+      "description": "Video Frame Marking: a 0-byte value is outside the 1-4 bytes LOC-03 2.3.2.2 states.",
+      "property_type": "0x09",
+      "value_hex": "",
+      "error": "invalid_length",
+      "error_detail": "Video Frame Marking: Length: Varies (1-4 bytes)"
+    },
+    {
+      "id": "five-bytes",
+      "description": "Video Frame Marking: a 5-byte value is outside the 1-4 bytes LOC-03 2.3.2.2 states.",
+      "property_type": "0x09",
+      "value_hex": "e0002a0000",
+      "error": "invalid_length",
+      "error_detail": "Video Frame Marking: Length: Varies (1-4 bytes)"
+    }
+  ]
+}

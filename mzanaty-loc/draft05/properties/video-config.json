@@ -1,0 +1,17 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "video-config",
+  "spec_section": "2.3.2.1",
+  "vectors": [
+    {
+      "id": "varint",
+      "description": "draft-mzanaty-moq-loc-05 2.3 declares an even type's value as Length bytes, but its [MoQTransport], draft-ietf-moq-transport-10 9.1.1.2, frames an even type's value as one varint. Video Config (2.3.2.1) declares codec extradata of varying length; the varint 1 cannot be that, so the value is left uninterpreted.",
+      "property_type": "0x10",
+      "value": "1",
+      "decoded": {
+        "name": "Video Config",
+        "uninterpreted": true
+      }
+    }
+  ]
+}

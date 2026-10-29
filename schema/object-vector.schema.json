@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/moqtap/test-vectors/schema/object-vector.schema.json",
+  "title": "CMSF Object Test Vector File",
+  "description": "A collection of CMSF object vectors: the payload of one MOQT Object of a cmaf track and the CMAF header it is read against, paired with what the payload says at the level the draft states or the complaint it must draw. Box layouts are those of ISO/IEC 14496-12.",
+  "type": "object",
+  "required": ["topic", "vectors"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "What the file exercises, and its file name without the extension: 'structure', 'track-id', 'sap', 'timing'."
+    },
+    "spec_section": {
+      "type": "string",
+      "description": "The section of the draft most of the file's vectors cite. Each vector's description cites its own."
+    },
+    "vectors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/vector"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "bytes": {
+      "type": "object",
+      "required": ["hex"],
+      "properties": {
+        "hex": {
+          "type": "string",
+          "pattern": "^([0-9a-f]{2})*$",
+          "description": "The bytes, lowercase hex, no 0x prefix, no separators."
+        }
+      },
+      "additionalProperties": false
+    },
+    "digits": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "signed": {
+      "type": "string",
+      "pattern": "^-?[0-9]+$"
+    },
+    "not_signalled": {
+      "const": "not_signalled",
+      "description": "The payload and the header given do not state the value. A reader reports it as not signalled and does not fill it in."
+    },
+    "ambiguous": {
+      "const": "ambiguous",
+      "description": "The payload states the value in more than one way, and neither CMSF nor ISO/IEC 14496-12 ranks them. A reader reports it as ambiguous and does not pick one."
+    },
+    "decoded": {
+      "type": "object",
+      "required": [
+        "boxes",
+        "chunks",
+        "track_id_in_header",
+        "timescale",
+        "first_sample",
+        "earliest_presentation_time",
+        "ept_ms"
+      ],
+      "properties": {
+        "boxes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[\\x20-\\x7e]{4}$" },
+          "description": "The type of every top-level box in the payload, in order."
+        },
+        "chunks": {
+          "type": "array",
+          "minItems": 1,
+          "description": "One entry per moof that an mdat follows, in order.",
+          "items": {
+            "type": "object",
+            "required": ["sequence_number", "trafs"],
+            "properties": {
+              "sequence_number": { "$ref": "#/$defs/digits", "description": "mfhd sequence_number." },
+              "trafs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["track_id", "base_media_decode_time", "sample_count"],
+                  "properties": {
+                    "track_id": { "$ref": "#/$defs/digits", "description": "tfhd track_ID." },
+                    "base_media_decode_time": {
+                      "oneOf": [{ "$ref": "#/$defs/digits" }, { "$ref": "#/$defs/not_signalled" }],
+                      "description": "tfdt baseMediaDecodeTime, in the track's timescale; not signalled without a tfdt."
+                    },
+                    "sample_count": { "$ref": "#/$defs/digits", "description": "The samples of every trun in the traf." }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "track_id_in_header": {
+          "oneOf": [{ "const": true }, { "$ref": "#/$defs/not_signalled" }],
+          "description": "true when the header has a trak whose tkhd track_ID is the one the trafs name; not signalled when no header is given. A track_ID the header lacks is the error unknown_track_id."
+        },
+        "timescale": {
+          "oneOf": [{ "$ref": "#/$defs/digits" }, { "$ref": "#/$defs/not_signalled" }],
+          "description": "The track's mdhd timescale from the header."
+        },
+        "first_sample": {
+          "type": "object",
+          "description": "The first sample of the Object: the first sample of the first traf of the first chunk.",
+          "required": ["flags_from", "sync", "sap_type"],
+          "properties": {
+            "flags_from": {
+              "enum": [
+                "trun_sample_flags",
+                "trun_first_sample_flags",
+                "tfhd_default_sample_flags",
+                "trex_default_sample_flags",
+                "not_signalled",
+                "ambiguous"
+              ],
+              "description": "Where its sample_flags come from, by the precedence of ISO/IEC 14496-12: the trun's first_sample_flags or per-sample flags, then the tfhd's default_sample_flags, then the header's trex default_sample_flags. ISO/IEC 14496-12 lets a trun carry only one of first_sample_flags and per-sample flags; a trun carrying both is ambiguous."
+            },
+            "is_leading": { "type": "string", "pattern": "^[0-3]$", "description": "sample_flags is_leading." },
+            "depends_on": { "type": "string", "pattern": "^[0-3]$", "description": "sample_flags sample_depends_on." },
+            "sync": {
+              "oneOf": [{ "type": "boolean" }, { "$ref": "#/$defs/not_signalled" }, { "$ref": "#/$defs/ambiguous" }],
+              "description": "true when sample_is_non_sync_sample is 0."
+            },
+            "sap_type": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": { "type": "string", "pattern": "^[1-6]$" }
+                },
+                { "$ref": "#/$defs/not_signalled" },
+                { "$ref": "#/$defs/ambiguous" }
+              ],
+              "description": "The SAP types the data allows for the sample, as candidates; one item when the data decides it. A 'sap ' sample group states the type. Otherwise, by ISO/IEC 14496-12: a sync sample is type 1 or 2; a later sample of the Object presented before it rules out 1, and the type is 2 alone when every such sample has is_leading 3 (decodable), else 2 or 3. A non-sync sample in no 'sap ' group signals no type."
+            }
+          },
+          "if": { "properties": { "flags_from": { "enum": ["not_signalled", "ambiguous"] } } },
+          "then": { "not": { "anyOf": [{ "required": ["is_leading"] }, { "required": ["depends_on"] }] } },
+          "else": { "required": ["is_leading", "depends_on"] },
+          "additionalProperties": false
+        },
+        "earliest_presentation_time": {
+          "oneOf": [{ "$ref": "#/$defs/signed" }, { "$ref": "#/$defs/not_signalled" }],
+          "description": "The earliest presentation time of all samples in the Object, in the track's timescale: decode time from tfdt and the sample durations, plus the composition offset. No fixture has an edit list."
+        },
+        "ept_ms": {
+          "oneOf": [
+            {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 2,
+              "items": { "$ref": "#/$defs/signed" }
+            },
+            { "$ref": "#/$defs/not_signalled" }
+          ],
+          "description": "earliest_presentation_time rounded to the nearest millisecond, the value a SAP Type timeline record carries (CMSF 3.6.1). Two candidates when it lies exactly halfway."
+        }
+      },
+      "additionalProperties": false
+    },
+    "vector": {
+      "type": "object",
+      "required": ["id", "description", "object"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique identifier within the file. Kebab-case."
+        },
+        "description": {
+          "type": "string",
+          "description": "What the case tests, and the sentence of the draft that decides it."
+        },
+        "header": {
+          "$ref": "#/$defs/bytes",
+          "description": "The CMAF header the catalog gives the track, decoded from its Base64. Absent when the vector reads the Object without one."
+        },
+        "object": {
+          "$ref": "#/$defs/bytes",
+          "description": "The Object payload."
+        },
+        "first_in_group": {
+          "const": true,
+          "description": "The Object is the first of its Group, so CMSF 3.4's SAP rule applies. Absent otherwise."
+        },
+        "decoded": {
+          "$ref": "#/$defs/decoded"
+        },
+        "error": {
+          "type": "string",
+          "enum": [
+            "malformed_box",
+            "missing_chunk",
+            "missing_box",
+            "unknown_track_id",
+            "multiple_tracks",
+            "invalid_group_start"
+          ],
+          "description": "Error category for invalid vectors. malformed_box: a box size is below its header's or runs past its parent or the payload, or a box's fields run past its end. missing_chunk: no moof is followed by an mdat (3.3). missing_box: a moof lacks its mfhd or a traf, or a traf its tfhd (3.3). unknown_track_id: a tfhd track_ID matches no tkhd in the header (3.3). multiple_tracks: the trafs name more than one track_ID (3.3). invalid_group_start: the first Object of a Group begins with a signalled SAP type other than 1 or 2 (3.4 'MUST begin with an Object containing a stream access point (SAP) type 1 or 2', with 3.6.1, which requires the SAP type the first Object begins with to be 1 or 2)."
+        },
+        "error_detail": {
+          "type": "string",
+          "description": "Optional human-readable detail: usually the box or value at fault."
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["decoded"],
+          "not": {
+            "anyOf": [{ "required": ["error"] }, { "required": ["error_detail"] }]
+          }
+        },
+        {
+          "required": ["error"],
+          "not": { "required": ["decoded"] }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

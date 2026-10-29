@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schema/meta.schema.json",
+  "id": "draft05",
+  "spec": "draft-mzanaty-moq-loc-05",
+  "spec_url": "https://www.ietf.org/archive/id/draft-mzanaty-moq-loc-05.txt",
+  "categories": [
+    "properties"
+  ],
+  "description": "The individual draft that draft-ietf-moq-msf-00 cites as [LOC]. Its 2.3 frames an even type's value as Length and bytes, which its [MoQTransport], draft-ietf-moq-transport-10 (9.1.1.2), frames as one varint. All four of its types are even, so none of its values can be read as it declares them."
+}

@@ -4,7 +4,9 @@
   "spec": "draft-ietf-moq-cmsf-00",
   "spec_url": "https://www.ietf.org/archive/id/draft-ietf-moq-cmsf-00.txt",
   "categories": [
-    "catalog"
+    "catalog",
+    "objects",
+    "timeline"
   ],
-  "description": "CMSF-00 extends draft-ietf-moq-warp-01 (WARP Streaming Format), which is not included. Its catalog example writes version as a Number and puts each track's header in initData; these vectors cover only what CMSF-00 defines."
+  "description": "CMSF-00 extends draft-ietf-moq-warp-01 (WARP Streaming Format), which is not included. Its catalog example writes version as a Number and puts each track's header in initData; these vectors cover only what CMSF-00 defines. Object vectors read a cmaf Object against its header; timeline vectors cover the SAP Type timeline, whose Location shape CMSF-00 shows only in its 3.6.2 example."
 }

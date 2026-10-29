@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "audio-config",
+  "spec_section": "2.3.3.1",
+  "vectors": [
+    {
+      "id": "description",
+      "description": "Audio Config: 19 bytes of codec configuration, carried unchanged; LOC-04 2.3.3.1 gives the length as Varies and names no structure.",
+      "property_type": "0x0f",
+      "value_hex": "4f707573486561640102380180bb0000000000",
+      "decoded": {
+        "name": "Audio Config",
+        "length": "19"
+      }
+    },
+    {
+      "id": "two-bytes",
+      "description": "Audio Config: 2 bytes of codec configuration, carried unchanged; LOC-04 2.3.3.1 gives the length as Varies and names no structure.",
+      "property_type": "0x0f",
+      "value_hex": "1210",
+      "decoded": {
+        "name": "Audio Config",
+        "length": "2"
+      }
+    },
+    {
+      "id": "empty",
+      "description": "Audio Config: 0 bytes of codec configuration, carried unchanged; LOC-04 2.3.3.1 gives the length as Varies and names no structure.",
+      "property_type": "0x0f",
+      "value_hex": "",
+      "decoded": {
+        "name": "Audio Config",
+        "length": "0"
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "audio-level",
+  "spec_section": "2.3.3.2",
+  "vectors": [
+    {
+      "id": "voice",
+      "description": "Audio Level: the low 8 bits are the RFC 6464 Section 3 octet: V=1, level 30 (-30 dBov). LOC-03 2.3.3.2 defines the value as the audio level and a voice activity indicator; with no vad attribute RFC 6464 Section 4 defaults to vad=on, so V is voice activity.",
+      "property_type": "0x0c",
+      "value": "158",
+      "decoded": {
+        "name": "Audio Level",
+        "voice_activity": true,
+        "level": "30"
+      }
+    },
+    {
+      "id": "no-voice",
+      "description": "Audio Level: the low 8 bits are the RFC 6464 Section 3 octet: V=0, level 30 (-30 dBov). LOC-03 2.3.3.2 defines the value as the audio level and a voice activity indicator; with no vad attribute RFC 6464 Section 4 defaults to vad=on, so V is voice activity.",
+      "property_type": "0x0c",
+      "value": "30",
+      "decoded": {
+        "name": "Audio Level",
+        "voice_activity": false,
+        "level": "30"
+      }
+    },
+    {
+      "id": "silence",
+      "description": "Audio Level: the low 8 bits are the RFC 6464 Section 3 octet: V=0, level 127 (-127 dBov). LOC-03 2.3.3.2 defines the value as the audio level and a voice activity indicator; with no vad attribute RFC 6464 Section 4 defaults to vad=on, so V is voice activity.",
+      "property_type": "0x0c",
+      "value": "127",
+      "decoded": {
+        "name": "Audio Level",
+        "voice_activity": false,
+        "level": "127"
+      }
+    },
+    {
+      "id": "silence-voice",
+      "description": "Audio Level: the low 8 bits are the RFC 6464 Section 3 octet: V=1, level 127 (-127 dBov). LOC-03 2.3.3.2 defines the value as the audio level and a voice activity indicator; with no vad attribute RFC 6464 Section 4 defaults to vad=on, so V is voice activity.",
+      "property_type": "0x0c",
+      "value": "255",
+      "decoded": {
+        "name": "Audio Level",
+        "voice_activity": true,
+        "level": "127"
+      }
+    },
+    {
+      "id": "loudest",
+      "description": "Audio Level: the low 8 bits are the RFC 6464 Section 3 octet: V=0, level 0 (0 dBov). LOC-03 2.3.3.2 defines the value as the audio level and a voice activity indicator; with no vad attribute RFC 6464 Section 4 defaults to vad=on, so V is voice activity.",
+      "property_type": "0x0c",
+      "value": "0",
+      "decoded": {
+        "name": "Audio Level",
+        "voice_activity": false,
+        "level": "0"
+      }
+    },
+    {
+      "id": "beyond-ff",
+      "description": "Audio Level: 256 is outside the values 0x00-0xFF LOC-03 2.3.3.2 states.",
+      "property_type": "0x0c",
+      "value": "256",
+      "error": "out_of_range",
+      "error_detail": "Audio Level: vi64 (1-2 bytes to encode values 0x00-0xFF)"
+    }
+  ]
+}

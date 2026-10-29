@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/moqtap/test-vectors/schema/timeline-vector.schema.json",
+  "title": "Timeline Test Vector File",
+  "description": "A collection of timeline vectors: the exact payload of one media or event timeline Object, uncompressed, or the value of a track's media timeline template, paired with the records it holds or the complaint it must draw.",
+  "type": "object",
+  "required": ["topic", "format", "vectors"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "What the file exercises, and its file name without the extension: 'media', 'event' and 'template' for MSF, 'sap' for the CMSF SAP Type timeline."
+    },
+    "format": {
+      "type": "string",
+      "enum": ["mediatimeline", "eventtimeline", "template"],
+      "description": "What each input is. mediatimeline: the payload of a media timeline Object (MSF 7.1). eventtimeline: the payload of an event timeline Object (MSF 8.1). template: the value of a track's template field (MSF-01 5.2.15, 7.4.1)."
+    },
+    "event_type": {
+      "type": "string",
+      "description": "The catalog eventType of the timeline track, which defines the structure of each record's data. Absent when data is read as it is, with no eventType's definition applied."
+    },
+    "spec_section": {
+      "type": "string",
+      "description": "The section of the draft most of the file's vectors cite. Each vector's description cites its own."
+    },
+    "vectors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/vector"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "format": { "const": "eventtimeline" } } },
+      "else": { "not": { "required": ["event_type"] } }
+    }
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "sap_record": {
+      "type": "object",
+      "description": "One SAP Type timeline record (CMSF 3.6.1): its Location and its data. Integers are strings of decimal digits.",
+      "required": ["group_id", "object_id", "sap_type", "ept_ms"],
+      "properties": {
+        "group_id": { "type": "string", "pattern": "^[0-9]+$", "description": "The first item of the 'l' Location." },
+        "object_id": { "type": "string", "pattern": "^[0-9]+$", "description": "The second item of the 'l' Location." },
+        "sap_type": { "type": "string", "pattern": "^[0-3]$", "description": "The first integer of data." },
+        "ept_ms": { "type": "string", "pattern": "^-?[0-9]+$", "description": "The second integer of data: the earliest presentation time of the Object's samples, in milliseconds." }
+      },
+      "additionalProperties": false
+    },
+    "media_record": {
+      "type": "object",
+      "description": "One media timeline record (MSF 7.1), or one entry a template yields (MSF-01 7.4.1). Integers are strings of decimal digits.",
+      "required": ["media_time_ms", "group_id", "object_id", "wallclock_ms"],
+      "properties": {
+        "media_time_ms": { "type": "string", "pattern": "^-?[0-9]+$", "description": "The first item: the media presentation timestamp, in milliseconds." },
+        "group_id": { "type": "string", "pattern": "^[0-9]+$", "description": "The first number of the second item, the Location." },
+        "object_id": { "type": "string", "pattern": "^[0-9]+$", "description": "The second number of the Location." },
+        "wallclock_ms": { "type": "string", "pattern": "^[0-9]+$", "description": "The third item: milliseconds since 1970-01-01T00:00:00Z." }
+      },
+      "additionalProperties": false
+    },
+    "event_record": {
+      "type": "object",
+      "description": "One event timeline record (MSF 8.1) read as it is: the key of its index reference, that reference's value, and data. Integers are strings of decimal digits.",
+      "required": ["index", "data"],
+      "properties": {
+        "index": { "type": "string", "enum": ["t", "l", "m"], "description": "The index reference the record carries." },
+        "wallclock_ms": { "type": "string", "pattern": "^[0-9]+$", "description": "'t': milliseconds since 1970-01-01T00:00:00Z." },
+        "group_id": { "type": "string", "pattern": "^[0-9]+$", "description": "'l': the first item of the Location." },
+        "object_id": { "type": "string", "pattern": "^[0-9]+$", "description": "'l': the second item of the Location." },
+        "media_time_ms": { "type": "string", "pattern": "^-?[0-9]+$", "description": "'m': the media PTS, in milliseconds." },
+        "data": { "description": "The record's data, the JSON value as the payload has it." }
+      },
+      "oneOf": [
+        {
+          "properties": { "index": { "const": "t" } },
+          "required": ["wallclock_ms"],
+          "not": { "anyOf": [{ "required": ["group_id"] }, { "required": ["object_id"] }, { "required": ["media_time_ms"] }] }
+        },
+        {
+          "properties": { "index": { "const": "l" } },
+          "required": ["group_id", "object_id"],
+          "not": { "anyOf": [{ "required": ["wallclock_ms"] }, { "required": ["media_time_ms"] }] }
+        },
+        {
+          "properties": { "index": { "const": "m" } },
+          "required": ["media_time_ms"],
+          "not": { "anyOf": [{ "required": ["wallclock_ms"] }, { "required": ["group_id"] }, { "required": ["object_id"] }] }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "template": {
+      "type": "object",
+      "description": "The six values of a media timeline template (MSF-01 7.4.1), each Location split into its Group ID and Object ID. Integers are strings of decimal digits.",
+      "required": ["start_media_time_ms", "delta_media_time_ms", "start_group_id", "start_object_id", "delta_group_id", "delta_object_id", "start_wallclock_ms", "delta_wallclock_ms"],
+      "properties": {
+        "start_media_time_ms": { "type": "string", "pattern": "^-?[0-9]+$", "description": "startMediaTime." },
+        "delta_media_time_ms": { "type": "string", "pattern": "^-?[0-9]+$", "description": "deltaMediaTime." },
+        "start_group_id": { "type": "string", "pattern": "^[0-9]+$", "description": "The first number of startLocation." },
+        "start_object_id": { "type": "string", "pattern": "^[0-9]+$", "description": "The second number of startLocation." },
+        "delta_group_id": { "type": "string", "pattern": "^-?[0-9]+$", "description": "The first number of deltaLocation." },
+        "delta_object_id": { "type": "string", "pattern": "^-?[0-9]+$", "description": "The second number of deltaLocation." },
+        "start_wallclock_ms": { "type": "string", "pattern": "^[0-9]+$", "description": "startWallclock." },
+        "delta_wallclock_ms": { "type": "string", "pattern": "^-?[0-9]+$", "description": "deltaWallclock." }
+      },
+      "additionalProperties": false
+    },
+    "vector": {
+      "type": "object",
+      "required": ["id", "description", "input"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique identifier within the file. Kebab-case."
+        },
+        "description": {
+          "type": "string",
+          "description": "What the case tests, and the sentence of the draft that decides it."
+        },
+        "input": {
+          "type": "object",
+          "required": ["text"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The payload, or the template value, as text. Its UTF-8 encoding is the bytes."
+            }
+          },
+          "additionalProperties": false
+        },
+        "entries": {
+          "type": "string",
+          "pattern": "^[0-9]+$",
+          "description": "Template vectors that decode: how many entries decoded.records lists, n = 0 up to entries - 1."
+        },
+        "decoded": {
+          "type": "object",
+          "required": ["records"],
+          "properties": {
+            "records": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  { "$ref": "#/$defs/sap_record" },
+                  { "$ref": "#/$defs/media_record" },
+                  { "$ref": "#/$defs/event_record" }
+                ]
+              },
+              "description": "Every record of the payload, in payload order: SAP Type timeline records for the eventType org.ietf.moq.cmsf.sap, event records for an event timeline without event_type, media records for a media timeline. Nothing is merged or dropped. For a template, the entries mediaTime[n], location[n] and wallclock[n] of MSF-01 7.4.1."
+            },
+            "template": {
+              "$ref": "#/$defs/template"
+            }
+          },
+          "additionalProperties": false
+        },
+        "error": {
+          "type": "string",
+          "enum": ["invalid_json", "invalid_value", "missing_field", "invalid_index"],
+          "description": "Error category for invalid vectors. invalid_json: the input is not JSON text (RFC 8259). invalid_value: the payload, the template, a record, a Location, a time or data is not of the shape or within the values the draft allows. missing_field: a record or the template lacks a required field or item. invalid_index: an event record's index reference is not exactly one of the keys the draft allows."
+        },
+        "error_detail": {
+          "type": "string",
+          "description": "Optional human-readable detail: the path of the value at fault, such as records[0].data[0], records[0][2] or template[3]."
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["decoded"],
+          "not": {
+            "anyOf": [{ "required": ["error"] }, { "required": ["error_detail"] }]
+          }
+        },
+        {
+          "required": ["error"],
+          "not": { "anyOf": [{ "required": ["decoded"] }, { "required": ["entries"] }] }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

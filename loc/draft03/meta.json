@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schema/meta.schema.json",
+  "id": "draft03",
+  "spec": "draft-ietf-moq-loc-03",
+  "spec_url": "https://www.ietf.org/archive/id/draft-ietf-moq-loc-03.txt",
+  "categories": [
+    "properties"
+  ],
+  "description": "Its [MoQTransport] is draft-ietf-moq-transport-18, whose varint is the vi64 of its Section 1.4.1. Timestamp has two types, 0x0A in 2.3.1.1 and 0x06 in Table 1, and timestamp.json covers both."
+}

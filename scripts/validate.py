@@ -17,6 +17,14 @@ Checks:
    resolves to itself parsed
 10. Every JSON file under a version directory sits in a category its meta.json
     lists, and every listed category exists
+11. Property vectors: an even type carries `value`, an odd type `value_hex`;
+    exactly one of decoded and error; decoded has one of its four shapes
+12. Object vectors: header and object are lowercase hex; exactly one of
+    decoded and error; a header's top-level boxes tile it and include moov;
+    a decoded object's top-level boxes tile it and are the ones it lists
+13. Timeline vectors: exactly one of decoded and error; invalid_json exactly
+    when the text does not parse; decoded is what the input reads as under the
+    file's format: its records in payload order, or a template's entries
 
 Every spec in manifest.json is walked.
 
@@ -403,6 +411,357 @@ def validate_catalog_vectors(filepath, data):
                 err(f"{filepath}: {where} is tolerant, so it resolves and binds the reader profile alone")
 
 
+def _load_property_schema():
+    path = os.path.join(REPO_ROOT, "schema", "property-vector.schema.json")
+    with open(path) as f:
+        schema = json.load(f)
+    vector = schema["$defs"]["vector"]
+    return (
+        set(schema["properties"]),
+        set(vector["properties"]),
+        set(vector["properties"]["error"]["enum"]),
+        set(schema["$defs"]["fields"]["properties"]),
+    )
+
+
+(PROPERTY_FILE_FIELDS, PROPERTY_VECTOR_FIELDS, PROPERTY_ERROR_CATEGORIES,
+ PROPERTY_FIELDS) = _load_property_schema()
+_PROPERTY_BOOL_FIELDS = {"S", "E", "I", "D", "B", "voice_activity"}
+
+
+def _check_reading(filepath, where, reading):
+    extra = set(reading) - PROPERTY_FIELDS
+    if extra:
+        err(f"{filepath}: {where} carries {sorted(extra)}, which the schema does not declare")
+    for k, v in reading.items():
+        if k in _PROPERTY_BOOL_FIELDS:
+            if not isinstance(v, bool):
+                err(f"{filepath}: {where}.{k} must be a boolean")
+        elif k in PROPERTY_FIELDS and not (isinstance(v, str) and INT_PATTERN.match(v)):
+            err(f"{filepath}: {where}.{k} = {v!r} must be a string of digits")
+
+
+def validate_property_vectors(filepath, data):
+    """Validate a property vector file: value form by parity, and the shape of decoded."""
+    extra = set(data) - PROPERTY_FILE_FIELDS
+    if extra:
+        err(f"{filepath}: carries {sorted(extra)}, which the property schema does not declare")
+    stem = os.path.splitext(os.path.basename(filepath))[0]
+    if data.get("topic") != stem:
+        err(f"{filepath}: topic {data.get('topic')!r} is not the file name {stem!r}")
+    if "vectors" not in data:
+        err(f"{filepath}: missing 'vectors' array")
+        return
+
+    validate_vector_ids(filepath, data["vectors"])
+
+    for i, v in enumerate(data["vectors"]):
+        where = f"[{i}] '{v.get('id', i)}'"
+        extra = set(v) - PROPERTY_VECTOR_FIELDS
+        if extra:
+            err(f"{filepath}: {where} carries {sorted(extra)}, which the schema does not declare")
+        if not isinstance(v.get("description"), str) or not v.get("description"):
+            err(f"{filepath}: {where} needs a description citing the draft")
+
+        ptype = v.get("property_type")
+        if not isinstance(ptype, str) or not _KVP_TYPE_PATTERN.match(ptype):
+            err(f"{filepath}: {where} property_type {ptype!r} must be lowercase hex, like '0x0d'")
+            continue
+        if int(ptype, 16) % 2 == 0:
+            if "value_hex" in v or not (isinstance(v.get("value"), str) and INT_PATTERN.match(v["value"])):
+                err(f"{filepath}: {where} has an even type, so it carries `value` in decimal digits and no `value_hex`")
+        else:
+            raw = v.get("value_hex")
+            if "value" in v or not (isinstance(raw, str) and (raw == "" or HEX_PATTERN.match(raw))):
+                err(f"{filepath}: {where} has an odd type, so it carries `value_hex` in lowercase hex and no `value`")
+
+        has_decoded = "decoded" in v
+        has_error = "error" in v
+        if has_decoded == has_error:
+            err(f"{filepath}: {where} must carry exactly one of decoded and error")
+            continue
+        if has_error:
+            if v["error"] not in PROPERTY_ERROR_CATEGORIES:
+                err(f"{filepath}: {where} claims error category {v['error']!r}, which the schema does not name")
+            continue
+        if "error_detail" in v:
+            err(f"{filepath}: {where} decodes and still carries error_detail")
+
+        d = v["decoded"]
+        if not isinstance(d, dict):
+            err(f"{filepath}: {where} decoded must be an object")
+            continue
+        if "ambiguous" in d:
+            names = d["ambiguous"]
+            if (set(d) != {"ambiguous"} or not isinstance(names, list) or len(names) < 2
+                    or len(set(names)) != len(names) or not all(isinstance(n, str) for n in names)):
+                err(f"{filepath}: {where} ambiguous stands alone and lists two or more distinct names")
+            continue
+        if not isinstance(d.get("name"), str):
+            err(f"{filepath}: {where} decoded needs a name unless it is ambiguous")
+        if "uninterpreted" in d:
+            if d["uninterpreted"] is not True or set(d) != {"name", "uninterpreted"}:
+                err(f"{filepath}: {where} uninterpreted is true and sits beside name alone")
+        elif "candidates" in d:
+            cands = d["candidates"]
+            if set(d) != {"name", "candidates"} or not isinstance(cands, list) or len(cands) < 2:
+                err(f"{filepath}: {where} candidates sits beside name alone and lists two or more readings")
+                continue
+            for n, c in enumerate(cands):
+                if not isinstance(c, dict) or not c:
+                    err(f"{filepath}: {where} candidates[{n}] must be a non-empty reading")
+                else:
+                    _check_reading(filepath, f"{where}.candidates[{n}]", c)
+            if len({json.dumps(c, sort_keys=True) for c in cands}) != len(cands):
+                err(f"{filepath}: {where} lists the same reading twice")
+        else:
+            _check_reading(filepath, f"{where}.decoded", {k: x for k, x in d.items() if k != "name"})
+
+
+def _load_object_schema():
+    path = os.path.join(REPO_ROOT, "schema", "object-vector.schema.json")
+    with open(path) as f:
+        schema = json.load(f)
+    vector = schema["$defs"]["vector"]
+    return (
+        set(schema["properties"]),
+        set(vector["properties"]),
+        set(vector["properties"]["error"]["enum"]),
+    )
+
+
+OBJECT_FILE_FIELDS, OBJECT_VECTOR_FIELDS, OBJECT_ERROR_CATEGORIES = _load_object_schema()
+
+
+def _top_level_boxes(raw):
+    """Box types if the 32-bit sizes tile `raw` exactly, else None."""
+    types, pos = [], 0
+    while pos < len(raw):
+        if len(raw) - pos < 8:
+            return None
+        size = struct.unpack(">I", raw[pos:pos + 4])[0]
+        if size < 8 or pos + size > len(raw):
+            return None
+        types.append(raw[pos + 4:pos + 8].decode("latin-1"))
+        pos += size
+    return types
+
+
+def _hex_bytes(filepath, where, holder, name):
+    h = holder.get("hex") if isinstance(holder, dict) else None
+    if not isinstance(holder, dict) or set(holder) != {"hex"} or not isinstance(h, str) \
+            or not (h == "" or HEX_PATTERN.match(h)):
+        err(f"{filepath}: {where} {name} must be {{\"hex\": ...}} in lowercase hex")
+        return None
+    return bytes.fromhex(h)
+
+
+def validate_object_vectors(filepath, data):
+    """Validate a CMSF object vector file: hex, exactly one of decoded and error, exact box sizes."""
+    extra = set(data) - OBJECT_FILE_FIELDS
+    if extra:
+        err(f"{filepath}: carries {sorted(extra)}, which the object schema does not declare")
+    stem = os.path.splitext(os.path.basename(filepath))[0]
+    if data.get("topic") != stem:
+        err(f"{filepath}: topic {data.get('topic')!r} is not the file name {stem!r}")
+    if "vectors" not in data:
+        err(f"{filepath}: missing 'vectors' array")
+        return
+    validate_vector_ids(filepath, data["vectors"])
+    for i, v in enumerate(data["vectors"]):
+        where = f"[{i}] '{v.get('id', i)}'"
+        extra = set(v) - OBJECT_VECTOR_FIELDS
+        if extra:
+            err(f"{filepath}: {where} carries {sorted(extra)}, which the schema does not declare")
+        if not isinstance(v.get("description"), str) or not v.get("description"):
+            err(f"{filepath}: {where} needs a description citing the draft")
+        if "first_in_group" in v and v["first_in_group"] is not True:
+            err(f"{filepath}: {where} first_in_group is true or absent")
+        obj = _hex_bytes(filepath, where, v.get("object"), "object")
+        if "header" in v:
+            hdr = _hex_bytes(filepath, where, v["header"], "header")
+            if hdr is not None:
+                types = _top_level_boxes(hdr)
+                if types is None or "moov" not in types:
+                    err(f"{filepath}: {where} header's boxes must tile it and include moov")
+        has_decoded, has_error = "decoded" in v, "error" in v
+        if has_decoded == has_error:
+            err(f"{filepath}: {where} must carry exactly one of decoded and error")
+            continue
+        if has_error:
+            if v["error"] not in OBJECT_ERROR_CATEGORIES:
+                err(f"{filepath}: {where} claims error category {v['error']!r}, which the schema does not name")
+            continue
+        if "error_detail" in v:
+            err(f"{filepath}: {where} decodes and still carries error_detail")
+        d = v["decoded"]
+        if not isinstance(d, dict):
+            err(f"{filepath}: {where} decoded must be an object")
+            continue
+        if obj is not None and _top_level_boxes(obj) != d.get("boxes"):
+            err(f"{filepath}: {where} object's boxes must tile it and be the ones decoded.boxes lists")
+        if ("header" in v) != (d.get("track_id_in_header") is True):
+            err(f"{filepath}: {where} track_id_in_header is true exactly when a header is given")
+
+
+def _load_timeline_schema():
+    path = os.path.join(REPO_ROOT, "schema", "timeline-vector.schema.json")
+    with open(path) as f:
+        schema = json.load(f)
+    vector = schema["$defs"]["vector"]
+    return (
+        set(schema["properties"]),
+        set(schema["properties"]["format"]["enum"]),
+        set(vector["properties"]),
+        set(vector["properties"]["error"]["enum"]),
+    )
+
+
+(TIMELINE_FILE_FIELDS, TIMELINE_FORMATS, TIMELINE_VECTOR_FIELDS,
+ TIMELINE_ERROR_CATEGORIES) = _load_timeline_schema()
+SAP_EVENT_TYPE = "org.ietf.moq.cmsf.sap"
+
+
+def _is_int(x):
+    return isinstance(x, int) and not isinstance(x, bool)
+
+
+def _is_location(x):
+    return isinstance(x, list) and len(x) == 2 and all(_is_int(n) and n >= 0 for n in x)
+
+
+def _media_record(item):
+    """A well-formed media timeline record as decoded lists it, or None."""
+    if not (isinstance(item, list) and len(item) == 3 and _is_int(item[0])
+            and _is_location(item[1]) and _is_int(item[2]) and item[2] >= 0):
+        return None
+    return {"media_time_ms": str(item[0]), "group_id": str(item[1][0]),
+            "object_id": str(item[1][1]), "wallclock_ms": str(item[2])}
+
+
+def _event_record(item):
+    """A well-formed event timeline record, data as it is, or None."""
+    if not isinstance(item, dict) or "data" not in item:
+        return None
+    keys = [k for k in ("t", "l", "m") if k in item]
+    if len(keys) != 1:
+        return None
+    key, x = keys[0], item[keys[0]]
+    out = {"index": key}
+    if key == "l":
+        if not _is_location(x):
+            return None
+        out["group_id"], out["object_id"] = str(x[0]), str(x[1])
+    elif not _is_int(x) or (key == "t" and x < 0):
+        return None
+    else:
+        out["wallclock_ms" if key == "t" else "media_time_ms"] = str(x)
+    out["data"] = item["data"]
+    return out
+
+
+def _sap_record(item):
+    """A well-formed SAP Type timeline record as decoded lists it, or None."""
+    if not isinstance(item, dict) or set(item) != {"l", "data"} or not _is_location(item["l"]):
+        return None
+    d = item["data"]
+    if not (isinstance(d, list) and len(d) == 2 and all(_is_int(n) for n in d) and 0 <= d[0] <= 3):
+        return None
+    return {"group_id": str(item["l"][0]), "object_id": str(item["l"][1]),
+            "sap_type": str(d[0]), "ept_ms": str(d[1])}
+
+
+def _expected_decoded(fmt, event_type, doc, entries):
+    """What decoded must be for a parsed input, or None when it does not read."""
+    if fmt == "template":
+        if not (isinstance(doc, list) and len(doc) == 6 and _is_int(doc[0]) and _is_int(doc[1])
+                and _is_location(doc[2]) and isinstance(doc[3], list) and len(doc[3]) == 2
+                and all(_is_int(n) for n in doc[3]) and _is_int(doc[4]) and doc[4] >= 0
+                and _is_int(doc[5]) and entries is not None):
+            return None
+        sm, dm, (sg, so), (dg, do), sw, dw = doc
+        template = {
+            "start_media_time_ms": sm, "delta_media_time_ms": dm,
+            "start_group_id": sg, "start_object_id": so,
+            "delta_group_id": dg, "delta_object_id": do,
+            "start_wallclock_ms": sw, "delta_wallclock_ms": dw,
+        }
+        # MSF-01 7.4.1: mediaTime[n] = startMediaTime + (n * deltaMediaTime), and alike.
+        records = [_media_record([sm + n * dm, [sg + n * dg, so + n * do], sw + n * dw])
+                   for n in range(entries)]
+        if None in records:
+            return None
+        return {"template": {k: str(x) for k, x in template.items()}, "records": records}
+    if fmt == "mediatimeline":
+        read = _media_record
+    elif event_type is None:
+        read = _event_record
+    elif event_type == SAP_EVENT_TYPE:
+        read = _sap_record
+    else:
+        return None
+    if not isinstance(doc, list):
+        return None
+    records = [read(item) for item in doc]
+    return None if None in records else {"records": records}
+
+
+def validate_timeline_vectors(filepath, data):
+    """Validate a timeline vector file: inputs that parse, and read, as their expectation says."""
+    extra = set(data) - TIMELINE_FILE_FIELDS
+    if extra:
+        err(f"{filepath}: carries {sorted(extra)}, which the timeline schema does not declare")
+    stem = os.path.splitext(os.path.basename(filepath))[0]
+    if data.get("topic") != stem:
+        err(f"{filepath}: topic {data.get('topic')!r} is not the file name {stem!r}")
+    fmt = data.get("format")
+    if fmt not in TIMELINE_FORMATS:
+        err(f"{filepath}: format {fmt!r} is not one the schema names")
+    event_type = data.get("event_type")
+    if event_type is not None and (fmt != "eventtimeline" or not isinstance(event_type, str)):
+        err(f"{filepath}: event_type belongs to an eventtimeline file only, as a string")
+    if "vectors" not in data:
+        err(f"{filepath}: missing 'vectors' array")
+        return
+    validate_vector_ids(filepath, data["vectors"])
+    for i, v in enumerate(data["vectors"]):
+        where = f"[{i}] '{v.get('id', i)}'"
+        extra = set(v) - TIMELINE_VECTOR_FIELDS
+        if extra:
+            err(f"{filepath}: {where} carries {sorted(extra)}, which the schema does not declare")
+        if not isinstance(v.get("description"), str) or not v.get("description"):
+            err(f"{filepath}: {where} needs a description citing the draft")
+        payload = v.get("input")
+        if not isinstance(payload, dict) or set(payload) != {"text"} or not isinstance(payload["text"], str):
+            err(f"{filepath}: {where} input must be {{\"text\": ...}}")
+            continue
+        try:
+            doc, parses = json.loads(payload["text"]), True
+        except json.JSONDecodeError:
+            doc, parses = None, False
+        has_decoded, has_error = "decoded" in v, "error" in v
+        if has_decoded == has_error:
+            err(f"{filepath}: {where} must carry exactly one of decoded and error")
+            continue
+        if ("entries" in v) != (fmt == "template" and has_decoded):
+            err(f"{filepath}: {where} carries entries exactly when it is a template that decodes")
+        if has_error:
+            if v["error"] not in TIMELINE_ERROR_CATEGORIES:
+                err(f"{filepath}: {where} claims error category {v['error']!r}, which the schema does not name")
+            if parses == (v["error"] == "invalid_json"):
+                err(f"{filepath}: {where} is invalid_json exactly when its text does not parse")
+            continue
+        if "error_detail" in v:
+            err(f"{filepath}: {where} decodes and still carries error_detail")
+        entries = v.get("entries")
+        entries = int(entries) if isinstance(entries, str) and INT_PATTERN.match(entries) else None
+        expected = _expected_decoded(fmt, event_type, doc, entries) if parses else None
+        if expected is None:
+            err(f"{filepath}: {where} decodes, but its input does not read as a {fmt} input")
+        elif v["decoded"] != expected:
+            err(f"{filepath}: {where} decoded is not what its input reads as: {json.dumps(expected)}")
+
+
 def _dvi_quic(data, off):
     """Decode a QUIC varint at offset. Returns (value, bytes_consumed) or (None, 0)."""
     if off >= len(data):
@@ -595,6 +954,21 @@ for spec_name, draft_id, vpath in manifest_versions():
         relpath, data = load(filepath)
         if data is not None:
             validate_catalog_vectors(relpath, data)
+
+    for filepath in sorted(glob.glob(os.path.join(base, "properties", "**", "*.json"), recursive=True)):
+        relpath, data = load(filepath)
+        if data is not None:
+            validate_property_vectors(relpath, data)
+
+    for filepath in sorted(glob.glob(os.path.join(base, "objects", "**", "*.json"), recursive=True)):
+        relpath, data = load(filepath)
+        if data is not None:
+            validate_object_vectors(relpath, data)
+
+    for filepath in sorted(glob.glob(os.path.join(base, "timeline", "**", "*.json"), recursive=True)):
+        relpath, data = load(filepath)
+        if data is not None:
+            validate_timeline_vectors(relpath, data)
 
 # 2. Validate meta.json files
 print("Checking meta.json files...")

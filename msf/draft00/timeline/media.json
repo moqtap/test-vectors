@@ -1,0 +1,214 @@
+{
+  "$schema": "../../../schema/timeline-vector.schema.json",
+  "topic": "media",
+  "format": "mediatimeline",
+  "spec_section": "7.1",
+  "vectors": [
+    {
+      "id": "example",
+      "description": "Section 7.1 verbatim.",
+      "input": {
+        "text": "[\n  [0, [0,0], 1759924158381],\n  [2002, [1,0], 1759924160383],\n  [4004, [2,0], 1759924162385],\n  [6006, [3,0], 1759924164387],\n  [8008, [4,0], 1759924166389]\n]\n"
+      },
+      "decoded": {
+        "records": [
+          {
+            "media_time_ms": "0",
+            "group_id": "0",
+            "object_id": "0",
+            "wallclock_ms": "1759924158381"
+          },
+          {
+            "media_time_ms": "2002",
+            "group_id": "1",
+            "object_id": "0",
+            "wallclock_ms": "1759924160383"
+          },
+          {
+            "media_time_ms": "4004",
+            "group_id": "2",
+            "object_id": "0",
+            "wallclock_ms": "1759924162385"
+          },
+          {
+            "media_time_ms": "6006",
+            "group_id": "3",
+            "object_id": "0",
+            "wallclock_ms": "1759924164387"
+          },
+          {
+            "media_time_ms": "8008",
+            "group_id": "4",
+            "object_id": "0",
+            "wallclock_ms": "1759924166389"
+          }
+        ]
+      }
+    },
+    {
+      "id": "empty",
+      "description": "A media timeline with no records.",
+      "input": {
+        "text": "[]"
+      },
+      "decoded": {
+        "records": []
+      }
+    },
+    {
+      "id": "later-object",
+      "description": "A record for Object 12 of Group 3.",
+      "input": {
+        "text": "[[6400, [3, 12], 1759924164787]]"
+      },
+      "decoded": {
+        "records": [
+          {
+            "media_time_ms": "6400",
+            "group_id": "3",
+            "object_id": "12",
+            "wallclock_ms": "1759924164787"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wallclock-zero",
+      "description": "Wallclock 0 in every record. 7.1 'For VOD assets, or if the wallclock time is not known, the value SHOULD be 0.' The record carries the 0 as it is.",
+      "input": {
+        "text": "[[0, [0, 0], 0], [2000, [1, 0], 0]]"
+      },
+      "decoded": {
+        "records": [
+          {
+            "media_time_ms": "0",
+            "group_id": "0",
+            "object_id": "0",
+            "wallclock_ms": "0"
+          },
+          {
+            "media_time_ms": "2000",
+            "group_id": "1",
+            "object_id": "0",
+            "wallclock_ms": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "negative-media-time",
+      "description": "A media time of -33. 7.1 'The first item holds the media presentation timestamp, expressed as a JSON Number.' The draft does not bound it.",
+      "input": {
+        "text": "[[-33, [0, 0], 1759924158381]]"
+      },
+      "decoded": {
+        "records": [
+          {
+            "media_time_ms": "-33",
+            "group_id": "0",
+            "object_id": "0",
+            "wallclock_ms": "1759924158381"
+          }
+        ]
+      }
+    },
+    {
+      "id": "not-json",
+      "description": "A payload missing its closing bracket.",
+      "input": {
+        "text": "[[0, [0, 0], 1759924158381]"
+      },
+      "error": "invalid_json"
+    },
+    {
+      "id": "not-an-array",
+      "description": "A JSON Object in place of the array. 7.1: 'The document contains an array of records.'",
+      "input": {
+        "text": "{\"records\": [[0, [0, 0], 1759924158381]]}"
+      },
+      "error": "invalid_value",
+      "error_detail": "records"
+    },
+    {
+      "id": "record-object",
+      "description": "A record written as a JSON Object. 7.1 'Each record consists of an array of three required items, whose ordinal position defines their type'.",
+      "input": {
+        "text": "[{\"mediaTime\": 0, \"location\": [0, 0], \"wallclock\": 1759924158381}]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0]"
+    },
+    {
+      "id": "two-items",
+      "description": "A record without its wallclock time. 7.1 'Each record consists of an array of three required items'.",
+      "input": {
+        "text": "[[0, [0, 0]]]"
+      },
+      "error": "missing_field",
+      "error_detail": "records[0][2]"
+    },
+    {
+      "id": "media-time-string",
+      "description": "A media time written as the string \"0\". 7.1 'The first item holds the media presentation timestamp, expressed as a JSON Number.'",
+      "input": {
+        "text": "[[\"0\", [0, 0], 1759924158381]]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0][0]"
+    },
+    {
+      "id": "media-time-fraction",
+      "description": "A media time of 33.3. 7.1 gives the timestamp 'rounded to the nearest millisecond'.",
+      "input": {
+        "text": "[[33.3, [0, 1], 1759924158414]]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0][0]"
+    },
+    {
+      "id": "location-not-array",
+      "description": "A Location written as a Number. 7.1 'The second item holds the MOQT Location of the entry ... expressed as a JSON Array of Numbers'.",
+      "input": {
+        "text": "[[0, 0, 1759924158381]]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0][1]"
+    },
+    {
+      "id": "location-one-item",
+      "description": "A Location with one item. 7.1 'defined as a tuple of the MOQT Group ID and MOQT Object ID'.",
+      "input": {
+        "text": "[[0, [0], 1759924158381]]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0][1]"
+    },
+    {
+      "id": "location-fraction",
+      "description": "A Location whose Object ID is 1.5. 7.1 makes the second number 'the Object ID', an integer in MOQT.",
+      "input": {
+        "text": "[[33, [0, 1.5], 1759924158414]]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0][1][1]"
+    },
+    {
+      "id": "location-negative",
+      "description": "A Location whose Group ID is -1. 7.1 makes the first number 'the Group ID', an unsigned integer in MOQT.",
+      "input": {
+        "text": "[[0, [-1, 0], 1759924158381]]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0][1][0]"
+    },
+    {
+      "id": "wallclock-string",
+      "description": "A wallclock time written as a string. 7.1 'The third time holds the wallclock time ... expressed as a JSON Number.'",
+      "input": {
+        "text": "[[0, [0, 0], \"1759924158381\"]]"
+      },
+      "error": "invalid_value",
+      "error_detail": "records[0][2]"
+    }
+  ]
+}

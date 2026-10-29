@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../schema/property-vector.schema.json",
+  "topic": "timescale",
+  "spec_section": "2.3.1.2",
+  "vectors": [
+    {
+      "id": "video-90khz",
+      "description": "Timescale: 90000 Timestamp units per second (LOC-04 2.3.1.2).",
+      "property_type": "0x08",
+      "value": "90000",
+      "decoded": {
+        "name": "Timescale",
+        "timescale": "90000"
+      }
+    },
+    {
+      "id": "audio-48khz",
+      "description": "Timescale: 48000 Timestamp units per second (LOC-04 2.3.1.2).",
+      "property_type": "0x08",
+      "value": "48000",
+      "decoded": {
+        "name": "Timescale",
+        "timescale": "48000"
+      }
+    },
+    {
+      "id": "microseconds",
+      "description": "Timescale: 1000000 Timestamp units per second (LOC-04 2.3.1.2).",
+      "property_type": "0x08",
+      "value": "1000000",
+      "decoded": {
+        "name": "Timescale",
+        "timescale": "1000000"
+      }
+    },
+    {
+      "id": "one",
+      "description": "Timescale: 1 Timestamp unit per second (LOC-04 2.3.1.2).",
+      "property_type": "0x08",
+      "value": "1",
+      "decoded": {
+        "name": "Timescale",
+        "timescale": "1"
+      }
+    },
+    {
+      "id": "max",
+      "description": "Timescale at the largest vi64, within the 1-9 bytes stated: 18446744073709551615 Timestamp units per second (LOC-04 2.3.1.2).",
+      "property_type": "0x08",
+      "value": "18446744073709551615",
+      "decoded": {
+        "name": "Timescale",
+        "timescale": "18446744073709551615"
+      }
+    }
+  ]
+}
