@@ -155,6 +155,16 @@
       "hex": "000102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading object_id"
+    },
+    {
+      "id": "datagram-prior-group-id-gap-exceeds-group-id",
+      "description": "object datagram (type 0x01: extensions present), Group 1, carrying Prior Group ID Gap 2 (Extension Header Type 0x40). Section 10.1: \"A track with a Group that contains more than one Object with different values for Prior Group ID Gap or has a Prior Group ID Gap larger than the Group ID is considered malformed.\" The gap is larger than the Group ID, so the track is malformed (Section 2.5), which an endpoint detects from this datagram alone",
+      "hex": "010101008003404002deadbeef",
+      "error": "invalid_value",
+      "error_detail": "Prior Group ID Gap 2 is larger than Group ID 1",
+      "profiles": [
+        "endpoint"
+      ]
     }
   ]
 }

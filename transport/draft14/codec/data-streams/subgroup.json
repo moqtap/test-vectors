@@ -408,7 +408,7 @@
     },
     {
       "id": "with-extension-content",
-      "description": "type 0x11 subgroup with Prior Group ID Gap extension header, in Group 5. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.5), so the Group ID is at least the gap",
+      "description": "type 0x11 subgroup with Prior Group ID Gap extension header, in Group 5. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID\" That makes the Track malformed (Section 2.5), so the Group ID is at least the gap",
       "hex": "1101058000023c0204deadbeef",
       "decoded": {
         "stream_type": "subgroup_header",
@@ -487,7 +487,7 @@
     },
     {
       "id": "subgroup-prior-group-id-gap-exceeds-group-id",
-      "description": "subgroup stream (type 0x11: extensions present), Group 1, whose object carries Prior Group ID Gap 2. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.5), which an endpoint detects from this Object alone",
+      "description": "subgroup stream (type 0x11: extensions present), Group 1, whose object carries Prior Group ID Gap 2. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID\" That makes the Track malformed (Section 2.5), which an endpoint detects from this Object alone",
       "hex": "1101018000023c0204deadbeef",
       "error": "invalid_value",
       "error_detail": "Prior Group ID Gap 2 is larger than Group ID 1",
@@ -507,7 +507,7 @@
     },
     {
       "id": "subgroup-prior-object-id-gap-exceeds-object-id",
-      "description": "subgroup stream (type 0x11: extensions present), Group 5, whose Object 0 carries Prior Object ID Gap 1. Section 11.3: \"An Object has a Prior Object ID Gap larger than the Object ID.\" That makes the Track malformed (Section 2.5)",
+      "description": "subgroup stream (type 0x11: extensions present), Group 5, whose Object 0 carries Prior Object ID Gap 1. Section 11.3: \"An Object has a Prior Object ID Gap larger than the Object ID\" That makes the Track malformed (Section 2.5)",
       "hex": "1101058000023e0104deadbeef",
       "error": "invalid_value",
       "error_detail": "Prior Object ID Gap 1 is larger than Object ID 0",

@@ -104,7 +104,7 @@
     },
     {
       "id": "with-extension-headers",
-      "description": "fetch stream with extension headers (Prior Group ID Gap), in Group 5. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.5), so the Group ID is at least the gap",
+      "description": "fetch stream with extension headers (Prior Group ID Gap), in Group 5. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID\" That makes the Track malformed (Section 2.5), so the Group ID is at least the gap",
       "hex": "050205000080023c0204deadbeef",
       "decoded": {
         "stream_type": "fetch_header",
@@ -125,7 +125,7 @@
     },
     {
       "id": "multi-object-with-extensions",
-      "description": "fetch stream with multiple objects, some with extensions, in Group 5. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.5), so the Group ID is at least the gap",
+      "description": "fetch stream with multiple objects, some with extensions, in Group 5. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID\" That makes the Track malformed (Section 2.5), so the Group ID is at least the gap",
       "hex": "050205000080023c0204deadbeef050001800002cafe",
       "decoded": {
         "stream_type": "fetch_header",

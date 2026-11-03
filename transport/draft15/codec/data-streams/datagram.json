@@ -114,6 +114,26 @@
       "hex": "000102",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading object_id"
+    },
+    {
+      "id": "datagram-prior-group-id-gap-exceeds-group-id",
+      "description": "object datagram (type 0x01: extensions present), Group 1, carrying Prior Group ID Gap 2. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.4.2)",
+      "hex": "0101010080023c02deadbeef",
+      "error": "invalid_value",
+      "error_detail": "Prior Group ID Gap 2 is larger than Group ID 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "datagram-prior-object-id-gap-exceeds-object-id",
+      "description": "object datagram (type 0x01: extensions present), Group 5, Object 0, carrying Prior Object ID Gap 1. Section 11.2: \"An Object has a Prior Object ID Gap larger than the Object ID.\" That makes the Track malformed (Section 2.4.2)",
+      "hex": "0101050080023e01deadbeef",
+      "error": "invalid_value",
+      "error_detail": "Prior Object ID Gap 1 is larger than Object ID 0",
+      "profiles": [
+        "endpoint"
+      ]
     }
   ]
 }

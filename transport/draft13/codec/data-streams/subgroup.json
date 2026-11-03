@@ -350,6 +350,26 @@
       "hex": "100100",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading publisher_priority"
+    },
+    {
+      "id": "subgroup-prior-group-id-gap-exceeds-group-id",
+      "description": "subgroup stream (type 0x11: extensions present), Group 1, whose object carries Prior Group ID Gap 2 (Extension Header Type 0x40). Section 10.1: \"A track with a Group that contains more than one Object with different values for Prior Group ID Gap or has a Prior Group ID Gap larger than the Group ID is considered malformed.\" The gap is larger than the Group ID, so the track is malformed (Section 2.5), which an endpoint detects from this Object alone",
+      "hex": "11010180000340400204deadbeef",
+      "error": "invalid_value",
+      "error_detail": "Prior Group ID Gap 2 is larger than Group ID 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subgroup-prior-group-id-gap-differs",
+      "description": "subgroup stream (type 0x11: extensions present), Group 5, with two objects carrying Prior Group ID Gap 2 and 3 (Extension Header Type 0x40). Section 10.1: \"A track with a Group that contains more than one Object with different values for Prior Group ID Gap or has a Prior Group ID Gap larger than the Group ID is considered malformed.\" The values differ within one Group, so the track is malformed (Section 2.5)",
+      "hex": "11010580000340400204deadbeef010340400302cafe",
+      "error": "invalid_value",
+      "error_detail": "two Objects in Group 5 carry different Prior Group ID Gap values",
+      "profiles": [
+        "endpoint"
+      ]
     }
   ]
 }
