@@ -346,15 +346,15 @@ The two type columns count files — one per control message type, one per data 
 | MoQ Transport | draft-11 | 27 | 3 | 159 | 35 |
 | MoQ Transport | draft-12 | 30 | 3 | 190 | 38 |
 | MoQ Transport | draft-13 | 31 | 3 | 213 | 39 |
-| MoQ Transport | draft-14 | 31 | 3 | 228 | 39 |
-| MoQ Transport | draft-15 | 24 | 3 | 186 | 30 |
-| MoQ Transport | draft-16 | 25 | 3 | 189 | 32 |
-| MoQ Transport | draft-17 | 19 | 3 | 224 | 42 |
-| MoQ Transport | draft-18 | 20 | 3 | 253 | 40 |
-| MoQ Transport | draft-19 | 20 | 3 | 273 | 40 |
-| MoQ Transport | draft-20 | 21 | 3 | 337 | 63 |
-| MoQ Transport | draft-21 | 21 | 3 | 337 | 63 |
-| MoQ Transport | draft-22 | 21 | 3 | 347 | 65 |
+| MoQ Transport | draft-14 | 31 | 3 | 231 | 42 |
+| MoQ Transport | draft-15 | 24 | 3 | 189 | 34 |
+| MoQ Transport | draft-16 | 25 | 3 | 192 | 36 |
+| MoQ Transport | draft-17 | 19 | 3 | 227 | 46 |
+| MoQ Transport | draft-18 | 20 | 3 | 256 | 44 |
+| MoQ Transport | draft-19 | 20 | 3 | 276 | 44 |
+| MoQ Transport | draft-20 | 21 | 3 | 340 | 67 |
+| MoQ Transport | draft-21 | 21 | 3 | 340 | 67 |
+| MoQ Transport | draft-22 | 21 | 3 | 350 | 69 |
 | MoQ Transport | draft-23 | 20 | 3 | 419 | 100 |
 | MOQT Streaming Format | draft-00 | — | — | 79 | 49 |
 | MOQT Streaming Format | draft-01 | — | — | 110 | 67 |
@@ -367,7 +367,7 @@ The two type columns count files — one per control message type, one per data 
 | Low Overhead Media Container | draft-04 | — | — | 29 | 3 |
 | Low Overhead Media Container | draft-05 | — | — | 36 | 5 |
 | Low Overhead Media Container (draft-mzanaty) | draft-05 | — | — | 5 | 0 |
-| | **all** | | | **5094** | **1152** |
+| | **all** | | | **5121** | **1187** |
 
 ## Scope
 

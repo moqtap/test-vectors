@@ -90,13 +90,13 @@
     },
     {
       "id": "datagram-with-properties-content",
-      "description": "object datagram (type 0x01: PROPERTIES set) with PRIOR_GROUP_ID_GAP=2 property and 2-byte payload",
-      "hex": "0101000080023c02cafe",
+      "description": "object datagram (type 0x01: PROPERTIES set) with PRIOR_GROUP_ID_GAP=2 property and 2-byte payload, in Group 5. Section 12.8: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.4.2), so the Group ID is at least the gap",
+      "hex": "0101050080023c02cafe",
       "decoded": {
         "stream_type": "datagram",
         "datagram_type": "0x01",
         "track_alias": "1",
-        "group_id": "0",
+        "group_id": "5",
         "object_id": "0",
         "publisher_priority": "128",
         "object_properties": [
@@ -185,8 +185,8 @@
     },
     {
       "id": "status-and-properties-non-normal",
-      "description": "object datagram setting both STATUS (0x20) and PROPERTIES (0x01) whose Object Status is End of Group (0x3). Section 11.3.1: \"If an Object Datagram includes both the STATUS bit and PROPERTIES bit, and the Object Status is not Normal (0x0), the endpoint MUST close the session with a PROTOCOL_VIOLATION, because only Normal Objects can have Properties.\" Every field parses and sits where the layout puts it, so this is a datagram a decoder can read back exactly as it arrived and a receiving endpoint must still refuse. Identical to the datagram-with-properties-content vector with STATUS set and the payload replaced by a status.",
-      "hex": "2101000580023c0203",
+      "description": "object datagram setting both STATUS (0x20) and PROPERTIES (0x01) whose Object Status is End of Group (0x3), Group 5, with PRIOR_GROUP_ID_GAP=2. Section 11.3.1: \"If an Object Datagram includes both the STATUS bit and PROPERTIES bit, and the Object Status is not Normal (0x0), the endpoint MUST close the session with a PROTOCOL_VIOLATION, because only Normal Objects can have Properties.\" The gap is within the Group ID, so the status is the only fault",
+      "hex": "2101050580023c0203",
       "error": "invalid_value",
       "error_detail": "properties on an Object whose status is not Normal",
       "profiles": [

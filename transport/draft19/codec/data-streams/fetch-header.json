@@ -173,16 +173,16 @@
     },
     {
       "id": "fetch-with-properties",
-      "description": "fetch stream with first object carrying PRIOR_GROUP_ID_GAP=2 property (flags=0x3c: PROPERTIES+PRIORITY+GROUP_ID_DELTA+OBJECT_ID_DELTA)",
-      "hex": "05043c000080023c0204deadbeef",
+      "description": "fetch stream with first object carrying PRIOR_GROUP_ID_GAP=2 property (flags=0x3c: PROPERTIES+PRIORITY+GROUP_ID_DELTA+OBJECT_ID_DELTA), in Group 5. Section 12.8: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.4.2), so the Group ID is at least the gap",
+      "hex": "05043c050080023c0204deadbeef",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
         "objects": [
           {
             "serialization_flags": "0x3c",
-            "group_id_delta": "0",
-            "group_id": "0",
+            "group_id_delta": "5",
+            "group_id": "5",
             "subgroup_id": "0",
             "object_id_delta": "0",
             "object_id": "0",

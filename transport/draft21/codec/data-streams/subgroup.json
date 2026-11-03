@@ -205,19 +205,19 @@
     },
     {
       "id": "subgroup-with-object-properties",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) with one object having PRIOR_GROUP_ID_GAP=2 and PRIOR_OBJECT_ID_GAP=1 properties",
-      "hex": "1101008000043c02020104deadbeef",
+      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set), Group 5, with one object, Object ID 1 (Object ID Delta 1), carrying PRIOR_GROUP_ID_GAP=2 and PRIOR_OBJECT_ID_GAP=1. Section 10.8: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 12.1). Section 10.9: \"An Object has a Prior Object ID Gap larger than the Object ID.\" Both IDs are at least their gap",
+      "hex": "1101058001043c02020104deadbeef",
       "decoded": {
         "stream_type": "subgroup",
         "header_type": "0x11",
         "track_alias": "1",
-        "group_id": "0",
+        "group_id": "5",
         "subgroup_id": "0",
         "publisher_priority": "128",
         "objects": [
           {
-            "object_id_delta": "0",
-            "object_id": "0",
+            "object_id_delta": "1",
+            "object_id": "1",
             "object_properties": [
               {
                 "type": "0x3c",
@@ -315,13 +315,13 @@
     },
     {
       "id": "subgroup-properties-two-objects-nonempty",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) with two objects, each carrying a PRIOR_GROUP_ID_GAP property",
-      "hex": "1101008000023c0204deadbeef00023c0302cafe",
+      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set), Group 5, with two objects, each carrying PRIOR_GROUP_ID_GAP=2. Section 10.8 makes the Track malformed when \"A Group contains more than one Object with different values for Prior Group ID Gap.\", so both carry the same value",
+      "hex": "1101058000023c0204deadbeef00023c0202cafe",
       "decoded": {
         "stream_type": "subgroup",
         "header_type": "0x11",
         "track_alias": "1",
-        "group_id": "0",
+        "group_id": "5",
         "subgroup_id": "0",
         "publisher_priority": "128",
         "objects": [
@@ -345,7 +345,7 @@
               {
                 "type": "0x3c",
                 "name": "prior_group_id_gap",
-                "value": "3"
+                "value": "2"
               }
             ],
             "payload_length": "2",
@@ -356,32 +356,13 @@
     },
     {
       "id": "subgroup-properties-status-object",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) with one status-only object (End of Group) carrying a non-empty properties blob",
-      "hex": "1101008000023c010003",
-      "decoded": {
-        "stream_type": "subgroup",
-        "header_type": "0x11",
-        "track_alias": "1",
-        "group_id": "0",
-        "subgroup_id": "0",
-        "publisher_priority": "128",
-        "objects": [
-          {
-            "object_id_delta": "0",
-            "object_id": "0",
-            "object_properties": [
-              {
-                "type": "0x3c",
-                "name": "prior_group_id_gap",
-                "value": "1"
-              }
-            ],
-            "payload_length": "0",
-            "status": "3",
-            "payload_hex": ""
-          }
-        ]
-      }
+      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set), Group 5, with one End of Group status object (status 3) carrying PRIOR_GROUP_ID_GAP=1. Section 11.1.3: \"If an endpoint receives properties on an Object with status that is not Normal, it MUST close the session with a PROTOCOL_VIOLATION.\"",
+      "hex": "1101058000023c010003",
+      "error": "invalid_value",
+      "error_detail": "only a Normal (0x0) Object may carry Properties",
+      "profiles": [
+        "endpoint"
+      ]
     },
     {
       "id": "noncanonical-type-flags",
@@ -435,13 +416,13 @@
     },
     {
       "id": "subgroup-properties-odd-type",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) with one object carrying an odd-typed property 0x0D (two bytes, cafe) and PRIOR_GROUP_ID_GAP=2 (Section 11.1.3). An odd Type is followed by a Length and that many bytes (Section 8.3); the transport assigns 0x0D nothing, so the entry has no name and its value is the bytes. 0x3C is written as the delta 0x2F from 0x0D",
-      "hex": "1101008000060d02cafe2f0204deadbeef",
+      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set), Group 5, with one object carrying an odd-typed property 0x0D (two bytes, cafe) and PRIOR_GROUP_ID_GAP=2 (Section 11.1.3). An odd Type is followed by a Length and that many bytes (Section 8.3); the transport assigns 0x0D nothing, so the entry has no name and its value is the bytes. 0x3C is written as the delta 0x2F from 0x0D",
+      "hex": "1101058000060d02cafe2f0204deadbeef",
       "decoded": {
         "stream_type": "subgroup",
         "header_type": "0x11",
         "track_alias": "1",
-        "group_id": "0",
+        "group_id": "5",
         "subgroup_id": "0",
         "publisher_priority": "128",
         "objects": [
@@ -525,13 +506,13 @@
     },
     {
       "id": "subgroup-properties-immutable",
-      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set) with one object whose only property is Immutable Properties (0x0B, Section 10.7) holding PRIOR_GROUP_ID_GAP=2. Its value is a Key-Value-Pair sequence of its own, whose first Type is a delta from 0 rather than from 0x0B. The contents render as a nested list",
-      "hex": "1101008000040b023c0204deadbeef",
+      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set), Group 5, with one object whose only property is Immutable Properties (0x0B, Section 10.7) holding PRIOR_GROUP_ID_GAP=2. Its value is a Key-Value-Pair sequence of its own, whose first Type is a delta from 0 rather than from 0x0B. The contents render as a nested list",
+      "hex": "1101058000040b023c0204deadbeef",
       "decoded": {
         "stream_type": "subgroup",
         "header_type": "0x11",
         "track_alias": "1",
-        "group_id": "0",
+        "group_id": "5",
         "subgroup_id": "0",
         "publisher_priority": "128",
         "objects": [
@@ -563,6 +544,36 @@
       "hex": "1101008000030d05ca04deadbeef",
       "error": "invalid_value",
       "error_detail": "property 0x0D claims 5 bytes but the property block has 1 left",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subgroup-prior-group-id-gap-exceeds-group-id",
+      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set), Group 1, whose object carries PRIOR_GROUP_ID_GAP=2. Section 10.8: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 12.1), which an endpoint detects from this Object alone",
+      "hex": "1101018000023c0204deadbeef",
+      "error": "invalid_value",
+      "error_detail": "Prior Group ID Gap 2 is larger than Group ID 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subgroup-prior-group-id-gap-differs",
+      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set), Group 5, with two objects carrying PRIOR_GROUP_ID_GAP 2 and 3. Section 10.8: \"A Group contains more than one Object with different values for Prior Group ID Gap.\" That makes the Track malformed (Section 12.1)",
+      "hex": "1101058000023c0204deadbeef00023c0302cafe",
+      "error": "invalid_value",
+      "error_detail": "two Objects in Group 5 carry different Prior Group ID Gap values",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subgroup-prior-object-id-gap-exceeds-object-id",
+      "description": "subgroup stream (Type Flags 0x11: PROPERTIES set), Group 5, whose Object 0 carries PRIOR_OBJECT_ID_GAP=1. Section 10.9: \"An Object has a Prior Object ID Gap larger than the Object ID.\" That makes the Track malformed (Section 12.1)",
+      "hex": "1101058000023e0104deadbeef",
+      "error": "invalid_value",
+      "error_detail": "Prior Object ID Gap 1 is larger than Object ID 0",
       "profiles": [
         "endpoint"
       ]

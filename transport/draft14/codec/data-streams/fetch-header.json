@@ -104,14 +104,14 @@
     },
     {
       "id": "with-extension-headers",
-      "description": "fetch stream with extension headers (Prior Group ID Gap)",
-      "hex": "050200000080023c0204deadbeef",
+      "description": "fetch stream with extension headers (Prior Group ID Gap), in Group 5. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.5), so the Group ID is at least the gap",
+      "hex": "050205000080023c0204deadbeef",
       "decoded": {
         "stream_type": "fetch_header",
         "request_id": "2",
         "objects": [
           {
-            "group_id": "0",
+            "group_id": "5",
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
@@ -125,14 +125,14 @@
     },
     {
       "id": "multi-object-with-extensions",
-      "description": "fetch stream with multiple objects, some with extensions",
-      "hex": "050200000080023c0204deadbeef000001800002cafe",
+      "description": "fetch stream with multiple objects, some with extensions, in Group 5. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.5), so the Group ID is at least the gap",
+      "hex": "050205000080023c0204deadbeef050001800002cafe",
       "decoded": {
         "stream_type": "fetch_header",
         "request_id": "2",
         "objects": [
           {
-            "group_id": "0",
+            "group_id": "5",
             "subgroup_id": "0",
             "object_id": "0",
             "publisher_priority": "128",
@@ -142,7 +142,7 @@
             "payload_hex": "deadbeef"
           },
           {
-            "group_id": "0",
+            "group_id": "5",
             "subgroup_id": "0",
             "object_id": "1",
             "publisher_priority": "128",

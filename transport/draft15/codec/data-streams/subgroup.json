@@ -324,13 +324,13 @@
     },
     {
       "id": "subgroup-nonempty-extensions",
-      "description": "subgroup stream (type 0x11: extensions present) with one object having Prior Group ID Gap extension",
-      "hex": "1101008000023c0104deadbeef",
+      "description": "subgroup stream (type 0x11: extensions present) with one object having Prior Group ID Gap extension, in Group 5. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.4.2), so the Group ID is at least the gap",
+      "hex": "1101058000023c0104deadbeef",
       "decoded": {
         "stream_type": "subgroup",
         "header_type": "0x11",
         "track_alias": "1",
-        "group_id": "0",
+        "group_id": "5",
         "subgroup_id": "0",
         "publisher_priority": "128",
         "objects": [
@@ -428,13 +428,13 @@
     },
     {
       "id": "subgroup-extensions-two-objects-nonempty",
-      "description": "subgroup stream (type 0x11: extensions present) with two objects, each carrying a Prior Group ID Gap extension",
-      "hex": "1101008000023c0204deadbeef00023c0302cafe",
+      "description": "subgroup stream (type 0x11: extensions present) with two objects, each carrying a Prior Group ID Gap extension. Both are in Group 5 and carry Prior Group ID Gap 2: Section 11.1 makes the Track malformed when \"A Group contains more than one Object with different values for Prior Group ID Gap.\", so both carry the same value",
+      "hex": "1101058000023c0204deadbeef00023c0202cafe",
       "decoded": {
         "stream_type": "subgroup",
         "header_type": "0x11",
         "track_alias": "1",
-        "group_id": "0",
+        "group_id": "5",
         "subgroup_id": "0",
         "publisher_priority": "128",
         "objects": [
@@ -456,7 +456,7 @@
               {
                 "type": "0x3c",
                 "name": "prior_group_id_gap",
-                "value": "3"
+                "value": "2"
               }
             ],
             "payload_length": "2",
@@ -467,31 +467,13 @@
     },
     {
       "id": "subgroup-extensions-status-object",
-      "description": "subgroup stream (type 0x11: extensions present) with one status-only object (End of Group) carrying a non-empty extensions blob. Draft-15 Section 10.2.1.2 allows extension headers only on an object whose status is Normal and requires an endpoint receiving them on any other status to close the session with a PROTOCOL_VIOLATION. The frame is well formed, so this is a case a decoder is expected to parse and then report as a violation, not one it fails to read",
-      "hex": "1101008000023c010003",
-      "decoded": {
-        "stream_type": "subgroup",
-        "header_type": "0x11",
-        "track_alias": "1",
-        "group_id": "0",
-        "subgroup_id": "0",
-        "publisher_priority": "128",
-        "objects": [
-          {
-            "object_id": "0",
-            "extension_headers": [
-              {
-                "type": "0x3c",
-                "name": "prior_group_id_gap",
-                "value": "1"
-              }
-            ],
-            "payload_length": "0",
-            "status": "3",
-            "payload_hex": ""
-          }
-        ]
-      }
+      "description": "subgroup stream (type 0x11: extensions present), Group 5, with one End of Group status object (status 3) carrying Prior Group ID Gap 1. Section 10.2.1.2: \"If an endpoint receives extension headers on Objects with status that is not Normal, it MUST close the session with a PROTOCOL_VIOLATION.\"",
+      "hex": "1101058000023c010003",
+      "error": "invalid_value",
+      "error_detail": "only a Normal (0x0) Object may carry extension headers",
+      "profiles": [
+        "endpoint"
+      ]
     },
     {
       "id": "subgroup-truncated",
@@ -499,6 +481,36 @@
       "hex": "100100",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading publisher_priority"
+    },
+    {
+      "id": "subgroup-prior-group-id-gap-exceeds-group-id",
+      "description": "subgroup stream (type 0x11: extensions present), Group 1, whose object carries Prior Group ID Gap 2. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 2.4.2), which an endpoint detects from this Object alone",
+      "hex": "1101018000023c0204deadbeef",
+      "error": "invalid_value",
+      "error_detail": "Prior Group ID Gap 2 is larger than Group ID 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subgroup-prior-group-id-gap-differs",
+      "description": "subgroup stream (type 0x11: extensions present), Group 5, with two objects carrying Prior Group ID Gap 2 and 3. Section 11.1: \"A Group contains more than one Object with different values for Prior Group ID Gap.\" That makes the Track malformed (Section 2.4.2)",
+      "hex": "1101058000023c0204deadbeef00023c0302cafe",
+      "error": "invalid_value",
+      "error_detail": "two Objects in Group 5 carry different Prior Group ID Gap values",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subgroup-prior-object-id-gap-exceeds-object-id",
+      "description": "subgroup stream (type 0x11: extensions present), Group 5, whose Object 0 carries Prior Object ID Gap 1. Section 11.2: \"An Object has a Prior Object ID Gap larger than the Object ID.\" That makes the Track malformed (Section 2.4.2)",
+      "hex": "1101058000023e0104deadbeef",
+      "error": "invalid_value",
+      "error_detail": "Prior Object ID Gap 1 is larger than Object ID 0",
+      "profiles": [
+        "endpoint"
+      ]
     }
   ]
 }
