@@ -427,6 +427,7 @@ def _load_property_schema():
 (PROPERTY_FILE_FIELDS, PROPERTY_VECTOR_FIELDS, PROPERTY_ERROR_CATEGORIES,
  PROPERTY_FIELDS) = _load_property_schema()
 _PROPERTY_BOOL_FIELDS = {"S", "E", "I", "D", "B", "voice_activity"}
+_PROPERTY_TEXT_FIELDS = {"codec"}
 
 
 def _check_reading(filepath, where, reading):
@@ -437,6 +438,9 @@ def _check_reading(filepath, where, reading):
         if k in _PROPERTY_BOOL_FIELDS:
             if not isinstance(v, bool):
                 err(f"{filepath}: {where}.{k} must be a boolean")
+        elif k in _PROPERTY_TEXT_FIELDS:
+            if not isinstance(v, str):
+                err(f"{filepath}: {where}.{k} must be a string")
         elif k in PROPERTY_FIELDS and not (isinstance(v, str) and INT_PATTERN.match(v)):
             err(f"{filepath}: {where}.{k} = {v!r} must be a string of digits")
 

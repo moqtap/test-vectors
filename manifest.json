@@ -182,6 +182,11 @@
           "id": "draft04",
           "spec": "draft-ietf-moq-loc-04",
           "path": "loc/draft04/"
+        },
+        {
+          "id": "draft05",
+          "spec": "draft-ietf-moq-loc-05",
+          "path": "loc/draft05/"
         }
       ]
     },

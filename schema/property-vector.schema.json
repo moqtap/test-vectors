@@ -66,6 +66,10 @@
         "level": {
           "$ref": "#/$defs/digits",
           "description": "Audio Level: 0 to 127, meaning 0 to -127 dBov (RFC 6464 Section 3)."
+        },
+        "codec": {
+          "type": "string",
+          "description": "Codec String: the codec string its UTF-8 bytes spell, as the WebCodecs Codec Registry defines it."
         }
       }
     },
@@ -81,7 +85,7 @@
             "timestamp": true, "timescale": true, "length": true, "octets": true,
             "S": true, "E": true, "I": true, "D": true, "B": true,
             "TID": true, "LID": true, "TL0PICIDX": true,
-            "voice_activity": true, "level": true
+            "voice_activity": true, "level": true, "codec": true
           },
           "additionalProperties": false
         },
@@ -161,8 +165,8 @@
         },
         "error": {
           "type": "string",
-          "enum": ["invalid_length", "out_of_range"],
-          "description": "Error category for invalid vectors. invalid_length: an odd type's value has a length outside the range the draft states. out_of_range: an even type's value is outside the values the draft states, or needs more bytes than the draft allows it."
+          "enum": ["invalid_length", "out_of_range", "invalid_encoding"],
+          "description": "Error category for invalid vectors. invalid_length: an odd type's value has a length outside the range the draft states. out_of_range: an even type's value is outside the values the draft states, or needs more bytes than the draft allows it. invalid_encoding: an odd type's bytes are not in the encoding the draft states, such as a Codec String that is not UTF-8."
         },
         "error_detail": {
           "type": "string",

@@ -1,0 +1,73 @@
+{
+ "$schema": "../../../schema/property-vector.schema.json",
+ "topic": "codec-string",
+ "spec_section": "2.3.1.3",
+ "vectors": [
+  {
+   "id": "avc1",
+   "description": "Codec String: the UTF-8 bytes of \"avc1.64001f\", an H.264 High profile video codec, read as that codec string (LOC-05 2.3.1.3).",
+   "property_type": "0x11",
+   "value_hex": "617663312e363430303166",
+   "decoded": {
+    "name": "Codec String",
+    "codec": "avc1.64001f"
+   }
+  },
+  {
+   "id": "hev1",
+   "description": "Codec String: the UTF-8 bytes of \"hev1.1.6.L93.B0\", an H.265 Main profile video codec, read as that codec string (LOC-05 2.3.1.3).",
+   "property_type": "0x11",
+   "value_hex": "686576312e312e362e4c39332e4230",
+   "decoded": {
+    "name": "Codec String",
+    "codec": "hev1.1.6.L93.B0"
+   }
+  },
+  {
+   "id": "opus",
+   "description": "Codec String: the UTF-8 bytes of \"opus\", the Opus audio codec, read as that codec string (LOC-05 2.3.1.3).",
+   "property_type": "0x11",
+   "value_hex": "6f707573",
+   "decoded": {
+    "name": "Codec String",
+    "codec": "opus"
+   }
+  },
+  {
+   "id": "mp4a",
+   "description": "Codec String: the UTF-8 bytes of \"mp4a.40.2\", an AAC-LC audio codec, read as that codec string (LOC-05 2.3.1.3).",
+   "property_type": "0x11",
+   "value_hex": "6d7034612e34302e32",
+   "decoded": {
+    "name": "Codec String",
+    "codec": "mp4a.40.2"
+   }
+  },
+  {
+   "id": "empty",
+   "description": "Codec String: 0 bytes, which are UTF-8, read as the empty string (LOC-05 2.3.1.3).",
+   "property_type": "0x11",
+   "value_hex": "",
+   "decoded": {
+    "name": "Codec String",
+    "codec": ""
+   }
+  },
+  {
+   "id": "not-utf8",
+   "description": "Codec String: 0x61 0x76 0xff 0x31 is not UTF-8, which LOC-05 2.3.1.3 requires.",
+   "property_type": "0x11",
+   "value_hex": "6176ff31",
+   "error": "invalid_encoding",
+   "error_detail": "Codec String: Codec string in UTF-8 as defined by the WebCodecs Codec Registry"
+  },
+  {
+   "id": "truncated-utf8",
+   "description": "Codec String: a UTF-8 sequence cut short (0xc3 with no continuation byte) is not UTF-8, which LOC-05 2.3.1.3 requires.",
+   "property_type": "0x11",
+   "value_hex": "6f707573c3",
+   "error": "invalid_encoding",
+   "error_detail": "Codec String: Codec string in UTF-8 as defined by the WebCodecs Codec Registry"
+  }
+ ]
+}

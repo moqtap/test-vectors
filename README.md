@@ -81,10 +81,12 @@ loc/
   draft02/                  Low Overhead Media Container draft-02
   draft03/                  Low Overhead Media Container draft-03
   draft04/                  Low Overhead Media Container draft-04
+  draft05/                  Low Overhead Media Container draft-05
     properties/
       capture-timestamp.json  Capture Timestamp (draft-00, draft-01)
-      timestamp.json        Timestamp (draft-03, draft-04)
+      timestamp.json        Timestamp (draft-03 on)
       timescale.json        Timescale (draft-02 on)
+      codec-string.json     Codec String (draft-05)
       video-config.json     Video Config
       video-frame-marking.json  Video Frame Marking
       audio-config.json     Audio Config (draft-03 on)
@@ -321,7 +323,7 @@ Draft-22 is not wire-identical to draft-21. It changes one thing on the wire: LO
 
 MSF carries catalogs and timelines. CMSF adds the payload of a CMAF Object and its SAP Type timeline. MSF-00 writes `version` as a Number and a delta as `deltaUpdate: true` with `addTracks`, `removeTracks` and `cloneTracks`; MSF-01 writes `version` as a String and `deltaUpdate` as an ordered array of `{op, tracks}`. CMSF-00 puts each CMAF header in the track's `initData`; CMSF-01 moves it to a root `initDataList` that tracks point into with `initRef`, and adds `contentProtections`. CMSF-00 extends the WARP Streaming Format draft that preceded MSF, which is not included; its vectors cover only what CMSF-00 itself defines. Where a draft contradicts itself — `mimeType` in its field table and `mimetype` in its examples; `"draft-XX"` as the version convention and `"1"` in every example; examples whose Base64 is elided with `...` — the vector's description says so.
 
-LOC carries property values only. Draft-00 and draft-01 are wire-identical. Draft-02 gives type 0x06 to both Timestamp and Audio Level. That type is `ambiguous` and sits in draft-02's `conflicts.json`. Draft-03 gives Timestamp two types, 0x06 (Table 1) and 0x0A (2.3.1.1), and its `timestamp.json` covers both. Draft-mzanaty-moq-loc-05 frames an even type's value as Length and bytes, the reverse of every transport draft's framing. All four of its types are even, so each of its vectors is `uninterpreted`. A type does not mean the same thing across these drafts: 0x10 is Video Config in mzanaty-05 and Timestamp in draft-04. A consumer therefore runs the vectors of the draft a track uses.
+LOC carries property values only. Draft-00 and draft-01 are wire-identical. Draft-02 gives type 0x06 to both Timestamp and Audio Level. That type is `ambiguous` and sits in draft-02's `conflicts.json`. Draft-03 gives Timestamp two types, 0x06 (Table 1) and 0x0A (2.3.1.1), and its `timestamp.json` covers both. Draft-05 keeps draft-04's types and adds Codec String (0x11, 2.3.1.3), UTF-8 text. Bytes that are not UTF-8 are `invalid_encoding`. Draft-mzanaty-moq-loc-05 is the individual draft that preceded draft-00. It frames an even type's value as Length and bytes, the reverse of every transport draft's framing. All four of its types are even, so each of its vectors is `uninterpreted`. A type does not mean the same thing across these drafts: 0x10 is Video Config in mzanaty-05 and Timestamp in draft-04 and draft-05. A consumer therefore runs the vectors of the draft a track uses.
 
 The two type columns count files — one per control message type, one per data stream or datagram type; a catalog or property spec has neither, and its row counts its vectors. A **negative** vector is one carrying an `error` category instead of a `decoded` block: input a conforming consumer must refuse.
 
@@ -359,8 +361,9 @@ The two type columns count files — one per control message type, one per data 
 | Low Overhead Media Container | draft-02 | — | — | 17 | 1 |
 | Low Overhead Media Container | draft-03 | — | — | 31 | 3 |
 | Low Overhead Media Container | draft-04 | — | — | 29 | 3 |
+| Low Overhead Media Container | draft-05 | — | — | 36 | 5 |
 | Low Overhead Media Container (draft-mzanaty) | draft-05 | — | — | 5 | 0 |
-| | **all** | | | **4639** | **1047** |
+| | **all** | | | **4675** | **1052** |
 
 ## Scope
 
