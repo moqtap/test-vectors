@@ -1,0 +1,444 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish",
+  "message_type_id": "0x1d",
+  "spec_section": "9.8",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "PUBLISH with single-element namespace, track alias 0",
+      "hex": "1d0f0101046c69766505766964656f0000",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "multi-namespace",
+      "description": "PUBLISH with multi-element namespace, track alias 1",
+      "hex": "1d1c03020a636f6e666572656e636506726f6f6d343205617564696f0100",
+      "decoded": {
+        "request_id": "3",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "track_alias": "1",
+        "parameters": [],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "PUBLISH with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='pub-token'). Section 9.19.2 forbids copying AUTHORIZATION_TOKEN from a SUBSCRIBE_TRACKS into the resulting PUBLISH; this one is the publisher's own",
+      "hex": "1d1c0101046c69766505766964656f0001030b03007075622d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "7075622d746f6b656e"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "PUBLISH with EXPIRES parameter (60000ms)",
+      "hex": "1d130101046c69766505766964656f000108c0ea60",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "PUBLISH with LARGEST_OBJECT parameter (group=5, object=10)",
+      "hex": "1d120101046c69766505766964656f000109050a",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "5",
+              "object": "10"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-paused",
+      "description": "PUBLISH with PAUSED (0x11) = 1: the subscription starts paused. Section 9.19.18: \"If the parameter is omitted from any other message, the default value is 0.\"",
+      "hex": "1d110101046c69766505766964656f00011101",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "paused",
+            "type": "0x11",
+            "value": "1"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "PUBLISH carrying SUBSCRIBER_PRIORITY (0x20) as an initial Subscription Parameter",
+      "hex": "1d110101046c69766505766964656f00012020",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "32"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-group-order",
+      "description": "PUBLISH carrying GROUP_ORDER (0x22, descending) as an initial Subscription Parameter",
+      "hex": "1d110101046c69766505766964656f00012202",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "2"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-object-delivery-timeout",
+      "description": "PUBLISH carrying OBJECT_DELIVERY_TIMEOUT (0x02) as an initial Subscription Parameter",
+      "hex": "1d120101046c69766505766964656f0001029388",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-subgroup-delivery-timeout",
+      "description": "PUBLISH carrying SUBGROUP_DELIVERY_TIMEOUT (0x06) as an initial Subscription Parameter",
+      "hex": "1d120101046c69766505766964656f0001069f40",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "8000"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-location-filter",
+      "description": "PUBLISH carrying a type 0x05 LOCATION_FILTER: delivery starts at the Next Object. Section 9.19.9: \"If Location Filter Type is 0x05, no fields follow and it specifies the Next Object.\"",
+      "hex": "1d110101046c69766505766964656f00012105",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "5"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-fill-parameters",
+      "description": "PUBLISH (Request ID 1, namespace ('a'), name 'b', alias 0) with GROUP_ORDER=1 and an empty FILL_PARAMETERS (0x23, Type Delta 1 from 0x22, Number of Parameters 0). Section 9.8 lists FILL_PARAMETERS for PUBLISH, which draft-22 did not. Section 3.4.1: a publisher opens a fill fetch stream when it \"sends a PUBLISH, that carries FILL_PARAMETERS while the subscription is not paused\"",
+      "hex": "1d0c010101610162000222010100",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "a"
+        ],
+        "track_name": "b",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          },
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": []
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-subscribe-tracks-id",
+      "description": "PUBLISH (Request ID 1, namespace ('a'), name 'b', alias 0) sent as a result of the SUBSCRIBE_TRACKS with Request ID 2. Section 9.19.21: \"It appears only in a PUBLISH sent as a result of a SUBSCRIBE_TRACKS, and contains that SUBSCRIBE_TRACKS's Request ID.\" The value has the subscriber's parity, the PUBLISH Request ID the publisher's",
+      "hex": "1d0a01010161016200013602",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "a"
+        ],
+        "track_name": "b",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "subscribe_tracks_id",
+            "type": "0x36",
+            "value": "2"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-paused-and-subscribe-tracks-id",
+      "description": "PUBLISH as in with-subscribe-tracks-id, also carrying PAUSED=1. The SUBSCRIBE_TRACKS_ID Type Delta is 0x25, from 0x11 to 0x36",
+      "hex": "1d0c010101610162000211012502",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "a"
+        ],
+        "track_name": "b",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "paused",
+            "type": "0x11",
+            "value": "1"
+          },
+          {
+            "name": "subscribe_tracks_id",
+            "type": "0x36",
+            "value": "2"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-initial-subscription-parameters",
+      "description": "PUBLISH resulting from the SUBSCRIBE_TRACKS with Request ID 2, stating the subscription's initial SUBSCRIBER_PRIORITY and GROUP_ORDER. Section 3.6.2: the publisher uses the SUBSCRIBE_TRACKS parameters \"as the initial Subscription parameters when a PUBLISH is sent as a result of SUBSCRIBE_TRACKS, and includes those in the PUBLISH.\" Draft-23 admits SUBSCRIBER_PRIORITY on SUBSCRIBE_TRACKS (Section 9.17)",
+      "hex": "1d150101046c69766505766964656f0003202002011402",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "32"
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          },
+          {
+            "name": "subscribe_tracks_id",
+            "type": "0x36",
+            "value": "2"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-track-properties",
+      "description": "PUBLISH with track properties: OBJECT_DELIVERY_TIMEOUT=10000ms, MAX_CACHE_DURATION=30000ms, DEFAULT_PUBLISHER_PRIORITY=64",
+      "hex": "1d180101046c69766505766964656f000002a71002c075300a40",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "10000"
+          },
+          {
+            "name": "max_cache_duration",
+            "type": "0x4",
+            "value": "30000"
+          },
+          {
+            "name": "default_publisher_priority",
+            "type": "0xe",
+            "value": "64"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-subgroup-delivery-timeout-property",
+      "description": "PUBLISH with SUBGROUP_DELIVERY_TIMEOUT track property (8000ms, type 0x06)",
+      "hex": "1d120101046c69766505766964656f0000069f40",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "8000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-immutable-properties",
+      "description": "PUBLISH with an IMMUTABLE_PROPERTIES (0x0B) Track Property holding OBJECT_DELIVERY_TIMEOUT=42: 0b 02 02 2a. Section 10.7: Immutable Properties \"contains a sequence of Key-Value-Pairs (see Figure 4) that are themselves Track or Object Properties, respectively\", so the value renders as a nested list",
+      "hex": "1d130101046c69766505766964656f00000b02022a",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "track_alias": "0",
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "immutable_properties",
+            "type": "0xb",
+            "value": [
+              {
+                "name": "object_delivery_timeout",
+                "type": "0x2",
+                "value": "42"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "PUBLISH carrying draft-22's FORWARD (0x10) = 1. Draft-23's Table 14 has no row for 0x10: PAUSED (0x11) replaced FORWARD. Section 9.19: \"An endpoint that receives an unknown Message Parameter MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "1d110101046c69766505766964656f00011001",
+      "error": "invalid_parameter",
+      "error_detail": "message parameter type 0x10 is not defined by draft-23"
+    },
+    {
+      "id": "empty-track-name",
+      "description": "PUBLISH (Request ID 1, namespace ('a'), alias 0) with a zero-length Track Name. Section 2.4.1: \"If an endpoint receives a Track Name with a length of 0, it MUST close the session with a PROTOCOL_VIOLATION.\"",
+      "hex": "1d0701010161000000",
+      "error": "invalid_value",
+      "error_detail": "Track Name has length 0",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH — missing track_namespace",
+      "hex": "1d0f0101046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

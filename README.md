@@ -41,8 +41,9 @@ transport/
   draft20/                  MoQ Transport draft-20
   draft21/                  MoQ Transport draft-21
   draft22/                  MoQ Transport draft-22
+  draft23/                  MoQ Transport draft-23
     codec/
-      varint.json           VarInt encoding (§8.1 in drafts 21–22, §1.4.1 in drafts 17–20, RFC 9000 §16 before)
+      varint.json           VarInt encoding (§8.1 in drafts 21–23, §1.4.1 in drafts 17–20, RFC 9000 §16 before)
       messages/*.json       One file per control message type
       data-streams/*.json   Subgroup, datagram, fetch header vectors
     meta.json               Version metadata
@@ -270,7 +271,7 @@ The first Object of a Group must carry SAP type 1 or 2 (3.6.1), and that Object 
 }
 ```
 
-**Parameters are a list, not a map.** Every Key-Value-Pair block in a `decoded` message — `parameters`, `setup_parameters`, `options`, `track_properties`, `track_extensions`, and on the data plane `extension_headers` and `object_properties` — is an array of entries in the order the wire carried them. Each entry has a `type` (lowercase hex), an optional `name` the draft gives that type, and exactly one of `value` (decoded) or `raw_hex` (not modelled here). A map keyed by name reads better and cannot express three things the drafts require: a parameter type that repeats, which AUTHORIZATION_TOKEN and the five Range Filters are allowed to do; the ascending order that drafts 16 and later close the session over; and a type the draft names nothing, which has no key to sit under. As a list, each of those is an ordinary entry and needs no special case.
+**Parameters are a list, not a map.** Every Key-Value-Pair block in a `decoded` message — `parameters`, `setup_parameters`, `options`, `track_properties`, `track_extensions`, `error_details`, and on the data plane `extension_headers` and `object_properties` — is an array of entries in the order the wire carried them. Each entry has a `type` (lowercase hex), an optional `name` the draft gives that type, and exactly one of `value` (decoded) or `raw_hex` (not modelled here). A map keyed by name reads better and cannot express three things the drafts require: a parameter type that repeats, which AUTHORIZATION_TOKEN and the five Range Filters are allowed to do; the ascending order that drafts 16 and later close the session over; and a type the draft names nothing, which has no key to sit under. As a list, each of those is an ordinary entry and needs no special case.
 
 On the data plane an odd-typed property's bytes are `raw_hex`, and Immutable Properties (0xB) carry their contents as a nested list in `value`.
 
@@ -315,11 +316,13 @@ import sap from '@moqtap/test-vectors/cmsf/draft01/objects/sap.json';
 
 ## Specs covered
 
-Coverage spans drafts 00 through 22. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
+Coverage spans drafts 00 through 23. Drafts 00–06 use an earlier wire format (single OBJECT message, flat track names, no data streams) while drafts 07+ establish the modern structure (subgroup-based data streams, tuple namespaces, subscribe IDs). All drafts are self-contained.
 
 Draft-21 restructured draft-20 and changed nothing else: every code point, every table row and every wire diagram is identical, so its vectors carry byte-for-byte the same `hex` and `decoded` as draft-20's. What moved is where the draft says things — 200 numbered sections became 214, and only 11 keep both their title and their number — so the two directories differ in the sections their prose cites and in nothing a decoder can observe. A codec that passes draft-20 passes draft-21, and a consumer can use that: running both is a check on the consumer's own draft plumbing, since any disagreement between them is its bug rather than the protocol's.
 
 Draft-22 is not wire-identical to draft-21. It changes one thing on the wire: LOCATION_FILTER (0x21) now begins with a Location Filter Type where draft-21 had a byte Length. The type alone says which fields follow (0x00 none, 0x01 relative start, 0x02 absolute start, 0x03 absolute start to the end of a group, 0x04 absolute range, 0x05 Next Object), and any other type is a protocol violation. Every other vector carries draft-21's `hex` and `decoded` unchanged, and every LOCATION_FILTER value gains a `filter_type`. One meaning moves with it: `21 02 00 00` is now the absolute start {0,0}, not the Next Object, which is `21 05`. With fields below 128 a type equals the old Length byte for byte, so the vectors that tell a draft-22 decoder from a draft-21 one are those with a type 0x05, a multi-byte or non-minimal field, or a type 0x06 and above.
+
+Draft-23 changes the wire in several places. The control message Length is a vi64, not 16 bits, and SETUP gains MAX_CONTROL_MESSAGE_SIZE (0x09). FETCH_OK (0x18) is gone: a FETCH is answered by REQUEST_OK, which may carry EXPIRES and LARGEST_OBJECT. PAUSED (0x11, 1 = paused) replaces FORWARD (0x10, 0 = paused). FILL_PARAMETERS carries a parameter count, not a byte length. NAMESPACE ends with a parameter block. REQUEST_ERROR ends with Error Details, a Key-Value-Pair list (`error_details`) that holds REDIRECT (the Connect URI and the Redirect target) and UNSUPPORTED_PROPERTY. PUBLISH gains SUBSCRIBE_TRACKS_ID (0x36), and SUBSCRIBE_TRACKS admits OBJECT_DELIVERY_TIMEOUT, SUBGROUP_DELIVERY_TIMEOUT, SUBSCRIBER_PRIORITY, LOCATION_FILTER and FILL_PARAMETERS. REQUEST_ERROR drops PREFIX_OVERLAP (0x30) and adds UNAVAILABLE (0xA), PUBLISH_DONE adds EXPIRED_AUTH_TOKEN (0x7), and a Track Name must be at least one byte. On a fetch stream, an Object ID Delta without a Group ID Delta adds 2, End of Range indicators are delta encoded, and End of Group (0x80), End of Track (0x81) and End of Gone Range (0x40C) are new. Because the Length is a vi64, every control message vector has new `hex`. The subgroup stream and datagram formats are unchanged.
 
 MSF carries catalogs and timelines. CMSF adds the payload of a CMAF Object and its SAP Type timeline. MSF-00 writes `version` as a Number and a delta as `deltaUpdate: true` with `addTracks`, `removeTracks` and `cloneTracks`; MSF-01 writes `version` as a String and `deltaUpdate` as an ordered array of `{op, tracks}`. CMSF-00 puts each CMAF header in the track's `initData`; CMSF-01 moves it to a root `initDataList` that tracks point into with `initRef`, and adds `contentProtections`. CMSF-00 extends the WARP Streaming Format draft that preceded MSF, which is not included; its vectors cover only what CMSF-00 itself defines. Where a draft contradicts itself — `mimeType` in its field table and `mimetype` in its examples; `"draft-XX"` as the version convention and `"1"` in every example; examples whose Base64 is elided with `...` — the vector's description says so.
 
@@ -352,6 +355,7 @@ The two type columns count files — one per control message type, one per data 
 | MoQ Transport | draft-20 | 21 | 3 | 337 | 63 |
 | MoQ Transport | draft-21 | 21 | 3 | 337 | 63 |
 | MoQ Transport | draft-22 | 21 | 3 | 347 | 65 |
+| MoQ Transport | draft-23 | 20 | 3 | 419 | 100 |
 | MOQT Streaming Format | draft-00 | — | — | 79 | 49 |
 | MOQT Streaming Format | draft-01 | — | — | 110 | 67 |
 | CMAF MOQT Streaming Format | draft-00 | — | — | 76 | 36 |
@@ -363,7 +367,7 @@ The two type columns count files — one per control message type, one per data 
 | Low Overhead Media Container | draft-04 | — | — | 29 | 3 |
 | Low Overhead Media Container | draft-05 | — | — | 36 | 5 |
 | Low Overhead Media Container (draft-mzanaty) | draft-05 | — | — | 5 | 0 |
-| | **all** | | | **4675** | **1052** |
+| | **all** | | | **5094** | **1152** |
 
 ## Scope
 

@@ -1,0 +1,301 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "request_ok",
+  "message_type_id": "0x07",
+  "spec_section": "9.3",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "REQUEST_OK with no parameters and empty Track Properties. Section 9.3: it answers PUBLISH, FETCH, REQUEST_UPDATE, TRACK_STATUS, SUBSCRIBE_NAMESPACE, SUBSCRIBE_TRACKS and PUBLISH_NAMESPACE",
+      "hex": "070100",
+      "decoded": {
+        "parameters": [],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "REQUEST_OK with LARGEST_OBJECT parameter (group=10, object=3) — typically a REQUEST_UPDATE_OK",
+      "hex": "070401090a03",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "REQUEST_OK with EXPIRES parameter (60000ms)",
+      "hex": "07050108c0ea60",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-expires-and-largest-object",
+      "description": "REQUEST_UPDATE_OK carrying EXPIRES (60000ms) and LARGEST_OBJECT (group=10, object=3); demonstrates type-delta ordering (0x08 then a delta of 1 to 0x09)",
+      "hex": "07080208c0ea60010a03",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "track-status-ok-with-properties",
+      "description": "TRACK_STATUS_OK (REQUEST_OK in response to TRACK_STATUS) with LARGEST_OBJECT param and track properties",
+      "hex": "070901090f070293882e01",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "15",
+              "object": "7"
+            }
+          }
+        ],
+        "track_properties": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "dynamic_groups",
+            "type": "0x30",
+            "value": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "track-status-ok-with-expires",
+      "description": "TRACK_STATUS_OK carrying EXPIRES (30000ms) and LARGEST_OBJECT {5,0}. Section 9.3 lists \"TRACK_STATUS_OK: EXPIRES, LARGEST_OBJECT\"; draft-22 allowed LARGEST_OBJECT alone there. Section 9.19.16: \"EXPIRES in TRACK_STATUS_OK indicates the value the sender would have included in a SUBSCRIBE_OK for the same Track.\"",
+      "hex": "07080208c07530010500",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "30000"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "5",
+              "object": "0"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "fetch-ok-largest-object",
+      "description": "FETCH_OK with LARGEST_OBJECT {5,3}. Draft-23 removed the FETCH_OK message (0x18) and answers FETCH with REQUEST_OK; Section 1.5 keeps FETCH_OK as the name of that REQUEST_OK. Section 3.2: \"If Largest Object is within the requested range, the FETCH response ends at Largest Object and the publisher MUST include the LARGEST_OBJECT parameter (Section 9.19.17) in FETCH_OK.\"",
+      "hex": "070401090503",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "5",
+              "object": "3"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "fetch-ok-with-track-properties",
+      "description": "FETCH_OK with no parameters and Track Properties OBJECT_DELIVERY_TIMEOUT=5000ms and DYNAMIC_GROUPS=1. Without LARGEST_OBJECT the response ends at the requested End Location (Section 3.2). Section 9.3: \"Track Properties are populated in TRACK_STATUS_OK and FETCH_OK\"",
+      "hex": "0706000293882e01",
+      "decoded": {
+        "parameters": [],
+        "track_properties": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          },
+          {
+            "name": "dynamic_groups",
+            "type": "0x30",
+            "value": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-ok-with-expires",
+      "description": "FETCH_OK carrying EXPIRES (30ms) and LARGEST_OBJECT {10,3}, with Track Property OBJECT_DELIVERY_TIMEOUT=5000ms. Section 9.3 lists \"FETCH_OK: EXPIRES, LARGEST_OBJECT\". Draft-22's FETCH_OK could carry neither parameter",
+      "hex": "070902081e010a03029388",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "30"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
+          }
+        ],
+        "track_properties": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-params-noncanonical-2b-delta",
+      "description": "non-canonical REQUEST_OK — same parameters as with-expires-and-largest-object, but the LARGEST_OBJECT parameter type delta (value 1) is encoded as a 2-byte varint (8001) instead of the canonical 1-byte form (01); decoders MUST accept",
+      "hex": "07090208c0ea6080010a03",
+      "canonical": false,
+      "decoded": {
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-params-noncanonical-4b-delta",
+      "description": "non-canonical REQUEST_OK — same parameters as with-expires-and-largest-object, but the LARGEST_OBJECT parameter type delta (value 1) is encoded as a 4-byte varint (e0000001) instead of the canonical 1-byte form (01); decoders MUST accept",
+      "hex": "070b0208c0ea60e00000010a03",
+      "canonical": false,
+      "decoded": {
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-params-noncanonical-8b-delta",
+      "description": "non-canonical REQUEST_OK — same parameters as with-expires-and-largest-object, but the LARGEST_OBJECT parameter type delta (value 1) is encoded as a 8-byte varint (fe00000000000001) instead of the canonical 1-byte form (01); decoders MUST accept",
+      "hex": "070f0208c0ea60fe000000000000010a03",
+      "canonical": false,
+      "decoded": {
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          },
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "length-noncanonical-2b",
+      "description": "non-canonical REQUEST_OK — the minimal REQUEST_OK with its Message Length (1) written as the 2-byte vi64 8001. The Length is a vi64 (Section 9, Figure 6), so a non-minimal form is valid (Section 8.1). Decode-only",
+      "hex": "07800100",
+      "canonical": false,
+      "decoded": {
+        "parameters": [],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "length-noncanonical-3b",
+      "description": "non-canonical REQUEST_OK — the minimal REQUEST_OK with its Message Length (1) written as the 3-byte vi64 c00001. The Length is a vi64 (Section 9, Figure 6), so a non-minimal form is valid (Section 8.1). Decode-only",
+      "hex": "07c0000100",
+      "canonical": false,
+      "decoded": {
+        "parameters": [],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "length-zero",
+      "description": "REQUEST_OK whose Message Length is 0. The frame is complete and its body lacks the Number of Parameters. Section 9: \"If the length does not match the length of the Message Body, the receiver MUST close the session with MALFORMED_MESSAGE.\" The two bytes are the start of draft-22's minimal REQUEST_OK, 07 00 01 00, whose Length was 16 bits",
+      "hex": "0700",
+      "error": "invalid_value",
+      "error_detail": "Length 0 leaves no Number of Parameters",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUEST_OK — missing parameter count",
+      "hex": "0701",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

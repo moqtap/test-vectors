@@ -1,0 +1,472 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "request_error",
+  "message_type_id": "0x05",
+  "spec_section": "9.4",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "REQUEST_ERROR with INTERNAL_ERROR (0x0), not retryable, no Error Details",
+      "hex": "051100000e696e7465726e616c206572726f72",
+      "decoded": {
+        "error_code": "0",
+        "retry_interval": "0",
+        "reason_phrase": "internal error",
+        "error_details": []
+      }
+    },
+    {
+      "id": "unauthorized-retryable",
+      "description": "REQUEST_ERROR with UNAUTHORIZED (0x1), retry immediately",
+      "hex": "050f01010c756e617574686f72697a6564",
+      "decoded": {
+        "error_code": "1",
+        "retry_interval": "1",
+        "reason_phrase": "unauthorized",
+        "error_details": []
+      }
+    },
+    {
+      "id": "does-not-exist",
+      "description": "REQUEST_ERROR with DOES_NOT_EXIST (0x10), not retryable",
+      "hex": "051110000e646f6573206e6f74206578697374",
+      "decoded": {
+        "error_code": "16",
+        "retry_interval": "0",
+        "reason_phrase": "does not exist",
+        "error_details": []
+      }
+    },
+    {
+      "id": "empty-reason",
+      "description": "REQUEST_ERROR with empty reason phrase, not retryable",
+      "hex": "0503000000",
+      "decoded": {
+        "error_code": "0",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "error_details": []
+      }
+    },
+    {
+      "id": "timeout",
+      "description": "REQUEST_ERROR with TIMEOUT (0x2), not retryable",
+      "hex": "050a02000774696d656f7574",
+      "decoded": {
+        "error_code": "2",
+        "retry_interval": "0",
+        "reason_phrase": "timeout",
+        "error_details": []
+      }
+    },
+    {
+      "id": "not-supported",
+      "description": "REQUEST_ERROR with NOT_SUPPORTED (0x3), not retryable",
+      "hex": "051003000d6e6f7420737570706f72746564",
+      "decoded": {
+        "error_code": "3",
+        "retry_interval": "0",
+        "reason_phrase": "not supported",
+        "error_details": []
+      }
+    },
+    {
+      "id": "malformed-auth-token",
+      "description": "REQUEST_ERROR with MALFORMED_AUTH_TOKEN (0x4), not retryable",
+      "hex": "05170400146d616c666f726d6564206175746820746f6b656e",
+      "decoded": {
+        "error_code": "4",
+        "retry_interval": "0",
+        "reason_phrase": "malformed auth token",
+        "error_details": []
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "REQUEST_ERROR with EXPIRED_AUTH_TOKEN (0x5), not retryable",
+      "hex": "051505001265787069726564206175746820746f6b656e",
+      "decoded": {
+        "error_code": "5",
+        "retry_interval": "0",
+        "reason_phrase": "expired auth token",
+        "error_details": []
+      }
+    },
+    {
+      "id": "going-away",
+      "description": "REQUEST_ERROR with GOING_AWAY (0x6), not retryable",
+      "hex": "050d06000a676f696e672061776179",
+      "decoded": {
+        "error_code": "6",
+        "retry_interval": "0",
+        "reason_phrase": "going away",
+        "error_details": []
+      }
+    },
+    {
+      "id": "excessive-load",
+      "description": "REQUEST_ERROR with EXCESSIVE_LOAD (0x9), not retryable",
+      "hex": "051109000e657863657373697665206c6f6164",
+      "decoded": {
+        "error_code": "9",
+        "retry_interval": "0",
+        "reason_phrase": "excessive load",
+        "error_details": []
+      }
+    },
+    {
+      "id": "unavailable",
+      "description": "REQUEST_ERROR with UNAVAILABLE (0xA), new in draft-23, retry after 1000 ms (Retry Interval 1001, the two-byte vi64 83e9) and an empty reason. Section 7.4: \"A relay that lacks stream credit to forward a request can fail it immediately with UNAVAILABLE, or wait for credit and fail it with TIMEOUT if none arrives.\"",
+      "hex": "05040a83e900",
+      "decoded": {
+        "error_code": "10",
+        "retry_interval": "1001",
+        "reason_phrase": "",
+        "error_details": []
+      }
+    },
+    {
+      "id": "invalid-range",
+      "description": "REQUEST_ERROR with INVALID_RANGE (0x11), not retryable",
+      "hex": "051011000d696e76616c69642072616e6765",
+      "decoded": {
+        "error_code": "17",
+        "retry_interval": "0",
+        "reason_phrase": "invalid range",
+        "error_details": []
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "REQUEST_ERROR with MALFORMED_TRACK (0x12), not retryable",
+      "hex": "051212000f6d616c666f726d656420747261636b",
+      "decoded": {
+        "error_code": "18",
+        "retry_interval": "0",
+        "reason_phrase": "malformed track",
+        "error_details": []
+      }
+    },
+    {
+      "id": "uninterested",
+      "description": "REQUEST_ERROR with UNINTERESTED (0x20), not retryable",
+      "hex": "050f20000c756e696e7465726573746564",
+      "decoded": {
+        "error_code": "32",
+        "retry_interval": "0",
+        "reason_phrase": "uninterested",
+        "error_details": []
+      }
+    },
+    {
+      "id": "unassigned-0x30",
+      "description": "REQUEST_ERROR carrying error code 0x30. Draft-22 named it PREFIX_OVERLAP; draft-23 removed it and Table 21 has no row for it, so it is an unknown code. Section 13: \"Receipt of an unknown error code in any error context (Session Termination, REQUEST_ERROR, PUBLISH_DONE, or Data Stream Reset) MUST be treated as equivalent to INTERNAL_ERROR for that context. An endpoint MUST NOT close the session because it received an unknown error code in a REQUEST_ERROR or PUBLISH_DONE.\" The frame decodes",
+      "hex": "051130000e707265666978206f7665726c6170",
+      "decoded": {
+        "error_code": "48",
+        "retry_interval": "0",
+        "reason_phrase": "prefix overlap",
+        "error_details": []
+      }
+    },
+    {
+      "id": "namespace-too-large",
+      "description": "REQUEST_ERROR with NAMESPACE_TOO_LARGE (0x31), not retryable",
+      "hex": "05163100136e616d65737061636520746f6f206c61726765",
+      "decoded": {
+        "error_code": "49",
+        "retry_interval": "0",
+        "reason_phrase": "namespace too large",
+        "error_details": []
+      }
+    },
+    {
+      "id": "unsupported-extension",
+      "description": "REQUEST_ERROR with UNSUPPORTED_EXTENSION (0x33) and no Error Details",
+      "hex": "0518330015756e737570706f7274656420657874656e73696f6e",
+      "decoded": {
+        "error_code": "51",
+        "retry_interval": "0",
+        "reason_phrase": "unsupported extension",
+        "error_details": []
+      }
+    },
+    {
+      "id": "unsupported-extension-with-properties",
+      "description": "REQUEST_ERROR with UNSUPPORTED_EXTENSION (0x33) naming Mandatory Track Properties 0x4000 and 0x4002 in two UNSUPPORTED_PROPERTY Error Details (Type 0x02, even, so a bare vi64). The second is a Delta Type of 0. Section 9.4.2.2: \"Multiple instances of this type are allowed.\"",
+      "hex": "050b33000002c0400000c04002",
+      "decoded": {
+        "error_code": "51",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "error_details": [
+          {
+            "name": "unsupported_property",
+            "type": "0x2",
+            "value": "16384"
+          },
+          {
+            "name": "unsupported_property",
+            "type": "0x2",
+            "value": "16386"
+          }
+        ]
+      }
+    },
+    {
+      "id": "unsupported-property-with-other-code",
+      "description": "REQUEST_ERROR with DOES_NOT_EXIST (0x10) carrying an UNSUPPORTED_PROPERTY Error Detail. The frame decodes. Section 9.4.2: receivers \"MUST ignore a known Error Detail type that accompanies an Error Code it is not defined for.\"",
+      "hex": "050710000002c04000",
+      "decoded": {
+        "error_code": "16",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "error_details": [
+          {
+            "name": "unsupported_property",
+            "type": "0x2",
+            "value": "16384"
+          }
+        ]
+      }
+    },
+    {
+      "id": "conflicting-filters",
+      "description": "REQUEST_ERROR with CONFLICTING_FILTERS (0x35)",
+      "hex": "0516350013636f6e666c696374696e672066696c74657273",
+      "decoded": {
+        "error_code": "53",
+        "retry_interval": "0",
+        "reason_phrase": "conflicting filters",
+        "error_details": []
+      }
+    },
+    {
+      "id": "invalid-filter",
+      "description": "REQUEST_ERROR with INVALID_FILTER (0x36); a Range Filter parameter is invalid or exceeds MAX_FILTER_RANGES",
+      "hex": "051136000e696e76616c69642066696c746572",
+      "decoded": {
+        "error_code": "54",
+        "retry_interval": "0",
+        "reason_phrase": "invalid filter",
+        "error_details": []
+      }
+    },
+    {
+      "id": "unassigned-0x32",
+      "description": "REQUEST_ERROR carrying error code 0x32, which draft-23 leaves unassigned. Section 13: \"Receipt of an unknown error code in any error context (Session Termination, REQUEST_ERROR, PUBLISH_DONE, or Data Stream Reset) MUST be treated as equivalent to INTERNAL_ERROR for that context. An endpoint MUST NOT close the session because it received an unknown error code in a REQUEST_ERROR or PUBLISH_DONE.\" The frame decodes",
+      "hex": "051d32001a696e76616c6964206a6f696e696e672072657175657374206964",
+      "decoded": {
+        "error_code": "50",
+        "retry_interval": "0",
+        "reason_phrase": "invalid joining request id",
+        "error_details": []
+      }
+    },
+    {
+      "id": "long-reason",
+      "description": "REQUEST_ERROR with INTERNAL_ERROR and a 200-byte reason phrase, so the body is 204 bytes and the Message Length is the two-byte vi64 80cc. A 16-bit Length would be 00 cc",
+      "hex": "0580cc000080c8696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e7465726e616c206572726f7220696e746572",
+      "decoded": {
+        "error_code": "0",
+        "retry_interval": "0",
+        "reason_phrase": "internal error internal error internal error internal error internal error internal error internal error internal error internal error internal error internal error internal error internal error inter",
+        "error_details": []
+      }
+    },
+    {
+      "id": "redirect-new-uri",
+      "description": "REQUEST_ERROR with REDIRECT (0x34) and a REDIRECT Error Detail (Type 0x01, odd, so Length-prefixed) pointing at moqt://relay.example.com/path and a new full track name. Draft-22 carried the Redirect structure bare after the reason phrase",
+      "hex": "05403493880c676f20656c73657768657265012e1d6d6f71743a2f2f72656c61792e6578616d706c652e636f6d2f7061746801046c697665096e65772d766964656f",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "5000",
+        "reason_phrase": "go elsewhere",
+        "error_details": [
+          {
+            "name": "redirect",
+            "type": "0x1",
+            "value": {
+              "connect_uri": "moqt://relay.example.com/path",
+              "track_namespace": [
+                "live"
+              ],
+              "track_name": "new-video"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "redirect-same-session",
+      "description": "REQUEST_ERROR with REDIRECT (0x34) and a REDIRECT Error Detail with a zero-length Connect URI (reuse current session) and a renamed track",
+      "hex": "051834000001130001046c6976650b7265706c6163656d656e74",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "error_details": [
+          {
+            "name": "redirect",
+            "type": "0x1",
+            "value": {
+              "connect_uri": "",
+              "track_namespace": [
+                "live"
+              ],
+              "track_name": "replacement"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "redirect-short",
+      "description": "REQUEST_ERROR with REDIRECT, Retry Interval 0, an empty reason and a REDIRECT Error Detail with an empty Connect URI, namespace ('a') and Track Name 'b': 05 0b 34 00 00 01 06 00 01 01 61 01 62",
+      "hex": "050b3400000106000101610162",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "error_details": [
+          {
+            "name": "redirect",
+            "type": "0x1",
+            "value": {
+              "connect_uri": "",
+              "track_namespace": [
+                "a"
+              ],
+              "track_name": "b"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "redirect-namespace-only",
+      "description": "REQUEST_ERROR with REDIRECT (0x34) for a namespace-scoped request: empty Track Name. Section 9.4.2.1: \"Track Name is not meaningful for namespace-scoped requests (SUBSCRIBE_NAMESPACE, PUBLISH_NAMESPACE, SUBSCRIBE_TRACKS) and MUST be empty\"",
+      "hex": "053b34010f747279206f746865722072656c61790127186d6f71743a2f2f6f746865722e6578616d706c652e636f6d02046c6976650673706f72747300",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "1",
+        "reason_phrase": "try other relay",
+        "error_details": [
+          {
+            "name": "redirect",
+            "type": "0x1",
+            "value": {
+              "connect_uri": "moqt://other.example.com",
+              "track_namespace": [
+                "live",
+                "sports"
+              ],
+              "track_name": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "redirect-empty-target",
+      "description": "REQUEST_ERROR with REDIRECT (0x34) whose REDIRECT Error Detail has a zero-field Track Namespace and an empty Track Name. Section 9.4.2.1 calls the pair the Redirect target; these are literal empty values",
+      "hex": "0520340000011b186d6f71743a2f2f6f746865722e6578616d706c652e636f6d0000",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "error_details": [
+          {
+            "name": "redirect",
+            "type": "0x1",
+            "value": {
+              "connect_uri": "moqt://other.example.com",
+              "track_namespace": [],
+              "track_name": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "redirect-then-grease-detail",
+      "description": "REQUEST_ERROR with REDIRECT whose REDIRECT Error Detail is followed by Error Detail Type 0x9D, a grease value (Section 13), with an empty value: Delta Type 0x9C (the two-byte vi64 809c) and, 0x9D being odd, Length 0. Section 9.4.2: \"Receivers MUST ignore unknown Error Detail types\". The entry is kept, without a name",
+      "hex": "050e3400000106000101610162809c00",
+      "decoded": {
+        "error_code": "52",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "error_details": [
+          {
+            "name": "redirect",
+            "type": "0x1",
+            "value": {
+              "connect_uri": "",
+              "track_namespace": [
+                "a"
+              ],
+              "track_name": "b"
+            }
+          },
+          {
+            "raw_hex": "",
+            "type": "0x9d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "grease-detail-even-0x11c",
+      "description": "REQUEST_ERROR with INTERNAL_ERROR, an empty reason and Error Detail Type 0x11C, the second grease value of Section 13 (0x7f * N + 0x9D). 0x11C is even, so its value is a bare vi64, 5, after the Delta Type 811c. Section 9.4.2: \"Receivers MUST ignore unknown Error Detail types\". The entry is kept, without a name",
+      "hex": "0506000000811c05",
+      "decoded": {
+        "error_code": "0",
+        "retry_interval": "0",
+        "reason_phrase": "",
+        "error_details": [
+          {
+            "type": "0x11c",
+            "value": "5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "redirect-detail-trailing-bytes",
+      "description": "REQUEST_ERROR with REDIRECT whose REDIRECT Error Detail has Length 7: the 6-byte structure of redirect-short (empty Connect URI, namespace ('a'), Track Name 'b'), then one more byte, 00. Section 8.3: \"If a receiver understands a Type, and the following Value or Length/Value does not match the serialization defined by that Type, the receiver MUST close the session with MALFORMED_KEY_VALUE.\"",
+      "hex": "050c340000010700010161016200",
+      "error": "invalid_value",
+      "error_detail": "one byte follows the REDIRECT structure inside its Length",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "redirect-without-detail",
+      "description": "REQUEST_ERROR with REDIRECT (0x34) and no Error Details. Section 9.4.2.1: \"An endpoint that receives a REQUEST_ERROR with Error Code REDIRECT and no REDIRECT Error Detail MUST close the session with MALFORMED_MESSAGE.\"",
+      "hex": "0503340000",
+      "error": "invalid_value",
+      "error_detail": "Error Code REDIRECT requires a REDIRECT Error Detail",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "redirect-draft22-form",
+      "description": "REQUEST_ERROR with REDIRECT carrying draft-22's bare Redirect structure (empty URI, namespace ('a'), name 'b') after the reason phrase, under a vi64 Length. Read as Error Details, 00 01 is Type 0 with value 1, then 01 61 is Type 1, REDIRECT, with a Length of 97 that runs past the message",
+      "hex": "0509340000000101610162",
+      "error": "invalid_value",
+      "error_detail": "the REDIRECT Error Detail Length runs past the message",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated REQUEST_ERROR — missing error_code",
+      "hex": "0502",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading error_code"
+    }
+  ]
+}

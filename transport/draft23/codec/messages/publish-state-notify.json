@@ -1,0 +1,164 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_state_notify",
+  "message_type_id": "0x22",
+  "spec_section": "9.10",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "PUBLISH_STATE_NOTIFY with no parameters. The message has no Request ID field: it is identified by the subscription's request stream it arrives on",
+      "hex": "220100",
+      "decoded": {
+        "parameters": []
+      }
+    },
+    {
+      "id": "with-largest-object",
+      "description": "PUBLISH_STATE_NOTIFY carrying LARGEST_OBJECT (group=10, object=3). Section 9.10: the publisher MUST include it if known. LARGEST_OBJECT is Parameter Type 0x09, odd, but a Location: two bare vi64s with no length prefix. The Key-Value-Pair parity rule does not apply to Message Parameters",
+      "hex": "220401090a03",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "10",
+              "object": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-paused",
+      "description": "PUBLISH_STATE_NOTIFY reporting that the subscription is paused at the publisher: PAUSED (0x11) = 1. Section 9.19.18: \"When sent in PUBLISH_STATE_NOTIFY, it reports whether the subscription is paused at the publisher.\" Draft-22 reported the same state as FORWARD (0x10) = 0",
+      "hex": "2203011101",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "paused",
+            "type": "0x11",
+            "value": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-location-filter",
+      "description": "PUBLISH_STATE_NOTIFY reporting the Location Filter now in effect at the publisher: a type 0x03 filter, the inclusive range {12,0} through all of group 16",
+      "hex": "22060121030c0004",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "end_group_delta": "4",
+              "filter_type": "3",
+              "start_group": "12",
+              "start_object": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-largest-object-and-paused",
+      "description": "PUBLISH_STATE_NOTIFY carrying LARGEST_OBJECT (group=7, object=41) and PAUSED=0; the PAUSED Type Delta is 8, from 0x09 to 0x11",
+      "hex": "2206020907290800",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "7",
+              "object": "41"
+            }
+          },
+          {
+            "name": "paused",
+            "type": "0x11",
+            "value": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-all-three",
+      "description": "PUBLISH_STATE_NOTIFY carrying every parameter draft-23 permits in it: LARGEST_OBJECT (0x09), PAUSED (0x11) and LOCATION_FILTER (0x21). Section 9.10: \"The parameters that can appear in a PUBLISH_STATE_NOTIFY are LARGEST_OBJECT, PAUSED and LOCATION_FILTER.\"",
+      "hex": "220b03090729080010030c0004",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "largest_object",
+            "type": "0x9",
+            "value": {
+              "group": "7",
+              "object": "41"
+            }
+          },
+          {
+            "name": "paused",
+            "type": "0x11",
+            "value": "0"
+          },
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "end_group_delta": "4",
+              "filter_type": "3",
+              "start_group": "12",
+              "start_object": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-forward",
+      "description": "PUBLISH_STATE_NOTIFY carrying draft-22's FORWARD (0x10) = 0. Draft-23's Table 14 has no row for 0x10: PAUSED (0x11) replaced FORWARD. Section 9.19: \"An endpoint that receives an unknown Message Parameter MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "2203011000",
+      "error": "invalid_parameter",
+      "error_detail": "message parameter type 0x10 is not defined by draft-23"
+    },
+    {
+      "id": "paused-invalid-value",
+      "description": "PUBLISH_STATE_NOTIFY with PAUSED (0x11) = 2. Section 9.19.18: \"The allowed values are 0 (unpaused) or 1 (paused). If an endpoint receives a value outside this range, it MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "2203011102",
+      "error": "invalid_parameter",
+      "error_detail": "PAUSED accepts only 0 or 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "expires-out-of-scope",
+      "description": "PUBLISH_STATE_NOTIFY carrying EXPIRES (0x08). Section 9.10: \"The parameters that can appear in a PUBLISH_STATE_NOTIFY are LARGEST_OBJECT, PAUSED and LOCATION_FILTER.\" Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "22050108c0ea60",
+      "error": "parameter_out_of_scope",
+      "error_detail": "EXPIRES is not listed for PUBLISH_STATE_NOTIFY",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subscriber-priority-out-of-scope",
+      "description": "PUBLISH_STATE_NOTIFY carrying SUBSCRIBER_PRIORITY (0x20), a subscriber-controlled parameter. Section 9.10: \"The parameters that can appear in a PUBLISH_STATE_NOTIFY are LARGEST_OBJECT, PAUSED and LOCATION_FILTER.\" Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "2203012010",
+      "error": "parameter_out_of_scope",
+      "error_detail": "SUBSCRIBER_PRIORITY is not listed for PUBLISH_STATE_NOTIFY",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_STATE_NOTIFY — missing parameter count",
+      "hex": "2204",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

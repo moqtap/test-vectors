@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "unknown",
+  "spec_section": "9",
+  "vectors": [
+    {
+      "id": "unknown-type-with-payload",
+      "description": "message with unrecognized type 0x3F. Section 9: \"An endpoint that receives an unknown message type MUST close the session with UNEXPECTED_MESSAGE.\"",
+      "hex": "3f04deadbeef",
+      "error": "unknown_message",
+      "error_detail": "unknown message type 0x3F"
+    },
+    {
+      "id": "fetch-ok-reserved",
+      "description": "draft-22's FETCH_OK body (End Of Track 0, End Location {10,3}, no parameters) under type 0x18 with a vi64 Length. Table 5 gives 0x18 only as \"RESERVED (FETCH_OK in <= 22)\" and defines no message for it; a FETCH is answered by REQUEST_OK (Section 9.3). This corpus reads a reserved type as an unknown one. Section 9: \"An endpoint that receives an unknown message type MUST close the session with UNEXPECTED_MESSAGE.\"",
+      "hex": "1804000a0300",
+      "error": "unknown_message",
+      "error_detail": "message type 0x18 is reserved in draft-23"
+    }
+  ]
+}

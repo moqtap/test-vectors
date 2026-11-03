@@ -58,7 +58,7 @@
         },
         "decoded": {
           "type": "object",
-          "description": "Expected decoded representation as a plain JSON object. Keys are the field names the draft gives, in the order it defines them. A field the message did not carry is absent rather than zero. Every Key-Value-Pair block — `parameters`, `setup_parameters`, `options`, `track_properties`, `track_extensions`, and on the data plane `extension_headers` and `object_properties` — is a list of entries; see `kvp_block`.",
+          "description": "Expected decoded representation as a plain JSON object. Keys are the field names the draft gives, in the order it defines them. A field the message did not carry is absent rather than zero. Every Key-Value-Pair block — `parameters`, `setup_parameters`, `options`, `track_properties`, `track_extensions`, `error_details`, and on the data plane `extension_headers` and `object_properties` — is a list of entries; see `kvp_block`.",
           "properties": {
             "parameters": {
               "$ref": "#/$defs/kvp_block"
@@ -79,6 +79,9 @@
               "$ref": "#/$defs/kvp_block"
             },
             "object_properties": {
+              "$ref": "#/$defs/kvp_block"
+            },
+            "error_details": {
               "$ref": "#/$defs/kvp_block"
             }
           }
@@ -147,7 +150,7 @@
     },
     "kvp_entry": {
       "type": "object",
-      "description": "One Key-Value-Pair, as it sat on the wire. A parameter block is an ordered list of (Type, Value) with the types ascending, and this corpus renders it as a list rather than as a map keyed by the draft's name for each type. A map loses three things a vector may need to state: a repeat, which two parameter definitions permit (AUTHORIZATION_TOKEN, and on drafts 19 and 20 the five Range Filters); the order, which drafts 16 and later answer a violation of with a session close; and a type the draft assigns no name, which has no key to sit under. As a list, each of those is an ordinary entry.",
+      "description": "One Key-Value-Pair, as it sat on the wire. A parameter block is an ordered list of (Type, Value) with the types ascending, and this corpus renders it as a list rather than as a map keyed by the draft's name for each type. A map loses three things a vector may need to state: a repeat, which two parameter definitions permit (AUTHORIZATION_TOKEN, and on drafts 19 to 23 the five Range Filters); the order, which drafts 16 and later answer a violation of with a session close; and a type the draft assigns no name, which has no key to sit under. As a list, each of those is an ordinary entry.",
       "required": [
         "type"
       ],

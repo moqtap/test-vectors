@@ -1,0 +1,80 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "track_status",
+  "message_type_id": "0x0d",
+  "spec_section": "9.12",
+  "vectors": [
+    {
+      "id": "basic",
+      "description": "TRACK_STATUS request for live/video (format identical to SUBSCRIBE with the type set to 0xD)",
+      "hex": "0d0e0101046c69766505766964656f00",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": []
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "TRACK_STATUS with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='ts-token')",
+      "hex": "0d1a0101046c69766505766964656f01030a030074732d746f6b656e",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "74732d746f6b656e"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-include-properties",
+      "description": "TRACK_STATUS with INCLUDE_PROPERTIES (0x35) set to 0 — the TRACK_STATUS_OK should carry an empty Track Properties field. Section 9.12: \"The parameters that can appear in a TRACK_STATUS are AUTHORIZATION_TOKEN and INCLUDE_PROPERTIES.\"",
+      "hex": "0d100101046c69766505766964656f013500",
+      "decoded": {
+        "request_id": "1",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "include_properties",
+            "type": "0x35",
+            "value": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "empty-track-name",
+      "description": "TRACK_STATUS (Request ID 1, namespace ('live')) with a zero-length Track Name and no parameters. Section 2.4.1: \"If an endpoint receives a Track Name with a length of 0, it MUST close the session with a PROTOCOL_VIOLATION.\"",
+      "hex": "0d090101046c6976650000",
+      "error": "invalid_value",
+      "error_detail": "Track Name has length 0",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated TRACK_STATUS — missing track_namespace",
+      "hex": "0d0e0101046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

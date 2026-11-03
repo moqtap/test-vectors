@@ -1,0 +1,709 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "object",
+  "message_type_id": "0x05",
+  "spec_section": "11.4.1",
+  "vectors": [
+    {
+      "id": "fetch-stream-single-object",
+      "description": "fetch stream header (type 0x05) with one object (flags 0x1c: GROUP_ID_DELTA, OBJECT_ID_DELTA and PRIORITY present, subgroup mode 0b00); the first object's deltas are absolute values",
+      "hex": "05041c00008004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "0",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-two-objects",
+      "description": "fetch stream with two objects (Ascending group order); the second uses pure delta encoding (flags 0x00) — Object ID is prior + 1 within the same group",
+      "hex": "05041c00008004deadbeef0002cafe",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "0",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          },
+          {
+            "serialization_flags": "0x00",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id": "1",
+            "publisher_priority": "128",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-cross-group-delta",
+      "description": "fetch stream where the second object starts a new group via GROUP_ID_DELTA (flags 0x0c). In Ascending order the new Group ID is prior + delta + 1, and the Object ID is the Object ID Delta whenever a Group ID Delta is present",
+      "hex": "05041c05008001aa0c000001bb",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x0c",
+            "group_id_delta": "0",
+            "group_id": "6",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-object-delta-same-group",
+      "description": "fetch stream where the second object carries an Object ID Delta of 2 and no Group ID Delta (flags 0x04), so its Object ID is 0 + 2 + 2 = 4. Section 11.4.1.1: \"When the Group ID Delta field is not present, the Object ID is the prior Object's ID plus the Object ID Delta + 2 if present.\" Draft-22 wrote this Object with a delta of 4",
+      "hex": "05041c03008001aa040201bb",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "3",
+            "group_id": "3",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x04",
+            "group_id": "3",
+            "subgroup_id": "0",
+            "object_id_delta": "2",
+            "object_id": "4",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-object-delta-zero",
+      "description": "fetch stream where the Object after {5,3} has flags 0x05 (prior Subgroup ID, Object ID Delta present) and Object ID Delta 0: 05 00 02 4142 decodes to {5,5}. Draft-22 read the same bytes as {5,3}, a repeat of the prior Location",
+      "hex": "05041f0507038001aa0500024142",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1f",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "7",
+            "object_id_delta": "3",
+            "object_id": "3",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x05",
+            "group_id": "5",
+            "subgroup_id": "7",
+            "object_id_delta": "0",
+            "object_id": "5",
+            "publisher_priority": "128",
+            "payload_length": "2",
+            "payload_hex": "4142"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-object-delta-one",
+      "description": "fetch stream where the Object after {5,3} has flags 0x05 and Object ID Delta 1, which decodes to {5,6}. Draft-22 read it as {5,4}, which draft-23 writes with flags 0x01 and no delta",
+      "hex": "05041f0507038001aa0501024142",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1f",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "7",
+            "object_id_delta": "3",
+            "object_id": "3",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x05",
+            "group_id": "5",
+            "subgroup_id": "7",
+            "object_id_delta": "1",
+            "object_id": "6",
+            "publisher_priority": "128",
+            "payload_length": "2",
+            "payload_hex": "4142"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-object-delta-skip",
+      "description": "fetch stream where the Object after {5,3} is {5,7}: flags 0x05 and Object ID Delta 2 (7 - 3 - 2), 05 02 02 4142. Draft-22 wrote 05 04 02 4142",
+      "hex": "05041f0507038001aa0502024142",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1f",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "7",
+            "object_id_delta": "3",
+            "object_id": "3",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x05",
+            "group_id": "5",
+            "subgroup_id": "7",
+            "object_id_delta": "2",
+            "object_id": "7",
+            "publisher_priority": "128",
+            "payload_length": "2",
+            "payload_hex": "4142"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-new-group-object-id-continues",
+      "description": "fetch stream where the second object starts a new group via Group ID Delta but carries no Object ID Delta (flags 0x08). Section 11.4.1.1: \"If Object ID Delta is not present, the Object ID is the prior Object's ID plus one, regardless of which group it belongs to.\" So the Object ID continues 7 → 8 across the group boundary",
+      "hex": "05041c00078001aa080001bb",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "0",
+            "group_id": "0",
+            "subgroup_id": "0",
+            "object_id_delta": "7",
+            "object_id": "7",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x08",
+            "group_id_delta": "0",
+            "group_id": "1",
+            "subgroup_id": "0",
+            "object_id": "8",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-non-existent-range",
+      "description": "fetch stream with an End of Non-Existent Range indicator (Serialization Flags 0x8C, the two-byte vi64 808c) as the first entry, so its two fields are absolute (Section 11.4.2.1): {5,10}. Section 11.4.2 says \"Subgroup ID, Priority and Properties are not present\" and does not mention Object Payload Length, which Figure 29 marks mandatory. The draft does not settle whether an End of Range indicator carries it. This corpus encodes it as 0, the trailing 00 of every End of Range vector",
+      "hex": "0504808c050a00",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x8c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "object_id_delta": "10",
+            "object_id": "10",
+            "payload_length": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-unknown-range",
+      "description": "fetch stream with an End of Unknown Range indicator (Serialization Flags 0x10C, the two-byte vi64 810c) as the first entry: {5,10}. The trailing 00 is Object Payload Length (see fetch-end-of-non-existent-range)",
+      "hex": "0504810c050a00",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x10c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "object_id_delta": "10",
+            "object_id": "10",
+            "payload_length": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-timed-out-range",
+      "description": "fetch stream with an End of Timed-Out Range indicator (Serialization Flags 0x20C, the two-byte vi64 820c) as the first entry: {5,10}. The trailing 00 is Object Payload Length (see fetch-end-of-non-existent-range)",
+      "hex": "0504820c050a00",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x20c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "object_id_delta": "10",
+            "object_id": "10",
+            "payload_length": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-gone-range",
+      "description": "fetch stream whose first entry is an End of Gone Range indicator, new in draft-23 (Serialization Flags 0x40C, the two-byte vi64 840c), through {9,30}: 840c 09 1e 00. Section 11.4.2: the Objects up to it \"are Gone (0x40C)\". Written as a QUIC varint, 0x40C would be 440c, which as a vi64 is the ordinary flags 0x44. The trailing 00 is Object Payload Length (see fetch-end-of-non-existent-range)",
+      "hex": "0504840c091e00",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x40c",
+            "group_id_delta": "9",
+            "group_id": "9",
+            "object_id_delta": "30",
+            "object_id": "30",
+            "payload_length": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-timed-out-range-after-object",
+      "description": "fetch stream with an Object {5,0} followed by an End of Timed-Out Range indicator through {6,9}. Section 11.4.2.1: the Group ID is the prior Group ID plus Group ID Delta, 5 + 1, and \"When Group ID Delta is nonzero, the Object ID Delta field contains the absolute Object ID in the new Group.\" So the indicator is 820c 01 09 00. Read with the Object rule of Section 11.4.1.1, which adds 1 to a Group ID Delta, the same bytes would end at {7,9}. The trailing 00 is Object Payload Length (see fetch-end-of-non-existent-range)",
+      "hex": "05041c05008001aa820c010900",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x20c",
+            "group_id_delta": "1",
+            "group_id": "6",
+            "object_id_delta": "9",
+            "object_id": "9",
+            "payload_length": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-unknown-range-same-group",
+      "description": "fetch stream with an Object {5,2} followed by an End of Unknown Range indicator with Group ID Delta 0 and Object ID Delta 4, then an Object with flags 0x01. Section 11.4.2.1: \"If Group ID Delta is zero, the Object ID is the prior Object ID plus Object ID Delta + 1.\" So the range ends at {5,7}, and the following Object is {5,8} with the Subgroup ID and Priority of {5,2} (Section 11.4.2.2). The trailing 00 is Object Payload Length (see fetch-end-of-non-existent-range)",
+      "hex": "05041c05028001aa810c0004000101aa",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id_delta": "2",
+            "object_id": "2",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x10c",
+            "group_id_delta": "0",
+            "group_id": "5",
+            "object_id_delta": "4",
+            "object_id": "7",
+            "payload_length": "0"
+          },
+          {
+            "serialization_flags": "0x01",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id": "8",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-unknown-range-next-groups",
+      "description": "fetch stream with an Object {5,2} followed by an End of Unknown Range indicator through {8,4}: 810c 03 04 00. Group ID is 5 + 3, with no +1, and the Object ID is absolute; 810c 02 04 00 would be {7,4}. The trailing 00 is Object Payload Length (see fetch-end-of-non-existent-range)",
+      "hex": "05041c05028001aa810c030400",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id_delta": "2",
+            "object_id": "2",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x10c",
+            "group_id_delta": "3",
+            "group_id": "8",
+            "object_id_delta": "4",
+            "object_id": "4",
+            "payload_length": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-object-after-timed-out-indicator",
+      "description": "fetch stream where an ordinary object follows an End of Timed-Out Range indicator and references the prior Object. Section 11.4.2.2: prior Group ID and prior Object ID are \"The decoded values from the End of Range indicator.\" ({6,9}); prior Subgroup ID and Priority come from the last actual Object before it. The trailing object's flags are 0x00, so it is {6,10}, Subgroup 0, Priority 128. The trailing 00 is Object Payload Length (see fetch-end-of-non-existent-range)",
+      "hex": "05041c05008001aa820c0109000002cafe",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x20c",
+            "group_id_delta": "1",
+            "group_id": "6",
+            "object_id_delta": "9",
+            "object_id": "9",
+            "payload_length": "0"
+          },
+          {
+            "serialization_flags": "0x00",
+            "group_id": "6",
+            "subgroup_id": "0",
+            "object_id": "10",
+            "publisher_priority": "128",
+            "payload_length": "2",
+            "payload_hex": "cafe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-group-then-object",
+      "description": "fetch stream with Objects {5,0} to {5,2}, an End of Group indicator (0x80, the two-byte vi64 8080), then Object {6,0}. Section 11.4.2.2: \"When Serialization Flags is 0x80 (End of Group) or 0x81 (End of Track), no other fields are present.\" The next Object carries a Group ID Delta and an Object ID Delta",
+      "hex": "05041c05008001aa0001aa0001aa80801c00008001aa",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x00",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id": "1",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x00",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id": "2",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x80"
+          },
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "0",
+            "group_id": "6",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-end-of-track",
+      "description": "fetch stream whose last Object {9,4} is followed by End of Track (0x81, the two-byte vi64 8081). Section 3.2.2: \"The publisher MUST follow an Object known to end the Track with End of Track\". Section 11.4.2.2: \"End of Track also indicates End of Group.\"",
+      "hex": "05041c09048001aa8081",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "9",
+            "group_id": "9",
+            "subgroup_id": "0",
+            "object_id_delta": "4",
+            "object_id": "4",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x81"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-with-properties",
+      "description": "fetch stream whose first object, {5,0}, carries a PRIOR_GROUP_ID_GAP=2 property (flags 0x3c: PROPERTIES, PRIORITY, GROUP_ID_DELTA and OBJECT_ID_DELTA). Section 10.8 makes the Track malformed when \"An Object has a Prior Group ID Gap larger than the Group ID.\", so the Group ID is at least 2",
+      "hex": "05043c050080023c0204deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x3c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "object_properties": [
+              {
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
+                "value": "2"
+              }
+            ],
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-datagram-flag",
+      "description": "fetch stream with the DATAGRAM flag set (flags 0x5c). The two least significant bits are ignored and no Subgroup ID is present, because an Object with Delivery Mode Datagram has none",
+      "hex": "05045c03008004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x5c",
+            "group_id_delta": "3",
+            "group_id": "3",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-with-subgroup-id-present",
+      "description": "fetch stream with an explicit subgroup_id (flags 0x1f: subgroup mode 0b11, so the Subgroup ID field is present, plus PRIORITY, GROUP_ID_DELTA and OBJECT_ID_DELTA)",
+      "hex": "05041f0007008004deadbeef",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1f",
+            "group_id_delta": "0",
+            "group_id": "0",
+            "subgroup_id": "7",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "4",
+            "payload_hex": "deadbeef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-gone-range-after-object",
+      "description": "fetch stream with an Object {5,2}, an End of Gone Range indicator 840c 00 03 00, and an Object with flags 0x01. Section 11.4.2.1: \"If Group ID Delta is zero, the Object ID is the prior Object ID plus Object ID Delta + 1.\" So the range ends at {5,6}, and the following Object is {5,7} with the Subgroup ID and Priority of {5,2}. The trailing 00 is Object Payload Length (see fetch-end-of-non-existent-range)",
+      "hex": "05041c05028001aa840c0003000101bb",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "5",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id_delta": "2",
+            "object_id": "2",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x40c",
+            "group_id_delta": "0",
+            "group_id": "5",
+            "object_id_delta": "3",
+            "object_id": "6",
+            "payload_length": "0"
+          },
+          {
+            "serialization_flags": "0x01",
+            "group_id": "5",
+            "subgroup_id": "0",
+            "object_id": "7",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "end-of-group-then-object-id-overflow",
+      "description": "fetch stream with Object {5,2}, End of Group (0x80), then an Object with flags 0x18 (Group ID Delta and Priority present, no Object ID Delta). Section 11.4.2.2: after 0x80 \"The prior Object ID becomes 2^64-1.\" With no Object ID Delta the Object ID is that plus one. Section 11.4.1.1: \"If the computed Object ID would be greater than 2^64-1, the Subscriber MUST close the Session with DELTA_ENCODING_OVERFLOW.\"",
+      "hex": "05041c05028001aa808018008001bb",
+      "error": "invalid_value",
+      "error_detail": "Object ID would be 2^64",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "end-of-range-object-id-overflow",
+      "description": "fetch stream with Object {5,0} followed by an End of Unknown Range indicator with Group ID Delta 0 and Object ID Delta 2^64-1, the nine-byte vi64 ff followed by eight ff bytes. Section 11.4.2.1: \"If Group ID Delta is zero, the Object ID is the prior Object ID plus Object ID Delta + 1.\" That is 2^64. \"If either decoded ID is less than zero or greater than 2^64-1, the Subscriber MUST close the Session with DELTA_ENCODING_OVERFLOW.\"",
+      "hex": "05041c05008001aa810c00ffffffffffffffffff00",
+      "error": "invalid_value",
+      "error_detail": "End of Range Object ID would be 2^64",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "object-id-delta-plus-two-overflow",
+      "description": "fetch stream with Object {5,2^64-2} followed by an Object with flags 0x05 (prior Subgroup ID, Object ID Delta present) and Object ID Delta 0. Section 11.4.1.1: \"When the Group ID Delta field is not present, the Object ID is the prior Object's ID plus the Object ID Delta + 2 if present.\" That is 2^64. \"If the computed Object ID would be greater than 2^64-1, the Subscriber MUST close the Session with DELTA_ENCODING_OVERFLOW.\"",
+      "hex": "05041c05fffffffffffffffffe8001aa0500024142",
+      "error": "invalid_value",
+      "error_detail": "Object ID would be 2^64",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "invalid-serialization-flags",
+      "description": "fetch stream whose first entry carries Serialization Flags 0x8D, the two-byte vi64 808d. Table 8 defines 0x8C, 0x10C, 0x20C, 0x40C, 0x80 and 0x81 at or above 128. Section 11.4.1: \"If an endpoint receives any other value greater than 127, it MUST close the session with MALFORMED_OBJECT.\"",
+      "hex": "0504808d050a00",
+      "error": "invalid_value",
+      "error_detail": "0x8D is neither a flag combination below 128 nor a Table 8 indicator"
+    },
+    {
+      "id": "invalid-serialization-flags-0x82",
+      "description": "fetch stream whose first entry carries Serialization Flags 0x82, beside the new End of Group (0x80) and End of Track (0x81) and not defined. Section 11.4.1: \"If an endpoint receives any other value greater than 127, it MUST close the session with MALFORMED_OBJECT.\"",
+      "hex": "05048082",
+      "error": "invalid_value",
+      "error_detail": "0x82 is not a Table 8 indicator"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated fetch header — missing request_id",
+      "hex": "05",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading request_id"
+    }
+  ]
+}

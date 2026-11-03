@@ -1,0 +1,490 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "fetch",
+  "message_type_id": "0x16",
+  "spec_section": "9.11",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "minimal FETCH with no parameters. A FETCH with no LOCATION_FILTER is unfiltered (Section 9.19.9) and is answered by REQUEST_OK (Section 9.3)",
+      "hex": "160e0201046c69766505766964656f00",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": []
+      }
+    },
+    {
+      "id": "multi-namespace",
+      "description": "FETCH with multi-element namespace",
+      "hex": "161b04020a636f6e666572656e636506726f6f6d343205617564696f00",
+      "decoded": {
+        "request_id": "4",
+        "track_namespace": [
+          "conference",
+          "room42"
+        ],
+        "track_name": "audio",
+        "parameters": []
+      }
+    },
+    {
+      "id": "with-filter-relative-next-group",
+      "description": "FETCH with a type 0x01 (Relative Start) LOCATION_FILTER, StartGroup=0. Section 3.2: \"If the Location filter is relative (see Section 9.19.9), the publisher MUST return REQUEST_ERROR with error code INVALID_RANGE.\" The frame decodes; the refusal is a request error, not a session close",
+      "hex": "16110201046c69766505766964656f01210100",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "1",
+              "start_group": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-filter-relative-three-groups-back",
+      "description": "FETCH with a type 0x01 (Relative Start) LOCATION_FILTER, StartGroup=3. Section 3.2: \"If the Location filter is relative (see Section 9.19.9), the publisher MUST return REQUEST_ERROR with error code INVALID_RANGE.\" The frame decodes; the refusal is a request error, not a session close",
+      "hex": "16110201046c69766505766964656f01210103",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "1",
+              "start_group": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-filter-next-object",
+      "description": "FETCH with a type 0x05 LOCATION_FILTER, the Next Object. Section 9.19.9: \"If Location Filter Type is 0x05, no fields follow and it specifies the Next Object.\" The vector asserts the decode only",
+      "hex": "16100201046c69766505766964656f012105",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "5"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-filter-absolute-start",
+      "description": "FETCH with a type 0x02 (Absolute Start) LOCATION_FILTER: absolute start {10,3}. Section 9.19.9: \"When they are omitted from a Fetch, the EndGroup and EndObject are Largest Object.\"",
+      "hex": "16120201046c69766505766964656f0121020a03",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "2",
+              "start_group": "10",
+              "start_object": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-filter-end-group",
+      "description": "FETCH with a type 0x03 (Absolute Start, Group End) LOCATION_FILTER: start {10,3}, EndGroupDelta 5 so the End Group is 15, EndObject omitted so all objects in group 15 are included",
+      "hex": "16130201046c69766505766964656f0121030a0305",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "end_group_delta": "5",
+              "filter_type": "3",
+              "start_group": "10",
+              "start_object": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-filter-full-range",
+      "description": "FETCH with a type 0x04 (Absolute Range) LOCATION_FILTER: the inclusive range {10,3} through {15,7}",
+      "hex": "16140201046c69766505766964656f0121040a030507",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "end_group_delta": "5",
+              "end_object": "7",
+              "filter_type": "4",
+              "start_group": "10",
+              "start_object": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-filter-noncanonical-field-count",
+      "description": "non-canonical FETCH — a type 0x02 LOCATION_FILTER whose StartGroup (10) is encoded as a 2-byte varint (800a) and StartObject (3) as one byte. Decode-only",
+      "hex": "16130201046c69766505766964656f012102800a03",
+      "canonical": false,
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "2",
+              "start_group": "10",
+              "start_object": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "FETCH with SUBSCRIBER_PRIORITY parameter (16). Section 9.19.7: \"If omitted from SUBSCRIBE or FETCH, the publisher uses the value 128.\"",
+      "hex": "16100201046c69766505766964656f012010",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-group-order",
+      "description": "FETCH with GROUP_ORDER parameter (descending=2). Section 9.19.8: \"If omitted from FETCH, the receiver uses Ascending (0x1).\"",
+      "hex": "16100201046c69766505766964656f012202",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-fill-timeout",
+      "description": "FETCH with FILL_TIMEOUT parameter (5000ms)",
+      "hex": "16110201046c69766505766964656f010a9388",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "fill_timeout",
+            "type": "0xa",
+            "value": "5000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-fill-timeout-zero",
+      "description": "FETCH with FILL_TIMEOUT=0",
+      "hex": "16100201046c69766505766964656f010a00",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "fill_timeout",
+            "type": "0xa",
+            "value": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-include-properties-zero",
+      "description": "FETCH with INCLUDE_PROPERTIES (0x35) set to 0 — the FETCH_OK should carry an empty Track Properties field",
+      "hex": "16100201046c69766505766964656f013500",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "include_properties",
+            "type": "0x35",
+            "value": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "FETCH with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='fetch-token')",
+      "hex": "161d0201046c69766505766964656f01030d030066657463682d746f6b656e",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "66657463682d746f6b656e"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-objectid-filter",
+      "description": "FETCH with OBJECTID_FILTER (0x26): SetID 0, Object ID range 2-5",
+      "hex": "16130201046c69766505766964656f012603000203",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "objectid_filter",
+            "type": "0x26",
+            "value": {
+              "ranges": [
+                {
+                  "end": "5",
+                  "start": "2"
+                }
+              ],
+              "set_id": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-priority-filter",
+      "description": "FETCH with PRIORITY_FILTER (0x27): SetID 0, Publisher Priority range 0-63",
+      "hex": "16130201046c69766505766964656f01270300003f",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "priority_filter",
+            "type": "0x27",
+            "value": {
+              "ranges": [
+                {
+                  "end": "63",
+                  "start": "0"
+                }
+              ],
+              "set_id": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-multiple-params",
+      "description": "FETCH with SUBSCRIBER_PRIORITY (16), a type 0x04 LOCATION_FILTER covering {4,0} through {6,9} inclusive, and GROUP_ORDER (ascending=1); demonstrates type-delta ordering across 0x20, 0x21 and 0x22",
+      "hex": "16180201046c69766505766964656f0320100104040002090101",
+      "decoded": {
+        "request_id": "2",
+        "track_namespace": [
+          "live"
+        ],
+        "track_name": "video",
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "16"
+          },
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "end_group_delta": "2",
+              "end_object": "9",
+              "filter_type": "4",
+              "start_group": "4",
+              "start_object": "0"
+            }
+          },
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "invalid-filter-type",
+      "description": "FETCH whose LOCATION_FILTER carries Location Filter Type 0x40. Section 9.19.9: \"If an endpoint receives any other Location Filter Type, it MUST close the session with INVALID_PARAMETER.\" The type says how many fields follow, so a decoder cannot step over one it does not know",
+      "hex": "16100201046c69766505766964656f012140",
+      "error": "invalid_parameter",
+      "error_detail": "Location Filter Type 0x40 is not defined; draft-23 defines 0x00 through 0x05",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "location-filter-fields-overrun-payload",
+      "description": "FETCH whose LOCATION_FILTER is type 0x04 but whose message ends after StartGroup and StartObject. The Message Length covers every byte, so the frame is complete and the parameter is not. Section 12.2: \"MALFORMED_MESSAGE (0x300): A control message cannot be parsed or is missing a required element\"",
+      "hex": "16120201046c69766505766964656f0121040a03",
+      "error": "invalid_parameter",
+      "error_detail": "a type 0x04 LOCATION_FILTER carries four fields and the message payload ends after two",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "location-filter-end-group-overflow",
+      "description": "FETCH whose type 0x03 LOCATION_FILTER has StartGroup = 2^64 - 1 and EndGroupDelta = 1. Section 9.19.9: \"If StartGroup + EndGroupDelta exceeds 2^64 - 1, the endpoint MUST close the session with DELTA_ENCODING_OVERFLOW.\"",
+      "hex": "161b0201046c69766505766964656f012103ffffffffffffffffff0001",
+      "error": "invalid_parameter",
+      "error_detail": "StartGroup + EndGroupDelta exceeds 2^64 - 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "location-filter-end-group-overflow-full-range",
+      "description": "FETCH whose type 0x04 LOCATION_FILTER has StartGroup = 2^64 - 1, EndGroupDelta = 1 and EndObject = 0. The DELTA_ENCODING_OVERFLOW rule of Section 9.19.9 covers both types that carry an EndGroupDelta",
+      "hex": "161c0201046c69766505766964656f012104ffffffffffffffffff000100",
+      "error": "invalid_parameter",
+      "error_detail": "StartGroup + EndGroupDelta exceeds 2^64 - 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fill-parameters-out-of-scope",
+      "description": "FETCH carrying an empty FILL_PARAMETERS (0x23 00). Section 9.19.15 names SUBSCRIBE, SUBSCRIBE_TRACKS, PUBLISH and REQUEST_UPDATE (for a subscription) only. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "16100201046c69766505766964656f012300",
+      "error": "parameter_out_of_scope",
+      "error_detail": "FILL_PARAMETERS may appear only in SUBSCRIBE, SUBSCRIBE_TRACKS, PUBLISH or REQUEST_UPDATE for a subscription",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "paused-out-of-scope",
+      "description": "FETCH carrying PAUSED (0x11) = 1. Section 9.19.18 does not name FETCH. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "16100201046c69766505766964656f011101",
+      "error": "parameter_out_of_scope",
+      "error_detail": "PAUSED is not listed for FETCH",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "include-properties-invalid-value",
+      "description": "FETCH with INCLUDE_PROPERTIES (0x35) carrying the value 255. Section 9.19.22: \"If an endpoint receives a value outside this range, it MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "16100201046c69766505766964656f0135ff",
+      "error": "invalid_parameter",
+      "error_detail": "INCLUDE_PROPERTIES accepts only 0 or 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "empty-track-name",
+      "description": "FETCH (Request ID 2, namespace ('live')) with a zero-length Track Name and no parameters. Section 2.4.1: \"If an endpoint receives a Track Name with a length of 0, it MUST close the session with a PROTOCOL_VIOLATION.\"",
+      "hex": "16090201046c6976650000",
+      "error": "invalid_value",
+      "error_detail": "Track Name has length 0",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated FETCH — missing track_namespace",
+      "hex": "160e0201046c69",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading track_namespace"
+    }
+  ]
+}

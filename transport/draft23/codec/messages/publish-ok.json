@@ -1,0 +1,152 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_ok",
+  "message_type_id": "0x07",
+  "spec_section": "9.3",
+  "vectors": [
+    {
+      "id": "minimal",
+      "description": "PUBLISH_OK (REQUEST_OK, Type 0x07) with no parameters and empty Track Properties",
+      "hex": "070100",
+      "decoded": {
+        "parameters": [],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-expires",
+      "description": "PUBLISH_OK with EXPIRES parameter (60000ms)",
+      "hex": "07050108c0ea60",
+      "decoded": {
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-expires-noncanonical-type-delta",
+      "description": "non-canonical PUBLISH_OK — the EXPIRES parameter type (0x08, the first parameter, so the delta is the absolute type) is encoded as a 2-byte varint (8008) instead of the canonical 1-byte form (08); decoders MUST accept",
+      "hex": "0706018008c0ea60",
+      "canonical": false,
+      "decoded": {
+        "parameters": [
+          {
+            "name": "expires",
+            "type": "0x8",
+            "value": "60000"
+          }
+        ],
+        "track_properties": []
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "PUBLISH_OK carrying SUBSCRIBER_PRIORITY (0x20). Section 9.3 lists EXPIRES as the one parameter for PUBLISH_OK. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "0703012040",
+      "error": "parameter_out_of_scope",
+      "error_detail": "SUBSCRIBER_PRIORITY is not listed for PUBLISH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-object-delivery-timeout",
+      "description": "PUBLISH_OK carrying OBJECT_DELIVERY_TIMEOUT (0x02). Section 9.3 lists EXPIRES as the one parameter for PUBLISH_OK. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "070401029388",
+      "error": "parameter_out_of_scope",
+      "error_detail": "OBJECT_DELIVERY_TIMEOUT is not listed for PUBLISH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-subgroup-delivery-timeout",
+      "description": "PUBLISH_OK carrying SUBGROUP_DELIVERY_TIMEOUT (0x06). Section 9.3 lists EXPIRES as the one parameter for PUBLISH_OK. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "07040106a710",
+      "error": "parameter_out_of_scope",
+      "error_detail": "SUBGROUP_DELIVERY_TIMEOUT is not listed for PUBLISH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-paused",
+      "description": "PUBLISH_OK carrying PAUSED (0x11) = 1. Section 9.3 lists EXPIRES as the one parameter for PUBLISH_OK. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "0703011101",
+      "error": "parameter_out_of_scope",
+      "error_detail": "PAUSED is not listed for PUBLISH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-location-filter",
+      "description": "PUBLISH_OK carrying LOCATION_FILTER (0x21), a type 0x03 filter {5,0} through all of group 25. Section 9.3 lists EXPIRES as the one parameter for PUBLISH_OK. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "0706012103050014",
+      "error": "parameter_out_of_scope",
+      "error_detail": "LOCATION_FILTER is not listed for PUBLISH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-new-group-request",
+      "description": "PUBLISH_OK carrying NEW_GROUP_REQUEST (0x32). Section 9.3 lists EXPIRES as the one parameter for PUBLISH_OK. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "070301320a",
+      "error": "parameter_out_of_scope",
+      "error_detail": "NEW_GROUP_REQUEST is not listed for PUBLISH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-objectid-filter",
+      "description": "PUBLISH_OK carrying OBJECTID_FILTER (0x26). Section 9.3 lists EXPIRES as the one parameter for PUBLISH_OK. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "0706012603000009",
+      "error": "parameter_out_of_scope",
+      "error_detail": "OBJECTID_FILTER is not listed for PUBLISH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-largest-object",
+      "description": "PUBLISH_OK carrying LARGEST_OBJECT (0x09) {10,3}. Section 9.3 lists EXPIRES as the one parameter for PUBLISH_OK. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "070401090a03",
+      "error": "parameter_out_of_scope",
+      "error_detail": "LARGEST_OBJECT is not listed for PUBLISH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-forward",
+      "description": "PUBLISH_OK carrying draft-22's FORWARD (0x10) = 0. Draft-23's Table 14 has no row for 0x10: PAUSED (0x11) replaced FORWARD. Section 9.19: \"An endpoint that receives an unknown Message Parameter MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "0703011000",
+      "error": "invalid_parameter",
+      "error_detail": "message parameter type 0x10 is not defined by draft-23"
+    },
+    {
+      "id": "with-track-properties",
+      "description": "PUBLISH_OK with no parameters and Track Property DYNAMIC_GROUPS=1. Section 9.3: Track Properties \"are empty in PUBLISH_OK, REQUEST_UPDATE_OK, SUBSCRIBE_NAMESPACE_OK and PUBLISH_NAMESPACE_OK. If an endpoint receives Track Properties in one of these messages it MUST close the session with INVALID_FIELD.\"",
+      "hex": "0703003001",
+      "error": "invalid_value",
+      "error_detail": "Track Properties must be empty in PUBLISH_OK",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_OK — missing parameter count",
+      "hex": "0701",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading parameter count"
+    }
+  ]
+}

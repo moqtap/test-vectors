@@ -1,0 +1,78 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "namespace",
+  "message_type_id": "0x08",
+  "spec_section": "9.15",
+  "vectors": [
+    {
+      "id": "single-suffix",
+      "description": "NAMESPACE with single-element suffix and no parameters. Figure 20 adds Number of Parameters and Parameters after the suffix, which draft-22 did not have; here the count is 0",
+      "hex": "08090106726f6f6d343200",
+      "decoded": {
+        "namespace_suffix": [
+          "room42"
+        ],
+        "parameters": []
+      }
+    },
+    {
+      "id": "multi-suffix",
+      "description": "NAMESPACE with multi-element suffix",
+      "hex": "080d020673706f72747303666f6f00",
+      "decoded": {
+        "namespace_suffix": [
+          "sports",
+          "foo"
+        ],
+        "parameters": []
+      }
+    },
+    {
+      "id": "empty-suffix",
+      "description": "NAMESPACE with zero-element suffix (exact match)",
+      "hex": "08020000",
+      "decoded": {
+        "namespace_suffix": [],
+        "parameters": []
+      }
+    },
+    {
+      "id": "single-suffix-short",
+      "description": "NAMESPACE with suffix ('a') and no parameters: 08 04 01 01 61 00",
+      "hex": "080401016100",
+      "decoded": {
+        "namespace_suffix": [
+          "a"
+        ],
+        "parameters": []
+      }
+    },
+    {
+      "id": "draft22-form",
+      "description": "NAMESPACE with suffix ('a') and no Number of Parameters, as draft-22 wrote it, under a vi64 Length of 3. The frame is complete and the body ends before a required field. Section 9: \"If the length does not match the length of the Message Body, the receiver MUST close the session with MALFORMED_MESSAGE.\"",
+      "hex": "0803010161",
+      "error": "invalid_value",
+      "error_detail": "the body ends before Number of Parameters",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-auth-token",
+      "description": "NAMESPACE with suffix ('room42') carrying AUTHORIZATION_TOKEN (USE_VALUE type=0, value='ns-token'). Section 9.15: \"When Parameters of a NAMESPACE change, the NAMESPACE message is sent again with the updated Parameters.\" No parameter definition in Section 9.19 names NAMESPACE, and Section 9.19.2 lists AUTHORIZATION_TOKEN for other messages only. Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "08150106726f6f6d343201030a03006e732d746f6b656e",
+      "error": "parameter_out_of_scope",
+      "error_detail": "no Message Parameter is defined for NAMESPACE",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "truncated",
+      "description": "truncated NAMESPACE — missing suffix data",
+      "hex": "080801",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading namespace_suffix"
+    }
+  ]
+}

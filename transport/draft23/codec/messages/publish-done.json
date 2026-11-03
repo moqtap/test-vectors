@@ -1,0 +1,145 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "publish_done",
+  "message_type_id": "0x0b",
+  "spec_section": "9.9",
+  "vectors": [
+    {
+      "id": "internal-error",
+      "description": "PUBLISH_DONE with INTERNAL_ERROR (0x0), stream_count=0, empty reason",
+      "hex": "0b03000000",
+      "decoded": {
+        "status_code": "0",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "track-ended",
+      "description": "PUBLISH_DONE with TRACK_ENDED (0x2), stream_count=5",
+      "hex": "0b03020500",
+      "decoded": {
+        "status_code": "2",
+        "stream_count": "5",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "with-reason",
+      "description": "PUBLISH_DONE with UNAUTHORIZED (0x1) and reason phrase",
+      "hex": "0b0f01000c756e617574686f72697a6564",
+      "decoded": {
+        "status_code": "1",
+        "stream_count": "0",
+        "reason_phrase": "unauthorized"
+      }
+    },
+    {
+      "id": "unassigned-0x3",
+      "description": "PUBLISH_DONE carrying status code 0x3, which draft-23 leaves unassigned. Section 13: \"Receipt of an unknown error code in any error context (Session Termination, REQUEST_ERROR, PUBLISH_DONE, or Data Stream Reset) MUST be treated as equivalent to INTERNAL_ERROR for that context. An endpoint MUST NOT close the session because it received an unknown error code in a REQUEST_ERROR or PUBLISH_DONE.\" The frame decodes",
+      "hex": "0b03030300",
+      "decoded": {
+        "status_code": "3",
+        "stream_count": "3",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "going-away",
+      "description": "PUBLISH_DONE with GOING_AWAY (0x4), stream_count=0",
+      "hex": "0b03040000",
+      "decoded": {
+        "status_code": "4",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "too-far-behind",
+      "description": "PUBLISH_DONE with TOO_FAR_BEHIND (0x5)",
+      "hex": "0b03050200",
+      "decoded": {
+        "status_code": "5",
+        "stream_count": "2",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "expired",
+      "description": "PUBLISH_DONE with EXPIRED (0x6)",
+      "hex": "0b03060000",
+      "decoded": {
+        "status_code": "6",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "expired-auth-token",
+      "description": "PUBLISH_DONE with EXPIRED_AUTH_TOKEN (0x7), new in draft-23, stream_count=3. Section 9.9: \"A publisher that ends a subscription because the authorization token that authorized it has expired SHOULD send PUBLISH_DONE with status code EXPIRED_AUTH_TOKEN.\"",
+      "hex": "0b03070300",
+      "decoded": {
+        "status_code": "7",
+        "stream_count": "3",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "update-failed",
+      "description": "PUBLISH_DONE with UPDATE_FAILED (0x8) and reason phrase",
+      "hex": "0b1008000d757064617465206661696c6564",
+      "decoded": {
+        "status_code": "8",
+        "stream_count": "0",
+        "reason_phrase": "update failed"
+      }
+    },
+    {
+      "id": "excessive-load",
+      "description": "PUBLISH_DONE with EXCESSIVE_LOAD (0x9), stream_count=0",
+      "hex": "0b03090000",
+      "decoded": {
+        "status_code": "9",
+        "stream_count": "0",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "malformed-track",
+      "description": "PUBLISH_DONE with MALFORMED_TRACK (0x12) and reason phrase",
+      "hex": "0b1212000f6d616c666f726d656420747261636b",
+      "decoded": {
+        "status_code": "18",
+        "stream_count": "0",
+        "reason_phrase": "malformed track"
+      }
+    },
+    {
+      "id": "stream-count-includes-fill-fetch",
+      "description": "PUBLISH_DONE with TRACK_ENDED (0x2) and stream_count=7. Section 9.9 counts the streams opened for the subscription \"including any fill fetch streams\"",
+      "hex": "0b03020700",
+      "decoded": {
+        "status_code": "2",
+        "stream_count": "7",
+        "reason_phrase": ""
+      }
+    },
+    {
+      "id": "stream-count-unknown",
+      "description": "PUBLISH_DONE whose Stream Count is 2^64 - 1, the nine-byte vi64 ff followed by eight ff bytes. Section 9.9: a publisher unable to set Stream Count to the exact number \"MUST set Stream Count to 2^64 - 1\"",
+      "hex": "0b1f00ffffffffffffffffff14756e6b6e6f776e2073747265616d20636f756e74",
+      "decoded": {
+        "status_code": "0",
+        "stream_count": "18446744073709551615",
+        "reason_phrase": "unknown stream count"
+      }
+    },
+    {
+      "id": "truncated",
+      "description": "truncated PUBLISH_DONE — missing status_code",
+      "hex": "0b04",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading status_code"
+    }
+  ]
+}

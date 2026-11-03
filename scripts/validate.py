@@ -7,7 +7,8 @@ Checks:
 3. Every codec vector has exactly one of decoded or error
 4. Protocol integer fields in decoded objects are strings matching ^[0-9]+$
 5. Control message framing: declared length matches actual payload length
-   (varint framing for draft00..10, 16-bit BE for draft11+)
+   (QUIC varint framing for draft00..10, 16-bit BE for draft11..22, the MoQT
+   vi64 from draft23)
 6. Every version directory has a meta.json
 7. meta.json entries are consistent with manifest.json
 8. Vector fields, error categories and conformance profiles are ones the
@@ -74,7 +75,7 @@ PROTOCOL_INT_FIELDS = {
     # draft-16: existing_request_id, retry_interval, subscribe_options
     "existing_request_id", "retry_interval", "subscribe_options",
     "timeout",
-    "object_id_delta",
+    "object_id_delta", "group_id_delta", "end_group_delta",
     "required_request_id_delta",
     # draft-00/01
     "track_id", "group_sequence", "object_sequence", "object_send_order",
@@ -102,6 +103,7 @@ _KVP_BLOCK_KEYS = {
     "track_extensions",
     "extension_headers",
     "object_properties",
+    "error_details",
 }
 _KVP_TYPE_PATTERN = re.compile(r"^0x[0-9a-f]+$")
 
@@ -819,11 +821,22 @@ def _dvi_for(draft_id):
     return _dvi_moqt if n >= _MOQT_VARINT_FIRST_DRAFT else _dvi_quic
 
 # Drafts where control messages use varint length framing (draft00..draft10).
-# From draft11 onward, all control messages use 16-bit BE length framing.
+# Draft11 to draft22 use a 16-bit BE length. Draft-23 Section 9 (Figure 6)
+# makes it a varint again, the MoQT one: "Message Length (vi64)".
 _VARINT_FRAMED_DRAFTS = {
     'draft00', 'draft01', 'draft02', 'draft03', 'draft04', 'draft05',
     'draft06', 'draft07', 'draft08', 'draft09', 'draft10',
 }
+_VI64_LENGTH_FIRST_DRAFT = 23
+
+
+def _varint_framed(draft_id):
+    if draft_id in _VARINT_FRAMED_DRAFTS:
+        return True
+    try:
+        return int((draft_id or '')[len('draft'):]) >= _VI64_LENGTH_FIRST_DRAFT
+    except ValueError:
+        return False
 
 def _extract_draft_id(filepath):
     """Extract draft id (e.g. 'draft12') from a file path."""
@@ -847,7 +860,7 @@ def validate_message_framing(filepath, data, draft_id):
         if t is None:
             continue
 
-        use_varint = draft_id in _VARINT_FRAMED_DRAFTS
+        use_varint = _varint_framed(draft_id)
 
         if use_varint:
             length, ll = dvi(raw, tl)

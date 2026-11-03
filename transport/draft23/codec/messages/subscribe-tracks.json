@@ -1,0 +1,419 @@
+{
+  "$schema": "../../../../schema/codec-vector.schema.json",
+  "message_type": "subscribe_tracks",
+  "message_type_id": "0x51",
+  "spec_section": "9.17",
+  "vectors": [
+    {
+      "id": "single-prefix",
+      "description": "SUBSCRIBE_TRACKS with single-element prefix (results in PUBLISH messages for matching tracks)",
+      "hex": "510e01010a636f6e666572656e636500",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": []
+      }
+    },
+    {
+      "id": "multi-prefix",
+      "description": "SUBSCRIBE_TRACKS with multi-element prefix",
+      "hex": "510f0302046c6976650673706f72747300",
+      "decoded": {
+        "request_id": "3",
+        "namespace_prefix": [
+          "live",
+          "sports"
+        ],
+        "parameters": []
+      }
+    },
+    {
+      "id": "with-paused",
+      "description": "SUBSCRIBE_TRACKS with PAUSED (0x11) = 1: each resulting subscription starts paused. Draft-22 sent the same request as FORWARD (0x10) = 0",
+      "hex": "511001010a636f6e666572656e6365011101",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "paused",
+            "type": "0x11",
+            "value": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-auth-token",
+      "description": "SUBSCRIBE_TRACKS with AUTHORIZATION_TOKEN parameter (USE_VALUE type=0, value='tracks-tok'). Section 9.19.2 forbids copying it into the resulting PUBLISH",
+      "hex": "511c01010a636f6e666572656e636501030c0300747261636b732d746f6b",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "authorization_token",
+            "type": "0x3",
+            "value": {
+              "alias_type": "3",
+              "token_type": "0",
+              "token_value": "747261636b732d746f6b"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "empty-prefix",
+      "description": "SUBSCRIBE_TRACKS with zero-element prefix (subscribes to all tracks)",
+      "hex": "5103070000",
+      "decoded": {
+        "request_id": "7",
+        "namespace_prefix": [],
+        "parameters": []
+      }
+    },
+    {
+      "id": "with-group-order",
+      "description": "SUBSCRIBE_TRACKS with GROUP_ORDER parameter (descending=2)",
+      "hex": "511001010a636f6e666572656e6365012202",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "group_order",
+            "type": "0x22",
+            "value": "2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-include-properties",
+      "description": "SUBSCRIBE_TRACKS with INCLUDE_PROPERTIES (0x35) set to 0 — the resulting PUBLISH messages should carry an empty Track Properties field",
+      "hex": "511001010a636f6e666572656e6365013500",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "include_properties",
+            "type": "0x35",
+            "value": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-track-property-filter",
+      "description": "SUBSCRIBE_TRACKS with TRACK_PROPERTY_FILTER (0x29): SetID 0, Track Property Type 0x0E, value range 1-1. Section 3.6.2: \"AUTHORIZATION_TOKEN and TRACK_PROPERTY_FILTER apply to the SUBSCRIBE_TRACKS itself.\"",
+      "hex": "511401010a636f6e666572656e6365012904000e0100",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "track_property_filter",
+            "type": "0x29",
+            "value": {
+              "property_type": "14",
+              "ranges": [
+                {
+                  "end": "1",
+                  "start": "1"
+                }
+              ],
+              "set_id": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-objectid-filter",
+      "description": "SUBSCRIBE_TRACKS with OBJECTID_FILTER (0x26): SetID 0, Object ID range 0-4. Section 3.6.2 says the publisher uses such parameters \"as the initial Subscription parameters when a PUBLISH is sent as a result of SUBSCRIBE_TRACKS, and includes those in the PUBLISH.\" Section 9.8 does not list OBJECTID_FILTER for PUBLISH. The two sections disagree, and the vector asserts the decode only",
+      "hex": "511301010a636f6e666572656e6365012603000004",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "objectid_filter",
+            "type": "0x26",
+            "value": {
+              "ranges": [
+                {
+                  "end": "4",
+                  "start": "0"
+                }
+              ],
+              "set_id": "0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-two-track-property-filters",
+      "description": "SUBSCRIBE_TRACKS carrying TRACK_PROPERTY_FILTER twice: DEFAULT_PUBLISHER_PRIORITY (0x0E) equal to 1 in set 0, and DEFAULT_PUBLISHER_GROUP_ORDER (0x22) between 1 and 2 in set 1. Section 3.3.2: \"The Track Property filter parameter MAY appear multiple times in a SUBSCRIBE_TRACKS message or REQUEST_UPDATE for it.\"",
+      "hex": "511a01010a636f6e666572656e6365022904000e0100000401220101",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "track_property_filter",
+            "type": "0x29",
+            "value": {
+              "property_type": "14",
+              "ranges": [
+                {
+                  "end": "1",
+                  "start": "1"
+                }
+              ],
+              "set_id": "0"
+            }
+          },
+          {
+            "name": "track_property_filter",
+            "type": "0x29",
+            "value": {
+              "property_type": "34",
+              "ranges": [
+                {
+                  "end": "2",
+                  "start": "1"
+                }
+              ],
+              "set_id": "1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-location-filter",
+      "description": "SUBSCRIBE_TRACKS carrying a type 0x05 LOCATION_FILTER, so each resulting subscription joins its Track at the Next Object. Section 9.17: \"The parameters that can appear in a SUBSCRIBE_TRACKS are OBJECT_DELIVERY_TIMEOUT, AUTHORIZATION_TOKEN, SUBGROUP_DELIVERY_TIMEOUT, PAUSED, SUBSCRIBER_PRIORITY, LOCATION_FILTER, GROUP_ORDER, FILL_PARAMETERS, SUBGROUP_FILTER, OBJECTID_FILTER, PRIORITY_FILTER, OBJECT_PROPERTY_FILTER, TRACK_PROPERTY_FILTER and INCLUDE_PROPERTIES.\"",
+      "hex": "511001010a636f6e666572656e6365012105",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "5"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-location-filter-and-fill-parameters",
+      "description": "SUBSCRIBE_TRACKS carrying a type 0x05 LOCATION_FILTER followed by an empty FILL_PARAMETERS (Type Delta 2, Number of Parameters 0), the pair Section 3.6.2 names for joining the Tracks the resulting PUBLISHes start",
+      "hex": "511201010a636f6e666572656e63650221050200",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "5"
+            }
+          },
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-fill-parameters",
+      "description": "SUBSCRIBE_TRACKS carrying FILL_PARAMETERS (0x23) alone, its value a type 0x02 LOCATION_FILTER selecting the fill range {100,0} onward for each resulting subscription",
+      "hex": "511401010a636f6e666572656e636501230121026400",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "fill_parameters",
+            "type": "0x23",
+            "value": [
+              {
+                "name": "location_filter",
+                "type": "0x21",
+                "value": {
+                  "filter_type": "2",
+                  "start_group": "100",
+                  "start_object": "0"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-object-delivery-timeout",
+      "description": "SUBSCRIBE_TRACKS carrying OBJECT_DELIVERY_TIMEOUT (0x02), 5000 ms. Section 9.19.4: \"It MAY appear in a SUBSCRIBE, PUBLISH, SUBSCRIBE_TRACKS, or REQUEST_UPDATE (for a subscription) message.\" Draft-22 refused it here",
+      "hex": "511101010a636f6e666572656e636501029388",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "object_delivery_timeout",
+            "type": "0x2",
+            "value": "5000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-subgroup-delivery-timeout",
+      "description": "SUBSCRIBE_TRACKS carrying SUBGROUP_DELIVERY_TIMEOUT (0x06), 5000 ms. Section 9.19.3: \"It MAY appear in a SUBSCRIBE, PUBLISH, SUBSCRIBE_TRACKS, or REQUEST_UPDATE (for a subscription) message.\" Draft-22 refused it here",
+      "hex": "511101010a636f6e666572656e636501069388",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "subgroup_delivery_timeout",
+            "type": "0x6",
+            "value": "5000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-subscriber-priority",
+      "description": "SUBSCRIBE_TRACKS carrying SUBSCRIBER_PRIORITY (0x20), 32. Section 9.17: \"The parameters that can appear in a SUBSCRIBE_TRACKS are OBJECT_DELIVERY_TIMEOUT, AUTHORIZATION_TOKEN, SUBGROUP_DELIVERY_TIMEOUT, PAUSED, SUBSCRIBER_PRIORITY, LOCATION_FILTER, GROUP_ORDER, FILL_PARAMETERS, SUBGROUP_FILTER, OBJECTID_FILTER, PRIORITY_FILTER, OBJECT_PROPERTY_FILTER, TRACK_PROPERTY_FILTER and INCLUDE_PROPERTIES.\" Draft-22 refused it here",
+      "hex": "511001010a636f6e666572656e6365012020",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "32"
+          }
+        ]
+      }
+    },
+    {
+      "id": "with-subscriber-priority-and-location-filter",
+      "description": "SUBSCRIBE_TRACKS carrying SUBSCRIBER_PRIORITY=64 and a type 0x05 LOCATION_FILTER: 02 20 40 01 05",
+      "hex": "511201010a636f6e666572656e63650220400105",
+      "decoded": {
+        "request_id": "1",
+        "namespace_prefix": [
+          "conference"
+        ],
+        "parameters": [
+          {
+            "name": "subscriber_priority",
+            "type": "0x20",
+            "value": "64"
+          },
+          {
+            "name": "location_filter",
+            "type": "0x21",
+            "value": {
+              "filter_type": "5"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "rendezvous-timeout-out-of-scope",
+      "description": "SUBSCRIBE_TRACKS carrying RENDEZVOUS_TIMEOUT (0x04), 3000 ms. Section 3.6.2: \"Parameters that only apply to a SUBSCRIBE for a single Track, such as RENDEZVOUS_TIMEOUT and NEW_GROUP_REQUEST, cannot appear in SUBSCRIBE_TRACKS.\" Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "511101010a636f6e666572656e636501048bb8",
+      "error": "parameter_out_of_scope",
+      "error_detail": "RENDEZVOUS_TIMEOUT may appear in SUBSCRIBE only",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "new-group-request-out-of-scope",
+      "description": "SUBSCRIBE_TRACKS carrying NEW_GROUP_REQUEST (0x32), 25. Section 3.6.2: \"Parameters that only apply to a SUBSCRIBE for a single Track, such as RENDEZVOUS_TIMEOUT and NEW_GROUP_REQUEST, cannot appear in SUBSCRIBE_TRACKS.\" Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "511001010a636f6e666572656e6365013219",
+      "error": "parameter_out_of_scope",
+      "error_detail": "NEW_GROUP_REQUEST may appear in SUBSCRIBE or REQUEST_UPDATE for a subscription only",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "subscribe-tracks-id-out-of-scope",
+      "description": "SUBSCRIBE_TRACKS carrying SUBSCRIBE_TRACKS_ID (0x36). Section 9.19.21: \"It appears only in a PUBLISH sent as a result of a SUBSCRIBE_TRACKS\". Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "511001010a636f6e666572656e6365013601",
+      "error": "parameter_out_of_scope",
+      "error_detail": "SUBSCRIBE_TRACKS_ID may appear only in PUBLISH",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "expires-out-of-scope",
+      "description": "SUBSCRIBE_TRACKS carrying EXPIRES (0x08). Section 9.17: \"The parameters that can appear in a SUBSCRIBE_TRACKS are OBJECT_DELIVERY_TIMEOUT, AUTHORIZATION_TOKEN, SUBGROUP_DELIVERY_TIMEOUT, PAUSED, SUBSCRIBER_PRIORITY, LOCATION_FILTER, GROUP_ORDER, FILL_PARAMETERS, SUBGROUP_FILTER, OBJECTID_FILTER, PRIORITY_FILTER, OBJECT_PROPERTY_FILTER, TRACK_PROPERTY_FILTER and INCLUDE_PROPERTIES.\" Section 9.19.1: \"If a parameter appears in some other type of message, the receiving endpoint MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "511201010a636f6e666572656e63650108c0ea60",
+      "error": "parameter_out_of_scope",
+      "error_detail": "EXPIRES is not listed for SUBSCRIBE_TRACKS",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "with-forward",
+      "description": "SUBSCRIBE_TRACKS carrying draft-22's FORWARD (0x10) = 0. Draft-23's Table 14 has no row for 0x10: PAUSED (0x11) replaced FORWARD. Section 9.19: \"An endpoint that receives an unknown Message Parameter MUST close the session with INVALID_PARAMETER.\"",
+      "hex": "511001010a636f6e666572656e6365011000",
+      "error": "invalid_parameter",
+      "error_detail": "message parameter type 0x10 is not defined by draft-23"
+    },
+    {
+      "id": "truncated",
+      "description": "truncated SUBSCRIBE_TRACKS — missing namespace_prefix",
+      "hex": "510d0101",
+      "error": "incomplete",
+      "error_detail": "unexpected end of input while reading namespace_prefix"
+    }
+  ]
+}
