@@ -7,6 +7,27 @@ including every vector added, is in the git history.
 
 A version with no entry here broke nothing.
 
+## 0.23.0
+
+Drafts 15–22: `subgroup-properties-status-object` (drafts 17–22) and
+`subgroup-extensions-status-object` (drafts 15–16) now expect `invalid_value`,
+because properties on an Object whose status is not Normal close the session.
+
+Drafts 14–22: vectors whose Prior Group ID Gap was larger than their Group ID,
+which makes the Track malformed, now sit in Group 5. Three that carried
+different gaps in one Group now carry 2 twice.
+
+- Drafts 17–22: `datagram-with-properties-content`,
+  `status-and-properties-non-normal` (still `invalid_value`),
+  `fetch-with-properties`, `subgroup-with-object-properties` (now Object 1, as its Prior
+  Object ID Gap of 1 was larger than its Object ID),
+  `subgroup-properties-two-objects-nonempty` (both gaps 2),
+  `subgroup-properties-odd-type`, `subgroup-properties-immutable`.
+- Drafts 15–16: `subgroup-nonempty-extensions`,
+  `subgroup-extensions-two-objects-nonempty` (both gaps 2).
+- Draft 14: `with-extension-content`, `with-extension-content-multi-object`
+  (both gaps 2), `with-extension-headers`, `multi-object-with-extensions`.
+
 ## 0.19.0
 
 `object_properties` (drafts 17–22, previously a map keyed by name) and
