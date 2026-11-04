@@ -134,6 +134,56 @@
       "profiles": [
         "endpoint"
       ]
+    },
+    {
+      "id": "datagram-prior-group-id-gap-twice",
+      "description": "object datagram (type 0x01: extensions present), Group 5, carrying Prior Group ID Gap 2 and 3 (Extension Header Type 0x40 twice). Section 10.1: \"A track with a Group that contains more than one Object with different values for Prior Group ID Gap or has a Prior Group ID Gap larger than the Group ID is considered malformed.\" This draft does not say whether an Object may carry 0x40 more than once, or which value is that Object's when it does (Section 9.1.1.2: \"Object Extension Headers are serialized as Key-Value-Pairs\"). The condition needs more than one Object, and a datagram carries one, so the track is not malformed",
+      "hex": "010105008006404002404003deadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "1",
+        "track_alias": "1",
+        "group_id": "5",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "6",
+        "extension_headers": [
+          {
+            "type": "0x40",
+            "value": "2"
+          },
+          {
+            "type": "0x40",
+            "value": "3"
+          }
+        ],
+        "payload_hex": "deadbeef"
+      }
+    },
+    {
+      "id": "datagram-prior-group-id-gap-second-exceeds-group-id",
+      "description": "object datagram (type 0x01: extensions present), Group 5, carrying Prior Group ID Gap 2 and then 6 (Extension Header Type 0x40 twice). Section 10.1: \"A track with a Group that contains more than one Object with different values for Prior Group ID Gap or has a Prior Group ID Gap larger than the Group ID is considered malformed.\" This draft does not say whether an Object may carry 0x40 more than once, or which value is that Object's when it does (Section 9.1.1.2: \"Object Extension Headers are serialized as Key-Value-Pairs\"). Taking 6 as the Object's makes its gap larger than the Group ID and taking 2 does not, so whether the track is malformed is ambiguous; only an Object whose every value is larger than the Group ID has a gap larger than it under every reading, and the decoder does not refuse this",
+      "hex": "010105008006404002404006deadbeef",
+      "decoded": {
+        "stream_type": "object_datagram",
+        "stream_type_id": "1",
+        "track_alias": "1",
+        "group_id": "5",
+        "object_id": "0",
+        "publisher_priority": "128",
+        "extension_headers_length": "6",
+        "extension_headers": [
+          {
+            "type": "0x40",
+            "value": "2"
+          },
+          {
+            "type": "0x40",
+            "value": "6"
+          }
+        ],
+        "payload_hex": "deadbeef"
+      }
     }
   ]
 }

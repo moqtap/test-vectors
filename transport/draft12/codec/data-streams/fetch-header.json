@@ -163,6 +163,36 @@
       "hex": "05",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"
+    },
+    {
+      "id": "fetch-prior-group-id-gaps-share-no-value",
+      "description": "fetch stream with two objects in Group 5 carrying Prior Group ID Gap 2 and 3 (Extension Header Type 0x40). Section 10.1: \"A track with a Group that contains more than one Object with different values for Prior Group ID Gap or has a Prior Group ID Gap larger than the Group ID is considered malformed.\" Whichever value is taken as each Object's, they differ, so the track is malformed (Section 2.5)",
+      "hex": "0502050000800340400201aa050001800340400301bb",
+      "error": "invalid_value",
+      "error_detail": "the Objects in Group 5 carry no Prior Group ID Gap value in common",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-prior-group-id-gap-exceeds-group-id",
+      "description": "fetch stream with one object in Group 1 carrying Prior Group ID Gap 2 (Extension Header Type 0x40). Section 10.1: \"A track with a Group that contains more than one Object with different values for Prior Group ID Gap or has a Prior Group ID Gap larger than the Group ID is considered malformed.\" The gap is larger than the Group ID, so the track is malformed (Section 2.5), which an endpoint detects from this Object alone",
+      "hex": "0502010000800340400201aa",
+      "error": "invalid_value",
+      "error_detail": "Prior Group ID Gap 2 is larger than Group ID 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-group-within-a-communicated-gap",
+      "description": "fetch stream in Descending Group Order with Object 0 of Group 10 carrying Prior Group ID Gap 2 (Extension Header Type 0x40), then Object 0 of Group 9. Section 10.1: \"If an endpoint receives an Object with a Group ID within a previously communicated gap it also treats the track as malformed.\" Group 9 is within the gap Group 10 communicated, so the track is malformed (Section 2.5)",
+      "hex": "05020a0000800340400201aa090000800001bb",
+      "error": "invalid_value",
+      "error_detail": "Group 9 is within the Prior Group ID Gap 2 that Group 10 communicated",
+      "profiles": [
+        "endpoint"
+      ]
     }
   ]
 }

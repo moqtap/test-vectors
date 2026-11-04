@@ -159,6 +159,76 @@
       "hex": "050200",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading subgroup_id"
+    },
+    {
+      "id": "fetch-prior-group-id-gaps-differ",
+      "description": "fetch stream with Objects 0 and 1 of Group 5 carrying Prior Group ID Gap 2 and 3. Section 11.1: \"A Group contains more than one Object with different values for Prior Group ID Gap\". That makes the Track malformed (Section 2.5)",
+      "hex": "050205000080023c0201aa05000180023c0301bb",
+      "error": "invalid_value",
+      "error_detail": "two Objects in Group 5 carry different Prior Group ID Gap values",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-prior-group-id-gap-covers-an-earlier-group",
+      "description": "fetch stream with an object in Group 9 and then Object 0 of Group 10 carrying Prior Group ID Gap 1. Section 11.1: \"An endpoint receives an Object with a Prior Group ID Gap covering an Object it previously received\". The gap covers Group 9, which this stream delivered first. That makes the Track malformed (Section 2.5)",
+      "hex": "0502090000800001aa0a000080023c0101bb",
+      "error": "invalid_value",
+      "error_detail": "Prior Group ID Gap 1 of Group 10 covers Group 9, received earlier",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-prior-object-id-gap-covers-an-earlier-object",
+      "description": "fetch stream with Objects 8 and 9 of Group 3, the second carrying Prior Object ID Gap 1. Section 11.3: \"An endpoint receives an Object with a Prior Object ID Gap covering an Object it previously received\". Section 9.16.3: \"Within each group, objects are sent in Object ID order; subgroup ID is not used for ordering.\" The gap covers Object 8, delivered just before. That makes the Track malformed (Section 2.5)",
+      "hex": "0502030008800001aa03000980023e0101bb",
+      "error": "invalid_value",
+      "error_detail": "Prior Object ID Gap 1 of Object 9 covers Object 8",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-prior-group-id-gap-exceeds-group-id",
+      "description": "fetch stream with Object 0 of Group 1 carrying Prior Group ID Gap 2. Section 11.1: \"An Object has a Prior Group ID Gap larger than the Group ID\". That makes the Track malformed (Section 2.5), which an endpoint detects from this Object alone",
+      "hex": "050201000080023c0201aa",
+      "error": "invalid_value",
+      "error_detail": "Prior Group ID Gap 2 is larger than Group ID 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-prior-object-id-gap-exceeds-object-id",
+      "description": "fetch stream with Object 1 of Group 3 carrying Prior Object ID Gap 2. Section 11.3: \"An Object has a Prior Object ID Gap larger than the Object ID\". That makes the Track malformed (Section 2.5), which an endpoint detects from this Object alone",
+      "hex": "050203000180023e0201aa",
+      "error": "invalid_value",
+      "error_detail": "Prior Object ID Gap 2 is larger than Object ID 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-prior-group-id-gap-repeated",
+      "description": "fetch stream with Object 0 of Group 5 carrying Prior Group ID Gap 1 twice. Section 11.1: \"An Object contains more than one instance of Prior Group ID Gap\". That makes the Track malformed (Section 2.5), which an endpoint detects from this Object alone",
+      "hex": "050205000080043c013c0101aa",
+      "error": "invalid_value",
+      "error_detail": "an Object contains more than one Prior Group ID Gap",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-group-within-a-communicated-gap",
+      "description": "fetch stream in Descending Group Order with Object 0 of Group 10 carrying Prior Group ID Gap 2, then Object 0 of Group 9. Section 11.1: \"An endpoint receives an Object with a Group ID within a previously communicated gap\". Group 9 is within the gap Group 10 communicated. That makes the Track malformed (Section 2.5)",
+      "hex": "05020a000080023c0201aa090000800001bb",
+      "error": "invalid_value",
+      "error_detail": "Group 9 is within the Prior Group ID Gap 2 that Group 10 communicated",
+      "profiles": [
+        "endpoint"
+      ]
     }
   ]
 }

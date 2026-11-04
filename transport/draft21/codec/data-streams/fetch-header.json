@@ -359,6 +359,124 @@
       "hex": "05",
       "error": "incomplete",
       "error_detail": "unexpected end of input while reading request_id"
+    },
+    {
+      "id": "fetch-prior-group-id-gaps-differ",
+      "description": "fetch stream with Objects 0 and 1 of Group 5 carrying Prior Group ID Gap 2 and 3. The second object's flags (0x20) leave its Group ID, Object ID and Priority to the Object before it. Section 10.8: \"A Group contains more than one Object with different values for Prior Group ID Gap.\" That makes the Track malformed (Section 12.1)",
+      "hex": "05023c050080023c0201aa20023c0301bb",
+      "error": "invalid_value",
+      "error_detail": "two Objects in Group 5 carry different Prior Group ID Gap values",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-prior-group-id-gap-covers-an-earlier-group",
+      "description": "fetch stream with an object in Group 9 and then Object 0 of Group 10 carrying Prior Group ID Gap 1 (flags 0x2C; its Group ID Delta of 0 is the prior Group ID plus 1). Section 10.8: \"An endpoint receives an Object with a Prior Group ID Gap covering an Object it previously received.\" The gap covers Group 9, which this stream delivered first. Section 2.1.1: \"The Object is known to exist. From this state, it can transition to not existing, but not vice versa.\" The two conflict, so whether the Track is malformed is ambiguous, and the decoder does not refuse this",
+      "hex": "05021c09008001aa2c0000023c0101bb",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "2",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "9",
+            "group_id": "9",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x2c",
+            "group_id_delta": "0",
+            "group_id": "10",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "object_properties": [
+              {
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
+                "value": "1"
+              }
+            ],
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-prior-object-id-gap-covers-an-earlier-object",
+      "description": "fetch stream with Objects 8 and 9 of Group 3, the second carrying Prior Object ID Gap 1. The second object's flags (0x20) leave its Group ID, Object ID and Priority to the Object before it. Section 10.9: \"An endpoint receives an Object with a Prior Object ID Gap covering an Object it previously received.\" Section 9.11: \"Within each group, objects are sent in Object ID order; subgroup ID is not used for ordering.\" The gap covers Object 8, delivered just before. Section 2.1.1: \"The Object is known to exist. From this state, it can transition to not existing, but not vice versa.\" The two conflict, so whether the Track is malformed is ambiguous, and the decoder does not refuse this",
+      "hex": "05021c03088001aa20023e0101bb",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "2",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "3",
+            "group_id": "3",
+            "subgroup_id": "0",
+            "object_id_delta": "8",
+            "object_id": "8",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x20",
+            "group_id": "3",
+            "subgroup_id": "0",
+            "object_id": "9",
+            "publisher_priority": "128",
+            "object_properties": [
+              {
+                "type": "0x3e",
+                "name": "prior_object_id_gap",
+                "value": "1"
+              }
+            ],
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-prior-group-id-gap-exceeds-group-id",
+      "description": "fetch stream with Object 0 of Group 1 carrying Prior Group ID Gap 2. Section 10.8: \"An Object has a Prior Group ID Gap larger than the Group ID.\" That makes the Track malformed (Section 12.1), which an endpoint detects from this Object alone",
+      "hex": "05023c010080023c0201aa",
+      "error": "invalid_value",
+      "error_detail": "Prior Group ID Gap 2 is larger than Group ID 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-prior-object-id-gap-exceeds-object-id",
+      "description": "fetch stream with Object 1 of Group 3 carrying Prior Object ID Gap 2. Section 10.9: \"An Object has a Prior Object ID Gap larger than the Object ID.\" That makes the Track malformed (Section 12.1), which an endpoint detects from this Object alone",
+      "hex": "05023c030180023e0201aa",
+      "error": "invalid_value",
+      "error_detail": "Prior Object ID Gap 2 is larger than Object ID 1",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-prior-group-id-gap-repeated",
+      "description": "fetch stream with Object 0 of Group 5 carrying Prior Group ID Gap 1 twice. Section 10.8: \"An Object contains more than one instance of Prior Group ID Gap.\" That makes the Track malformed (Section 12.1), which an endpoint detects from this Object alone",
+      "hex": "05023c050080043c01000101aa",
+      "error": "invalid_value",
+      "error_detail": "an Object contains more than one Prior Group ID Gap",
+      "profiles": [
+        "endpoint"
+      ]
     }
   ]
 }

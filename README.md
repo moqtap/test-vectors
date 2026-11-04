@@ -343,19 +343,19 @@ The two type columns count files — one per control message type, one per data 
 | MoQ Transport | draft-08 | 27 | 4 | 152 | 37 |
 | MoQ Transport | draft-09 | 27 | 4 | 154 | 38 |
 | MoQ Transport | draft-10 | 27 | 4 | 154 | 38 |
-| MoQ Transport | draft-11 | 27 | 3 | 162 | 38 |
-| MoQ Transport | draft-12 | 30 | 3 | 193 | 41 |
-| MoQ Transport | draft-13 | 31 | 3 | 216 | 42 |
-| MoQ Transport | draft-14 | 31 | 3 | 233 | 44 |
-| MoQ Transport | draft-15 | 24 | 3 | 191 | 36 |
-| MoQ Transport | draft-16 | 25 | 3 | 194 | 38 |
-| MoQ Transport | draft-17 | 19 | 3 | 227 | 46 |
-| MoQ Transport | draft-18 | 20 | 3 | 256 | 44 |
-| MoQ Transport | draft-19 | 20 | 3 | 276 | 44 |
-| MoQ Transport | draft-20 | 21 | 3 | 340 | 67 |
-| MoQ Transport | draft-21 | 21 | 3 | 340 | 67 |
-| MoQ Transport | draft-22 | 21 | 3 | 350 | 69 |
-| MoQ Transport | draft-23 | 20 | 3 | 419 | 100 |
+| MoQ Transport | draft-11 | 27 | 3 | 173 | 43 |
+| MoQ Transport | draft-12 | 30 | 3 | 204 | 46 |
+| MoQ Transport | draft-13 | 31 | 3 | 227 | 47 |
+| MoQ Transport | draft-14 | 31 | 3 | 240 | 51 |
+| MoQ Transport | draft-15 | 24 | 3 | 198 | 43 |
+| MoQ Transport | draft-16 | 25 | 3 | 201 | 43 |
+| MoQ Transport | draft-17 | 19 | 3 | 234 | 51 |
+| MoQ Transport | draft-18 | 20 | 3 | 262 | 48 |
+| MoQ Transport | draft-19 | 20 | 3 | 282 | 48 |
+| MoQ Transport | draft-20 | 21 | 3 | 346 | 71 |
+| MoQ Transport | draft-21 | 21 | 3 | 346 | 71 |
+| MoQ Transport | draft-22 | 21 | 3 | 356 | 73 |
+| MoQ Transport | draft-23 | 20 | 3 | 425 | 106 |
 | MOQT Streaming Format | draft-00 | — | — | 79 | 49 |
 | MOQT Streaming Format | draft-01 | — | — | 110 | 67 |
 | CMAF MOQT Streaming Format | draft-00 | — | — | 76 | 36 |
@@ -367,7 +367,7 @@ The two type columns count files — one per control message type, one per data 
 | Low Overhead Media Container | draft-04 | — | — | 29 | 3 |
 | Low Overhead Media Container | draft-05 | — | — | 36 | 5 |
 | Low Overhead Media Container (draft-mzanaty) | draft-05 | — | — | 5 | 0 |
-| | **all** | | | **5136** | **1202** |
+| | **all** | | | **5233** | **1267** |
 
 ## Scope
 
