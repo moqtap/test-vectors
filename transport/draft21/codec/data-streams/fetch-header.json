@@ -92,8 +92,8 @@
     },
     {
       "id": "fetch-stream-object-delta-same-group",
-      "description": "fetch stream where the second object carries an Object ID Delta but no Group ID Delta (flags 0x04). Section 11.4.1.1: \"When the Group ID Delta field is not present, the Object ID is the prior Object's ID plus the Object ID Delta if present\" — so this is prior + delta (0 + 4 = 4), not the delta itself, and not prior + delta + 1. The Group ID Delta present case one row above resolves Object ID differently, which is what makes this pair worth having: a decoder that reads Object ID Delta the same way in both branches passes one and fails the other",
-      "hex": "05041c03008001aa040401bb",
+      "description": "fetch stream where the second object carries an Object ID Delta but no Group ID Delta (flags 0x04). Section 11.4.1.1: \"When the Group ID Delta field is not present, the Object ID is the prior Object's ID plus the Object ID Delta if present\" — so this is prior + delta (2 + 4 = 6), not the delta itself (4), and not prior + delta + 1 (7). The first Object's Object ID is 2 so that the delta-alone reading differs. The Group ID Delta present case one row above resolves Object ID differently, which is what makes this pair worth having: a decoder that reads Object ID Delta the same way in both branches passes one and fails the other",
+      "hex": "05041c03028001aa040401bb",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
@@ -103,8 +103,8 @@
             "group_id_delta": "3",
             "group_id": "3",
             "subgroup_id": "0",
-            "object_id_delta": "0",
-            "object_id": "0",
+            "object_id_delta": "2",
+            "object_id": "2",
             "publisher_priority": "128",
             "payload_length": "1",
             "payload_hex": "aa"
@@ -114,7 +114,7 @@
             "group_id": "3",
             "subgroup_id": "0",
             "object_id_delta": "4",
-            "object_id": "4",
+            "object_id": "6",
             "publisher_priority": "128",
             "payload_length": "1",
             "payload_hex": "bb"
@@ -147,6 +147,40 @@
             "group_id": "1",
             "subgroup_id": "0",
             "object_id": "8",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fetch-stream-descending",
+      "description": "fetch stream read in Descending Group Order (group_order 2, the FETCH's GROUP_ORDER): Object 0 of Group 10, then a second object with flags 0x0c and Group ID Delta 1. Section 11.4.1.1: \"If the Group Order is Descending, the Group ID is the prior Object's Group ID minus the (Group ID Delta + 1).\" So its Group ID is 10 - (1 + 1) = 8, where Ascending would give 12",
+      "hex": "05041c0a008001aa0c010001bb",
+      "group_order": "2",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "10",
+            "group_id": "10",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x0c",
+            "group_id_delta": "1",
+            "group_id": "8",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
             "publisher_priority": "128",
             "payload_length": "1",
             "payload_hex": "bb"
@@ -207,8 +241,8 @@
     },
     {
       "id": "fetch-timed-out-range-after-object",
-      "description": "fetch stream with an object followed by an End of Timed-Out Range marker that is not the first record. The draft does not say whether the ordinary delta arithmetic of Section 11.4.1.1 applies to a marker's two fields or whether they are absolute; the marker's flags are literally the ordinary flags, so this corpus applies the ordinary arithmetic. Ascending order gives Group ID = 5 + 0 + 1 = 6, and because a Group ID Delta is present the Object ID is the Object ID Delta, 9",
-      "hex": "05041c05008001aa820c000900",
+      "description": "fetch stream with an object followed by an End of Timed-Out Range marker that is not the first record. Section 11.4.1.2: \"the Group ID and Object ID fields are present\". They are absolute: the delta rules of Section 11.4.1.1 cover \"an Object other than the first\", and a Serialization Flags value of 128 or more is not read as flag bits (Section 11.4.1: \"When less than 128, the bits represent flags\"). Draft-23 changed this (\"Delta encode FETCH End of Range indicators\"). So the End of Timed-Out Range marker is {6,9}; read as an ordinary delta it would be Group 5 + 6 + 1 = 12",
+      "hex": "05041c05008001aa820c060900",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
@@ -226,9 +260,7 @@
           },
           {
             "serialization_flags": "0x20c",
-            "group_id_delta": "0",
             "group_id": "6",
-            "object_id_delta": "9",
             "object_id": "9",
             "payload_length": "0"
           }
@@ -238,7 +270,7 @@
     {
       "id": "fetch-object-after-timed-out-marker",
       "description": "fetch stream where an ordinary object follows an End of Timed-Out Range marker and references the prior Object. Section 11.4.1.2 fixes what \"prior\" means across a marker: prior Group ID and prior Object ID come from the marker ({6,9}), while prior Subgroup ID and prior Priority come from the last actual Object before it (priority 128). The trailing object's flags are 0x00, so its Group ID is 6, its Object ID is 10, its Subgroup ID is 0 and its Priority is inherited",
-      "hex": "05041c05008001aa820c0009000002cafe",
+      "hex": "05041c05008001aa820c0609000002cafe",
       "decoded": {
         "stream_type": "fetch",
         "request_id": "4",
@@ -256,9 +288,7 @@
           },
           {
             "serialization_flags": "0x20c",
-            "group_id_delta": "0",
             "group_id": "6",
-            "object_id_delta": "9",
             "object_id": "9",
             "payload_length": "0"
           },
@@ -477,6 +507,47 @@
       "profiles": [
         "endpoint"
       ]
+    },
+    {
+      "id": "fetch-group-within-a-communicated-gap",
+      "description": "fetch stream in Descending Group Order (group_order 2) with Object 0 of Group 10 carrying Prior Group ID Gap 2, then Object 0 of Group 9 (flags 0x0c; its Group ID Delta of 0 is the prior Group ID minus 1). Section 10.8: \"An endpoint receives an Object with a Group ID within a previously communicated gap.\" Group 9 is within the gap Group 10 communicated. Section 2.1.1: \"an endpoint can receive an Object after it has already recorded that the Object does not exist\" and \"This is not a protocol error and the Track is not malformed.\" The two conflict, so whether the Track is malformed is ambiguous, and the decoder does not refuse this",
+      "hex": "05023c0a0080023c0201aa0c000001bb",
+      "group_order": "2",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "2",
+        "objects": [
+          {
+            "serialization_flags": "0x3c",
+            "group_id_delta": "10",
+            "group_id": "10",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "object_properties": [
+              {
+                "type": "0x3c",
+                "name": "prior_group_id_gap",
+                "value": "2"
+              }
+            ],
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x0c",
+            "group_id_delta": "0",
+            "group_id": "9",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
     }
   ]
 }

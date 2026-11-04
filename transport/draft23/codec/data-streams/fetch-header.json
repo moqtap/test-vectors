@@ -251,6 +251,40 @@
       }
     },
     {
+      "id": "fetch-stream-descending",
+      "description": "fetch stream read in Descending Group Order (group_order 2, the FETCH's GROUP_ORDER): Object 0 of Group 10, then a second object with flags 0x0c and Group ID Delta 1. Section 11.4.1.1: \"If the Group Order is Descending, the Group ID is the prior Object's Group ID minus the (Group ID Delta + 1).\" So its Group ID is 10 - (1 + 1) = 8, where Ascending would give 12",
+      "hex": "05041c0a008001aa0c010001bb",
+      "group_order": "2",
+      "decoded": {
+        "stream_type": "fetch",
+        "request_id": "4",
+        "objects": [
+          {
+            "serialization_flags": "0x1c",
+            "group_id_delta": "10",
+            "group_id": "10",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "aa"
+          },
+          {
+            "serialization_flags": "0x0c",
+            "group_id_delta": "1",
+            "group_id": "8",
+            "subgroup_id": "0",
+            "object_id_delta": "0",
+            "object_id": "0",
+            "publisher_priority": "128",
+            "payload_length": "1",
+            "payload_hex": "bb"
+          }
+        ]
+      }
+    },
+    {
       "id": "fetch-end-of-non-existent-range",
       "description": "fetch stream with an End of Non-Existent Range indicator (Serialization Flags 0x8C, the two-byte vi64 808c) as the first entry, so its two fields are absolute (Section 11.4.2.1): {5,10}. Section 11.4.2 says \"Subgroup ID, Priority and Properties are not present\" and does not mention Object Payload Length, which Figure 29 marks mandatory. The draft does not settle whether an End of Range indicator carries it. This corpus encodes it as 0, the trailing 00 of every End of Range vector",
       "hex": "0504808c050a00",
@@ -761,6 +795,17 @@
       "hex": "05023c050080043c01000101aa",
       "error": "invalid_value",
       "error_detail": "an Object contains more than one Prior Group ID Gap",
+      "profiles": [
+        "endpoint"
+      ]
+    },
+    {
+      "id": "fetch-group-within-a-communicated-gap",
+      "description": "fetch stream in Descending Group Order (group_order 2) with Object 0 of Group 10 carrying Prior Group ID Gap 2, then Object 0 of Group 9 (flags 0x0c; its Group ID Delta of 0 is the prior Group ID minus 1). Section 10.8: \"An endpoint receives an Object with a Group ID within a previously communicated gap.\" Group 9 is within the gap Group 10 communicated. That makes the Track malformed (Section 12.1)",
+      "hex": "05023c0a0080023c0201aa0c000001bb",
+      "group_order": "2",
+      "error": "invalid_value",
+      "error_detail": "Group 9 is within the Prior Group ID Gap 2 that Group 10 communicated",
       "profiles": [
         "endpoint"
       ]

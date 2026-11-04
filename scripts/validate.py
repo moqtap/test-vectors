@@ -26,6 +26,8 @@ Checks:
 13. Timeline vectors: exactly one of decoded and error; invalid_json exactly
     when the text does not parse; decoded is what the input reads as under the
     file's format: its records in payload order, or a template's entries
+14. `group_order` appears only on fetch stream vectors of draft-18 and later,
+    where a Group ID Delta's sign depends on it
 
 Every spec in manifest.json is walked.
 
@@ -196,10 +198,11 @@ def _load_vector_schema():
         set(vector["properties"]),
         set(vector["properties"]["error"]["enum"]),
         set(vector["properties"]["profiles"]["items"]["enum"]),
+        set(vector["properties"]["group_order"]["enum"]),
     )
 
 
-VECTOR_FIELDS, ERROR_CATEGORIES, PROFILES = _load_vector_schema()
+VECTOR_FIELDS, ERROR_CATEGORIES, PROFILES, GROUP_ORDERS = _load_vector_schema()
 
 
 def _load_catalog_schema():
@@ -280,6 +283,13 @@ def validate_codec_vectors(filepath, data, draft_id=None):
                 err(f"{filepath}: [{i}] '{desc}' names profiles and decodes; bytes decode the same for every reader")
             if v.get("error") == "incomplete":
                 err(f"{filepath}: [{i}] '{desc}' restricts a truncation to some readers; a frame that ended early ended early for everyone")
+
+        if "group_order" in v:
+            m = re.fullmatch(r"draft(\d+)", draft_id or "")
+            if os.path.basename(filepath) != "fetch-header.json" or not m or int(m.group(1)) < 18:
+                err(f"{filepath}: [{i}] '{desc}' carries group_order, which only a draft-18 or later fetch stream reads")
+            elif v["group_order"] not in GROUP_ORDERS:
+                err(f"{filepath}: [{i}] '{desc}' group_order {v['group_order']!r} is not one the schema admits")
 
         # Check protocol integers in decoded
         if has_decoded:

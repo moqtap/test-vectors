@@ -91,6 +91,15 @@
           "default": true,
           "description": "Defaults to true. Set to false for valid-but-non-canonical encodings (decode-only test)."
         },
+        "group_order": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2"
+          ],
+          "default": "1",
+          "description": "Fetch stream vectors on draft-18 and later only: the Group Order to read the stream in, as the FETCH's GROUP_ORDER parameter spells it, Ascending '1' or Descending '2'. It decides whether a later Object's Group ID Delta counts up or down (draft-23 Section 11.4.1.1), and the stream does not carry it. Absent means '1', as draft-23 Section 9.19.8 gives for a FETCH without the parameter: \"If omitted from FETCH, the receiver uses Ascending (0x1).\""
+        },
         "error": {
           "type": "string",
           "enum": [

@@ -148,6 +148,8 @@ Valid vectors have a `decoded` object. Invalid vectors have an `error` category 
 
 The `error` category names the kind of complaint a decoder must make, and `profiles` names which consumers a vector's expectation binds. Both are defined in [`schema/codec-vector.schema.json`](schema/codec-vector.schema.json), which is also what the validator reads.
 
+A fetch stream vector on draft-18 or later may carry `group_order`, the GROUP_ORDER of the FETCH that opened the stream: `"1"` Ascending or `"2"` Descending. It decides whether a Group ID Delta counts up or down, and the stream does not carry it. Absent means `"1"`, as for a FETCH without the parameter.
+
 ### Catalog vectors
 
 A catalog vector holds the exact payload of a catalog object — `{"text": ...}`, or `{"hex": ...}` when the bytes matter — never a parsed object, since member order is asserted (MSF-01 5.1.7). Later objects on the same track follow in `steps`: a delta applies to what came before it, an independent catalog replaces it. Then exactly one of `resolved`, the catalog after the last object as a plain JSON document, or `error` with an optional `error_detail` and, when there are steps, `error_at` naming the object that fails (0 is `input`).
@@ -350,12 +352,12 @@ The two type columns count files — one per control message type, one per data 
 | MoQ Transport | draft-15 | 24 | 3 | 198 | 43 |
 | MoQ Transport | draft-16 | 25 | 3 | 201 | 43 |
 | MoQ Transport | draft-17 | 19 | 3 | 234 | 51 |
-| MoQ Transport | draft-18 | 20 | 3 | 262 | 48 |
-| MoQ Transport | draft-19 | 20 | 3 | 282 | 48 |
-| MoQ Transport | draft-20 | 21 | 3 | 346 | 71 |
-| MoQ Transport | draft-21 | 21 | 3 | 346 | 71 |
-| MoQ Transport | draft-22 | 21 | 3 | 356 | 73 |
-| MoQ Transport | draft-23 | 20 | 3 | 425 | 106 |
+| MoQ Transport | draft-18 | 20 | 3 | 266 | 48 |
+| MoQ Transport | draft-19 | 20 | 3 | 286 | 48 |
+| MoQ Transport | draft-20 | 21 | 3 | 348 | 71 |
+| MoQ Transport | draft-21 | 21 | 3 | 348 | 71 |
+| MoQ Transport | draft-22 | 21 | 3 | 358 | 73 |
+| MoQ Transport | draft-23 | 20 | 3 | 427 | 107 |
 | MOQT Streaming Format | draft-00 | — | — | 79 | 49 |
 | MOQT Streaming Format | draft-01 | — | — | 110 | 67 |
 | CMAF MOQT Streaming Format | draft-00 | — | — | 76 | 36 |
@@ -367,7 +369,7 @@ The two type columns count files — one per control message type, one per data 
 | Low Overhead Media Container | draft-04 | — | — | 29 | 3 |
 | Low Overhead Media Container | draft-05 | — | — | 36 | 5 |
 | Low Overhead Media Container (draft-mzanaty) | draft-05 | — | — | 5 | 0 |
-| | **all** | | | **5233** | **1267** |
+| | **all** | | | **5249** | **1268** |
 
 ## Scope
 
