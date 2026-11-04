@@ -7,6 +7,21 @@ including every vector added, is in the git history.
 
 A version with no entry here broke nothing.
 
+## 0.25.0
+
+Drafts 18–22: `fetch-stream-object-delta-same-group` starts at Object ID 2
+and expects Object ID 6 on its second Object, so a decoder that reads the
+Object ID Delta as the Object ID fails it.
+
+Drafts 20–22: `fetch-timed-out-range-after-object` and
+`fetch-object-after-timed-out-marker` carry the End of Range marker's Group
+ID and Object ID as absolute values, as these drafts do; draft-23 made them
+deltas.
+
+Fetch stream vectors on drafts 18–23 may carry `group_order`. A consumer
+that ignores it decodes `fetch-stream-descending` and
+`fetch-group-within-a-communicated-gap` as Ascending and fails them.
+
 ## 0.23.0
 
 Drafts 15–22: `subgroup-properties-status-object` (drafts 17–22) and
